@@ -1,0 +1,28 @@
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C2*/SET SCHEMA PUBLIC
+create table faculty_department (\u000d\u000a  faculty_department_id INTEGER not null\u000d\u000a  , faculty VARCHAR(255) not null\u000d\u000a  , department VARCHAR(255) not null\u000d\u000a  , constraint faculty_department_PKC primary key (faculty_department_id)\u000d\u000a)
+DISCONNECT
+/*C3*/SET SCHEMA PUBLIC
+create table course (\u000d\u000a  user_id VARCHAR(20) not null\u000d\u000a  , syllabus_id VARCHAR(20) not null\u000d\u000a  , achievement INTEGER\u000d\u000a  , main_teacher_name VARCHAR(255)\u000d\u000a  , year INTEGER\u000d\u000a  , constraint course_PKC primary key (user_id,syllabus_id)\u000d\u000a)
+create table registration_period (\u000d\u000a  id INTEGER not null\u000d\u000a  , start_date DATE not null\u000d\u000a  , end_date DATE not null\u000d\u000a  , constraint registration_period_PKC primary key (id)\u000d\u000a)
+create table relation (\u000d\u000a  main_syllabus_id VARCHAR(20) not null\u000d\u000a  , sub_syllabus_id VARCHAR(20) not null\u000d\u000a  , relation_type VARCHAR(10) not null\u000d\u000a  , constraint relation_PKC primary key (main_syllabus_id,sub_syllabus_id,relation_type)\u000d\u000a)
+create table student (\u000d\u000a  user_id VARCHAR(20) not null\u000d\u000a  , faculty_department_id INTEGER not null\u000d\u000a  , guardian_password VARCHAR(255)\u000d\u000a  , guardian_slat VARCHAR(255)\u000d\u000a  , constraint student_PKC primary key (user_id)\u000d\u000a)
+create table syllabus (\u000d\u000a  syllabus_id VARCHAR(20) not null\u000d\u000a  , syllabus_name VARCHAR(255) not null\u000d\u000a  , english_name VARCHAR(255)\u000d\u000a  , dividend_grade INTEGER not null\u000d\u000a  , faculty_department_id INTEGER not null\u000d\u000a  , year INTEGER not null\u000d\u000a  , class VARCHAR(255)\u000d\u000a  , semester VARCHAR(10) not null\u000d\u000a  , week VARCHAR(10) not null\u000d\u000a  , time VARCHAR(10) not null\u000d\u000a  , unit INTEGER not null\u000d\u000a  , capacity INTEGER not null\u000d\u000a  , objective_summary VARCHAR(65535)\u000d\u000a  , goal VARCHAR(65535)\u000d\u000a  , textbook VARCHAR(65535)\u000d\u000a  , reference_book VARCHAR(65535)\u000d\u000a  , educational_object VARCHAR(65535)\u000d\u000a  , dp VARCHAR(65535)\u000d\u000a  , self_study VARCHAR(65535)\u000d\u000a  , free_text VARCHAR(65535)\u000d\u000a  , mail_address VARCHAR(255)\u000d\u000a  , office_hour VARCHAR(65535)\u000d\u000a  , classification VARCHAR(65535)\u000d\u000a  , guidance VARCHAR(65535)\u000d\u000a  , advice VARCHAR(65535)\u000d\u000a  , constraint syllabus_PKC primary key (syllabus_id)\u000d\u000a)
+create table teacher_in_charge (\u000d\u000a  user_id VARCHAR(20) not null\u000d\u000a  , syllabus_id VARCHAR(20) not null\u000d\u000a  , main_teacher INTEGER not null\u000d\u000a  , constraint teacher_in_charge_PKC primary key (user_id,syllabus_id)\u000d\u000a)
+create table syllabus_contents (\u000d\u000a  subject_id VARCHAR(20) not null\u000d\u000a  , class_number INTEGER not null\u000d\u000a  , course_content VARCHAR(65535)\u000d\u000a  , constraint syllabus_contents_PKC primary key (subject_id,class_number)\u000d\u000a)
+create table user (\u000d\u000a  user_id VARCHAR(20) not null\u000d\u000a  , name VARCHAR(255) not null\u000d\u000a  , phonetic VARCHAR(255) not null\u000d\u000a  , password VARCHAR(255) not null\u000d\u000a  , slat VARCHAR(255) not null\u000d\u000a  , gender INTEGER not null\u000d\u000a  , birthday DATE not null\u000d\u000a  , postal_code CHAR(7) not null\u000d\u000a  , address VARCHAR(255) not null\u000d\u000a  , tel CHAR(11) not null\u000d\u000a  , user_classification CHAR(10) not null\u000d\u000a  , constraint user_PKC primary key (user_id)\u000d\u000a)
+alter table student add foreign key(user_id) references user(user_id) 
+alter table student add foreign key(faculty_department_id) references faculty_department(faculty_department_id) 
+alter table syllabus add foreign key(faculty_department_id) references faculty_department(faculty_department_id) 
+alter table teacher_in_charge add foreign key(user_id) references user(user_id) 
+alter table teacher_in_charge add foreign key(syllabus_id) references syllabus(syllabus_id) 
+alter table course add foreign key(user_id) references student(user_id) 
+alter table course add foreign key(syllabus_id) references syllabus(syllabus_id) 
+alter table relation add foreign key(main_syllabus_id) references syllabus(syllabus_id) 
+alter table relation add foreign key(sub_syllabus_id) references syllabus(syllabus_id) 
+alter table syllabus_contents add foreign key(subject_id) references syllabus(syllabus_id) 
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+DISCONNECT

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>LoginCheckServlet</servlet-name>
+        <servlet-class>servlet.LoginCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginCheckServlet</servlet-name>
+        <url-pattern>/LoginCheck</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyUserForwardServlet</servlet-name>
+        <servlet-class>servlet.MyUserForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyUserForwardServlet</servlet-name>
+        <url-pattern>/MyUserForward</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TTForwardServlet</servlet-name>
+        <servlet-class>servlet.TTForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TTForwardServlet</servlet-name>
+        <url-pattern>/TTForward</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AchieveForwardServlet</servlet-name>
+        <servlet-class>servlet.AchieveForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AchieveForwardServlet</servlet-name>
+        <url-pattern>/AchieveForward</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConditionForwardServlet</servlet-name>
+        <servlet-class>servlet.ConditionForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConditionForwardServlet</servlet-name>
+        <url-pattern>/ConditionForward</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserUpdateCheckServlet</servlet-name>
+        <servlet-class>servlet.UserUpdateCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserUpdateCheckServlet</servlet-name>
+        <url-pattern>/UserUpdateCheck</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <servlet-class>servlet.UserDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <url-pattern>/UserDelete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserSearchServlet</servlet-name>
+        <servlet-class>servlet.UserSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserSearchServlet</servlet-name>
+        <url-pattern>/UserSearch</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserRegistServlet</servlet-name>
+        <servlet-class>servlet.UserRegistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserRegistServlet</servlet-name>
+        <url-pattern>/UserRegist</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserUpdateServlet</servlet-name>
+        <servlet-class>servlet.UserUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserUpdateServlet</servlet-name>
+        <url-pattern>/UserUpdate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SyllabusDeleteServlet</servlet-name>
+        <servlet-class>servlet.SyllabusDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusDeleteServlet</servlet-name>
+        <url-pattern>/SyllabusDelete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SyllabusSearchServlet</servlet-name>
+        <servlet-class>servlet.SyllabusSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusSearchServlet</servlet-name>
+        <url-pattern>/SyllabusSearch</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SyllabusRegistServlet</servlet-name>
+        <servlet-class>servlet.SyllabusRegistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusRegistServlet</servlet-name>
+        <url-pattern>/SyllabusRegist</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentDeleteCheckServlet</servlet-name>
+        <servlet-class>servlet.StudentDeleteCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentDeleteCheckServlet</servlet-name>
+        <url-pattern>/StudentDeleteCheck</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StudentDeleteServlet</servlet-name>
+        <servlet-class>servlet.StudentDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentDeleteServlet</servlet-name>
+        <url-pattern>/StudentDelete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourseRegistCheckServlet</servlet-name>
+        <servlet-class>servlet.CourseRegistCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseRegistCheckServlet</servlet-name>
+        <url-pattern>/CourseRegistCheck</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourseRegistServlet</servlet-name>
+        <servlet-class>servlet.CourseRegistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseRegistServlet</servlet-name>
+        <url-pattern>/CourseRegistServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AchieveRegUploadServlet</servlet-name>
+        <servlet-class>servlet.AchieveRegUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AchieveRegUploadServlet</servlet-name>
+        <url-pattern>/AchieveRegUpdate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AchieveRegistServlet</servlet-name>
+        <servlet-class>servlet.AchieveRegistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AchieveRegistServlet</servlet-name>
+        <url-pattern>/AchieveRegist</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Return</servlet-name>
+        <servlet-class>servlet.Return</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Return</servlet-name>
+        <url-pattern>/Return</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReturnTop</servlet-name>
+        <servlet-class>servlet.ReturnTop</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReturnTop</servlet-name>
+        <url-pattern>/ReturnTop</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.html</location>
+    </error-page>
+</web-app>
