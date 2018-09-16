@@ -23,6 +23,33 @@ public class SyllabusDetail extends Syllabus {
     private String advice;
     private List<SyllabusContents> syllabusContents;
 
+    public SyllabusDetail() {
+        this.syllabusId = "";
+        this.syllabusName = "";
+        this.englishName = "";
+        this.dividendGrade = -1;
+        this.year = -1;
+        this.classRoom = "";
+        this.semester = "";
+        this.week = "";
+        this.time = "";
+        this.unit = -1;
+        this.capacity = -1;
+        this.objectiveSummary = "";
+        this.goal = "";
+        this.textbook = "";
+        this.referenceBook = "";
+        this.educationalObject = "";
+        this.dp = "";
+        this.selfStudy = "";
+        this.freeText = "";
+        this.mailAddress = "";
+        this.officeHour = "";
+        this.classification = "";
+        this.guidance = "";
+        this.advice = "";
+        this.syllabusContents = null;
+    }
 
     public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {
         super(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity);

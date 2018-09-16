@@ -5,64 +5,64 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import Entity.SyllabusDetail;
 
 public class SyllabusRegistServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String syllabusId = request.getParameter("syllabus_id");
-        String syllabusName = request.getParameter("syllbus_name");
+        String syllabusName = request.getParameter("syllabus_name");
         String englishName = request.getParameter("english_name");
-        int dividendGrde = Integer.parseInt("dividend_grde");
+        int dividendGrade = Integer.parseInt("dividend_grade");
         int year = Integer.parseInt("year");
-        String dass = request.getParameter("dass");
+        String classroom = request.getParameter("class");
         String semester = request.getParameter("semester");
         String week = request.getParameter("week");
         String time = request.getParameter("time");
         int unit = Integer.parseInt("unit");
         int capacity = Integer.parseInt("capacity");
-        String objeciveSummary = request.getParameter("objecive_Summar");
+        String objectiveSummary = request.getParameter("objectiveSummary");
         String goal = request.getParameter("goal");
         String textbook = request.getParameter("textbook");
-        String referenceBook = request.getParameter("reference_Book");
-        String educationalObject = request.getParameter("educational_Object ");
+        String referenceBook = request.getParameter("referenceBook");
+        String educationalObject = request.getParameter("educationalObject ");
         String dp = request.getParameter("dp");
-        String selfStudy = request.getParameter("self_Study");
+        String selfStudy = request.getParameter("selfStudy");
         String freeText = request.getParameter("freeText");
-        String mailAddress = request.getParameter("mail_addres");
-        String officeHour= request.getParameter("office_Hour");
-        String classifcation = request.getParameter("classifcation");
+        String mailAddress = request.getParameter("mailAddress");
+        String officeHour = request.getParameter("officeHour");
+        String classification = request.getParameter("classification");
         String guidance = request.getParameter("guidance");
         String advice = request.getParameter("advice");
 
         String errorString = "";
         SyllabusDetail syllabusDetail = new SyllabusDetail();
-        errorString = errorString + syllabusDetail.setSyllabusId(syllabusId);
-        errorString = errorString + syllabusDetail.setsyllabusName(syllabusName);
-        errorString = errorString + syllabusDetail.setenglishName(englishName);
-        errorString = errorString + syllabusDetail.setdividendGrde(dividendGrde);
-        errorString = errorString + syllabusDetail.setyear(year);
-        errorString = errorString + syllabusDetail.setdass(dass);
-        errorString = errorString + syllabusDetail.setsemeter(semester);
-        errorString = errorString + syllabusDetail.setweek(week);
-        errorString = errorString + syllabusDetail.settime(time);
-        errorString = errorString + syllabusDetail.setunit(unit);
-        errorString = errorString + syllabusDetail.setcapacity(capacity);
-        errorString = errorString + syllabusDetail.setobjeciveSummary(objeciveSummary);
-        errorString = errorString + syllabusDetail.setgoal(goal);
-        errorString = errorString + syllabusDetail.settextbook(textbook);
-        errorString = errorString + syllabusDetail.setreferenceBook(referenceBook);
-        errorString = errorString + syllabusDetail.seteducationalObject(educationalObject);
-        errorString = errorString + syllabusDetail.setdp(dp);
-        errorString = errorString + syllabusDetail.setselfStudy (selfStudy);
-        errorString = errorString + syllabusDetail.setfreeText(freeText);
-        errorString = errorString + syllabusDetail.setmailAddress(mailAddress);
-        errorString = errorString + syllabusDetail.setofficeHour(officeHour);
-        errorString = errorString + syllabusDetail.setclassifcation (classifcation);
-        errorString = errorString + syllabusDetail.setguidance(guidance);
-        errorString = errorString + syllabusDetail.setadvice(advice);
+        errorString += syllabusDetail.setSyllabusId(syllabusId);
+        errorString += syllabusDetail.setSyllabusName(syllabusName);
+        errorString += syllabusDetail.setEnglishName(englishName);
+        errorString += syllabusDetail.setDividendGrade(dividendGrade);
+        errorString += syllabusDetail.setYear(year);
+        errorString += syllabusDetail.setClassRoom(classroom);
+        errorString += syllabusDetail.setSemester(semester);
+        errorString += syllabusDetail.setWeek(week);
+        errorString += syllabusDetail.setTime(time);
+        errorString += syllabusDetail.setUnit(unit);
+        errorString += syllabusDetail.setCapacity(capacity);
+        errorString += syllabusDetail.setObjectiveSummary(objectiveSummary);
+        errorString += syllabusDetail.setGoal(goal);
+        errorString += syllabusDetail.setTextbook(textbook);
+        errorString += syllabusDetail.setReferenceBook(referenceBook);
+        errorString += syllabusDetail.setEducationalObject(educationalObject);
+        errorString += syllabusDetail.setDp(dp);
+        errorString += syllabusDetail.setSelfStudy(selfStudy);
+        errorString += syllabusDetail.setFreeText(freeText);
+        errorString += syllabusDetail.setMailAddress(mailAddress);
+        errorString += syllabusDetail.setOfficeHour(officeHour);
+        errorString += syllabusDetail.setClassification(classification);
+        errorString += syllabusDetail.setGuidance(guidance);
+        errorString += syllabusDetail.setAdvice(advice);
 
     }
-}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

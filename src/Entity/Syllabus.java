@@ -8,17 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Syllabus {
-    private String syllabusId;
-    private String syllabusName;
-    private String englishName;
-    private Integer dividendGrade;
-    private Integer year;
-    private String classRoom;
-    private String semester;
-    private String week;
-    private String time;
-    private Integer unit;
-    private Integer capacity;
+    protected String syllabusId;
+    protected String syllabusName;
+    protected String englishName;
+    protected Integer dividendGrade;
+    protected Integer year;
+    protected String classRoom;
+    protected String semester;
+    protected String week;
+    protected String time;
+    protected Integer unit;
+    protected Integer capacity;
 
     public Syllabus() {
         this.syllabusId = "";
