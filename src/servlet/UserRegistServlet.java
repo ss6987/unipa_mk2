@@ -30,15 +30,15 @@ public class UserRegistServlet extends HttpServlet {
 
         String errorString = "";
         User user = new User();
-        errorString = errorString + user.setUserId(userId);
-        errorString = errorString + user.setName(name);
-        errorString = errorString + user.setPhonetic(phonetic);
-        errorString = errorString + user.setGender(gender);
-        errorString = errorString + user.setBirthday(birthday);
-        errorString = errorString + user.setPostalCode(postalCode);
-        errorString = errorString + user.setAddress(address);
-        errorString = errorString + user.setTel(tel);
-        errorString = errorString + user.setUserClassification(userClassification);
+        errorString += user.setUserId(userId);
+        errorString += user.setName(name);
+        errorString += user.setPhonetic(phonetic);
+        errorString += user.setGender(gender);
+        errorString += user.setBirthday(birthday);
+        errorString += user.setPostalCode(postalCode);
+        errorString += user.setAddress(address);
+        errorString += user.setTel(tel);
+        errorString += user.setUserClassification(userClassification);
 
     }
 
