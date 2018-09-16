@@ -16,11 +16,16 @@ public class LoginCheckServlet extends HttpServlet {
 
         ModelManager modelManager = new ModelManager();
         User user = modelManager.login(id,password);
+        String url = "";
         if(user != null){
             System.out.println("login");
+            url = "ok.jsp";
         }else{
             System.out.println("error");
+            request.setAttribute("id",id);
+            url = "login.jsp";
         }
+        getServletConfig().getServletContext().getRequestDispatcher(url).forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
