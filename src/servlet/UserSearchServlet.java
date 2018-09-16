@@ -35,6 +35,7 @@ public class UserSearchServlet extends HttpServlet {
         errorString = errorString + user.setAddress(address);
         errorString = errorString + user.setTel(tel);
         errorString = errorString + user.setUserClassification(urerClassification);
+        System.out.println("UserSearch");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

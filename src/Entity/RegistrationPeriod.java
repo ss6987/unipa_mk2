@@ -23,6 +23,10 @@ public class RegistrationPeriod {
         this.endDate = endDate;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getStartDate() {
         return startDate;
     }

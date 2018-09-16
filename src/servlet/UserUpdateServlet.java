@@ -20,7 +20,7 @@ public class UserUpdateServlet extends HttpServlet {
         String postalCode = request.getParameter("postal_code");
         String address = request.getParameter("address");
         String tel = request.getParameter("tel");
-        String urerClassification = request.getParameter("user_classification");
+        String userClassification = request.getParameter("user_classification");
 
         String errorString = "";
         User user = new User();
@@ -32,7 +32,7 @@ public class UserUpdateServlet extends HttpServlet {
         errorString = errorString + user.setPostalCode(postalCode);
         errorString = errorString + user.setAddress(address);
         errorString = errorString + user.setTel(tel);
-        errorString = errorString + user.setUserClassification(urerClassification);
+        errorString = errorString + user.setUserClassification(userClassification);
 
 
     }

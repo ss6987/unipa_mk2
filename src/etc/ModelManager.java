@@ -168,7 +168,7 @@ public class ModelManager {
         return true;
     }
 
-    public boolean courseDelete(String syllabusId,List<String> studentList){
+    public boolean courseDelete(String syllabusId,List<String> studentList) throws SQLException {
         CourseDAO courseDAO = new CourseDAO();
         Course course = new Course();
         course.setSyllabusId(syllabusId);

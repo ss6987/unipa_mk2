@@ -16,7 +16,7 @@
     <title>ログイン</title>
 </head>
 <body>
-<form action="<%= request.getContextPath()%>/Login" method="post">
+<form action="<%= request.getContextPath()%>/LoginCheck" method="post">
     <table>
         <tr>
             <td>学籍番号</td>
