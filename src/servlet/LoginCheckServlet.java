@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginCheckServlet extends HttpServlet {
@@ -15,15 +16,20 @@ public class LoginCheckServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         ModelManager modelManager = new ModelManager();
-        User user = modelManager.login(id,password);
+        HttpSession session = request.getSession(true);
+
+        User user = modelManager.login(id, password);
         String url = "";
         if(user != null){
             System.out.println("login");
-            url = "ok.jsp";
+            session.setAttribute("user",user);
+            url = "/ok.jsp";
         }else{
             System.out.println("error");
-            request.setAttribute("id",id);
-            url = "login.jsp";
+            user = new User();
+            user.setUserId(id);
+            session.setAttribute("user",user);
+            url = "/login.jsp";
         }
         getServletConfig().getServletContext().getRequestDispatcher(url).forward(request,response);
     }

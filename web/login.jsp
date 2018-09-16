@@ -7,10 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    ModelManager modelManager = new ModelManager();
-    User user = modelManager.userFindById("test");
-%>
+<jsp:useBean id="user" class="Entity.User" scope="session"/>
 <html>
 <head>
     <title>ログイン</title>
@@ -20,7 +17,9 @@
     <table>
         <tr>
             <td>学籍番号</td>
-            <td><input type="text" name="id"/></td>
+            <td>
+                <input type="text" name="id" value="<jsp:getProperty name="user" property="userId"/>"/>
+            </td>
         </tr>
         <tr>
             <td>パスワード</td>
