@@ -35,7 +35,7 @@
 <h2>履修登録期間<%=period%>
 </h2>
 <div>
-    <form action="/Top" method="post">
+    <form action="<%= request.getContextPath()%>/Top" method="post">
         <span><button type="submit" name="action" value="MyUser">ユーザー情報確認</button></span>
         <span><button type="submit" name="action" value="SyllabusSearch">シラバス検索</button></span>
         <%
@@ -43,26 +43,25 @@
         %>
 
         <span><button type="submit" name="action" value="CheckTimeTable">時間割表確認</button> </span>
-        <span>成績参照</span>
-        <span>履修登録</span>
-
+        <span><button type="submit" name="action" value="Achieve">成績参照</button></span>
+        <span><button type="submit" name="action" value="CourseRegist">履修登録</button> </span>
         <%
         } else if (classification.equals("教職員")) {
         %>
-        <span>担当科目確認</span>
+        <span><button type="submit" name="action" value="CourseCheck">担当科目確認</button></span>
         <%
         } else if (classification.equals("管理者")) {
         %>
-        <span>ユーザー検索</span>
-        <span>成績情報登録</span>
-        <span>ユーザー登録</span>
-        <span>シラバス登録</span>
-        <span>成績情報参照</span>
+        <span><button type="submit" name="action" value="UserSearch">ユーザー検索</button></span>
+        <span><button type="submit" name="action" value="AchieveRegist">成績登録</button></span>
+        <span><button type="submit" name="action" value="UserResist">ユーザー登録</button></span>
+        <span><button type="submit" name="action" value="SyllabusRegist">シラバス登録</button></span>
+        <span><button type="submit" name="action" value="AchieveCheck" ></button></span>
         <%
         } else {
         %>
-        <span>時間割表確認</span>
-        <span>成績参照</span>
+        <span><button type="submit" name="action" value="CheckTimeTable">時間割表確認</button> </span>
+        <span><button type="submit" name="action" value="Achieve">成績参照</button></span>
         <%
             }
         %>
