@@ -23,18 +23,45 @@ public class TopServlet extends HttpServlet {
         String action = request.getParameter("action");
         Integer url;
 
-        switch (action){
+        switch (action) {
             case "MyUser":
                 url = 0;
                 break;
             case "SyllabusSearch":
-                url = 1;
+                url = 0;
+                break;
+            case "CheckTimeTable":
+                url = 0;
+                break;
+            case "Achieve":
+                url = 0;
+                break;
+            case "CourseRegist":
+                url = 0;
+                break;
+            case "CourseCheck":
+                url = 0;
+                break;
+            case "UserSearch":
+                url = 0;
+                break;
+            case "AchieveRegist":
+                url = 0;
+                break;
+            case "UserRegist":
+                url = 0;
+                break;
+            case "SyllabusRegist":
+                url = 0;
+                break;
+            case "AchieveCheck":
+                url = 0;
                 break;
             default:
-                url = 1;
+                url = 0;
         }
 
-        request.setAttribute("Number",url);
+        request.setAttribute("Number", url);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
