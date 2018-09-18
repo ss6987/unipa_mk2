@@ -199,6 +199,14 @@
         <servlet-name>MyUserForwardServlet</servlet-name>
         <url-pattern>/MyUserForward</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Top</servlet-name>
+        <servlet-class>servlet.TopServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Top</servlet-name>
+        <url-pattern>/Top</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>

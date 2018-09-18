@@ -1,87 +1,73 @@
-<%@ page import="Entity.User" %><%--
+<%--
   Created by IntelliJ IDEA.
-  User: SS
-  Date: 2018/09/17
-  Time: 1:20
+  User: ASAMI
+  Date: 2018/07/13
+  Time: 19:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="user" class="Entity.User" scope="session"/>
-
-<html>
+<jsp:useBean id="user" scope="session" class="Entity.User"/>
+<!doctype html>
+<html lang="jp">
 <head>
-    <title>
-        <jsp:getProperty name="user" property="name"/>
-    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>ユーザーID</th>
-        <td>
-            <jsp:getProperty name="user" property="userId"/>
-        </td>
-    </tr>
-    <tr>
-        <th>名前</th>
-        <td>
-            <jsp:getProperty name="user" property="name"/>
-        </td>
-    </tr>
-    <tr>
-        <th>フリガナ</th>
-        <td>
-            <jsp:getProperty name="user" property="phonetic"/>
-        </td>
-    </tr>
-    <tr>
-        <th>性別</th>
-        <td>
-            <%
-                if(user.getGender() == 0){
-            %>
-                男性
-            <%
-                }else{
-            %>
-                女性
-            <%
-                }
-            %>
-        </td>
-    </tr>
-    <tr>
-        <th>生年月日</th>
-        <td>
-            <jsp:getProperty name="user" property="birthday"/>
-        </td>
-    </tr>
-    <tr>
-        <th>郵便番号</th>
-        <td>
-            <jsp:getProperty name="user" property="postalCode"/>
-        </td>
-    </tr>
-    <tr>
-        <th>住所</th>
-        <td>
-            <jsp:getProperty name="user" property="address"/>
-        </td>
-    </tr>
-    <tr>
-        <th>電話番号</th>
-        <td>
-            <jsp:getProperty name="user" property="tel"/>
-        </td>
-    </tr>
-    <tr>
-        <th>ユーザー分類</th>
-        <td>
-            <jsp:getProperty name="user" property="userClassification"/>
-        </td>
-    </tr>
 
+</body>
+</html>
+<html>
+<head>
+    <title>TOP</title>
+</head>
+<body>
+<%
+    String period = (String) request.getAttribute("period");
+    String classification = user.getUserClassification();
+%>
 
-</table>
+<h1>UNIPAへようこそ！</h1>
+<span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
+<h2>履修登録期間<%=period%>
+</h2>
+<div>
+    <form action="/Top" method="post">
+        <span><button type="submit" name="action" value="MyUser">ユーザー情報確認</button></span>
+        <span><button type="submit" name="action" value="SyllabusSearch">シラバス検索</button></span>
+        <%
+            if (classification.equals("学生")) {
+        %>
+
+        <span><button type="submit" name="action" value="CheckTimeTable">時間割表確認</button> </span>
+        <span>成績参照</span>
+        <span>履修登録</span>
+
+        <%
+        } else if (classification.equals("教職員")) {
+        %>
+        <span>担当科目確認</span>
+        <%
+        } else if (classification.equals("管理者")) {
+        %>
+        <span>ユーザー検索</span>
+        <span>成績情報登録</span>
+        <span>ユーザー登録</span>
+        <span>シラバス登録</span>
+        <span>成績情報参照</span>
+        <%
+        } else {
+        %>
+        <span>時間割表確認</span>
+        <span>成績参照</span>
+        <%
+            }
+        %>
+    </form>
+</div>
+
 </body>
 </html>

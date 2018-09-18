@@ -1,14 +1,10 @@
 package etc;
 
 import DAO.CourseDAO;
+import DAO.RegistrationPeriodDAO;
 import DAO.SyllabusDAO;
 import DAO.UserDAO;
-import Entity.Course;
-import Entity.Syllabus;
-import Entity.SyllabusDetail;
-import Entity.Student;
-import Entity.User;
-
+import Entity.*;
 
 
 import java.sql.SQLException;
@@ -16,7 +12,7 @@ import java.util.List;
 
 public class ModelManager {
 
-    public ModelManager(){
+    public ModelManager() {
         System.out.println("OK");
     }
 
@@ -32,7 +28,7 @@ public class ModelManager {
     public boolean userRegistration(User user, String password) {
         UserDAO userDAO = new UserDAO();
         if (userDAO.insert(user)) {
-            userDAO.updatePassword(user,password);
+            userDAO.updatePassword(user, password);
             return true;
         } else {
             return false;
@@ -48,14 +44,14 @@ public class ModelManager {
         }
     }
 
-    public boolean userUpdate(User user){
+    public boolean userUpdate(User user) {
         UserDAO userDAO = new UserDAO();
         return userDAO.update(user);
     }
 
-    public boolean userUpdatePassword(User user,String password){
+    public boolean userUpdatePassword(User user, String password) {
         UserDAO userDAO = new UserDAO();
-        return userDAO.updatePassword(user,password);
+        return userDAO.updatePassword(user, password);
     }
 
     public User userFindById(String userId) {
@@ -96,7 +92,7 @@ public class ModelManager {
         return syllabusDAO.insert(syllabusDetail);
     }
 
-    public boolean syllabusUpdate(SyllabusDetail syllabusDetail){
+    public boolean syllabusUpdate(SyllabusDetail syllabusDetail) {
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         return syllabusDAO.update(syllabusDetail);
     }
@@ -148,14 +144,14 @@ public class ModelManager {
         }
     }
 
-    public boolean courseRegistration(Student student,List<String> syllabusIdList){
+    public boolean courseRegistration(Student student, List<String> syllabusIdList) {
         CourseDAO courseDAO = new CourseDAO();
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         boolean flag = true;
-        for(int i = 0;i < syllabusIdList.size();i++){
+        for (int i = 0; i < syllabusIdList.size(); i++) {
             try {
                 Syllabus tmpSyllabus = syllabusDAO.findBySyllabusId(syllabusIdList.get(i));
-                Course course = new Course(student,tmpSyllabus,-1);
+                Course course = new Course(student, tmpSyllabus, -1);
                 courseDAO.insert(course);
             } catch (SQLException e) {
                 flag = false;
@@ -164,15 +160,15 @@ public class ModelManager {
         return flag;
     }
 
-    public boolean courseUpdate(Student student,List<String> syllabusIdList,List<String> achievementList){
+    public boolean courseUpdate(Student student, List<String> syllabusIdList, List<String> achievementList) {
         return true;
     }
 
-    public boolean courseDelete(String syllabusId,List<String> studentList) throws SQLException {
+    public boolean courseDelete(String syllabusId, List<String> studentList) throws SQLException {
         CourseDAO courseDAO = new CourseDAO();
         Course course = new Course();
         course.setSyllabusId(syllabusId);
-        for(int i = 0;i < studentList.size();i++){
+        for (int i = 0; i < studentList.size(); i++) {
             course.setUserId(studentList.get(i));
             try {
                 courseDAO.delete(course);
@@ -181,5 +177,16 @@ public class ModelManager {
             }
         }
         return true;
+    }
+
+    public String getRegistrationPeriod(){
+        RegistrationPeriodDAO registrationPeriodDAO = new RegistrationPeriodDAO();
+        RegistrationPeriod registrationPeriod = null;
+        try {
+            registrationPeriod = registrationPeriodDAO.select();
+            return registrationPeriod.getPeriod();
+        } catch (SQLException e) {
+            return "";
+        }
     }
 }

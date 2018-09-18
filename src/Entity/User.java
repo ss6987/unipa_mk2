@@ -163,7 +163,7 @@ public class User {
     }
 
     public String getUserClassification() {
-        return userClassification;
+        return userClassification.replace(" ","");
     }
 
     public Student convertUserToStudent() throws SQLException {

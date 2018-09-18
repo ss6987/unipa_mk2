@@ -35,6 +35,10 @@ public class RegistrationPeriod {
         return endDate;
     }
 
+    public String getPeriod(){
+        return getStartDate()+ "~" + getEndDate();
+    }
+
     public void setStartDate(String startDate) {
         startDate = new ReplaceString().replace(startDate);
         this.startDate = startDate;
