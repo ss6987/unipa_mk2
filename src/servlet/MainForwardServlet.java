@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class MainForwardServlet extends HttpServlet {
     //ページリストの定義
-    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/User.jsp", "/UserDelete.jsp",
+    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/UserUpdate.jsp", "/UserDelete.jsp",
             "/CourseList.jsp", "/CourseDelete.jsp", "/UserSearch.jsp", "/UserResult.jsp", "/SyllabusRegistration.jsp",
-            "/Syllabus.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
-            "/CourseRegistration.jsp", "/Course.jsp", "/TimeTable.jsp", "/Course.jsp", "/AchieveRegistration.jsp",
-            "/Achieve.jsp", "/condition.jsp"};
+            "/SyllabusRegistration.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
+            "/CourseRegistration.jsp", "/CourseCheck.jsp", "/TimeTable.jsp", "/CourseCheck.jsp", "/AchieveRegistration.jsp",
+            "/AchieveCheck.jsp", "/condition.jsp"};
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = (String) request.getAttribute("ErrorMessage");
