@@ -10,12 +10,9 @@ import java.io.IOException;
 
 public class UserSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
         String userId = request.getParameter("user_id");
         String name = request.getParameter("name");
         String phonetic =request.getParameter("phonetic");
-        String password =request.getParameter("password");
-        String salt = request.getParameter("salt");
         Integer gender = Integer.parseInt(request.getParameter("gender"));
         String birthday =  request.getParameter("birthday");
         String postalCode = request.getParameter("postal_code");

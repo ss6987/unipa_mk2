@@ -8,18 +8,18 @@ import java.io.IOException;
 
 public class MainForwardServlet extends HttpServlet {
     //ページリストの定義
-    private String[] pageList = {"/login.jsp", "/top.jsp", "/userreg.jsp", "/user.jsp", "/userdel.jsp",
-            "/studentlist.jsp", "/studentdel.jsp", "/usersea.jsp", "/userresult.jsp", "/syllabusreg.jsp",
-            "/syllabus.jsp", "/syllabusdel.jsp", "/syllabussea.jsp", "/ssresult.jsp",
-            "/coursereg.jsp", "/course.jsp", "/timetable.jsp", "/courseperiod.jsp", "/achievereg.jsp",
-            "/achieve.jsp", "/condition.jsp"};
+    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/User.jsp", "/UserDelete.jsp",
+            "/CourseList.jsp", "/CourseDelete.jsp", "/UserSearch.jsp", "/UserResult.jsp", "/syllabusreg.jsp",
+            "/Syllabus.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
+            "/coursereg.jsp", "/Course.jsp", "/TimeTable.jsp", "/Course.jsp", "/AchieveRegistration.jsp",
+            "/Achieve.jsp", "/condition.jsp"};
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = (String) request.getAttribute("ErrorMessage");
-        int nextNumber;
-        try{
+        int nextNumber = 0;
+        try {
             nextNumber = (Integer) request.getAttribute("Number");
-        }catch (java.lang.NullPointerException e){
+        } catch (java.lang.NullPointerException e) {
             nextNumber = Integer.parseInt(request.getParameter("Number"));
         }
 
