@@ -1,6 +1,7 @@
 package servlet;
 
 import etc.ModelManager;
+import Entity.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,46 +23,49 @@ public class TopServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Integer url;
+        System.out.println(action);
 
         switch (action) {
             case "MyUser":
-                url = 0;
+                url = 4;
+                request.setAttribute("targetUser", session.getAttribute("user"));
                 break;
             case "SyllabusSearch":
-                url = 0;
+                url = 13;
                 break;
             case "CheckTimeTable":
-                url = 0;
+                url = 17;
                 break;
             case "Achieve":
-                url = 0;
+                url = 20;
                 break;
             case "CourseRegistration":
-                url = 0;
+                url = 15;
                 break;
             case "CourseCheck":
-                url = 0;
+                url = 18;
                 break;
             case "UserSearch":
-                url = 0;
+                url = 8;
                 break;
             case "AchieveRegistration":
-                url = 0;
+                url = 19;
                 break;
             case "UserRegistration":
-                url = 0;
+                url = 3;
                 break;
             case "SyllabusRegistration":
-                url = 0;
+                url = 10;
                 break;
             case "AchieveCheck":
-                url = 0;
+                url = 20;
                 break;
             default:
-                url = 0;
+                url = 2;
         }
 
         request.setAttribute("Number", url);
+        dispatch.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,6 +75,9 @@ public class TopServlet extends HttpServlet {
         if (session.getAttribute("user") != null) {
             request.setAttribute("period", modelManager.getRegistrationPeriod());
             request.setAttribute("Number", 2);
+            dispatch.forward(request, response);
+        } else {
+            request.setAttribute("Number", 1);
             dispatch.forward(request, response);
         }
 

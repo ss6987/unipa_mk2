@@ -8,7 +8,7 @@ import etc.StringCheck;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class User {
+public class User{
     private String userId;
     private String name;
     private String phonetic;

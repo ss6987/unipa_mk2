@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Entity.User" %><%--
   Created by IntelliJ IDEA.
   User: ASAMI
   Date: 2018/07/13
@@ -6,100 +6,114 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="user" class="Entity.User" scope="session"/>
+<jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
+
 <html>
 <head>
     <title>ユーザー管理</title>
 </head>
 <body>
+
+<div>
+    <form action="/Top" method="get">
+        <button type="submit">トップ</button>
+    </form>
+</div>
+
+<h1 align="center">ユーザー管理</h1>
 <%
-    //InputCheckServletでセットした時のキーで値を取り出す。
-    String name = (String) session.getAttribute("name");
-    String say = (String) session.getAttribute("say");
-    String may = (String) session.getAttribute("may");
-    String saykana = (String) session.getAttribute("saykana");
-    String maykana = (String) session.getAttribute("maykana");
-    String sex = request.getParameter("sex");
-    String bunrui1 = request.getParameter("bunrui1");
-    String bunrui2 = request.getParameter("bunrui2");
-    String nen = (String) session.getAttribute("nen");
-    String tsuki = (String) session.getAttribute("tsuki");
-    String hi = (String) session.getAttribute("hi");
-    String yuubin = (String) session.getAttribute("yuubin");
-    String jusho = (String) session.getAttribute("jusho");
-    String denwa = (String) session.getAttribute("denwa");
-
-
+    if (user.getUserClassification().equals("学生")) {
 %>
-
-
-<h1>
-    <button type="submit" name="check"> トップ</button>
-</h1>
-
-<h1 align="center">ユーザー更新</h1>
-
-
 <table BORDER="1" align="center">
     <tr align="center">
-        <td>学籍番号</td>
-        <td><%=name%>
+        <th>学籍番号</th>
+        <td>
+            <%=targetUser.getUserId()%>
         </td>
     </tr>
 
     <tr align="center">
-        <td>氏名<br>フリガナ</td>
-        <td>姓<%=say%>名<%=may%>
-            <br>セイ<%=saykana%>メイ<%=maykana%>
+        <th>氏名</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="name"/>
+        </td>
+    </tr>
+    <tr align="center">
+        <th>フリガナ</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="phonetic"/>
         </td>
     </tr>
 
     <tr align="center">
-        <td>性別</td>
-        <td><%=sex%>
+        <th>性別</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="gender"/>
+        </td>
+    </tr>
+
+    <tr align="center">
+        <th>ユーザー分類</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="userClassification"/>
         </td>
     </tr>
 
 
     <tr align="center">
-        <td>ユーザー分類</td>
-        <td><%=bunrui1%>
+        <th>学部・学科</th>
+        <td>
         </td>
     </tr>
 
 
     <tr align="center">
-        <td>学部・学科</td>
-        <td><%=bunrui2%>
-        </td>
-    </tr>
-
-
-    <tr align="center">
-        <td>生年月日</td>
-        <td>西暦<%=nen%>年<%=tsuki%>月<%=hi%>日</td>
-    </tr>
-
-    <tr align="center">
-        <td>郵便番号</td>
-        <td><%=yuubin%>
+        <th>生年月日</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="birthday"/>
         </td>
     </tr>
 
     <tr align="center">
-        <td>住所</td>
-        <td><%=jusho%>
+        <th>郵便番号</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="postalCode"/>
         </td>
     </tr>
 
     <tr align="center">
-        <td>電話番号</td>
-        <td><%=denwa%>
+        <th>住所</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="address"/>
         </td>
     </tr>
 
+    <tr align="center">
+        <th>電話番号</th>
+        <td>
+            <jsp:getProperty name="targetUser" property="tel"/>
+        </td>
+    </tr>
 </table>
+<h2 align="center">パスワード設定</h2>
+<table BORDER="1" align="center">
+    <td>パスワード<br>確認用パスワード</td>
+    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
+    </tr>
+</table>
+
 <br>
-<br>
+
+<h2 align="center">保護者用パスワード設定</h2>
+<table BORDER="1" align="center">
+    <td>パスワード<br>確認用パスワード</td>
+    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
+    </tr>
+</table>
+<%
+} else if (user.getUserClassification().equals("教職員")){
+%>
 <h2 align="center">更新情報を入力してください</h2>
 
 <table BORDER="1" align="center">
@@ -157,24 +171,11 @@
         <td><input type="text" name="denwa"/><br>※ハイフンなしで入力</td>
     </tr>
 </table>
-
-<table BORDER="1" align="center">
-    <h2 align="center">パスワード設定</h2>
-    <td>パスワード<br>確認用パスワード</td>
-    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-    </tr>
-</table>
-
-<br>
-
-<table BORDER="1" align="center">
-    <h2 align="center">保護者用パスワード設定</h2>
-    <td>パスワード<br>確認用パスワード</td>
-    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-    </tr>
-</table>
-
 <button type="submit" name="update" align="center"> 更新</button>
 <button type="submit" name="userdel" align="center"> 削除</button>
+<%
+    }
+%>
+
 </body>
 </html>

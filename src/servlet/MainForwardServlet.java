@@ -8,15 +8,14 @@ import java.io.IOException;
 
 public class MainForwardServlet extends HttpServlet {
     //ページリストの定義
-    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/UserUpdate.jsp", "/UserDelete.jsp",
+    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/UserDetail.jsp", "/UserDelete.jsp",
             "/CourseList.jsp", "/CourseDelete.jsp", "/UserSearch.jsp", "/UserResult.jsp", "/SyllabusRegistration.jsp",
-            "/SyllabusRegistration.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
+            "/SyllabusDetail.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
             "/CourseRegistration.jsp", "/CourseCheck.jsp", "/TimeTable.jsp", "/CourseCheck.jsp", "/AchieveRegistration.jsp",
             "/AchieveCheck.jsp", "/condition.jsp"};
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String errorMessage = (String) request.getAttribute("ErrorMessage");
-        int nextNumber = 0;
+        int nextNumber;
         try {
             nextNumber = (Integer) request.getAttribute("Number");
         } catch (java.lang.NullPointerException e) {
@@ -28,10 +27,12 @@ public class MainForwardServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String errorMessage = (String) request.getAttribute("ErrorMessage");
-        int nextNumber = (Integer) request.getAttribute("Number");
-
+        int nextNumber;
+        try {
+            nextNumber = (Integer) request.getAttribute("Number");
+        }catch (java.lang.NullPointerException e){
+            nextNumber = 1;
+        }
         //ページリストから画面NoのURLへ遷移する
         request.getRequestDispatcher(pageList[nextNumber - 1]).forward(request, response);
     }

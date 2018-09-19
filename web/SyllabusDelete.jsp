@@ -42,7 +42,7 @@
 <h1>  <button type="submit" name="check"> トップ </button></h1>
 
 <br>
-<span style="background-color:#ffcc99">以下の学生情報を完全に削除します。</span>
+<span style="background-color:#ffcc99">以下のシラバス情報を完全に削除します。</span>
 
 <br>
 

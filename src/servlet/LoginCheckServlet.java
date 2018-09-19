@@ -53,6 +53,9 @@ public class LoginCheckServlet extends HttpServlet {
             request.setAttribute("period", modelManager.getRegistrationPeriod());
             request.setAttribute("Number", 2);
             dispatch.forward(request, response);
+        }else{
+            request.setAttribute("Number", 1);
+            dispatch.forward(request, response);
         }
     }
 }
