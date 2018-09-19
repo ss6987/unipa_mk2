@@ -36,7 +36,7 @@ public class TopServlet extends HttpServlet {
             case "Achieve":
                 url = 0;
                 break;
-            case "CourseRegist":
+            case "CourseRegistration":
                 url = 0;
                 break;
             case "CourseCheck":
@@ -45,13 +45,13 @@ public class TopServlet extends HttpServlet {
             case "UserSearch":
                 url = 0;
                 break;
-            case "AchieveRegist":
+            case "AchieveRegistration":
                 url = 0;
                 break;
-            case "UserRegist":
+            case "UserRegistration":
                 url = 0;
                 break;
-            case "SyllabusRegist":
+            case "SyllabusRegistration":
                 url = 0;
                 break;
             case "AchieveCheck":

@@ -44,7 +44,7 @@
 
         <span><button type="submit" name="action" value="CheckTimeTable">時間割表確認</button> </span>
         <span><button type="submit" name="action" value="Achieve">成績参照</button></span>
-        <span><button type="submit" name="action" value="CourseRegist">履修登録</button> </span>
+        <span><button type="submit" name="action" value="CourseRegistration">履修登録</button> </span>
         <%
         } else if (classification.equals("教職員")) {
         %>
@@ -53,10 +53,10 @@
         } else if (classification.equals("管理者")) {
         %>
         <span><button type="submit" name="action" value="UserSearch">ユーザー検索</button></span>
-        <span><button type="submit" name="action" value="AchieveRegist">成績登録</button></span>
+        <span><button type="submit" name="action" value="AchieveRegistration">成績登録</button></span>
         <span><button type="submit" name="action" value="UserResist">ユーザー登録</button></span>
-        <span><button type="submit" name="action" value="SyllabusRegist">シラバス登録</button></span>
-        <span><button type="submit" name="action" value="AchieveCheck" ></button></span>
+        <span><button type="submit" name="action" value="SyllabusRegistration">シラバス登録</button></span>
+        <span><button type="submit" name="action" value="AchieveCheck"></button></span>
         <%
         } else {
         %>
