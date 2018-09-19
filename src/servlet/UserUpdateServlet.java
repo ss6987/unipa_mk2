@@ -2,6 +2,7 @@ package servlet;
 
 import Entity.User;
 import etc.ModelManager;
+import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +13,31 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UserUpdateServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String disp = "/MainForward";
-        RequestDispatcher dispatch = request.getRequestDispatcher(disp);
-                String userId = request.getParameter("user_id");
-                String name = request.getParameter("name");
-                String phonetic =request.getParameter("phonetic");
-                Integer gender = Integer.parseInt(request.getParameter("gender"));
-                String birthday =  request.getParameter("birthday");
-                String postalCode = request.getParameter("postal_code");
-                String address = request.getParameter("address");
-                String tel = request.getParameter("tel");
-                String userClassification = request.getParameter("user_classification");
+    private String disp = "/MainForward";
+    private ModelManager modelManager = new ModelManager();
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+
+        String action = request.getParameter("action");
+        String userId = request.getParameter("user_id");
+        User targetUser = modelManager.userFindById(userId);
+
+        if (action.equals("update")) {
+            String name = new ReplaceString().repairRequest(request.getParameter("name"));
+            String phonetic = new ReplaceString().repairRequest(request.getParameter("phonetic"));
+            Integer gender = Integer.parseInt(request.getParameter("gender"));
+            String year = request.getParameter("year");
+            String month = request.getParameter("month");
+            String day = request.getParameter("day");
+            String birthday = year + "-" + month + "-" + day;
+            String postalCode = request.getParameter("postal_code");
+            String address = new ReplaceString().repairRequest(request.getParameter("address"));
+            String tel = request.getParameter("tel");
+            String userClassification = request.getParameter("user_classification");
+            if (name.equals("管理者")) {
+                System.out.println(name);
+                System.out.println(phonetic);
                 String errorString = "";
                 User user = new User();
                 errorString += user.setUserId(userId);
@@ -37,13 +50,23 @@ public class UserUpdateServlet extends HttpServlet {
                 errorString += user.setTel(tel);
                 errorString += user.setUserClassification(userClassification);
 
-        ModelManager modelManager = new ModelManager();
-        boolean update = modelManager.userUpdate(user);
+                ModelManager modelManager = new ModelManager();
+//                boolean update = modelManager.userUpdate(user);
+//
+//                if (update != true) errorString += ("更新に失敗しました");
 
-        if(update != true)errorString += ("更新に失敗しました");
+                request.setAttribute("Number", 4);
+                dispatch.forward(request, response);
+            }
 
-        request.setAttribute("Number", 4);
-        dispatch.forward(request, response);
+        } else if (action.equals("delete")) {
+            request.setAttribute("targetUser", targetUser);
+            request.setAttribute("Number", 5);
+            dispatch.forward(request, response);
+        } else {
+            request.setAttribute("Number", 2);
+            dispatch.forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

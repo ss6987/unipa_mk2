@@ -1,5 +1,7 @@
 package etc;
 
+import java.io.UnsupportedEncodingException;
+
 public class ReplaceString {
     String[][] replaceList = {
 //            {"&","&amp;"},
@@ -19,5 +21,9 @@ public class ReplaceString {
         }
         string = string.replace("&lt;br/&gt;","<br/>");
         return string;
+    }
+
+    public String repairRequest(String string) throws UnsupportedEncodingException {
+        return new String(string.getBytes("ISO-8859-1"),"UTF-8");
     }
 }

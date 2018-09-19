@@ -146,12 +146,12 @@ public class User {
         return gender;
     }
 
-    public String getGenderString(){
-        if(this.gender == 0){
+    public String getGenderString() {
+        if (this.gender == 0) {
             return "男性";
-        }else if(this.gender == 1){
+        } else if (this.gender == 1) {
             return "`女性";
-        }else{
+        } else {
             return "その他";
         }
     }
@@ -174,6 +174,37 @@ public class User {
 
     public String getUserClassification() {
         return userClassification.replace(" ", "");
+    }
+
+    public String getUserClassificationSelected(String string) {
+        if (this.getUserClassification().equals(string)) {
+            return "selected";
+        } else {
+            return "";
+        }
+    }
+
+    public String getGenderSelected(Integer number) {
+        if (this.getGender() == number) {
+            return "checked";
+        } else {
+            return "";
+        }
+    }
+
+    public String getBirthYear(){
+        String[] birth = this.getBirthday().split("-");
+        return birth[0];
+    }
+
+    public String getBirthMonth(){
+        String[] birth = this.getBirthday().split("-");
+        return birth[1];
+    }
+
+    public String getBirthDay(){
+        String[] birth = this.getBirthday().split("-");
+        return birth[2];
     }
 
     public Student convertUserToStudent() throws SQLException {

@@ -35,7 +35,7 @@
 <h2>履修登録期間<%=period%>
 </h2>
 <div>
-    <form action="<%= request.getContextPath()%>/Top" method="post">
+    <form action="<%= request.getContextPath()%>/Top" method="post" accept-charset="UTF-8">
         <span><button type="submit" name="action" value="MyUser">ユーザー情報確認</button></span>
         <span><button type="submit" name="action" value="SyllabusSearch">シラバス検索</button></span>
         <%
