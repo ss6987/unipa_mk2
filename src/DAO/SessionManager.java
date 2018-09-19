@@ -25,22 +25,21 @@ public class SessionManager {
     public boolean execute(String sql) {
         try {
             Statement statement = con.createStatement();
-            return statement.execute(sql);
+            System.out.println(statement.execute(sql) + "execute");
+            return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public ResultSet executeQuery(String sql) {
-        Statement statement = null;
+        Statement statement;
         try {
             statement = con.createStatement();
             return statement.executeQuery(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public void close(){

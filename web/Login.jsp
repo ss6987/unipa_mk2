@@ -1,3 +1,5 @@
+<%@ page import="etc.ModelManager" %>
+<%@ page import="Entity.User"%>
 <%--
   Created by IntelliJ IDEA.
   User: SS
@@ -7,7 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
-
 
 <html>
 <head>

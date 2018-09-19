@@ -15,6 +15,8 @@ import java.io.IOException;
 public class UserUpdateServlet extends HttpServlet {
     private String disp = "/MainForward";
     private ModelManager modelManager = new ModelManager();
+    private RequestDispatcher dispatch;
+    private HttpSession session;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatch = request.getRequestDispatcher(disp);
@@ -34,7 +36,7 @@ public class UserUpdateServlet extends HttpServlet {
             String postalCode = request.getParameter("postal_code");
             String address = new ReplaceString().repairRequest(request.getParameter("address"));
             String tel = request.getParameter("tel");
-            String userClassification = request.getParameter("user_classification");
+            String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
             if (name.equals("管理者")) {
                 System.out.println(name);
                 System.out.println(phonetic);
@@ -51,10 +53,18 @@ public class UserUpdateServlet extends HttpServlet {
                 errorString += user.setUserClassification(userClassification);
 
                 ModelManager modelManager = new ModelManager();
-//                boolean update = modelManager.userUpdate(user);
-//
-//                if (update != true) errorString += ("更新に失敗しました");
+                boolean update = modelManager.userUpdate(user);
 
+                if (update != true) {
+                    errorString += ("更新に失敗しました");
+                    request.setAttribute("errorString",errorString);
+                    request.setAttribute("user",user);
+                } else {
+                    user = modelManager.userFindById(userId);
+                    session.setAttribute("user", user);
+                    request.setAttribute("targetUser",user);
+                }
+                System.out.println(errorString);
                 request.setAttribute("Number", 4);
                 dispatch.forward(request, response);
             }

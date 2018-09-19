@@ -43,11 +43,12 @@ public class UserDAO {
         return sessionManager.execute(sql);
     }
 
+
     public boolean update(User user) {
         setList(user);
         String sql = sqlCreater.update(tableName, list);
-        System.out.println(sql);
         return sessionManager.execute(sql);
+
     }
 
     public boolean delete(User user) {
@@ -124,7 +125,7 @@ public class UserDAO {
     }
 
     public boolean updatePassword(User user, String password) {
-        setList(user,password);
+        setList(user, password);
         String sql = sqlCreater.update(tableName, list);
         return sessionManager.execute(sql);
     }
