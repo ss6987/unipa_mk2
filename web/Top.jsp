@@ -56,7 +56,7 @@
         <span><button type="submit" name="action" value="AchieveRegistration">成績登録</button></span>
         <span><button type="submit" name="action" value="UserResist">ユーザー登録</button></span>
         <span><button type="submit" name="action" value="SyllabusRegistration">シラバス登録</button></span>
-        <span><button type="submit" name="action" value="AchieveCheck"></button></span>
+        <span><button type="submit" name="action" value="AchieveCheck">履修登録確認</button></span>
         <%
         } else {
         %>

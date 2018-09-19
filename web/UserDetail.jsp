@@ -49,7 +49,7 @@
     <tr align="center">
         <th>性別</th>
         <td>
-            <jsp:getProperty name="targetUser" property="gender"/>
+            <jsp:getProperty name="targetUser" property="genderString"/>
         </td>
     </tr>
 

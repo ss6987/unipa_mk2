@@ -8,7 +8,7 @@ import etc.StringCheck;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class User{
+public class User {
     private String userId;
     private String name;
     private String phonetic;
@@ -146,6 +146,16 @@ public class User{
         return gender;
     }
 
+    public String getGenderString(){
+        if(this.gender == 0){
+            return "男性";
+        }else if(this.gender == 1){
+            return "`女性";
+        }else{
+            return "その他";
+        }
+    }
+
     public String getBirthday() {
         return birthday;
     }
@@ -163,7 +173,7 @@ public class User{
     }
 
     public String getUserClassification() {
-        return userClassification.replace(" ","");
+        return userClassification.replace(" ", "");
     }
 
     public Student convertUserToStudent() throws SQLException {
