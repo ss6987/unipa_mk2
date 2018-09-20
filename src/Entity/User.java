@@ -1,7 +1,9 @@
 package Entity;
 
 
+import DAO.FacultyDepartmentDAO;
 import DAO.StudentDAO;
+import DAO.UserDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
@@ -169,7 +171,7 @@ public class User {
     }
 
     public String getTel() {
-        return tel;
+        return tel.replace(" ", "");
     }
 
     public String getUserClassification() {
@@ -192,17 +194,17 @@ public class User {
         }
     }
 
-    public String getBirthYear(){
+    public String getBirthYear() {
         String[] birth = this.getBirthday().split("-");
         return birth[0];
     }
 
-    public String getBirthMonth(){
+    public String getBirthMonth() {
         String[] birth = this.getBirthday().split("-");
         return birth[1];
     }
 
-    public String getBirthDay(){
+    public String getBirthDay() {
         String[] birth = this.getBirthday().split("-");
         return birth[2];
     }

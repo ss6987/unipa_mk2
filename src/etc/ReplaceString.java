@@ -6,6 +6,7 @@ public class ReplaceString {
     String[][] replaceList = {
 //            {"&","&amp;"},
             {"　"," "},
+            {" "," "},
             {"\"","&quot;"},
             {"'","&#39;"},
             {"<","&lt;"},

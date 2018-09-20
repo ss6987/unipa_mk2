@@ -61,11 +61,18 @@
         </td>
     </tr>
 
+    <%
+        if (targetUser.getUserClassification().equals("学生")) {
+    %>
     <tr align="center">
         <th>学部・学科</th>
         <td>
         </td>
     </tr>
+
+    <%
+        }
+    %>
 
 
     <tr align="center">
@@ -139,20 +146,24 @@
             <td>
                 <select name="user_classification" size="1">
                     <option value="学生" <%=targetUser.getUserClassificationSelected("学生")%>>学生</option>
-                    <option value="様職員" <%=targetUser.getUserClassificationSelected("`教職員")%>>教職員</option>
+                    <option value="教職員" <%=targetUser.getUserClassificationSelected("教職員")%>>教職員</option>
                     <option value="管理者" <%=targetUser.getUserClassificationSelected("管理者")%>>管理者</option>
                 </select>
             </td>
         </tr>
 
+        <%
+            if (targetUser.getUserClassification().equals("学生")) {
+        %>
         <tr align="center">
             <th>学部・学科</th>
-            <td><select name="bunrui2" size="1">
-                <option value="nc">工学部第二部情報通信工学科</option>
-                <option value="nm">工学部第二部機械工学科</option>
-                <option value="ne">工学部第二部電気電子工学科</option>
-            </select></td>
+            <td>
+            </td>
         </tr>
+
+        <%
+            }
+        %>
 
         <tr align="center">
             <th>性別</th>
@@ -199,6 +210,9 @@
 <%
     }
 %>
+<%
+    if (user.getUserId() == targetUser.getUserId()) {
+%>
 <h2 align="center">パスワード設定</h2>
 <form action="/UserUpdate" method="post">
 
@@ -218,6 +232,9 @@
     </table>
     <button type="submit" name="action" value="update_password">パスワード更新</button>
 </form>
+<%
+    }
+%>
 
 <%
     if (user.getUserClassification().equals("学生")) {

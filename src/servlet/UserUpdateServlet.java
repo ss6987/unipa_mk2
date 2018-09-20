@@ -23,8 +23,8 @@ public class UserUpdateServlet extends HttpServlet {
         session = request.getSession(true);
 
         String action = request.getParameter("action");
-        String userId = (String) session.getAttribute("targetUserId");
-        User targetUser = modelManager.userFindById(userId);
+        String targetUserId = (String) session.getAttribute("targetUserId");
+        User targetUser = modelManager.userFindById(targetUserId);
         String errorString = "";
 
 
@@ -42,7 +42,7 @@ public class UserUpdateServlet extends HttpServlet {
             String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
 
             User user = new User();
-            errorString += user.setUserId(userId);
+            errorString += user.setUserId(targetUserId);
             errorString += user.setName(name);
             errorString += user.setPhonetic(phonetic);
             errorString += user.setGender(gender);
@@ -52,6 +52,15 @@ public class UserUpdateServlet extends HttpServlet {
             errorString += user.setTel(tel);
             errorString += user.setUserClassification(userClassification);
 
+            if (!errorString.equals("")) {
+                request.setAttribute("targetUser", user);
+
+                request.setAttribute("errorString", errorString);
+
+                request.setAttribute("Number", 4);
+                dispatch.forward(request, response);
+            }
+
             ModelManager modelManager = new ModelManager();
             boolean update = modelManager.userUpdate(user);
 
@@ -60,8 +69,11 @@ public class UserUpdateServlet extends HttpServlet {
                 request.setAttribute("user", user);
             } else {
                 errorString += "更新完了";
-                user = modelManager.userFindById(userId);
-                session.setAttribute("user", user);
+                User loginUser = (User) session.getAttribute("user");
+                if (loginUser.getUserId() == targetUserId) {
+                    user = modelManager.userFindById(targetUserId);
+                    session.setAttribute("user", user);
+                }
                 request.setAttribute("targetUser", user);
             }
             request.setAttribute("errorString", errorString);
@@ -77,7 +89,7 @@ public class UserUpdateServlet extends HttpServlet {
             String beforePassword = request.getParameter("before_password");
             String afterPassword = request.getParameter("after_password");
 
-            User user = modelManager.login(userId, beforePassword);
+            User user = modelManager.login(targetUserId, beforePassword);
             if (user != null) {
                 modelManager.userUpdatePassword(user, afterPassword);
                 session.invalidate();
@@ -87,7 +99,7 @@ public class UserUpdateServlet extends HttpServlet {
             } else {
                 errorString += "パスワードが違います。";
                 request.setAttribute("errorString", errorString);
-                request.setAttribute("targetUser",targetUser);
+                request.setAttribute("targetUser", targetUser);
 
                 request.setAttribute("Number", 4);
                 dispatch.forward(request, response);

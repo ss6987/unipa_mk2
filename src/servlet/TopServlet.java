@@ -23,47 +23,82 @@ public class TopServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Integer url;
+        User user = (User) session.getAttribute("user");
+        if (user.getUserClassification().equals("学生")) {
+            switch (action) {
+                case "MyUser":
+                    url = 4;
+                    User targetUser = (User) session.getAttribute("user");
+                    request.setAttribute("targetUser", targetUser);
+                    session.setAttribute("targetUserId", targetUser.getUserId());
+                    request.setAttribute("errorString", "");
+                    break;
+                case "SyllabusSearch":
 
-        switch (action) {
-            case "MyUser":
-                url = 4;
-                User targetUser = (User) session.getAttribute("user");
-                request.setAttribute("targetUser", targetUser);
-                session.setAttribute("targetUserId",targetUser.getUserId());
-                request.setAttribute("errorString","");
-                break;
-            case "SyllabusSearch":
-                url = 13;
-                break;
-            case "CheckTimeTable":
-                url = 17;
-                break;
-            case "Achieve":
-                url = 20;
-                break;
-            case "CourseRegistration":
-                url = 15;
-                break;
-            case "CourseCheck":
-                url = 18;
-                break;
-            case "UserSearch":
-                url = 8;
-                break;
-            case "AchieveRegistration":
-                url = 19;
-                break;
-            case "UserRegistration":
-                url = 3;
-                break;
-            case "SyllabusRegistration":
-                url = 10;
-                break;
-            case "AchieveCheck":
-                url = 20;
-                break;
-            default:
-                url = 2;
+                    url = 13;
+                    break;
+                case "CheckTimeTable":
+                    url = 17;
+                    break;
+                case "Achieve":
+                    url = 20;
+                    break;
+                case "CourseRegistration":
+                    url = 15;
+                    break;
+                default:
+                    url = 2;
+            }
+        } else if (user.getUserClassification().equals("教職員")) {
+            switch (action) {
+                case "MyUser":
+                    url = 4;
+                    User targetUser = (User) session.getAttribute("user");
+                    request.setAttribute("targetUser", targetUser);
+                    session.setAttribute("targetUserId", targetUser.getUserId());
+                    request.setAttribute("errorString", "");
+                    break;
+                case "SyllabusSearch":
+                    url = 13;
+                    break;
+                case "CourseCheck":
+                    url = 18;
+                    break;
+                default:
+                    url = 2;
+            }
+        } else if (user.getUserClassification().equals("管理者")) {
+            switch (action) {
+                case "MyUser":
+                    url = 4;
+                    User targetUser = (User) session.getAttribute("user");
+                    request.setAttribute("targetUser", targetUser);
+                    session.setAttribute("targetUserId", targetUser.getUserId());
+                    request.setAttribute("errorString", "");
+                    break;
+                case "SyllabusSearch":
+                    url = 13;
+                    break;
+                case "UserSearch":
+                    url = 8;
+                    break;
+                case "AchieveRegistration":
+                    url = 19;
+                    break;
+                case "UserRegistration":
+                    url = 3;
+                    break;
+                case "SyllabusRegistration":
+                    url = 10;
+                    break;
+                case "AchieveCheck":
+                    url = 20;
+                    break;
+                default:
+                    url = 2;
+            }
+        }else{
+            url = 2;
         }
 
         request.setAttribute("Number", url);
