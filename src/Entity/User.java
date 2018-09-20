@@ -150,7 +150,7 @@ public class User {
         if (this.gender == 0) {
             return "男性";
         } else if (this.gender == 1) {
-            return "`女性";
+            return "女性";
         } else {
             return "その他";
         }

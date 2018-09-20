@@ -23,7 +23,6 @@ public class TopServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Integer url;
-        System.out.println(action);
 
         switch (action) {
             case "MyUser":
