@@ -1,6 +1,8 @@
 package servlet;
 
-import Entity.SyllabusDetail;
+import Entity.Syllabus;
+import etc.ModelManager;
+import etc.ReplaceString;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,61 +12,34 @@ import java.io.IOException;
 
 public class SyllabusSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String syllabusId = request.getParameter("syllabus_id");
-        String syllabusName = request.getParameter("syllabus_name");
-        String englishName = request.getParameter("english_name");
-        int dividendGrade = Integer.parseInt("dividend_grade");
-        int year = Integer.parseInt("year");
-        String classroom = request.getParameter("class");
-        String semester = request.getParameter("semester");
-        String week = request.getParameter("week");
-        String time = request.getParameter("time");
-        int unit = Integer.parseInt("unit");
-        int capacity = Integer.parseInt("capacity");
-        String objectiveSummary = request.getParameter("objectiveSummary");
-        String goal = request.getParameter("goal");
-        String textbook = request.getParameter("textbook");
-        String referenceBook = request.getParameter("referenceBook");
-        String educationalObject = request.getParameter("educationalObject ");
-        String dp = request.getParameter("dp");
-        String selfStudy = request.getParameter("selfStudy");
-        String freeText = request.getParameter("freeText");
-        String mailAddress = request.getParameter("mailAddress");
-        String officeHour = request.getParameter("officeHour");
-        String classification = request.getParameter("classification");
-        String guidance = request.getParameter("guidance");
-        String advice = request.getParameter("advice");
+        String syllabusId = new ReplaceString().repairRequest(request.getParameter("syllabus_id"));
+        String syllabusName = new ReplaceString().repairRequest(request.getParameter("syllabus_name"));
+        String englishName = new ReplaceString().repairRequest(request.getParameter("english_name"));
+        int dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
+        int year = Integer.parseInt(new ReplaceString().repairRequest("year"));
+        String classroom = new ReplaceString().repairRequest(request.getParameter("class"));
+        String semester = new ReplaceString().repairRequest(request.getParameter("semester"));
+        String week = new ReplaceString().repairRequest(request.getParameter("week"));
+        String time = new ReplaceString().repairRequest(request.getParameter("time"));
+        int unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
+        int capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
 
         String errorString = "";
-        SyllabusDetail syllabusDetail = new SyllabusDetail();
-        errorString += syllabusDetail.setSyllabusId(syllabusId);
-        errorString += syllabusDetail.setSyllabusName(syllabusName);
-        errorString += syllabusDetail.setEnglishName(englishName);
-        errorString += syllabusDetail.setDividendGrade(dividendGrade);
-        errorString += syllabusDetail.setYear(year);
-        errorString += syllabusDetail.setClassRoom(classroom);
-        errorString += syllabusDetail.setSemester(semester);
-        errorString += syllabusDetail.setWeek(week);
-        errorString += syllabusDetail.setTime(time);
-        errorString += syllabusDetail.setUnit(unit);
-        errorString += syllabusDetail.setCapacity(capacity);
-        errorString += syllabusDetail.setObjectiveSummary(objectiveSummary);
-        errorString += syllabusDetail.setGoal(goal);
-        errorString += syllabusDetail.setTextbook(textbook);
-        errorString += syllabusDetail.setReferenceBook(referenceBook);
-        errorString += syllabusDetail.setEducationalObject(educationalObject);
-        errorString += syllabusDetail.setDp(dp);
-        errorString += syllabusDetail.setSelfStudy(selfStudy);
-        errorString += syllabusDetail.setFreeText(freeText);
-        errorString += syllabusDetail.setMailAddress(mailAddress);
-        errorString += syllabusDetail.setOfficeHour(officeHour);
-        errorString += syllabusDetail.setClassification(classification);
-        errorString += syllabusDetail.setGuidance(guidance);
-        errorString += syllabusDetail.setAdvice(advice);
-        System.out.println("SyllabusSearchServlet");
+        Syllabus syllabus = new Syllabus();
+        errorString += syllabus.setSyllabusId(syllabusId);
+        errorString += syllabus.setSyllabusName(syllabusName);
+        errorString += syllabus.setEnglishName(englishName);
+        errorString += syllabus.setDividendGrade(dividendGrade);
+        errorString += syllabus.setYear(year);
+        errorString += syllabus.setClassRoom(classroom);
+        errorString += syllabus.setSemester(semester);
+        errorString += syllabus.setWeek(week);
+        errorString += syllabus.setTime(time);
+        errorString += syllabus.setUnit(unit);
+        errorString += syllabus.setCapacity(capacity);
+        System.out.println(errorString);
 
     }
-
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

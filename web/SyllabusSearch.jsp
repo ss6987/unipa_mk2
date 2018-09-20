@@ -23,13 +23,13 @@
     <table BORDER="1" align="center">
         <tr align="center">
             <th>科目ID</th>
-            <td><input type="text" ></td>
+            <td><input type="text" name="syllabus_id"></td>
 
         </tr>
 
         <tr align="center">
             <th>科目名</th>
-            <td><input type="text"></td>
+            <td><input type="text" name="syllabus_name"></td>
         </tr>
 
         <tr align="center">

@@ -31,14 +31,14 @@ public class UserUpdateServlet extends HttpServlet {
         if (action.equals("update")) {
             String name = new ReplaceString().repairRequest(request.getParameter("name"));
             String phonetic = new ReplaceString().repairRequest(request.getParameter("phonetic"));
-            Integer gender = Integer.parseInt(request.getParameter("gender"));
-            String year = request.getParameter("year");
-            String month = request.getParameter("month");
-            String day = request.getParameter("day");
+            Integer gender = Integer.parseInt(new ReplaceString().repairRequest(request.getParameter("gender")));
+            String year = new ReplaceString().repairRequest(request.getParameter("year"));
+            String month = new ReplaceString().repairRequest(request.getParameter("month"));
+            String day = new ReplaceString().replace(request.getParameter("day"));
             String birthday = year + "-" + month + "-" + day;
-            String postalCode = request.getParameter("postal_code");
+            String postalCode = new ReplaceString().repairRequest(request.getParameter("postal_code"));
             String address = new ReplaceString().repairRequest(request.getParameter("address"));
-            String tel = request.getParameter("tel");
+            String tel = new ReplaceString().repairRequest(request.getParameter("tel"));
             String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
 
             User user = new User();
