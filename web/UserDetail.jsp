@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
+<jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 
 <html lang="ja">
 <head>
@@ -23,7 +24,7 @@
 
 <h1 align="center">ユーザー管理</h1>
 <%
-    if (user.getUserClassification().equals("学生")) {
+    if (user.getUserClassification().equals("学生") || user.getUserClassification().equals("教職員")) {
 %>
 <table BORDER="1" align="center">
     <tr align="center">
@@ -59,7 +60,6 @@
             <jsp:getProperty name="targetUser" property="userClassification"/>
         </td>
     </tr>
-
 
     <tr align="center">
         <th>学部・学科</th>
@@ -115,12 +115,22 @@
 } else if (user.getUserClassification().equals("管理者")) {
 %>
 <h2 align="center">更新情報を入力してください</h2>
+<%
+    System.out.println(request.getAttribute("errorString"));
+    if (!request.getAttribute("errorString").equals("")) {
+%>
+<h3><%=request.getAttribute("errorString")%>
+</h3>
+<%
+    }
+%>
+
 <form action="/UserUpdate" method="post">
     <table BORDER="1" align="center">
         <tr align="center">
             <th>学籍番号</th>
             <td>
-                <input type="text" name="user_id" value="<jsp:getProperty name="targetUser" property="userId"/>"/>
+                <jsp:getProperty name="targetUser" property="userId"/>
             </td>
         </tr>
 
@@ -178,7 +188,8 @@
         <tr align="center">
             <th>郵便番号</th>
             <td>
-                <input type="text" name="postal_code" value="<jsp:getProperty name="targetUser" property="postalCode"/>"/><br>※ハイフンなしで入力
+                <input type="text" name="postal_code"
+                       value="<jsp:getProperty name="targetUser" property="postalCode"/>"/><br>※ハイフンなしで入力
             </td>
         </tr>
 

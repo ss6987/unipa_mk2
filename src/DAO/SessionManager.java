@@ -25,7 +25,7 @@ public class SessionManager {
     public boolean execute(String sql) {
         try {
             Statement statement = con.createStatement();
-            System.out.println(statement.execute(sql) + "execute");
+            statement.execute(sql);
             return true;
         } catch (SQLException e) {
             return false;

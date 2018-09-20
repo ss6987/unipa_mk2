@@ -28,7 +28,10 @@ public class TopServlet extends HttpServlet {
         switch (action) {
             case "MyUser":
                 url = 4;
-                request.setAttribute("targetUser", session.getAttribute("user"));
+                User targetUser = (User) session.getAttribute("user");
+                request.setAttribute("targetUser", targetUser);
+                session.setAttribute("targetUserId",targetUser.getUserId());
+                request.setAttribute("errorString","");
                 break;
             case "SyllabusSearch":
                 url = 13;

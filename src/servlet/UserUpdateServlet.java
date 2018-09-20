@@ -20,9 +20,10 @@ public class UserUpdateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+        session = request.getSession(true);
 
         String action = request.getParameter("action");
-        String userId = request.getParameter("user_id");
+        String userId = (String) session.getAttribute("targetUserId");
         User targetUser = modelManager.userFindById(userId);
 
         if (action.equals("update")) {
@@ -37,37 +38,35 @@ public class UserUpdateServlet extends HttpServlet {
             String address = new ReplaceString().repairRequest(request.getParameter("address"));
             String tel = request.getParameter("tel");
             String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
-            if (name.equals("管理者")) {
-                System.out.println(name);
-                System.out.println(phonetic);
-                String errorString = "";
-                User user = new User();
-                errorString += user.setUserId(userId);
-                errorString += user.setName(name);
-                errorString += user.setPhonetic(phonetic);
-                errorString += user.setGender(gender);
-                errorString += user.setBirthday(birthday);
-                errorString += user.setPostalCode(postalCode);
-                errorString += user.setAddress(address);
-                errorString += user.setTel(tel);
-                errorString += user.setUserClassification(userClassification);
 
-                ModelManager modelManager = new ModelManager();
-                boolean update = modelManager.userUpdate(user);
+            String errorString = "";
+            User user = new User();
+            errorString += user.setUserId(userId);
+            errorString += user.setName(name);
+            errorString += user.setPhonetic(phonetic);
+            errorString += user.setGender(gender);
+            errorString += user.setBirthday(birthday);
+            errorString += user.setPostalCode(postalCode);
+            errorString += user.setAddress(address);
+            errorString += user.setTel(tel);
+            errorString += user.setUserClassification(userClassification);
 
-                if (update != true) {
-                    errorString += ("更新に失敗しました");
-                    request.setAttribute("errorString",errorString);
-                    request.setAttribute("user",user);
-                } else {
-                    user = modelManager.userFindById(userId);
-                    session.setAttribute("user", user);
-                    request.setAttribute("targetUser",user);
-                }
-                System.out.println(errorString);
-                request.setAttribute("Number", 4);
-                dispatch.forward(request, response);
+            ModelManager modelManager = new ModelManager();
+            boolean update = modelManager.userUpdate(user);
+
+            if (update != true) {
+                errorString += "更新に失敗しました";
+                request.setAttribute("user", user);
+            } else {
+                errorString += "更新完了";
+                user = modelManager.userFindById(userId);
+                session.setAttribute("user", user);
+                request.setAttribute("targetUser", user);
             }
+            request.setAttribute("errorString", errorString);
+
+            request.setAttribute("Number", 4);
+            dispatch.forward(request, response);
 
         } else if (action.equals("delete")) {
             request.setAttribute("targetUser", targetUser);
