@@ -96,21 +96,7 @@
         </td>
     </tr>
 </table>
-<h2 align="center">パスワード設定</h2>
-<table BORDER="1" align="center">
-    <td>パスワード<br>確認用パスワード</td>
-    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-    </tr>
-</table>
 
-<br>
-
-<h2 align="center">保護者用パスワード設定</h2>
-<table BORDER="1" align="center">
-    <td>パスワード<br>確認用パスワード</td>
-    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-    </tr>
-</table>
 <%
 } else if (user.getUserClassification().equals("管理者")) {
 %>
@@ -210,6 +196,39 @@
     <button type="submit" name="action" value="update" align="center"> 更新</button>
     <button type="submit" name="action" value="delete" align="center"> 削除</button>
 </form>
+<%
+    }
+%>
+<h2 align="center">パスワード設定</h2>
+<form action="/UserUpdate" method="post">
+
+    <table BORDER="1" align="center">
+        <tr>
+            <th>更新前パスワード</th>
+            <td>
+                <input type="password" name="before_password">
+            </td>
+        </tr>
+        <tr>
+            <th>更新後パスワード</th>
+            <td>
+                <input type="password" name="after_password">
+            </td>
+        </tr>
+    </table>
+    <button type="submit" name="action" value="update_password">パスワード更新</button>
+</form>
+
+<%
+    if (user.getUserClassification().equals("学生")) {
+%>
+<h2 align="center">保護者用パスワード設定</h2>
+<table BORDER="1" align="center">
+    <tr>
+        <th>パスワード<br>確認用パスワード</th>
+        <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
+    </tr>
+</table>
 <%
     }
 %>

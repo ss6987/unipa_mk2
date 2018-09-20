@@ -19,12 +19,14 @@ public class UserUpdateServlet extends HttpServlet {
     private HttpSession session;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatch = request.getRequestDispatcher(disp);
+        dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
         String action = request.getParameter("action");
         String userId = (String) session.getAttribute("targetUserId");
         User targetUser = modelManager.userFindById(userId);
+        String errorString = "";
+
 
         if (action.equals("update")) {
             String name = new ReplaceString().repairRequest(request.getParameter("name"));
@@ -39,7 +41,6 @@ public class UserUpdateServlet extends HttpServlet {
             String tel = request.getParameter("tel");
             String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
 
-            String errorString = "";
             User user = new User();
             errorString += user.setUserId(userId);
             errorString += user.setName(name);
@@ -72,6 +73,27 @@ public class UserUpdateServlet extends HttpServlet {
             request.setAttribute("targetUser", targetUser);
             request.setAttribute("Number", 5);
             dispatch.forward(request, response);
+        } else if (action.equals("update_password")) {
+            String beforePassword = request.getParameter("before_password");
+            String afterPassword = request.getParameter("after_password");
+
+            User user = modelManager.login(userId, beforePassword);
+            if (user != null) {
+                modelManager.userUpdatePassword(user, afterPassword);
+                session.invalidate();
+                request.setAttribute("Number", 1);
+                dispatch.forward(request, response);
+
+            } else {
+                errorString += "パスワードが違います。";
+                request.setAttribute("errorString", errorString);
+                request.setAttribute("targetUser",targetUser);
+
+                request.setAttribute("Number", 4);
+                dispatch.forward(request, response);
+            }
+
+
         } else {
             request.setAttribute("Number", 2);
             dispatch.forward(request, response);
