@@ -15,14 +15,39 @@ public class SyllabusSearchServlet extends HttpServlet {
         String syllabusId = new ReplaceString().repairRequest(request.getParameter("syllabus_id"));
         String syllabusName = new ReplaceString().repairRequest(request.getParameter("syllabus_name"));
         String englishName = new ReplaceString().repairRequest(request.getParameter("english_name"));
-        int dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
-        int year = Integer.parseInt(new ReplaceString().repairRequest("year"));
-        String classroom = new ReplaceString().repairRequest(request.getParameter("class"));
+        String classroom = new ReplaceString().repairRequest(request.getParameter("classroom"));
         String semester = new ReplaceString().repairRequest(request.getParameter("semester"));
         String week = new ReplaceString().repairRequest(request.getParameter("week"));
         String time = new ReplaceString().repairRequest(request.getParameter("time"));
-        int unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
-        int capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
+        int dividendGrade;
+        int year;
+        int unit;
+        int capacity;
+
+        try{
+            dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
+        }catch (java.lang.NumberFormatException e){
+            dividendGrade = -1;
+        }
+
+        try{
+            year = Integer.parseInt(new ReplaceString().repairRequest("year"));
+        }catch (java.lang.NumberFormatException e){
+            year = -1;
+        }
+
+        try{
+            unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
+        }catch (java.lang.NumberFormatException e){
+            unit = -1;
+        }
+
+        try{
+            capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
+        }catch (java.lang.NumberFormatException e){
+            capacity = -1;
+        }
+
 
         String errorString = "";
         Syllabus syllabus = new Syllabus();
