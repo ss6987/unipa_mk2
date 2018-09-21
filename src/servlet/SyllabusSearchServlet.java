@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class SyllabusSearchServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -73,7 +74,7 @@ public class SyllabusSearchServlet extends HttpServlet {
         errorString += syllabus.setTime(time);
         errorString += syllabus.setUnit(unit);
         errorString += syllabus.setCapacity(capacity);
-        errorString.replace("。","。<br/>");
+        errorString = errorString.replace("。","。<br/>");
 
         if (!errorString.equals("")) {
             request.setAttribute("errorString", errorString);
@@ -81,6 +82,10 @@ public class SyllabusSearchServlet extends HttpServlet {
             dispatch.forward(request, response);
         }
 
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus);
+        request.setAttribute("syllabusList",syllabusList);
+        request.setAttribute("Number",14);
+        dispatch.forward(request,response);
     }
 
 

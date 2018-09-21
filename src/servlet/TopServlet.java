@@ -106,7 +106,8 @@ public class TopServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
-        if (session.getAttribute("user") != null) {
+        User user = (User) session.getAttribute("user");
+        if (!user.getUserId().equals("")) {
             request.setAttribute("period", modelManager.getRegistrationPeriod());
             request.setAttribute("Number", 2);
             dispatch.forward(request, response);
