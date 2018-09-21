@@ -18,7 +18,15 @@
 <br>
 <h1>シラバス検索</h1>
 <br>
-<span style="background-color:#ffcc99">※正しく入力されていません</span><br>
+<%
+    if (!request.getAttribute("errorString").equals("")) {
+%>
+<span style="background-color:#ffcc99">
+    <%=request.getAttribute("errorString")%>
+</span><br>
+<%
+    }
+%>
 <form action="/SyllabusSearch" method="post">
     <table BORDER="1" align="center">
         <tr>

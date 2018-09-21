@@ -24,6 +24,7 @@ public class TopServlet extends HttpServlet {
         String action = request.getParameter("action");
         Integer url;
         User user = (User) session.getAttribute("user");
+        request.setAttribute("errorString","");
         if (user.getUserClassification().equals("学生")) {
             switch (action) {
                 case "MyUser":
@@ -31,10 +32,8 @@ public class TopServlet extends HttpServlet {
                     User targetUser = (User) session.getAttribute("user");
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUser.getUserId());
-                    request.setAttribute("errorString", "");
                     break;
                 case "SyllabusSearch":
-
                     url = 13;
                     break;
                 case "CheckTimeTable":
@@ -56,7 +55,6 @@ public class TopServlet extends HttpServlet {
                     User targetUser = (User) session.getAttribute("user");
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUser.getUserId());
-                    request.setAttribute("errorString", "");
                     break;
                 case "SyllabusSearch":
                     url = 13;
@@ -74,7 +72,6 @@ public class TopServlet extends HttpServlet {
                     User targetUser = (User) session.getAttribute("user");
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUser.getUserId());
-                    request.setAttribute("errorString", "");
                     break;
                 case "SyllabusSearch":
                     url = 13;

@@ -109,7 +109,6 @@
 %>
 <h2 align="center">更新情報を入力してください</h2>
 <%
-    System.out.println(request.getAttribute("errorString"));
     if (!request.getAttribute("errorString").equals("")) {
 %>
 <h3><%=request.getAttribute("errorString")%>
