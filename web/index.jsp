@@ -3,7 +3,7 @@
 
 %>
 
-<html>
+<html lang="ja">
 <head>
     <title>
         OK

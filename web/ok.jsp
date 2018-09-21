@@ -11,7 +11,7 @@
     user = (User) request.getAttribute("user");
 %>
 
-<html>
+<html lang="ja">
 <head>
     <title>
         <jsp:getProperty name="user" property="name"/>

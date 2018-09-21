@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
-<html>
+<html lang="ja">
 <head>
     <title>ユーザー登録</title>
 </head>

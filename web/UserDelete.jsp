@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
-<html>
+<html lang="ja">
 <head>
     <title>ユーザー削除確認</title>
 </head>
