@@ -26,10 +26,11 @@ public class SyllabusDAO {
 
     }
 
-    public List<Syllabus> select(Syllabus syllabus,Integer page) throws SQLException {
+    public List<Syllabus> select(Syllabus syllabus, Integer page) throws SQLException {
         clearValue();
         setList(syllabus);
-        String sql = sqlCreater.select(tableName, list,page);
+        String sql;
+        sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 OFFSET " + (page * 100) + " LIMIT 100";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<Syllabus> results = new ArrayList<Syllabus>();
         while (resultSet.next()) {
@@ -100,7 +101,7 @@ public class SyllabusDAO {
 
     public Syllabus findBySyllabusId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list,0);
+        String sql = sqlCreater.select(tableName, list, 0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new Syllabus(resultSet);
@@ -108,7 +109,7 @@ public class SyllabusDAO {
 
     public SyllabusDetail findBySyllabusDetailId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list,0);
+        String sql = sqlCreater.select(tableName, list, 0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return createSyllabusDetail(resultSet);
@@ -126,6 +127,7 @@ public class SyllabusDAO {
         String time = resultSet.getString("time");
         Integer unit = resultSet.getInt("unit");
         Integer capacity = resultSet.getInt("capacity");
+        String mainTeache = resultSet.getString("mainTeacher");
         String objectiveSummary = resultSet.getString("objective_summary");
         String goal = resultSet.getString("goal");
         String textbook = resultSet.getString("textbook");
@@ -151,6 +153,7 @@ public class SyllabusDAO {
                 time,
                 unit,
                 capacity,
+                mainTeache,
                 objectiveSummary,
                 goal,
                 textbook,

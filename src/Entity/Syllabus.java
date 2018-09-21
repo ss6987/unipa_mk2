@@ -19,6 +19,7 @@ public class Syllabus {
     protected String time;
     protected Integer unit;
     protected Integer capacity;
+    protected String mainTeacher;
 
     public Syllabus() {
         this.syllabusId = "";
@@ -32,6 +33,7 @@ public class Syllabus {
         this.time = "";
         this.unit = -1;
         this.capacity = -1;
+        this.mainTeacher = "";
     }
 
     public Syllabus(ResultSet resultSet) throws SQLException {
@@ -46,9 +48,10 @@ public class Syllabus {
         this.time = resultSet.getString("time");
         this.unit = resultSet.getInt("unit");
         this.capacity = resultSet.getInt("capacity");
+        this.mainTeacher = resultSet.getString("name");
     }
 
-    public Syllabus(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity) {
+    public Syllabus(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher) {
         setSyllabusId(syllabusId);
         setSyllabusName(syllabusName);
         setEnglishName(englishName);
@@ -60,6 +63,7 @@ public class Syllabus {
         setTime(time);
         setUnit(unit);
         setCapacity(capacity);
+        setMainTeacher(mainTeacher);
     }
 
     public String getSyllabusId() {
@@ -106,32 +110,36 @@ public class Syllabus {
         return capacity;
     }
 
-    public String getDividendGradeString(){
-        if(this.getDividendGrade() == -1){
+    public String getDividendGradeString() {
+        if (this.getDividendGrade() == -1) {
             return "";
         }
         return this.getDividendGrade().toString();
     }
 
-    public String getYearString(){
-        if(this.getYear() == -1){
+    public String getYearString() {
+        if (this.getYear() == -1) {
             return "";
         }
         return this.getYear().toString();
     }
 
-    public String getUnitString(){
-        if(this.getUnit() == -1){
+    public String getUnitString() {
+        if (this.getUnit() == -1) {
             return "";
         }
         return this.getUnit().toString();
     }
 
-    public String getCapacityString(){
-        if(this.getCapacity() == -1){
+    public String getCapacityString() {
+        if (this.getCapacity() == -1) {
             return "";
         }
         return this.getCapacity().toString();
+    }
+
+    public String getMainTeacher(){
+        return this.mainTeacher;
     }
 
     public String setSyllabusId(String syllabusId) {
@@ -229,12 +237,21 @@ public class Syllabus {
         return "定員に使用できない値が入力されています。";
     }
 
+    public String setMainTeacher(String mainTeacher){
+        mainTeacher = new ReplaceString().replace(mainTeacher);
+        if(new StringCheck().checkNotSymbols(mainTeacher)){
+            this.mainTeacher = mainTeacher;
+            return "";
+        }
+        return "主担当名に使用できない文字が存在します。";
+    }
+
     public SyllabusDetail convertSyllabusToSyllabusDetail() throws SQLException {
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         try {
             return syllabusDAO.findBySyllabusDetailId(this.getSyllabusId());
         } catch (SQLException e) {
-            return new SyllabusDetail(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity, "", "", "", "", "", "", "", "", "", "", "", "", "");
+            return new SyllabusDetail(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity,mainTeacher, "", "", "", "", "", "", "", "", "", "", "", "", "");
         }
     }
 }

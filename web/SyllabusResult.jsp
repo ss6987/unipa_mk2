@@ -13,8 +13,8 @@
 </head>
 <body>
 <%
+    long start = System.currentTimeMillis();
     List<Syllabus> syllabusList = (List<Syllabus>) request.getAttribute("syllabusList");
-
 %>
 
 <form action="/Top" method="get">
@@ -31,34 +31,58 @@
 <br>
 
 <table BORDER="1" align="center">
-
-
-    <tr align="center">
+    <tr>
         <th>科目ID</th>
         <th>科目名</th>
         <th>担当教員</th>
-        <th>科目分類</th>
         <th>学期</th>
         <th>曜日</th>
         <th>時限</th>
-        <th>参照</th>
+        <th>教室</th>
     </tr>
-
+    <%
+        for (int i = 0; i < syllabusList.size(); i++) {
+            Syllabus syllabus = syllabusList.get(i);
+    %>
     <tr align="center">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+            <%=syllabus.getSyllabusId()%>
+        </td>
+        <td>
+            <form action="/SyllabusDetail" method="post" name="form<%=i%>">
+                <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
+                <a href="javascript:form<%=i%>.submit()"><%=syllabus.getSyllabusName()%>
+                </a>
+            </form>
+        </td>
+        <td>
+            <%=syllabus.getMainTeacher()%>
+        </td>
+        <td>
+            <%=syllabus.getSemester()%>
+        </td>
+        <td>
+            <%=syllabus.getWeek()%>
+        </td>
+        <td>
+            <%=syllabus.getTime()%>
+        </td>
+        <td>
+            <%=syllabus.getClassRoom()%>
+        </td>
     </tr>
+    <%
+        }
+    %>
 
 </table>
 
 
 <button type="submit" name="ue"><a href="#top">上へ戻る</a></button>
 <button type="submit" name="check" align="center"> 戻る</button>
+<%
+    long end = System.currentTimeMillis();
+    System.out.println((end - start) + "ms");
+%>
 </body>
 </html>

@@ -100,7 +100,7 @@ public class User {
     }
 
     public String setPostalCode(String postalCode) {
-        if (new StringCheck().checkD(postalCode)) {
+        if (new StringCheck().checkD(postalCode) ) {
             this.postalCode = postalCode;
             return "";
         }

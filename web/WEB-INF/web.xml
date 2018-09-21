@@ -207,6 +207,14 @@
         <servlet-name>Top</servlet-name>
         <url-pattern>/Top</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusDetailServlet</servlet-name>
+        <servlet-class>servlet.SyllabusDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusDetailServlet</servlet-name>
+        <url-pattern>/SyllabusDetail</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>

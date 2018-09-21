@@ -51,8 +51,8 @@ public class SyllabusDetail extends Syllabus {
         this.syllabusContents = null;
     }
 
-    public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {
-        super(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity);
+    public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {
+        super(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity,mainTeacher);
         setObjectiveSummary(objectiveSummary);
         setGoal(goal);
         setTextbook(textbook);
@@ -264,6 +264,6 @@ public class SyllabusDetail extends Syllabus {
     }
 
     public Syllabus convertSyllabusDetailToSyllabus() {
-        return new Syllabus(getSyllabusId(), getSyllabusName(), getEnglishName(), getDividendGrade(), getYear(), getClassRoom(), getSemester(), getWeek(), getTime(), getUnit(), getCapacity());
+        return new Syllabus(getSyllabusId(), getSyllabusName(), getEnglishName(), getDividendGrade(), getYear(), getClassRoom(), getSemester(), getWeek(), getTime(), getUnit(), getCapacity(),getMainTeacher());
     }
 }
