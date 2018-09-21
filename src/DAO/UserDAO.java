@@ -26,9 +26,9 @@ public class UserDAO {
 
     }
 
-    public List<User> select(User user) throws SQLException {
+    public List<User> select(User user,Integer page) throws SQLException {
         setList(user);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,page);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<User> results = new ArrayList<User>();
         while (resultSet.next()) {
@@ -90,7 +90,7 @@ public class UserDAO {
 
     public User findById(String userId) throws SQLException {
         setValue("user_id", userId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new User(resultSet);
@@ -111,7 +111,7 @@ public class UserDAO {
     public User login(String userId, String password) throws SQLException {
         clearValue();
         setValue("user_id", userId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = sessionManager.executeQuery(sql);
         if (resultSet.next()) {
             String salt = resultSet.getString("slat");

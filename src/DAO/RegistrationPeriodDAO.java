@@ -26,7 +26,7 @@ public class RegistrationPeriodDAO {
     public RegistrationPeriod select() throws SQLException {
         clearValue();
         setValue("id","0");
-        String sql = sqlCreater.select(tableName,list);
+        String sql = sqlCreater.select(tableName,list,0);
         ResultSet resultSet = sessionManager.executeQuery(sql);
         resultSet.next();
         return new RegistrationPeriod(resultSet);

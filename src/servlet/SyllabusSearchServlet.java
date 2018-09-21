@@ -82,7 +82,8 @@ public class SyllabusSearchServlet extends HttpServlet {
             dispatch.forward(request, response);
         }
 
-        List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus);
+        session.setAttribute("searchSyllabus",syllabus);
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus,0);
         request.setAttribute("syllabusList",syllabusList);
         request.setAttribute("Number",14);
         dispatch.forward(request,response);

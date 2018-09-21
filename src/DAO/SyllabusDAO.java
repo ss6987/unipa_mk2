@@ -26,10 +26,10 @@ public class SyllabusDAO {
 
     }
 
-    public List<Syllabus> select(Syllabus syllabus) throws SQLException {
+    public List<Syllabus> select(Syllabus syllabus,Integer page) throws SQLException {
         clearValue();
         setList(syllabus);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,page);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<Syllabus> results = new ArrayList<Syllabus>();
         while (resultSet.next()) {
@@ -100,7 +100,7 @@ public class SyllabusDAO {
 
     public Syllabus findBySyllabusId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new Syllabus(resultSet);
@@ -108,7 +108,7 @@ public class SyllabusDAO {
 
     public SyllabusDetail findBySyllabusDetailId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return createSyllabusDetail(resultSet);

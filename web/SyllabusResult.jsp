@@ -17,13 +17,16 @@
 
 %>
 
-<h1>
+<form action="/Top" method="get">
     <button type="submit" name="check"> 再検索</button>
+</form>
+
+<h1>
+    検索結果
 </h1>
 
 <br>
 
-検索結果
 
 <br>
 

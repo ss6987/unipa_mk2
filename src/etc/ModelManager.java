@@ -63,10 +63,10 @@ public class ModelManager {
         }
     }
 
-    public List<User> userSearch(User user) {
+    public List<User> userSearch(User user,Integer page) {
         UserDAO userDAO = new UserDAO();
         try {
-            return userDAO.select(user);
+            return userDAO.select(user,page);
         } catch (SQLException e) {
             return null;
         }
@@ -120,10 +120,10 @@ public class ModelManager {
         }
     }
 
-    public List<Syllabus> syllabusSearch(Syllabus syllabus) {
+    public List<Syllabus> syllabusSearch(Syllabus syllabus,Integer page) {
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         try {
-            return syllabusDAO.select(syllabus);
+            return syllabusDAO.select(syllabus,page);
         } catch (SQLException e) {
             return null;
         }

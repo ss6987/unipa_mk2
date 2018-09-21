@@ -23,8 +23,9 @@ public class FacultyDepartmentDAO {
 
     }
 
-    public List<FacultyDepartment> select() throws SQLException {
-        String sql = sqlCreater.select(tableName, list);
+    public List<FacultyDepartment> select(FacultyDepartment facultyDepartment,Integer page) throws SQLException {
+        setList(facultyDepartment);
+        String sql = sqlCreater.select(tableName, list,page);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<FacultyDepartment> results = new ArrayList<FacultyDepartment>();
         while (resultSet.next()) {
@@ -63,7 +64,7 @@ public class FacultyDepartmentDAO {
 
     public FacultyDepartment findById(String facultyDepartmentId) throws SQLException {
         setValue("faculty_department_id", facultyDepartmentId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new FacultyDepartment(resultSet);

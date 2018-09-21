@@ -106,6 +106,34 @@ public class Syllabus {
         return capacity;
     }
 
+    public String getDividendGradeString(){
+        if(this.getDividendGrade() == -1){
+            return "";
+        }
+        return this.getDividendGrade().toString();
+    }
+
+    public String getYearString(){
+        if(this.getYear() == -1){
+            return "";
+        }
+        return this.getYear().toString();
+    }
+
+    public String getUnitString(){
+        if(this.getUnit() == -1){
+            return "";
+        }
+        return this.getUnit().toString();
+    }
+
+    public String getCapacityString(){
+        if(this.getCapacity() == -1){
+            return "";
+        }
+        return this.getCapacity().toString();
+    }
+
     public String setSyllabusId(String syllabusId) {
         syllabusId = new ReplaceString().replace(syllabusId);
         if (new StringCheck().checkW(syllabusId)) {

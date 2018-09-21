@@ -7,41 +7,42 @@ public class SQLCreater {
     public SQLCreater() {
     }
 
-    public String select(String tableName, List<DateSet> list) {
+    public String select(String tableName, List<DateSet> list,Integer page) {
         String sql = "SELECT ";
         boolean flag = true;
 
-        for(DateSet tmp:list){
+        for (DateSet tmp : list) {
             sql += tmp.getColumn() + ",";
         }
-        sql = sql.replaceFirst(",$","");
+        sql = sql.replaceFirst(",$", "");
         sql += " FROM " + tableName;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag && !tmp.getValue().equals("-1")) {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
                     sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
                 }
-
                 flag = false;
             }
         }
+
+        sql += " OFFSET " + (page * 100) + " LIMIT 100";
         return sql;
     }
 
-    public String selectAnd(String tableName, List<DateSet> list) {
+    public String selectAnd(String tableName, List<DateSet> list,Integer page) {
         String sql = "SELECT ";
         boolean flag = true;
 
-        for(DateSet tmp:list){
+        for (DateSet tmp : list) {
             sql += tmp.getColumn() + ",";
         }
-        sql = sql.replaceFirst(",$","");
+        sql = sql.replaceFirst(",$", "");
         sql += " FROM " + tableName;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
@@ -60,20 +61,23 @@ public class SQLCreater {
                 flag = false;
             }
         }
+
+        sql += " OFFSET " + (page * 100) + " LIMIT 100";
+
         return sql;
     }
 
-    public String selectOr(String tableName, List<DateSet> list) {
+    public String selectOr(String tableName, List<DateSet> list,Integer page) {
         String sql = "SELECT ";
         boolean flag = true;
 
-        for(DateSet tmp:list){
+        for (DateSet tmp : list) {
             sql += tmp.getColumn() + ",";
         }
-        sql = sql.replaceFirst(",$","");
+        sql = sql.replaceFirst(",$", "");
         sql += " FROM " + tableName;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue() != "-1")) {
                 if (tmp.getMold() != "string") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
@@ -93,21 +97,22 @@ public class SQLCreater {
             }
         }
 
-        System.out.println(sql);
+        sql += " OFFSET " + (page * 100) + " LIMIT 100";
+
         return sql;
     }
 
     public String insert(String tableName, List<DateSet> list) {
         String sql = "INSERT INTO " + tableName + "(" + ((DateSet) list.get(0)).getColumn();
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             sql += "," + tmp.getColumn();
         }
 
         sql += ") VALUES (";
         boolean flag = true;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag) {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += tmp.getValue();
@@ -132,7 +137,7 @@ public class SQLCreater {
         String sql = "UPDATE " + tableName;
         boolean flag = true;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag) {
                 if (tmp.getMold() != "string") {
                     sql += " SET " + tmp.getColumn() + " = " + tmp.getValue();
@@ -162,7 +167,7 @@ public class SQLCreater {
         String sql = "DELETE FROM " + tableName;
         boolean flag = true;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag) {
                 if (tmp.getMold() != "string") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
@@ -178,11 +183,11 @@ public class SQLCreater {
         return sql;
     }
 
-    public String deleteAnd(String tableName,List<DateSet> list){
+    public String deleteAnd(String tableName, List<DateSet> list) {
         String sql = "DELETE FROM " + tableName;
         boolean flag = true;
 
-        for (DateSet tmp:list) {
+        for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
@@ -191,7 +196,7 @@ public class SQLCreater {
                 }
 
                 flag = false;
-            }else if(!tmp.getValue().isEmpty() && !(tmp.getValue().equals("-1"))){
+            } else if (!tmp.getValue().isEmpty() && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string") {
                     sql += " AND " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {

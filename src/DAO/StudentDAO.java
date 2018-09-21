@@ -25,8 +25,9 @@ public class StudentDAO {
 
     }
 
-    public List<Student> select() throws SQLException {
-        String sql = sqlCreater.select(tableName, list);
+    public List<Student> select(Student student,Integer page) throws SQLException {
+        setList(student);
+        String sql = sqlCreater.select(tableName, list,page);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<Student> results = new ArrayList<Student>();
         while (resultSet.next()) {
@@ -65,7 +66,7 @@ public class StudentDAO {
 
     public Student findByStudent(String StudentId) throws SQLException {
         setValue("user_id", StudentId);
-        String sql = sqlCreater.select(tableName, list);
+        String sql = sqlCreater.select(tableName, list,0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return createStudent(resultSet);

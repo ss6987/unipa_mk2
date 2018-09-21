@@ -5,7 +5,7 @@ import java.sql.*;
 public class SessionManager {
     private Connection con;
 
-    public SessionManager(){
+    public SessionManager() {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
         } catch (ClassNotFoundException e) {
@@ -13,10 +13,10 @@ public class SessionManager {
         }
         try {
             this.con = DriverManager.getConnection(
-                "jdbc:hsqldb:hsql://localhost",
-                "SA",
-                ""
-                );
+                    "jdbc:hsqldb:hsql://localhost",
+                    "SA",
+                    ""
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -25,7 +25,10 @@ public class SessionManager {
     public boolean execute(String sql) {
         try {
             Statement statement = con.createStatement();
+            long start = System.currentTimeMillis();
             statement.execute(sql);
+            long end = System.currentTimeMillis();
+            System.out.println((end - start) + "ms");
             return true;
         } catch (SQLException e) {
             return false;
@@ -42,14 +45,13 @@ public class SessionManager {
         }
     }
 
-    public void close(){
+    public void close() {
         try {
             this.con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
 
 }
