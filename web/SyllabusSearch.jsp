@@ -142,6 +142,7 @@
         </tr>
 
     </table>
+    <input type="hidden" name="action" value="first_search"/>
     <button type="submit" name="action" value="search">検索</button>
 </form>
 </body>

@@ -24,7 +24,7 @@
 <h1>
     検索結果
 </h1>
-
+<%=(Integer)request.getAttribute("result_count")%>件
 <br>
 
 
@@ -76,13 +76,8 @@
     %>
 
 </table>
+<form action="/SyllabusSearch" method="post">
 
-
-<button type="submit" name="ue"><a href="#top">上へ戻る</a></button>
-<button type="submit" name="check" align="center"> 戻る</button>
-<%
-    long end = System.currentTimeMillis();
-    System.out.println((end - start) + "ms");
-%>
+</form>
 </body>
 </html>

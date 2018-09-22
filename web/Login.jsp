@@ -1,5 +1,6 @@
 <%@ page import="etc.ModelManager" %>
 <%@ page import="Entity.User"%>
+<%@ page import="DAO.SyllabusDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: SS
@@ -9,7 +10,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
-
+<%
+    System.out.println(new SyllabusDAO().getCount());
+%>
 <html lang="ja">
 <head>
     <title>ログイン</title>

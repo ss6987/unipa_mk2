@@ -7,7 +7,7 @@ public class SQLCreater {
     public SQLCreater() {
     }
 
-    public String select(String tableName, List<DateSet> list,Integer page) {
+    public String select(String tableName, List<DateSet> list, Integer page) {
         String sql = "SELECT ";
         boolean flag = true;
 
@@ -32,15 +32,10 @@ public class SQLCreater {
         return sql;
     }
 
-    public String selectAnd(String tableName, List<DateSet> list,Integer page) {
-        String sql = "SELECT ";
-        boolean flag = true;
+    public String getCount(String tableName, List<DateSet> list) {
+        String sql = "SELECT COUNT(*) FROM " + tableName;
 
-        for (DateSet tmp : list) {
-            sql += tmp.getColumn() + ",";
-        }
-        sql = sql.replaceFirst(",$", "");
-        sql += " FROM " + tableName;
+        boolean flag = true;
 
         for (DateSet tmp : list) {
             if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
@@ -62,12 +57,45 @@ public class SQLCreater {
             }
         }
 
+        return sql;
+    }
+
+    public String selectAnd(String tableName, List<DateSet> list, Integer page) {
+        String sql = "SELECT ";
+        boolean flag = true;
+
+        for (DateSet tmp : list) {
+            sql += tmp.getColumn() + ",";
+        }
+        sql = sql.replaceFirst(",$", "");
+        sql += " FROM " + tableName;
+
+        for (DateSet tmp : list) {
+            if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
+                if (tmp.getMold() != "string" && tmp.getMold() != "date") {
+                    sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
+                } else {
+                    sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                }
+
+                flag = false;
+            } else if (!tmp.getValue().isEmpty() && !(tmp.getValue().equals("-1"))) {
+                if (tmp.getMold() != "string" && tmp.getMold() != "date") {
+                    sql += " AND " + tmp.getColumn() + " = " + tmp.getValue();
+                } else {
+                    sql += " AND " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                }
+
+                flag = false;
+            }
+        }
+
         sql += " OFFSET " + (page * 100) + " LIMIT 100";
 
         return sql;
     }
 
-    public String selectOr(String tableName, List<DateSet> list,Integer page) {
+    public String selectOr(String tableName, List<DateSet> list, Integer page) {
         String sql = "SELECT ";
         boolean flag = true;
 

@@ -24,69 +24,77 @@ public class SyllabusSearchServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
-        String syllabusId = new ReplaceString().repairRequest(request.getParameter("syllabus_id"));
-        String syllabusName = new ReplaceString().repairRequest(request.getParameter("syllabus_name"));
-        String englishName = new ReplaceString().repairRequest(request.getParameter("english_name"));
-        String classroom = new ReplaceString().repairRequest(request.getParameter("classroom"));
-        String semester = new ReplaceString().repairRequest(request.getParameter("semester"));
-        String week = new ReplaceString().repairRequest(request.getParameter("week"));
-        String time = new ReplaceString().repairRequest(request.getParameter("time"));
-        int dividendGrade;
-        int year;
-        int unit;
-        int capacity;
+        String action = new ReplaceString().repairRequest(request.getParameter("action"));
+        if (action.equals("first_search")) {
+            String syllabusId = new ReplaceString().repairRequest(request.getParameter("syllabus_id"));
+            String syllabusName = new ReplaceString().repairRequest(request.getParameter("syllabus_name"));
+            String englishName = new ReplaceString().repairRequest(request.getParameter("english_name"));
+            String classroom = new ReplaceString().repairRequest(request.getParameter("classroom"));
+            String semester = new ReplaceString().repairRequest(request.getParameter("semester"));
+            String week = new ReplaceString().repairRequest(request.getParameter("week"));
+            String time = new ReplaceString().repairRequest(request.getParameter("time"));
+            int dividendGrade;
+            int year;
+            int unit;
+            int capacity;
 
-        try {
-            dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
-        } catch (java.lang.NumberFormatException e) {
-            dividendGrade = -1;
-        }
+            try {
+                dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
+            } catch (java.lang.NumberFormatException e) {
+                dividendGrade = -1;
+            }
 
-        try {
-            year = Integer.parseInt(new ReplaceString().repairRequest("year"));
-        } catch (java.lang.NumberFormatException e) {
-            year = -1;
-        }
+            try {
+                year = Integer.parseInt(new ReplaceString().repairRequest("year"));
+            } catch (java.lang.NumberFormatException e) {
+                year = -1;
+            }
 
-        try {
-            unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
-        } catch (java.lang.NumberFormatException e) {
-            unit = -1;
-        }
+            try {
+                unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
+            } catch (java.lang.NumberFormatException e) {
+                unit = -1;
+            }
 
-        try {
-            capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
-        } catch (java.lang.NumberFormatException e) {
-            capacity = -1;
-        }
+            try {
+                capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
+            } catch (java.lang.NumberFormatException e) {
+                capacity = -1;
+            }
 
 
-        String errorString = "";
-        Syllabus syllabus = new Syllabus();
-        errorString += syllabus.setSyllabusId(syllabusId);
-        errorString += syllabus.setSyllabusName(syllabusName);
-        errorString += syllabus.setEnglishName(englishName);
-        errorString += syllabus.setDividendGrade(dividendGrade);
-        errorString += syllabus.setYear(year);
-        errorString += syllabus.setClassRoom(classroom);
-        errorString += syllabus.setSemester(semester);
-        errorString += syllabus.setWeek(week);
-        errorString += syllabus.setTime(time);
-        errorString += syllabus.setUnit(unit);
-        errorString += syllabus.setCapacity(capacity);
-        errorString = errorString.replace("。","。<br/>");
+            String errorString = "";
+            Syllabus syllabus = new Syllabus();
+            errorString += syllabus.setSyllabusId(syllabusId);
+            errorString += syllabus.setSyllabusName(syllabusName);
+            errorString += syllabus.setEnglishName(englishName);
+            errorString += syllabus.setDividendGrade(dividendGrade);
+            errorString += syllabus.setYear(year);
+            errorString += syllabus.setClassRoom(classroom);
+            errorString += syllabus.setSemester(semester);
+            errorString += syllabus.setWeek(week);
+            errorString += syllabus.setTime(time);
+            errorString += syllabus.setUnit(unit);
+            errorString += syllabus.setCapacity(capacity);
+            errorString = errorString.replace("。", "。<br/>");
 
-        if (!errorString.equals("")) {
-            request.setAttribute("errorString", errorString);
-            request.setAttribute("Number", 13);
+            if (!errorString.equals("")) {
+                request.setAttribute("errorString", errorString);
+                request.setAttribute("Number", 13);
+                dispatch.forward(request, response);
+            }
+
+            session.setAttribute("searchSyllabus", syllabus);
+            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, 0);
+            Integer resultCount = modelManager.syllabusCount();
+            request.setAttribute("result_count",resultCount);
+            request.setAttribute("syllabusList", syllabusList);
+            request.setAttribute("Number", 14);
             dispatch.forward(request, response);
+        }else if(action.equals("change_page")){
+
         }
 
-        session.setAttribute("searchSyllabus",syllabus);
-        List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus,0);
-        request.setAttribute("syllabusList",syllabusList);
-        request.setAttribute("Number",14);
-        dispatch.forward(request,response);
     }
 
 

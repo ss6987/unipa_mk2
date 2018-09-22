@@ -29,14 +29,27 @@ public class SyllabusDAO {
     public List<Syllabus> select(Syllabus syllabus, Integer page) throws SQLException {
         clearValue();
         setList(syllabus);
-        String sql;
-        sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 OFFSET " + (page * 100) + " LIMIT 100";
+        String tmpSql = sqlCreater.selectAnd(tableName,list,0);
+        tmpSql = tmpSql.substring(tmpSql.lastIndexOf("FROM syllabus") + "FROM syllabus".length());
+        if(tmpSql.indexOf("WHERE") != -1){
+            tmpSql = " and" + tmpSql.substring(tmpSql.indexOf("WHERE ") + "WHERE".length(),tmpSql.indexOf("OFFSET"));
+        }else{
+            tmpSql = "";
+        }
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql + "OFFSET " + page * 100 + " LIMIT 100";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<Syllabus> results = new ArrayList<Syllabus>();
         while (resultSet.next()) {
             results.add(new Syllabus(resultSet));
         }
         return results;
+    }
+
+    public Integer getCount() throws SQLException {
+        String sql = new SQLCreater().getCount(tableName,list);
+        ResultSet resultSet = this.sessionManager.executeQuery(sql);
+        resultSet.next();
+        return resultSet.getInt("C1");
     }
 
     public boolean insert(SyllabusDetail syllabus) {
