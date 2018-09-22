@@ -76,6 +76,7 @@
     %>
 
 </table>
+<%=request.getAttribute("max_page")%>
 <form action="/SyllabusSearch" method="post">
 
 </form>

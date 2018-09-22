@@ -87,6 +87,9 @@ public class SyllabusSearchServlet extends HttpServlet {
             session.setAttribute("searchSyllabus", syllabus);
             List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, 0);
             Integer resultCount = modelManager.syllabusCount();
+            Integer maxPage = (resultCount / 100) + 1;
+
+            request.setAttribute("max_page",maxPage);
             request.setAttribute("result_count",resultCount);
             request.setAttribute("syllabusList", syllabusList);
             request.setAttribute("Number", 14);
