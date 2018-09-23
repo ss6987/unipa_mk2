@@ -112,6 +112,14 @@ public class ModelManager {
         }
     }
 
+    public SyllabusDetail syllabusDetailFindById(String syllabusId){
+        try {
+            return syllabusDAO.findBySyllabusDetailId(syllabusId);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     public List<Syllabus> syllabusSearch(Syllabus syllabus,Integer page) {
         try {
             return syllabusDAO.select(syllabus,page);

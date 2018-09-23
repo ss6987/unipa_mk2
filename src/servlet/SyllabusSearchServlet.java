@@ -2,6 +2,7 @@ package servlet;
 
 import Entity.Syllabus;
 import etc.ModelManager;
+import etc.Paging;
 import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ public class SyllabusSearchServlet extends HttpServlet {
     private ModelManager modelManager = new ModelManager();
     private RequestDispatcher dispatch;
     private HttpSession session;
+    private Paging paging;
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,15 +89,22 @@ public class SyllabusSearchServlet extends HttpServlet {
             session.setAttribute("searchSyllabus", syllabus);
             List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, 0);
             Integer resultCount = modelManager.syllabusCount();
-            Integer maxPage = (resultCount / 100) + 1;
+            paging = new Paging(resultCount);
+            paging.changePage(0);
 
-            request.setAttribute("max_page",maxPage);
-            request.setAttribute("result_count",resultCount);
+            request.setAttribute("paging", paging);
             request.setAttribute("syllabusList", syllabusList);
             request.setAttribute("Number", 14);
             dispatch.forward(request, response);
-        }else if(action.equals("change_page")){
-
+        } else if (action.equals("change_page")) {
+            Integer page = Integer.parseInt(new ReplaceString().repairRequest(request.getParameter("page")));
+            paging.changePage(page);
+            Syllabus syllabus = (Syllabus) session.getAttribute("searchSyllabus");
+            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, page);
+            request.setAttribute("paging", paging);
+            request.setAttribute("syllabusList", syllabusList);
+            request.setAttribute("Number", 14);
+            dispatch.forward(request, response);
         }
 
     }

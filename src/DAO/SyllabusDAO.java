@@ -29,11 +29,11 @@ public class SyllabusDAO {
     public List<Syllabus> select(Syllabus syllabus, Integer page) throws SQLException {
         clearValue();
         setList(syllabus);
-        String tmpSql = sqlCreater.selectAnd(tableName,list,0);
+        String tmpSql = sqlCreater.selectAnd(tableName, list, 0);
         tmpSql = tmpSql.substring(tmpSql.lastIndexOf("FROM syllabus") + "FROM syllabus".length());
-        if(tmpSql.indexOf("WHERE") != -1){
-            tmpSql = " and" + tmpSql.substring(tmpSql.indexOf("WHERE ") + "WHERE".length(),tmpSql.indexOf("OFFSET"));
-        }else{
+        if (tmpSql.indexOf("WHERE") != -1) {
+            tmpSql = " and" + tmpSql.substring(tmpSql.indexOf("WHERE ") + "WHERE".length(), tmpSql.indexOf("OFFSET"));
+        } else {
             tmpSql = "";
         }
         String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql + "OFFSET " + page * 100 + " LIMIT 100";
@@ -46,7 +46,7 @@ public class SyllabusDAO {
     }
 
     public Integer getCount() throws SQLException {
-        String sql = new SQLCreater().getCount(tableName,list);
+        String sql = new SQLCreater().getCount(tableName, list);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return resultSet.getInt("C1");
@@ -114,7 +114,7 @@ public class SyllabusDAO {
 
     public Syllabus findBySyllabusId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list, 0);
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new Syllabus(resultSet);
@@ -122,7 +122,7 @@ public class SyllabusDAO {
 
     public SyllabusDetail findBySyllabusDetailId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = sqlCreater.select(tableName, list, 0);
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name,s.objective_summary,s.goal,s.textbook,s.reference_book,s.educational_object,s.dp,s.self_study,s.free_text,s.mail_address,s.office_hour,s.classification,s.guidance,s.advice FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return createSyllabusDetail(resultSet);
@@ -140,7 +140,7 @@ public class SyllabusDAO {
         String time = resultSet.getString("time");
         Integer unit = resultSet.getInt("unit");
         Integer capacity = resultSet.getInt("capacity");
-        String mainTeache = resultSet.getString("mainTeacher");
+        String mainTeacher = resultSet.getString("name");
         String objectiveSummary = resultSet.getString("objective_summary");
         String goal = resultSet.getString("goal");
         String textbook = resultSet.getString("textbook");
@@ -166,7 +166,7 @@ public class SyllabusDAO {
                 time,
                 unit,
                 capacity,
-                mainTeache,
+                mainTeacher,
                 objectiveSummary,
                 goal,
                 textbook,
@@ -188,7 +188,7 @@ public class SyllabusDAO {
     }
 
     public void clearValue() {
-        list = new ArrayList<DateSet>();
+        list = new ArrayList<>();
         for (int i = 0; i < columns.size(); i++) {
             this.list.add(new DateSet(columns.get(i), mold.get(i), ""));
         }

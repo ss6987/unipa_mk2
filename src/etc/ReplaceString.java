@@ -13,7 +13,8 @@ public class ReplaceString {
             {">","&gt;"},
             {" ","&nbsp;"},
             {"©","&copy;"},
-            {"\t",""}
+            {"\t",""},
+            {",","&#44;"}
     };
 
     public String replace(String string){

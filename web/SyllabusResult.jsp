@@ -1,5 +1,6 @@
 <%@ page import="Entity.Syllabus" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="etc.Paging" %><%--
   Created by IntelliJ IDEA.
   User: ASAMI
   Date: 2018/07/27
@@ -13,8 +14,9 @@
 </head>
 <body>
 <%
-    long start = System.currentTimeMillis();
     List<Syllabus> syllabusList = (List<Syllabus>) request.getAttribute("syllabusList");
+    Paging paging = (Paging) request.getAttribute("paging");
+    Integer nowPage = paging.getNowPage();
 %>
 
 <form action="/Top" method="get">
@@ -24,7 +26,7 @@
 <h1>
     検索結果
 </h1>
-<%=(Integer)request.getAttribute("result_count")%>件
+<%=paging.getCount()%>件
 <br>
 
 
@@ -76,9 +78,55 @@
     %>
 
 </table>
-<%=request.getAttribute("max_page")%>
+<%
+    if (nowPage != 1) {
+%>
 <form action="/SyllabusSearch" method="post">
-
+    <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
+    <button name="action" type="submit" value="change_page">最初</button>
 </form>
+<%
+} else {
+%>
+<div>最初</div>
+<%
+    }
+%>
+
+<%
+    for (int i = nowPage - 2; i < nowPage + 3; i++) {
+        if (i != nowPage && i >= 1 && i <= paging.getLastPage()) {
+%>
+<form action="/SyllabusSearch" method="post">
+    <input type="hidden" name="page" value="<%=i%>"/>
+    <button name="action" type="submit" value="change_page"><%=i%>
+    </button>
+</form>
+<%
+} else if (i == nowPage && i != paging.getStartPage() && i != paging.getLastPage() && i >= 1 && i <= paging.getLastPage()) {
+%>
+<div>
+    <%=i%>
+</div>
+<%
+        }
+    }
+%>
+
+<%
+    if (nowPage != paging.getLastPage()) {
+%>
+<form action="/SyllabusSearch" method="post">
+    <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
+    <button name="action" type="submit" value="change_page">最後</button>
+</form>
+<%
+} else {
+%>
+<div>最後</div>
+<%
+    }
+%>
+
 </body>
 </html>
