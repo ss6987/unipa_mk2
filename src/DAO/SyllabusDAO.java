@@ -38,7 +38,7 @@ public class SyllabusDAO {
         }
         String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql + "OFFSET " + page * 100 + " LIMIT 100";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
-        List<Syllabus> results = new ArrayList<Syllabus>();
+        List<Syllabus> results = new ArrayList<>();
         while (resultSet.next()) {
             results.add(new Syllabus(resultSet));
         }
