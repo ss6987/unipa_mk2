@@ -162,7 +162,7 @@ public class Syllabus {
 
     public String setEnglishName(String englishName) {
         englishName = new ReplaceString().replace(englishName);
-        if (new StringCheck().checkW(englishName)) {
+        if (new StringCheck().checkNotSymbols(englishName)) {
             this.englishName = englishName;
             return "";
         }
