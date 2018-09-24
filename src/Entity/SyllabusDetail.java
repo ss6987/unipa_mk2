@@ -5,6 +5,7 @@ import etc.ReplaceString;
 import etc.StringCheck;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SyllabusDetail extends Syllabus {
@@ -48,7 +49,7 @@ public class SyllabusDetail extends Syllabus {
         this.classification = "";
         this.guidance = "";
         this.advice = "";
-        this.syllabusContents = null;
+        this.syllabusContents = new ArrayList<>();
     }
 
     public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {

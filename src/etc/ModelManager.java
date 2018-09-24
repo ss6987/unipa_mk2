@@ -89,7 +89,11 @@ public class ModelManager {
     }
 
     public boolean syllabusUpdate(SyllabusDetail syllabusDetail) {
-        return syllabusDAO.update(syllabusDetail);
+        try {
+            return syllabusDAO.update(syllabusDetail);
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean syllabusDelete(Syllabus syllabus) {

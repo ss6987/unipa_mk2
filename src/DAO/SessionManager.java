@@ -25,10 +25,7 @@ public class SessionManager {
     public boolean execute(String sql) {
         try {
             Statement statement = con.createStatement();
-            long start = System.currentTimeMillis();
             statement.execute(sql);
-            long end = System.currentTimeMillis();
-            System.out.println((end - start) + "ms");
             return true;
         } catch (SQLException e) {
             return false;

@@ -58,10 +58,24 @@ public class SyllabusDAO {
         return sessionManager.execute(sql);
     }
 
-    public boolean update(SyllabusDetail syllabus) {
+    public boolean update(SyllabusDetail syllabus) throws SQLException {
         setList(syllabus);
         String sql = sqlCreater.update(tableName, list);
-        System.out.println(sql);
+        boolean flag = sessionManager.execute(sql);
+        if(!flag){
+            return flag;
+        }
+        SyllabusContentsDAO syllabusContentsDAO = new SyllabusContentsDAO();
+        for(SyllabusContents syllabusContents:syllabus.getSyllabusContents()){
+            if(syllabusContentsDAO.findBySyllabusContents(syllabusContents)){
+                flag = syllabusContentsDAO.update(syllabusContents);
+            }else{
+                flag = syllabusContentsDAO.insert(syllabusContents);
+            }
+            if(!flag){
+                return flag;
+            }
+        }
         return sessionManager.execute(sql);
     }
 

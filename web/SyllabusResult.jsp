@@ -52,6 +52,7 @@
         </td>
         <td>
             <form action="/SyllabusDetail" method="post" name="form<%=i%>">
+                <input type="hidden" name="action" value="detail">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <a href="javascript:form<%=i%>.submit()"><%=syllabus.getSyllabusName()%>
                 </a>

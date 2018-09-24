@@ -25,41 +25,41 @@ public class SyllabusSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
-
-        String action = new ReplaceString().repairRequest(request.getParameter("action"));
+        ReplaceString replaceString = new ReplaceString();
+        String action = replaceString.repairRequest(request.getParameter("action"));
         if (action.equals("first_search")) {
-            String syllabusId = new ReplaceString().repairRequest(request.getParameter("syllabus_id"));
-            String syllabusName = new ReplaceString().repairRequest(request.getParameter("syllabus_name"));
-            String englishName = new ReplaceString().repairRequest(request.getParameter("english_name"));
-            String classroom = new ReplaceString().repairRequest(request.getParameter("classroom"));
-            String semester = new ReplaceString().repairRequest(request.getParameter("semester"));
-            String week = new ReplaceString().repairRequest(request.getParameter("week"));
-            String time = new ReplaceString().repairRequest(request.getParameter("time"));
+            String syllabusId = replaceString.repairRequest(request.getParameter("syllabus_id"));
+            String syllabusName = replaceString.repairRequest(request.getParameter("syllabus_name"));
+            String englishName = replaceString.repairRequest(request.getParameter("english_name"));
+            String classroom = replaceString.repairRequest(request.getParameter("classroom"));
+            String semester = replaceString.repairRequest(request.getParameter("semester"));
+            String week = replaceString.repairRequest(request.getParameter("week"));
+            String time = replaceString.repairRequest(request.getParameter("time"));
             int dividendGrade;
             int year;
             int unit;
             int capacity;
 
             try {
-                dividendGrade = Integer.parseInt(new ReplaceString().repairRequest("dividend_grade"));
+                dividendGrade = Integer.parseInt(replaceString.repairRequest("dividend_grade"));
             } catch (java.lang.NumberFormatException e) {
                 dividendGrade = -1;
             }
 
             try {
-                year = Integer.parseInt(new ReplaceString().repairRequest("year"));
+                year = Integer.parseInt(replaceString.repairRequest("year"));
             } catch (java.lang.NumberFormatException e) {
                 year = -1;
             }
 
             try {
-                unit = Integer.parseInt(new ReplaceString().repairRequest("unit"));
+                unit = Integer.parseInt(replaceString.repairRequest("unit"));
             } catch (java.lang.NumberFormatException e) {
                 unit = -1;
             }
 
             try {
-                capacity = Integer.parseInt(new ReplaceString().repairRequest("capacity"));
+                capacity = Integer.parseInt(replaceString.repairRequest("capacity"));
             } catch (java.lang.NumberFormatException e) {
                 capacity = -1;
             }
@@ -97,7 +97,7 @@ public class SyllabusSearchServlet extends HttpServlet {
             request.setAttribute("Number", 14);
             dispatch.forward(request, response);
         } else if (action.equals("change_page")) {
-            Integer page = Integer.parseInt(new ReplaceString().repairRequest(request.getParameter("page")));
+            Integer page = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
             paging.changePage(page);
             Syllabus syllabus = (Syllabus) session.getAttribute("searchSyllabus");
             List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, page);

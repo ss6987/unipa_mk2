@@ -12,7 +12,7 @@ public class MainForwardServlet extends HttpServlet {
             "/CourseList.jsp", "/CourseDelete.jsp", "/UserSearch.jsp", "/UserResult.jsp", "/SyllabusRegistration.jsp",
             "/SyllabusDetail.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
             "/CourseRegistration.jsp", "/CourseCheck.jsp", "/TimeTable.jsp", "/CourseCheck.jsp", "/AchieveRegistration.jsp",
-            "/AchieveCheck.jsp", "/condition.jsp"};
+            "/AchieveCheck.jsp", "/condition.jsp","SyllabusUpdate.jsp"};
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int nextNumber;

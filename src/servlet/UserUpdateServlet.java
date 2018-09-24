@@ -22,24 +22,25 @@ public class UserUpdateServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
-        String action = request.getParameter("action");
+        ReplaceString replaceString =new ReplaceString();
+        String action = replaceString.repairRequest(request.getParameter("action"));
         String targetUserId = (String) session.getAttribute("targetUserId");
         User targetUser = modelManager.userFindById(targetUserId);
         String errorString = "";
 
 
         if (action.equals("update")) {
-            String name = new ReplaceString().repairRequest(request.getParameter("name"));
-            String phonetic = new ReplaceString().repairRequest(request.getParameter("phonetic"));
-            Integer gender = Integer.parseInt(new ReplaceString().repairRequest(request.getParameter("gender")));
-            String year = new ReplaceString().repairRequest(request.getParameter("year"));
-            String month = new ReplaceString().repairRequest(request.getParameter("month"));
-            String day = new ReplaceString().replace(request.getParameter("day"));
+            String name =replaceString.repairRequest(request.getParameter("name"));
+            String phonetic =replaceString.repairRequest(request.getParameter("phonetic"));
+            Integer gender = Integer.parseInt(replaceString.repairRequest(request.getParameter("gender")));
+            String year =replaceString.repairRequest(request.getParameter("year"));
+            String month =replaceString.repairRequest(request.getParameter("month"));
+            String day =replaceString.replace(request.getParameter("day"));
             String birthday = year + "-" + month + "-" + day;
-            String postalCode = new ReplaceString().repairRequest(request.getParameter("postal_code"));
-            String address = new ReplaceString().repairRequest(request.getParameter("address"));
-            String tel = new ReplaceString().repairRequest(request.getParameter("tel"));
-            String userClassification = new ReplaceString().repairRequest(request.getParameter("user_classification"));
+            String postalCode =replaceString.repairRequest(request.getParameter("postal_code"));
+            String address =replaceString.repairRequest(request.getParameter("address"));
+            String tel =replaceString.repairRequest(request.getParameter("tel"));
+            String userClassification =replaceString.repairRequest(request.getParameter("user_classification"));
 
             User user = new User();
             errorString += user.setUserId(targetUserId);

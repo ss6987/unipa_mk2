@@ -166,7 +166,7 @@ public class SQLCreater {
         boolean flag = true;
 
         for (DateSet tmp : list) {
-            if (!tmp.getValue().isEmpty() && flag) {
+            if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string") {
                     sql += " SET " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
@@ -174,7 +174,7 @@ public class SQLCreater {
                 }
 
                 flag = false;
-            } else if (!tmp.getValue().isEmpty()) {
+            } else if (!tmp.getValue().isEmpty() && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string") {
                     sql += "," + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
@@ -188,6 +188,7 @@ public class SQLCreater {
         } else {
             sql += " WHERE " + ((DateSet) list.get(0)).getColumn() + " = '" + list.get(0).getValue() + "'";
         }
+
         return sql;
     }
 

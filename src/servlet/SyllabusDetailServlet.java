@@ -23,14 +23,23 @@ public class SyllabusDetailServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
+        String action = request.getParameter("action");
         String syllabusId = request.getParameter("targetSyllabusId");
+        if(syllabusId == null){
+            syllabusId = (String) session.getAttribute("targetSyllabusId");
+        }
 
         SyllabusDetail targetSyllabus = modelManager.syllabusDetailFindById(syllabusId);
 
-        session.setAttribute("targetSyllabusId",syllabusId);
-        request.setAttribute("targetSyllabus",targetSyllabus);
-        request.setAttribute("Number", 11);
-        dispatch.forward(request, response);
+        session.setAttribute("targetSyllabusId", syllabusId);
+        request.setAttribute("targetSyllabus", targetSyllabus);
+        if (action.equals("detail")) {
+            request.setAttribute("Number", 11);
+            dispatch.forward(request, response);
+        }else if(action.equals("update")){
+            request.setAttribute("Number",22);
+            dispatch.forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

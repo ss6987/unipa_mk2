@@ -26,22 +26,47 @@ public class SyllabusContentsDAO {
     }
 
     public boolean insert(SyllabusContents syllabusContents) {
+        clearValue();
         setList(syllabusContents);
         String sql = sqlCreater.insert(tableName, list);
         return sessionManager.execute(sql);
     }
 
+    public boolean update(SyllabusContents syllabusContents){
+        clearValue();
+        setList(syllabusContents);
+        String sql = sqlCreater.update(tableName,list) + "AND class_number = " + syllabusContents.getClassNumber();
+        return sessionManager.execute(sql);
+    }
+
     public boolean delete(SyllabusContents syllabusContents) {
+        clearValue();
         setList(syllabusContents);
         String sql = sqlCreater.deleteAnd(tableName, list);
         return sessionManager.execute(sql);
+    }
+
+    public boolean findBySyllabusContents(SyllabusContents syllabusContents) throws SQLException {
+        clearValue();
+        list.get(0).setValue(syllabusContents.getSyllabusId());
+        list.get(1).setValue(syllabusContents.getClassNumber().toString());
+        list.get(2).setValue("");
+        String sql = sqlCreater.selectAnd(tableName,list,0);
+        ResultSet resultSet = sessionManager.executeQuery(sql);
+        resultSet.next();
+        SyllabusContents newSyllabusContents = new SyllabusContents(resultSet);
+        if(!newSyllabusContents.getSyllabusId().equals("")){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public List<SyllabusContents> findBySyllabus(Syllabus syllabus) throws SQLException {
         String sql = "SELECT * FROM syllabus_contents WHERE subject_id = '" + syllabus.getSyllabusId() + "'";
         ResultSet resultSet = sessionManager.executeQuery(sql);
         List<SyllabusContents> syllabusContentsList = new ArrayList<SyllabusContents>();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             syllabusContentsList.add(new SyllabusContents(resultSet));
         }
         return syllabusContentsList;
