@@ -26,8 +26,9 @@ public class SyllabusDetailServlet extends HttpServlet {
         String syllabusId = request.getParameter("targetSyllabusId");
 
         SyllabusDetail targetSyllabus = modelManager.syllabusDetailFindById(syllabusId);
-        request.setAttribute("targetSyllabus",targetSyllabus);
 
+        session.setAttribute("targetSyllabusId",syllabusId);
+        request.setAttribute("targetSyllabus",targetSyllabus);
         request.setAttribute("Number", 11);
         dispatch.forward(request, response);
     }

@@ -215,6 +215,14 @@
         <servlet-name>SyllabusDetailServlet</servlet-name>
         <url-pattern>/SyllabusDetail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusUpdateServlet</servlet-name>
+        <servlet-class>servlet.SyllabusUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusUpdateServlet</servlet-name>
+        <url-pattern>/SyllabusUpdate</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>

@@ -14,7 +14,9 @@ public class ReplaceString {
             {" ", "&nbsp;"},
             {"©", "&copy;"},
             {"\t", ""},
-            {",", "&#44;"}
+            {",", "&#44;"},
+            {"(","&#40;"},
+            {")","&#41;"}
     };
 
     public String replace(String string) {
