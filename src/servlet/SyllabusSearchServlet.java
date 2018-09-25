@@ -90,7 +90,7 @@ public class SyllabusSearchServlet extends HttpServlet {
             List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, 0);
             Integer resultCount = modelManager.syllabusCount();
             paging = new Paging(resultCount);
-            paging.changePage(0);
+            paging.changePage(1);
 
             request.setAttribute("paging", paging);
             request.setAttribute("syllabusList", syllabusList);
