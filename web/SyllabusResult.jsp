@@ -19,8 +19,8 @@
     Integer nowPage = paging.getNowPage();
 %>
 
-<form action="/Top" method="get">
-    <button type="submit" name="check"> 再検索</button>
+<form action="/Top" method="post">
+    <button type="submit" name="action" value="SyllabusSearch"> 再検索</button>
 </form>
 
 <h1>
