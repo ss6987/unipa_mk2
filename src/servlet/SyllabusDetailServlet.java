@@ -39,6 +39,9 @@ public class SyllabusDetailServlet extends HttpServlet {
         }else if(action.equals("update")){
             request.setAttribute("Number",22);
             dispatch.forward(request, response);
+        }else if(action.equals("delete")){
+            request.setAttribute("Number",12);
+            dispatch.forward(request, response);
         }
     }
 

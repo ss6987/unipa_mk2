@@ -6,40 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="user" scope="session" class="Entity.User"/>
+<jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
+<jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
 <html lang="ja">
 <head>
-    <title>シラバス削除</title>
+    <title>シラバス削除確認</title>
 </head>
 <body>
-<%
-    //InputCheckServletでセットした時のキーで値を取り出す。
-    String kamokuID = (String) session.getAttribute("kamokuID");
-    String kamokumei = (String) session.getAttribute("kamokumei");
-    String kamokuenglish = (String) session.getAttribute("kamokuenglish");
-    String tani = (String) session.getAttribute("tani");
-    String kyouinID = (String) session.getAttribute("kyouinID");
-    String fukukyouinID = (String) session.getAttribute("fukukyouinID");
-    String gakunen = request.getParameter("gakunen");
-    String gakki = request.getParameter("gakki");
-    String youbi = request.getParameter("youbi");
-    String bunrui = request.getParameter("bunrui");
-    String jigen = (String) session.getAttribute("jigen");
-    String kanrenkamoku = (String) session.getAttribute("kanrenkamoku");
-    String jouken = (String) session.getAttribute("jouken");
-    String setsume = (String) session.getAttribute("setsume");
-    String ninzu = (String) session.getAttribute("ninzu");
 
 
 
-%>
-
-
-
-
-
-
-
-<h1>  <button type="submit" name="check"> トップ </button></h1>
+<h1>削除確認</h1>
 
 <br>
 <span style="background-color:#ffcc99">以下のシラバス情報を完全に削除します。</span>
@@ -48,79 +26,73 @@
 
 <table BORDER="1" align="center">
     <tr align="center">
-        <td>科目ID</td>
-        <td><%=kamokuID%></td>
+        <th>シラバスID</th>
+        <td><jsp:getProperty name="targetSyllabus" property="syllabusId"/></td>
     </tr>
 
     <tr align="center">
-        <td>科目名</td>
-        <td><%=kamokumei%></td>
+        <th>授業名</th>
+        <td><jsp:getProperty name="targetSyllabus" property="syllabusName"/></td>
     </tr>
 
     <tr align="center">
-        <td>科目名英名</td>
-        <td><%=kamokuenglish%></td>
+        <th>英語名</th>
+        <td><jsp:getProperty name="targetSyllabus" property="englishName"/></td>
     </tr>
 
     <tr align="center">
-        <td>配当学年</td>
-        <td><%=gakunen%>
-        </td>
+        <th>配当学年</th>
+        <td><jsp:getProperty name="targetSyllabus" property="dividendGrade"/></td>
     </tr>
 
     <tr align="center">
-        <td>学期・曜日・時限</td>
-        <td><%=gakki%>
-            <%=youbi%>
-            <%=jigen%>
-        </td>
-    </tr>
-
-
-
-    <tr align="center">
-        <td>学部・学科</td>
-        <td><%=bunrui%></td>
+        <th>学期</th>
+        <td><jsp:getProperty name="targetSyllabus" property="semester"/></td>
     </tr>
 
     <tr align="center">
-        <td>単位数</td>
-        <td><%=tani%></td>
+        <th>曜日</th>
+        <td><jsp:getProperty name="targetSyllabus" property="week"/></td>
     </tr>
 
     <tr align="center">
-        <td>担当教員ID</td>
-        <td><%=kyouinID%></td>
+        <th>時限</th>
+        <td><jsp:getProperty name="targetSyllabus" property="time"/></td>
     </tr>
 
     <tr align="center">
-        <td>担当副教員ID</td>
-        <td><%=fukukyouinID%></td>
+        <th>単位数</th>
+        <td><jsp:getProperty name="targetSyllabus" property="unit"/></td>
     </tr>
 
     <tr align="center">
-        <td>関連科目</td>
-        <td><%=kanrenkamoku%></td>
+        <th>主担当教員名</th>
+        <td><jsp:getProperty name="targetSyllabus" property="mainTeacher"/></td>
     </tr>
 
-    <tr align="center">
-        <td>履修条件</td>
-        <td><%=jouken%></td>
-    </tr>
+    <%--<tr align="center">--%>
+        <%--<th>関連科目</th>--%>
+    <%--</tr>--%>
+
+    <%--<tr align="center">--%>
+        <%--<th>履修条件</th>--%>
+    <%--</tr>--%>
+
 
     <tr align="center">
-        <td>概要説明</td>
-        <td><%=setsume%></td>
-    </tr>
-
-    <tr align="center">
-        <td>定員数</td>
-        <td><%=ninzu%></td>
+        <th>定員数</th>
+        <td><jsp:getProperty name="targetSyllabus" property="capacity"/></td>
     </tr>
 
 </table>
 
-<button type="submit" name="check" align="center"> 削除確定 </button>
-<button type="submit" name="check" align="center"> 戻る </button>
+
+<form action="/SyllabusDelete" method="post">
+    <button type="submit" name="action" value="delete">削除確定</button>
+</form>
+
+<form action="/SyllabusDetail" method="post">
+    <button type="submit" name="action" value="detail">戻る</button>
+</form>
 </body>
 </html>

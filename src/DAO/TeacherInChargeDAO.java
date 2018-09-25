@@ -35,6 +35,13 @@ public class TeacherInChargeDAO {
         return sessionManager.execute(sql);
     }
 
+    public boolean deleteBySyllabus(Syllabus syllabus){
+        setList(new User(),syllabus,-1);
+        String sql = sqlCreater.deleteAnd(tableName,list);
+        System.out.println(sql);
+        return sessionManager.execute(sql);
+    }
+
     public List<Syllabus> findByUser(User user, Integer mainTeacher) throws SQLException {
         String sql = "SELECT * FROM syllabus AS s,teacher_in_charge AS t WHERE t.syllabus_id = s.syllabus_id AND t.user_id = '" + user.getUserId() + "'";
         if (mainTeacher != -1) {

@@ -16,6 +16,9 @@
 </head>
 <body>
 <h1>シラバス更新</h1>
+<form action="/SyllabusDetail" method="post">
+    <button type="submit" name="action" value="detail">戻る</button>
+</form>
 <form action="/SyllabusUpdate" method="post">
     <button type="submit" name="action" value="update">更新</button>
     <table border="3">

@@ -1,9 +1,6 @@
 package etc;
 
-import DAO.CourseDAO;
-import DAO.RegistrationPeriodDAO;
-import DAO.SyllabusDAO;
-import DAO.UserDAO;
+import DAO.*;
 import Entity.*;
 
 
@@ -105,6 +102,12 @@ public class ModelManager {
     }
 
     public boolean syllabusDelete(SyllabusDetail syllabus) {
+        for(SyllabusContents syllabusContents:syllabus.getSyllabusContents()){
+            SyllabusContentsDAO syllabusContentsDAO = new SyllabusContentsDAO();
+            syllabusContentsDAO.delete(syllabusContents);
+        }
+        TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
+        teacherInChargeDAO.deleteBySyllabus(syllabus.convertSyllabusDetailToSyllabus());
         return syllabusDAO.delete(syllabus);
     }
 
