@@ -129,4 +129,11 @@ public class UserDAO {
         String sql = sqlCreater.update(tableName, list);
         return sessionManager.execute(sql);
     }
+
+    public Integer getCount() throws SQLException {
+        String sql = new SQLCreater().getCount(tableName,list);
+        ResultSet resultSet = this.sessionManager.executeQuery(sql);
+        resultSet.next();
+        return resultSet.getInt("C1");
+    }
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="searchSyllabus" class="Entity.Syllabus" scope="session"/>
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
     <title>シラバス検索</title>
@@ -20,10 +21,10 @@
 <h1>シラバス検索</h1>
 <br>
 <%
-    if (!request.getAttribute("errorString").equals("")) {
+    if (!errorString.equals("")) {
 %>
 <span style="background-color:#ffcc99">
-    <%=request.getAttribute("errorString")%>
+    <%=errorString%>
 </span><br>
 <%
     }

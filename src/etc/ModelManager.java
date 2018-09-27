@@ -81,6 +81,14 @@ public class ModelManager {
         }
     }
 
+    public Integer userCount(){
+        try{
+            return userDAO.getCount();
+        }catch (SQLException e){
+            return 0;
+        }
+    }
+
     public boolean syllabusRegistration(SyllabusDetail syllabusDetail) {
         return syllabusDAO.insert(syllabusDetail);
     }

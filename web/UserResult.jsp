@@ -12,16 +12,6 @@
 </head>
 <body>
 
-<%
-    //InputCheckServletでセットした時のキーで値を取り出す。
-    String name = (String) session.getAttribute("name");
-    String gakusekibangou = (String) session.getAttribute("gakusekibangou");
-    String say = (String) session.getAttribute("say");
-    String may = (String) session.getAttribute("may");
-    String bunrui = request.getParameter("bunrui");
-    String sansyo = request.getParameter("sansyo");
-
-%>
 
 <h1>  <button type="submit" name="check"> トップ </button></h1>
 <button type="submit" name="login" style="position: absolute; right:  0px; top: 0px">もどる</button>

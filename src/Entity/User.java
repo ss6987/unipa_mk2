@@ -92,15 +92,20 @@ public class User {
     }
 
     public String setBirthday(String birthday) {
+        birthday = new ReplaceString().replace(birthday);
         if (birthday.matches("[-\\d]+$") && birthday.matches("^(\\d{4}-(0[0-9]|1[0-2])-(0[0-9]|[12][0-9]|3[01]))$")) {
             this.birthday = birthday;
+            return "";
+        }else if(birthday.equals("")){
+            this.birthday = "";
             return "";
         }
         return "生年月日に使用できない文字が存在します。";
     }
 
     public String setPostalCode(String postalCode) {
-        if (new StringCheck().checkD(postalCode) ) {
+        postalCode = new ReplaceString().replace(postalCode);
+        if (new StringCheck().checkD(postalCode)) {
             this.postalCode = postalCode;
             return "";
         }
@@ -154,7 +159,7 @@ public class User {
         } else if (this.gender == 1) {
             return "女性";
         } else {
-            return "その他";
+            return "";
         }
     }
 

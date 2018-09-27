@@ -24,7 +24,7 @@ public class TopServlet extends HttpServlet {
         String action = request.getParameter("action");
         Integer url;
         User user = (User) session.getAttribute("user");
-        request.setAttribute("errorString","");
+        request.setAttribute("errorString", "");
         if (user.getUserClassification().equals("学生")) {
             switch (action) {
                 case "MyUser":
@@ -94,7 +94,7 @@ public class TopServlet extends HttpServlet {
                 default:
                     url = 2;
             }
-        }else{
+        } else {
             url = 2;
         }
 
