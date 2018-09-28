@@ -26,6 +26,7 @@ public class UserSearchServlet extends HttpServlet {
         session = request.getSession(true);
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
+        List<User> userList = null;
         if (action.equals("firstSearch")) {
             String userId = replaceString.repairRequest(request.getParameter("userId"));
             String name = replaceString.repairRequest(request.getParameter("name"));
@@ -55,32 +56,30 @@ public class UserSearchServlet extends HttpServlet {
             errorString += searchUser.setAddress(address);
             errorString += searchUser.setTel(tel);
             errorString += searchUser.setUserClassification(userClassification);
-            session.setAttribute("searchUser",searchUser);
+            session.setAttribute("searchUser", searchUser);
             if (!errorString.equals("")) {
-
                 request.setAttribute("errorString", errorString);
-
                 request.setAttribute("Number", 8);
                 dispatch.forward(request, response);
             }
-
-            List<User> userList = modelManager.userSearch(searchUser,0);
+            userList = modelManager.userSearch(searchUser, 0);
             Integer resultCount = modelManager.userCount();
             paging = new Paging(resultCount);
             paging.changePage(1);
 
-            request.setAttribute("paging",paging);
-            request.setAttribute("userList",userList);
-            request.setAttribute("Number",9);
-            dispatch.forward(request,response);
-        }else if(action.equals("changePage")){
-
-        }else if(action.equals("return")){
-            User user = (User)session.getAttribute("searchUser");
-            List<User> userList = modelManager.userSearch(user,paging.getNowPage());
-            request.setAttribute("paging",paging);
-            request.setAttribute("userList",userList);
+        } else if (action.equals("changePage")) {
+            Integer page = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
+            paging.changePage(page);
+            User searchUser = (User) session.getAttribute("searchUser");
+            userList = modelManager.userSearch(searchUser, page);
+        } else if (action.equals("return")) {
+            User user = (User) session.getAttribute("searchUser");
+            userList = modelManager.userSearch(user, paging.getNowPage() - 1);
         }
+        request.setAttribute("userList", userList);
+        request.setAttribute("paging", paging);
+        request.setAttribute("Number", 9);
+        dispatch.forward(request, response);
 
     }
 

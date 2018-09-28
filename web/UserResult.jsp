@@ -12,6 +12,7 @@
 <jsp:useBean id="paging" class="etc.Paging" scope="request"/>
 <%
     List<User> userList = (List<User>) request.getAttribute("userList");
+    Integer nowPage = paging.getNowPage();
 %>
 
 <html lang="ja">
@@ -30,11 +31,10 @@
 
 <h1>検索結果</h1>
 <jsp:getProperty name="paging" property="count"/>
+件
 <br>
 
 <table BORDER="1" align="center">
-
-
     <tr>
         <th>学籍番号</th>
         <th>名前</th>
@@ -47,7 +47,7 @@
         <th>ユーザー分類</th>
     </tr>
     <%
-        for (int i = 0;i < userList.size();i++) {
+        for (int i = 0; i < userList.size(); i++) {
             User user = userList.get(i);
     %>
     <tr>
@@ -58,7 +58,8 @@
             <form action="/Top" method="post" name="form<%=i%>">
                 <input type="hidden" name="action" value="UserDetail"/>
                 <input type="hidden" name="targetUserId" value="<%=user.getUserId()%>"/>
-                <a href="javascript:form<%=i%>.submit()"><%=user.getName()%></a>
+                <a href="javascript:form<%=i%>.submit()"><%=user.getName()%>
+                </a>
             </form>
         </td>
         <td>
@@ -88,7 +89,55 @@
         }
     %>
 </table>
+<%
+    if (nowPage != 1) {
+%>
+<form action="/UserSearch" method="post">
+    <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
+    <button name="action" type="submit" value="changePage">最初</button>
+</form>
+<%
+} else {
+%>
+<div>最初</div>
+<%
+    }
+%>
 
+<%
+    for (int i = nowPage - 2; i < nowPage + 3; i++) {
+        if (i != nowPage && i >= 1 && i <= paging.getLastPage()) {
+%>
+<form action="/UserSearch" method="post">
+    <input type="hidden" name="page" value="<%=i%>"/>
+    <button name="action" type="submit" value="changePage"><%=i%>
+    </button>
+</form>
+<%
+} else if (i == nowPage && i != paging.getStartPage() && i != paging.getLastPage() && i >= 1 && i <= paging.getLastPage()) {
+%>
+<div>
+    <%=i%>
+</div>
+<%
+        }
+    }
+%>
+
+<%
+    if (nowPage != paging.getLastPage()) {
+%>
+<form action="/UserSearch" method="post">
+    <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
+    <button name="action" type="submit" value="changePage">最後</button>
+</form>
+<%
+} else {
+%>
+<div>最後</div>
+<%
+    }
+%>
 
 </body>
 </html>

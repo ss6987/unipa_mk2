@@ -26,7 +26,6 @@
 %>
 <form action="/UserSearch" method="post">
     <button type="submit" name="action" value="return">戻る</button>
-    <input type="submit" name="action" value="return">
 </form>
 <%
     }
