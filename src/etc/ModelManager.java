@@ -12,6 +12,7 @@ public class ModelManager {
     private SyllabusDAO syllabusDAO = new SyllabusDAO();
     private CourseDAO courseDAO = new CourseDAO();
     private RegistrationPeriodDAO registrationPeriodDAO = new RegistrationPeriodDAO();
+    private TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
 
 
     public ModelManager() {
@@ -163,6 +164,14 @@ public class ModelManager {
         } catch (SQLException e) {
             return 0;
         }
+    }
+
+    public boolean teacherInChargeRegistration(String syllabusId,String userId,Integer mainTeacher){
+        Syllabus syllabus = new Syllabus();
+        User user = new User();
+        syllabus.setSyllabusId(syllabusId);
+        user.setUserId(userId);
+        return teacherInChargeDAO.insert(user,syllabus,mainTeacher);
     }
 
     public boolean courseRegistration(Student student, List<String> syllabusIdList) {

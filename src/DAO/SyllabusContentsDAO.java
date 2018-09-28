@@ -54,12 +54,13 @@ public class SyllabusContentsDAO {
         String sql = sqlCreater.selectAnd(tableName,list,0);
         ResultSet resultSet = sessionManager.executeQuery(sql);
         resultSet.next();
-        SyllabusContents newSyllabusContents = new SyllabusContents(resultSet);
-        if(!newSyllabusContents.getSyllabusId().equals("")){
+        try{
+            SyllabusContents newSyllabusContents = new SyllabusContents(resultSet);
             return true;
-        }else{
+        }catch (SQLException e){
             return false;
         }
+
     }
 
     public List<SyllabusContents> findBySyllabus(Syllabus syllabus) throws SQLException {

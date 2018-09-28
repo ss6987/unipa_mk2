@@ -1,4 +1,4 @@
-<%--
+<%@ page import="Entity.SyllabusContents" %><%--
   Created by IntelliJ IDEA.
   User: satone
   Date: 2018/07/20
@@ -6,146 +6,246 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="targetSyllabus" class="Entity.SyllabusDetail" scope="request"/>
+<jsp:useBean id="targetSyllabusId" class="java.lang.String" scope="session"/>
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
+
 <html lang="ja">
 <head>
     <title>シラバス登録</title>
 </head>
 <body>
-
-    <h1>シラバス登録</h1>
+<form action="/Top" method="get">
+    <button type="submit">トップ</button>
+</form>
+<h1>シラバス登録</h1>
 <br>
-
-    <span style="background-color:#ffcc99">※正しく入力されていません</span>
-    <table BORDER="1" align="center">
-        <tr align="center">
-            <td>科目ID</td>
-            <td><input type ="text" name ="kamokuID"/></td>
+<%
+    if (!errorString.equals("")) {
+%>
+    <%=errorString%>
+<%
+    }
+%>
+<form action="/SyllabusUpdate" method="post">
+    <table border="3">
+        <tr>
+            <th width="30%">シラバスID</th>
+            <td>
+                <%
+                    if (targetSyllabusId.equals("")) {
+                %>
+                <input value="lovelive" type="text" name="syllabusId">
+                <%
+                } else {
+                %>
+                <jsp:getProperty name="targetSyllabus" property="syllabusId"/>
+                <%
+                    }
+                %>
+            </td>
         </tr>
-
-        <tr align="center">
-            <td>科目名</td>
-            <td><input type ="text" name ="kamokumei"/></td>
+        <tr>
+            <th width="30%">授業名</th>
+            <td>
+                <input value="lovelive" type="text" name="syllabusName"
+                       value="<jsp:getProperty name="targetSyllabus" property="syllabusName"/>"/>
+            </td>
         </tr>
-
-        <tr align="center">
-            <td>科目名英名</td>
-            <td><input type ="text" name ="kamokuenglish"/></td>
+        <tr>
+            <th width="30%">英語名</th>
+            <td>
+                <input value="lovelive" type="text" name="englishName"
+                       value="<jsp:getProperty name="targetSyllabus" property="englishName"/>"/>
+            </td>
         </tr>
-
-        <tr align="center">
-            <td>配当学年</td>
-            <td><select name="gakunen" size="1">
-            <option value="all">全学年</option>
-            <option value="one">1</option>
-            <option value="two">2</option>
-            <option value="three">3</option>
-        <option value="four">4</option> </select>
-        </td>
+        <tr>
+            <th width="30%">配当学年</th>
+            <td>
+                <input value="1" type="text" name="dividendGrade"
+                       value="<jsp:getProperty name="targetSyllabus" property="dividendGradeString"/>"/>
+                年以上
+            </td>
         </tr>
-
-        <tr align="center">
-            <td>学期・曜日・時限</td>
-            <td><select name="gakki" size="1">
-                <option value="tunen">通年</option>
-                <option value="shuchu">集中</option>
-                <option value="zenki">前期</option>
-                <option value="kouki">後期</option> </select>
-                <select name="youbi" size="1">
-                    <option value="getsu">月</option>
-                    <option value="ka">火</option>
-                    <option value="sui">水</option>
-                    <option value="moku">木</option>
-                    <option value="kin">金</option>
-                    <option value="do">土</option> </select>
-                <input type ="text" name ="jigen"/>
+        <tr>
+            <th width="30%">開講年度</th>
+            <td>
+                <input value="2018" type="text" name="year" value="<jsp:getProperty name="targetSyllabus" property="yearString"/>"/>
+                年度
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">教室</th>
+            <td>
+                <input value="lovelive" type="text" name="classRoom"
+                       value="<jsp:getProperty name="targetSyllabus" property="classRoom"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">学期</th>
+            <td>
+                <input value="前期" type="text" name="semester"
+                       value="<jsp:getProperty name="targetSyllabus" property="semester"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">曜日</th>
+            <td>
+                <input value="日" type="text" name="week" value="<jsp:getProperty name="targetSyllabus" property="week"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">時限</th>
+            <td>
+                <input value="1,7" type="text" name="time" value="<jsp:getProperty name="targetSyllabus" property="time"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">単位数</th>
+            <td>
+                <input value="10" type="text" name="unit" value="<jsp:getProperty name="targetSyllabus" property="unitString"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">定員</th>
+            <td>
+                <input value="9" type="text" name="capacity"
+                       value="<jsp:getProperty name="targetSyllabus" property="capacityString"/>"/>
+                人
+            </td>
+        </tr>
+        <tr>
+            <th>主担当教員</th>
+            <td><input value="root" type="text" name="mainTeacherId"></td>
+        </tr>
+        <tr>
+            <th width="30%">目的概要</th>
+            <td>
+                <input value="lovelive" type="text" name="objectiveSummary"
+                       value="<jsp:getProperty name="targetSyllabus" property="objectiveSummary"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">達成目標</th>
+            <td>
+                <input value="lovelive" type="text" name="goal" value="<jsp:getProperty name="targetSyllabus" property="goal"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">教科書</th>
+            <td>
+                <input value="lovelive" type="text" name="textbook"
+                       value="<jsp:getProperty name="targetSyllabus" property="textbook"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">参考書</th>
+            <td>
+                <input value="lovelive" type="text" name="referenceBook"
+                       value="<jsp:getProperty name="targetSyllabus" property="referenceBook"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">学習・教育目標との対応</th>
+            <td>
+                <input value="lovelive" type="text" name="educationalObject"
+                       value="<jsp:getProperty name="targetSyllabus" property="educationalObject"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">DPとの対応</th>
+            <td>
+                <input value="lovelive" type="text" name="dp" value="<jsp:getProperty name="targetSyllabus" property="dp"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">事前・事後学習</th>
+            <td>
+                <input value="lovelive" type="text" name="selfStudy"
+                       value="<jsp:getProperty name="targetSyllabus" property="selfStudy"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">自由記載欄</th>
+            <td>
+                <input value="lovelive" type="text" name="freeText"
+                       value="<jsp:getProperty name="targetSyllabus" property="freeText"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">メールアドレス</th>
+            <td>
+                <input value="lovelive" type="text" name="mailAddress"
+                       value="<jsp:getProperty name="targetSyllabus" property="mailAddress"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">オフィスアワー等</th>
+            <td>
+                <input value="lovelive" type="text" name="officeHour"
+                       value="<jsp:getProperty name="targetSyllabus" property="officeHour"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">クラス分け情報</th>
+            <td>
+                <input value="lovelive" type="text" name="classification"
+                       value="<jsp:getProperty name="targetSyllabus" property="classification"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">ガイダンス情報</th>
+            <td>
+                <input value="lovelive" type="text" name="guidance"
+                       value="<jsp:getProperty name="targetSyllabus" property="guidance"/>"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="30%">学習上の助言</th>
+            <td>
+                <input value="lovelive" type="text" name="advice" value="<jsp:getProperty name="targetSyllabus" property="advice"/>"/>
+            </td>
+        </tr>
+        <%
+            if (!targetSyllabusId.equals("")) {
+                for (SyllabusContents syllabusContents : targetSyllabus.getSyllabusContents()) {
+        %>
+        <tr>
+            <th width="30%">第<%=syllabusContents.getClassNumber()%>回</th>
+            <td>
+                <input value="lovelive" type="text" name="syllabusContents<%=syllabusContents.getClassNumber()%>"
+                       value="<%=syllabusContents.getCourseContent()%>"/>
+            </td>
+        </tr>
+        <%
+            }
+        } else {
+            for (int i = 1; i <= 16; i++) {
+        %>
+        <tr>
+            <th width="30%">第<%=i%>回</th>
+            <td>
+                <input value="lovelive" type="text" name="syllabusContents<%=i%>"/>
             </td>
         </tr>
 
-
-
-        <tr align="center">
-            <td>学部・学科</td>
-            <td><select name="bunrui" size="1">
-                <option value="ek">工学部  機械工学科</option>
-                <option value="ej">工学部  電気電子工学科</option>
-                <option value="ec">工学部  情報通信工学科</option>
-                <option value="eh">工学部  電子システム工学科</option>
-                <option value="es">工学部  環境化学科</option>
-                <option value="es">工学部  応用化学科</option>
-                <option value="ef">工学部  先端機械工学科</option>
-                <option value="nm">工学部第二部  機械工学科</option>
-                <option value="ne">工学部第二部  電気電子工学科</option>
-                <option value="nc">工学部第二部  情報通信工学科</option>
-                <option value="fa">未来科学部  建築学科</option>
-                <option value="fi">未来科学部  情報メディア学科</option>
-                <option value="fr">未来科学部  ロボット・メカトロニクス学科</option>
-                <option value="aj">システムデザイン工学部  情報システム工学科</option>
-                <option value="ad">システムデザイン工学部  デザイン工学科</option>
-                <option value="ru">理工学部  理学系</option>
-                <option value="rb">理工学部  生命科学系</option>
-                <option value="rd">理工学部  情報システムデザイン学系</option>
-                <option value="rm">理工学部  機械工学系</option>
-                <option value="re">理工学部  電子工学系</option>
-                <option value="rg">理工学部  建築・都市環境学系</option>
-                <option value="jn">情報環境学部  情報環境学科  ネットワーク・コンピュータ工学コース</option>
-                <option value="jd">情報環境学部  情報環境学科  デジタル情報工学コース</option>
-                <option value="js">情報環境学部  情報環境学科  建築デザインコース</option>
-                <option value="jc">情報環境学部  情報環境学科  コミュニケーション工学コース</option></select></td>
-        </tr>
-
-        <tr align="center">
-            <td>科目分類</td>
-            <td><select name="bunrui" size="1">
-                <option value="jinka">人間科学科目</option>
-                <option value="eigo">英語科目</option>
-                <option value="zenki">専門基礎科目</option>
-                <option value="kouki">専門科目</option>
-                <option value="kouki">実践知重点科目</option>
-                <option value="kouki">教職科目</option>
-            </select></td>
-        </tr>
-
-        <tr align="center">
-            <td>単位数</td>
-            <td><input type ="text" name ="tani"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>担当教員ID</td>
-            <td><input type ="text" name ="kyouinID"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>担当副教員ID</td>
-            <td><input type ="text" name ="fukukyouinID"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>関連科目</td>
-            <td><input type ="text" name ="kanrenkamoku"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>履修条件</td>
-            <td><input type ="text" name ="jouken"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>概要説明</td>
-            <td><input type ="text" name ="setsumei"/></td>
-        </tr>
-
-        <tr align="center">
-            <td>定員数</td>
-            <td><input type ="text" name ="ninzu"/></td>
-        </tr>
-
+        <%
+                }
+            }
+        %>
     </table>
-
-
-    <br>
-    <button type="submit" name="next">次へ</button>
-    <br>
-
+    <%
+        if (!targetSyllabusId.equals("")) {
+    %>
+    <button type="submit" name="action" value="update">更新</button>
+    <button type="submit" name="action" value="delete">削除</button>
+    <%
+    } else {
+    %>
+    <button type="submit" name="action" value="insert">登録</button>
+    <%
+        }
+    %>
+</form>
 </body>
 </html>

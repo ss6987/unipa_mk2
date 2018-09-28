@@ -38,7 +38,6 @@ public class TeacherInChargeDAO {
     public boolean deleteBySyllabus(Syllabus syllabus){
         setList(new User(),syllabus,-1);
         String sql = sqlCreater.deleteAnd(tableName,list);
-        System.out.println(sql);
         return sessionManager.execute(sql);
     }
 

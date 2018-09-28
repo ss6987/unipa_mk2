@@ -79,7 +79,7 @@ public class UserUpdateServlet extends HttpServlet {
             }
 
 
-            if (update != true) {
+            if (!update) {
                 errorString += "更新に失敗しました";
                 request.setAttribute("user", user);
             } else {
