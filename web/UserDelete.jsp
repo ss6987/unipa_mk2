@@ -102,7 +102,7 @@
 </table>
 
 <form action="/Top" method="post">
-    <input type="hidden" name="action" value="MyUser">
+    <input type="hidden" name="action" value="UserUpdate">
     <button type="submit" name="login">もどる</button>
 </form>
 <form action="/UserDelete" method="post">

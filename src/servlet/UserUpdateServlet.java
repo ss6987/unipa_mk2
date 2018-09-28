@@ -25,11 +25,14 @@ public class UserUpdateServlet extends HttpServlet {
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
         String targetUserId = (String) session.getAttribute("targetUserId");
+        if(targetUserId.equals("")){
+            targetUserId = replaceString.repairRequest(request.getParameter("targetUserId"));
+        }
         User targetUser = modelManager.userFindById(targetUserId);
         String errorString = "";
 
 
-        if (action.equals("update")) {
+        if (action.equals("update") || action.equals("insert")) {
             String name = replaceString.repairRequest(request.getParameter("name"));
             String phonetic = replaceString.repairRequest(request.getParameter("phonetic"));
             String genderString = replaceString.repairRequest(request.getParameter("gender"));
@@ -68,7 +71,13 @@ public class UserUpdateServlet extends HttpServlet {
                 dispatch.forward(request, response);
             }
 
-            boolean update = modelManager.userUpdate(user);
+            boolean update = false;
+            if (action.equals("insert")) {
+                update = modelManager.userRegistration(user, "password");
+            } else if (action.equals("update")) {
+                update = modelManager.userUpdate(user);
+            }
+
 
             if (update != true) {
                 errorString += "更新に失敗しました";
@@ -110,7 +119,6 @@ public class UserUpdateServlet extends HttpServlet {
                 request.setAttribute("Number", 4);
                 dispatch.forward(request, response);
             }
-
 
         } else {
             request.setAttribute("Number", 2);

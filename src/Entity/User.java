@@ -201,17 +201,29 @@ public class User {
 
     public String getBirthYear() {
         String[] birth = this.getBirthday().split("-");
-        return birth[0];
+        try{
+            return birth[0];
+        }catch (java.lang.ArrayIndexOutOfBoundsException e){
+            return "";
+        }
     }
 
     public String getBirthMonth() {
         String[] birth = this.getBirthday().split("-");
-        return birth[1];
+        try{
+            return birth[1];
+        }catch (java.lang.ArrayIndexOutOfBoundsException e){
+            return "";
+        }
     }
 
     public String getBirthDay() {
         String[] birth = this.getBirthday().split("-");
-        return birth[2];
+        try{
+            return birth[2];
+        }catch (java.lang.ArrayIndexOutOfBoundsException e){
+            return "";
+        }
     }
 
     public Student convertUserToStudent() throws SQLException {
