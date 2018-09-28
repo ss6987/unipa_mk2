@@ -21,6 +21,16 @@
         <button type="submit">トップ</button>
     </form>
 </div>
+<%
+    if (!targetUserId.equals(user.getUserId())) {
+%>
+<form action="/UserSearch" method="post">
+    <button type="submit" name="action" value="return">戻る</button>
+    <input type="submit" name="action" value="return">
+</form>
+<%
+    }
+%>
 
 <h1 align="center">ユーザー管理</h1>
 <%

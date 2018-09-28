@@ -6,6 +6,10 @@ public class Paging {
     private Integer nowPage = 1;
     private Integer lastPage;
 
+    public Paging(){
+
+    }
+
     public Paging(Integer count) {
         this.count = count;
         this.lastPage = this.count / 100;

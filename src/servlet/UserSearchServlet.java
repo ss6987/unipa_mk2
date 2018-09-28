@@ -73,6 +73,13 @@ public class UserSearchServlet extends HttpServlet {
             request.setAttribute("userList",userList);
             request.setAttribute("Number",9);
             dispatch.forward(request,response);
+        }else if(action.equals("changePage")){
+
+        }else if(action.equals("return")){
+            User user = (User)session.getAttribute("searchUser");
+            List<User> userList = modelManager.userSearch(user,paging.getNowPage());
+            request.setAttribute("paging",paging);
+            request.setAttribute("userList",userList);
         }
 
     }

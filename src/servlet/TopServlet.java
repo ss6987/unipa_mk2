@@ -73,6 +73,13 @@ public class TopServlet extends HttpServlet {
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUser.getUserId());
                     break;
+                case "UserDetail":
+                    url = 4;
+                    String targetUserId = request.getParameter("targetUserId");
+                    targetUser = modelManager.userFindById(targetUserId);
+                    request.setAttribute("targetUser",targetUser);
+                    session.setAttribute("targetUserId",targetUserId);
+                    break;
                 case "SyllabusSearch":
                     url = 13;
                     break;
