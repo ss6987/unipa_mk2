@@ -125,18 +125,17 @@
 %>
 <h2 align="center">パスワード設定</h2>
 <form action="/UserUpdate" method="post">
-
     <table BORDER="1" align="center">
         <tr>
             <th>更新前パスワード</th>
             <td>
-                <input type="password" name="before_password">
+                <input type="password" name="before_password" required>
             </td>
         </tr>
         <tr>
             <th>更新後パスワード</th>
             <td>
-                <input type="password" name="after_password">
+                <input type="password" name="after_password" required>
             </td>
         </tr>
     </table>

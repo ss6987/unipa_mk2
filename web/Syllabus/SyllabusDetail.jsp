@@ -32,6 +32,12 @@
 </form>
 
 <%
+} else if (user.getUserClassification().equals("教職員")) {
+%>
+<form action="/Top" method="post">
+    <button type="submit" name="action" value="check">履修登録者一覧</button>
+</form>
+<%
     }
 %>
 <form action="/SyllabusSearch" method="post">

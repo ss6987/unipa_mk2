@@ -15,9 +15,15 @@
     <title>シラバス登録</title>
 </head>
 <body>
+<%
+    if (!targetSyllabusId.equals("")) {
+%>
 <form action="/SyllabusDetail" method="post">
     <button type="submit" name="action" value="detail">戻る</button>
 </form>
+<%
+    }
+%>
 <form action="/Top" method="get">
     <button type="submit">トップ</button>
 </form>
@@ -50,7 +56,7 @@
                 <%
                     if (targetSyllabusId.equals("")) {
                 %>
-                <input type="text" name="syllabusId">
+                <input type="text" name="syllabusId" pattern="^[0-9A-Za-z]+$" required autofocus>
                 <%
                 } else {
                 %>
@@ -64,7 +70,8 @@
             <th width="30%">授業名</th>
             <td>
                 <input type="text" name="syllabusName"
-                       value="<jsp:getProperty name="targetSyllabus" property="syllabusName"/>"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="syllabusName"/>"
+                       required autofocus/>
             </td>
         </tr>
         <tr>
@@ -78,7 +85,8 @@
             <th width="30%">配当学年</th>
             <td>
                 <input type="text" name="dividendGrade"
-                       value="<jsp:getProperty name="targetSyllabus" property="dividendGradeString"/>"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="dividendGradeString"/>"
+                       required pattern="^[1-4]$"/>
                 年以上
             </td>
         </tr>

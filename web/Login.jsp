@@ -18,12 +18,14 @@
         <tr>
             <td>学籍番号</td>
             <td>
-                <input type="text" name="id" value="<jsp:getProperty name="user" property="userId"/>"/>
+                <input type="text" name="id"
+                       value="<jsp:getProperty name="user" property="userId"/>"
+                       required pattern="^[0-9A-Za-z]+$"/>
             </td>
         </tr>
         <tr>
             <td>パスワード</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" name="password" required></td>
         </tr>
     </table>
     <button type="submit" name="login">ログイン</button>
