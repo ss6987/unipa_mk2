@@ -25,7 +25,7 @@ public class UserUpdateServlet extends HttpServlet {
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
         String targetUserId = (String) session.getAttribute("targetUserId");
-        if(targetUserId.equals("")){
+        if (targetUserId.equals("")) {
             targetUserId = replaceString.repairRequest(request.getParameter("targetUserId"));
         }
         User targetUser = modelManager.userFindById(targetUserId);
@@ -61,14 +61,14 @@ public class UserUpdateServlet extends HttpServlet {
             errorString += user.setAddress(address);
             errorString += user.setTel(tel);
             errorString += user.setUserClassification(userClassification);
+            errorString = errorString.replace("。","。<br/>");
 
             if (!errorString.equals("")) {
                 request.setAttribute("targetUser", user);
-
                 request.setAttribute("errorString", errorString);
-
-                request.setAttribute("Number", 4);
+                request.setAttribute("Number", 3);
                 dispatch.forward(request, response);
+                return;
             }
 
             boolean update = false;
@@ -82,24 +82,29 @@ public class UserUpdateServlet extends HttpServlet {
             if (!update) {
                 errorString += "更新に失敗しました";
                 request.setAttribute("user", user);
+                request.setAttribute("Number", 3);
             } else {
                 errorString += "更新完了";
                 User loginUser = (User) session.getAttribute("user");
+                user = modelManager.userFindById(targetUserId);
                 if (loginUser.getUserId() == targetUserId) {
-                    user = modelManager.userFindById(targetUserId);
                     session.setAttribute("user", user);
                 }
                 request.setAttribute("targetUser", user);
+                session.setAttribute("targetUserId",targetUserId);
+                request.setAttribute("Number", 4);
+
             }
             request.setAttribute("errorString", errorString);
 
-            request.setAttribute("Number", 4);
             dispatch.forward(request, response);
+            return;
 
         } else if (action.equals("delete")) {
             request.setAttribute("targetUser", targetUser);
             request.setAttribute("Number", 5);
             dispatch.forward(request, response);
+            return;
         } else if (action.equals("update_password")) {
             String beforePassword = request.getParameter("before_password");
             String afterPassword = request.getParameter("after_password");
@@ -110,6 +115,7 @@ public class UserUpdateServlet extends HttpServlet {
                 session.invalidate();
                 request.setAttribute("Number", 1);
                 dispatch.forward(request, response);
+                return;
 
             } else {
                 errorString += "パスワードが違います。";
@@ -118,11 +124,13 @@ public class UserUpdateServlet extends HttpServlet {
 
                 request.setAttribute("Number", 4);
                 dispatch.forward(request, response);
+                return;
             }
 
         } else {
             request.setAttribute("Number", 2);
             dispatch.forward(request, response);
+            return;
         }
     }
 

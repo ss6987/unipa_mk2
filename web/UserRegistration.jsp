@@ -9,6 +9,7 @@
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
     <title>ユーザー登録</title>
@@ -19,23 +20,43 @@
     <button type="submit" name="action" value="Top">トップ</button>
 </form>
 <br>
-<h1>ユーザー登録でザンス</h1>
+<%
+    if (!targetUserId.equals("")) {
+%>
+<h1>ユーザー更新</h1>
+<%
+} else {
+%>
+<h1>ユーザー登録</h1>
+<%
+    }
+%>
 <br>
 
 以下のフォームに登録する学生の情報を入力してくださいなんでもしますから
 
 <br>
+<%
+    if (!errorString.equals("")) {
+%>
+<%=errorString%>
+<%
+    }
+%>
 
 <form action="/UserUpdate" method="post">
     <table BORDER="1" align="center">
         <tr align="center">
             <th>学籍番号</th>
             <td>
-                <jsp:getProperty name="targetUser" property="userId"/>
                 <%
                     if (targetUserId.equals("")) {
                 %>
-                <input type="text" name="targetUserId">
+                <input type="text" name="targetUserId" value="<jsp:getProperty name="targetUser" property="userId"/>">
+                <%
+                } else {
+                %>
+                <jsp:getProperty name="targetUser" property="userId"/>
                 <%
                     }
                 %>

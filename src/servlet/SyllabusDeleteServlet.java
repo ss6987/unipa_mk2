@@ -30,10 +30,8 @@ public class SyllabusDeleteServlet extends HttpServlet {
 
             boolean flag = modelManager.syllabusDelete(syllabusDetail);
             if (flag) {
-                request.setAttribute("Number", 11);
-                dispatch.forward(request, response);
+                request.getRequestDispatcher("/SyllabusSearch").forward(request, response);
             } else {
-
                 request.setAttribute("Number", 11);
                 dispatch.forward(request, response);
             }

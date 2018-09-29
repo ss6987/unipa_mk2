@@ -30,13 +30,13 @@
 <form action="/SyllabusDetail" method="post">
     <button type="submit" name="action" value="delete">シラバス削除</button>
 </form>
-<form action="/SyllabusSearch" method="post">
-    <button type="submit" name="action" value="return">戻る</button>
-</form>
+
 <%
     }
 %>
-
+<form action="/SyllabusSearch" method="post">
+    <button type="submit" name="action" value="return">戻る</button>
+</form>
 <table border="3">
     <tr>
         <th width="30%">シラバスID</th>

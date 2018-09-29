@@ -40,53 +40,66 @@ public class SyllabusSearchServlet extends HttpServlet {
             int unit;
             int capacity;
 
-            try {
-                dividendGrade = Integer.parseInt(replaceString.repairRequest("dividend_grade"));
-            } catch (java.lang.NumberFormatException e) {
-                dividendGrade = -1;
-            }
-
-            try {
-                year = Integer.parseInt(replaceString.repairRequest("year"));
-            } catch (java.lang.NumberFormatException e) {
-                year = -1;
-            }
-
-            try {
-                unit = Integer.parseInt(replaceString.repairRequest("unit"));
-            } catch (java.lang.NumberFormatException e) {
-                unit = -1;
-            }
-
-            try {
-                capacity = Integer.parseInt(replaceString.repairRequest("capacity"));
-            } catch (java.lang.NumberFormatException e) {
-                capacity = -1;
-            }
-
 
             String errorString = "";
             Syllabus syllabus = new Syllabus();
             errorString += syllabus.setSyllabusId(syllabusId);
             errorString += syllabus.setSyllabusName(syllabusName);
             errorString += syllabus.setEnglishName(englishName);
-            errorString += syllabus.setDividendGrade(dividendGrade);
-            errorString += syllabus.setYear(year);
             errorString += syllabus.setClassRoom(classroom);
             errorString += syllabus.setSemester(semester);
             errorString += syllabus.setWeek(week);
             errorString += syllabus.setTime(time);
+            try {
+                dividendGrade = Integer.parseInt(replaceString.repairRequest(request.getParameter("dividend_grade")));
+            } catch (java.lang.NumberFormatException e) {
+                dividendGrade = -1;
+                if (!request.getParameter("dividend_grade").equals("")) {
+                    errorString += "配当学年に数字以外の文字を入力しないでください。";
+                }
+            }
+            errorString += syllabus.setDividendGrade(dividendGrade);
+
+            try {
+                year = Integer.parseInt(replaceString.repairRequest(request.getParameter("year")));
+            } catch (java.lang.NumberFormatException e) {
+                year = -1;
+                if (!request.getParameter("year").equals("")) {
+                    errorString += "開講年度に数字以外の文字を入力しないでください。";
+                }
+            }
+            errorString += syllabus.setYear(year);
+
+            try {
+                unit = Integer.parseInt(replaceString.repairRequest(request.getParameter("unit")));
+            } catch (java.lang.NumberFormatException e) {
+                unit = -1;
+                if (!request.getParameter("unit").equals("")) {
+                    errorString += "単位数に数字以外の文字を入力しないでください。";
+                }
+            }
             errorString += syllabus.setUnit(unit);
+
+            try {
+                capacity = Integer.parseInt(replaceString.repairRequest(request.getParameter("capacity")));
+            } catch (java.lang.NumberFormatException e) {
+                capacity = -1;
+                if (!request.getParameter("capacity").equals("")) {
+                    errorString += "定員に数字以外の文字を入力しないでください。";
+                }
+            }
             errorString += syllabus.setCapacity(capacity);
+
             errorString = errorString.replace("。", "。<br/>");
 
+            session.setAttribute("searchSyllabus", syllabus);
             if (!errorString.equals("")) {
                 request.setAttribute("errorString", errorString);
                 request.setAttribute("Number", 13);
                 dispatch.forward(request, response);
+                return;
             }
 
-            session.setAttribute("searchSyllabus", syllabus);
             List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, 0);
             Integer resultCount = modelManager.syllabusCount();
             paging = new Paging(resultCount);
@@ -96,22 +109,25 @@ public class SyllabusSearchServlet extends HttpServlet {
             request.setAttribute("syllabusList", syllabusList);
             request.setAttribute("Number", 14);
             dispatch.forward(request, response);
+            return;
         } else if (action.equals("change_page")) {
             Integer page = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
             paging.changePage(page);
             Syllabus syllabus = (Syllabus) session.getAttribute("searchSyllabus");
-            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, page);
+            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, page - 1);
             request.setAttribute("paging", paging);
             request.setAttribute("syllabusList", syllabusList);
             request.setAttribute("Number", 14);
             dispatch.forward(request, response);
-        } else if (action.equals("return")) {
+            return;
+        } else if (action.equals("return") || action.equals("delete")) {
             Syllabus syllabus = (Syllabus) session.getAttribute("searchSyllabus");
-            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, paging.getNowPage());
-            request.setAttribute("paging",paging);
+            List<Syllabus> syllabusList = modelManager.syllabusSearch(syllabus, paging.getNowPage() - 1);
+            request.setAttribute("paging", paging);
             request.setAttribute("syllabusList", syllabusList);
             request.setAttribute("Number", 14);
             dispatch.forward(request, response);
+            return;
         }
 
     }

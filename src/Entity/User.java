@@ -105,7 +105,7 @@ public class User {
 
     public String setPostalCode(String postalCode) {
         postalCode = new ReplaceString().replace(postalCode);
-        if (new StringCheck().checkD(postalCode)) {
+        if (new StringCheck().checkD(postalCode) && (postalCode.length() == 7|| postalCode.length() == 0)) {
             this.postalCode = postalCode;
             return "";
         }
@@ -122,7 +122,7 @@ public class User {
     }
 
     public String setTel(String tel) {
-        if (new StringCheck().checkD(tel)) {
+        if (new StringCheck().checkD(tel) && (tel.length() == 11) || tel.length() == 10 || tel.length() == 0) {
             this.tel = tel;
             return "";
         }
@@ -168,7 +168,7 @@ public class User {
     }
 
     public String getPostalCode() {
-        return postalCode;
+        return postalCode.replace(" ","");
     }
 
     public String getAddress() {
@@ -194,7 +194,9 @@ public class User {
     public String getGenderSelected(Integer number) {
         if (this.getGender() == number) {
             return "checked";
-        } else {
+        } else if(this.getGender() == -1 && number == 0) {
+            return "checked";
+        }else{
             return "";
         }
     }

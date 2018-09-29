@@ -31,7 +31,7 @@ public class StringCheck {
 
     //半角英数字,全角カタカナのみならTrue
     public boolean checkPhonetic(String string) {
-        if (string.matches("[\\wァ-ヶ&#;]+$") || string.equals("")) {
+        if (string.matches("[\\wァ-ヶ&#;ー]+$") || string.equals("")) {
             return true;
         } else {
             return false;

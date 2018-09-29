@@ -38,7 +38,7 @@ public class SQLCreater {
         boolean flag = true;
 
         for (DateSet tmp : list) {
-            if (!tmp.getValue().isEmpty() && flag && !(tmp.getValue().equals("-1"))) {
+            if (!(tmp.getValue().isEmpty()) && flag && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
@@ -46,14 +46,12 @@ public class SQLCreater {
                 }
 
                 flag = false;
-            } else if (!tmp.getValue().isEmpty() && !(tmp.getValue() != "-1")) {
+            } else if (!(tmp.getValue().isEmpty()) && !(tmp.getValue().equals("-1"))) {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " AND " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
                     sql += " AND " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
                 }
-
-                flag = false;
             }
         }
 

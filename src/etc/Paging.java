@@ -12,7 +12,7 @@ public class Paging {
 
     public Paging(Integer count) {
         this.count = count;
-        this.lastPage = this.count / 100;
+        this.lastPage = this.count / 100 + 1;
     }
 
     public void changePage(Integer nextPage) {

@@ -64,28 +64,36 @@ public class SyllabusUpdateServlet extends HttpServlet {
             try {
                 dividendGrade = Integer.parseInt(replaceString.repairRequest(request.getParameter("dividendGrade")));
             } catch (java.lang.NumberFormatException e) {
-//                errorString += "配当学年に使用できない文字が存在します。";
+                if (!request.getParameter("dividendGrade").equals("")) {
+                    errorString += "配当学年に使用できない文字が存在します。";
+                }
                 dividendGrade = -1;
             }
 
             try {
                 year = Integer.parseInt(replaceString.repairRequest(request.getParameter("year")));
             } catch (java.lang.NumberFormatException e) {
-//                errorString += "開講年度に使用できない文字が存在します。";
+                if (!request.getParameter("year").equals("")) {
+                    errorString += "開講年度に使用できない文字が存在します。";
+                }
                 year = -1;
             }
 
             try {
                 unit = Integer.parseInt(replaceString.repairRequest(request.getParameter("unit")));
             } catch (java.lang.NumberFormatException e) {
-//                errorString += "単位数に使用できない文字が存在します。";
+                if (!request.getParameter("unit").equals("")) {
+                    errorString += "単位数に使用できない文字が存在します。";
+                }
                 unit = -1;
             }
 
             try {
                 capacity = Integer.parseInt(replaceString.repairRequest(request.getParameter("capacity")));
             } catch (java.lang.NumberFormatException e) {
-//                errorString += "定員に使用できない文字が存在します。";
+                if (!request.getParameter("capacity").equals("")) {
+                    errorString += "定員に使用できない文字が存在します。";
+                }
                 capacity = -1;
             }
 
@@ -119,17 +127,17 @@ public class SyllabusUpdateServlet extends HttpServlet {
             boolean flag = false;
             if (action.equals("insert")) {
                 flag = modelManager.syllabusRegistration(syllabusDetail);
-            }
-            if (!flag) {
-                errorString += "更新に失敗しました。";
-                request.setAttribute("targetSyllabus", syllabusDetail);
-                request.setAttribute("errorString", errorString);
-                request.setAttribute("Number", 10);
-                dispatch.forward(request, response);
-                return;
+                if (!flag) {
+                    errorString += "更新に失敗しました。";
+                    request.setAttribute("targetSyllabus", syllabusDetail);
+                    request.setAttribute("errorString", errorString);
+                    request.setAttribute("Number", 10);
+                    dispatch.forward(request, response);
+                    return;
+                }
             }
 
-            flag = modelManager.teacherInChargeRegistration(syllabusId,mainTeacherId,0);
+            flag = modelManager.teacherInChargeRegistration(syllabusId, mainTeacherId, 0);
 
             try {
                 int i = 1;
@@ -157,11 +165,14 @@ public class SyllabusUpdateServlet extends HttpServlet {
             if (!flag) {
                 errorString += "更新に失敗しました。";
                 request.setAttribute("targetSyllabus", syllabusDetail);
+                request.setAttribute("Number", 10);
             } else {
                 errorString += "更新完了";
+                request.setAttribute("Number", 11);
+                session.setAttribute("targetSyllabusId", syllabusId);
+                request.setAttribute("targetSyllabus", modelManager.syllabusDetailFindById(syllabusId));
             }
             request.setAttribute("errorString", errorString);
-            request.setAttribute("Number", 10);
             dispatch.forward(request, response);
         }
     }

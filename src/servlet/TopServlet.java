@@ -120,6 +120,7 @@ public class TopServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
         session.removeAttribute("targetUserId");
+        session.removeAttribute("targetSyllabusId");
 
         User user = (User) session.getAttribute("user");
         if (!user.getUserId().equals("")) {

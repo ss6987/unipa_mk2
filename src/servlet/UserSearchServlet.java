@@ -56,6 +56,7 @@ public class UserSearchServlet extends HttpServlet {
             errorString += searchUser.setAddress(address);
             errorString += searchUser.setTel(tel);
             errorString += searchUser.setUserClassification(userClassification);
+            errorString = errorString.replace("。","<br/>");
             session.setAttribute("searchUser", searchUser);
             if (!errorString.equals("")) {
                 request.setAttribute("errorString", errorString);
@@ -71,7 +72,7 @@ public class UserSearchServlet extends HttpServlet {
             Integer page = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
             paging.changePage(page);
             User searchUser = (User) session.getAttribute("searchUser");
-            userList = modelManager.userSearch(searchUser, page);
+            userList = modelManager.userSearch(searchUser, page - 1);
         } else if (action.equals("return")) {
             User user = (User) session.getAttribute("searchUser");
             userList = modelManager.userSearch(user, paging.getNowPage() - 1);
@@ -80,7 +81,7 @@ public class UserSearchServlet extends HttpServlet {
         request.setAttribute("paging", paging);
         request.setAttribute("Number", 9);
         dispatch.forward(request, response);
-
+        return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
