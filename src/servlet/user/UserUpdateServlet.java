@@ -1,4 +1,4 @@
-package servlet;
+package servlet.user;
 
 import Entity.User;
 import etc.ModelManager;

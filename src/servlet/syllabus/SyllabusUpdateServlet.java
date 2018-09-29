@@ -1,4 +1,4 @@
-package servlet;
+package servlet.syllabus;
 
 import DAO.SyllabusDAO;
 import Entity.Syllabus;

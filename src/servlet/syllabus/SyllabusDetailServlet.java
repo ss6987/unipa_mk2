@@ -1,4 +1,4 @@
-package servlet;
+package servlet.syllabus;
 
 import Entity.Syllabus;
 import Entity.SyllabusDetail;

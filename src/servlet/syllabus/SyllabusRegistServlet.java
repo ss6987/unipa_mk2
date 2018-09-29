@@ -1,4 +1,4 @@
-package servlet;
+package servlet.syllabus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

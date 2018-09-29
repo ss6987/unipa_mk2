@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>TTForwardServlet</servlet-name>
-        <servlet-class>servlet.TTForwardServlet</servlet-class>
+        <servlet-class>servlet.user.TTForwardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TTForwardServlet</servlet-name>
@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>AchieveForwardServlet</servlet-name>
-        <servlet-class>servlet.AchieveForwardServlet</servlet-class>
+        <servlet-class>servlet.achieve.AchieveForwardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AchieveForwardServlet</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>ConditionForwardServlet</servlet-name>
-        <servlet-class>servlet.ConditionForwardServlet</servlet-class>
+        <servlet-class>servlet.Course.ConditionForwardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConditionForwardServlet</servlet-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>UserUpdateCheckServlet</servlet-name>
-        <servlet-class>servlet.UserUpdateCheckServlet</servlet-class>
+        <servlet-class>servlet.user.UserUpdateCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserUpdateCheckServlet</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>servlet.UserDeleteServlet</servlet-class>
+        <servlet-class>servlet.user.UserDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserDeleteServlet</servlet-name>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>UserSearchServlet</servlet-name>
-        <servlet-class>servlet.UserSearchServlet</servlet-class>
+        <servlet-class>servlet.user.UserSearchServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserSearchServlet</servlet-name>
@@ -69,7 +69,7 @@
 
     <servlet>
         <servlet-name>UserRegistServlet</servlet-name>
-        <servlet-class>servlet.UserRegistServlet</servlet-class>
+        <servlet-class>servlet.user.UserRegistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserRegistServlet</servlet-name>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>servlet.UserUpdateServlet</servlet-class>
+        <servlet-class>servlet.user.UserUpdateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserUpdateServlet</servlet-name>
@@ -87,7 +87,7 @@
 
     <servlet>
         <servlet-name>SyllabusDeleteServlet</servlet-name>
-        <servlet-class>servlet.SyllabusDeleteServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusDeleteServlet</servlet-name>
@@ -96,7 +96,7 @@
 
     <servlet>
         <servlet-name>SyllabusSearchServlet</servlet-name>
-        <servlet-class>servlet.SyllabusSearchServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusSearchServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusSearchServlet</servlet-name>
@@ -105,7 +105,7 @@
 
     <servlet>
         <servlet-name>SyllabusRegistServlet</servlet-name>
-        <servlet-class>servlet.SyllabusRegistServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusRegistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusRegistServlet</servlet-name>
@@ -114,7 +114,7 @@
 
     <servlet>
         <servlet-name>StudentDeleteCheckServlet</servlet-name>
-        <servlet-class>servlet.StudentDeleteCheckServlet</servlet-class>
+        <servlet-class>servlet.user.StudentDeleteCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StudentDeleteCheckServlet</servlet-name>
@@ -123,7 +123,7 @@
 
     <servlet>
         <servlet-name>StudentDeleteServlet</servlet-name>
-        <servlet-class>servlet.StudentDeleteServlet</servlet-class>
+        <servlet-class>servlet.user.StudentDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StudentDeleteServlet</servlet-name>
@@ -132,7 +132,7 @@
 
     <servlet>
         <servlet-name>CourseRegistCheckServlet</servlet-name>
-        <servlet-class>servlet.CourseRegistCheckServlet</servlet-class>
+        <servlet-class>servlet.Course.CourseRegistCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseRegistCheckServlet</servlet-name>
@@ -141,7 +141,7 @@
 
     <servlet>
         <servlet-name>CourseRegistServlet</servlet-name>
-        <servlet-class>servlet.CourseRegistServlet</servlet-class>
+        <servlet-class>servlet.Course.CourseRegistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseRegistServlet</servlet-name>
@@ -150,7 +150,7 @@
 
     <servlet>
         <servlet-name>AchieveRegUploadServlet</servlet-name>
-        <servlet-class>servlet.AchieveRegUploadServlet</servlet-class>
+        <servlet-class>servlet.achieve.AchieveRegUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AchieveRegUploadServlet</servlet-name>
@@ -159,7 +159,7 @@
 
     <servlet>
         <servlet-name>AchieveRegistServlet</servlet-name>
-        <servlet-class>servlet.AchieveRegistServlet</servlet-class>
+        <servlet-class>servlet.achieve.AchieveRegistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AchieveRegistServlet</servlet-name>
@@ -193,7 +193,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>MyUserForwardServlet</servlet-name>
-        <servlet-class>servlet.MyUserForwardServlet</servlet-class>
+        <servlet-class>servlet.user.MyUserForwardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyUserForwardServlet</servlet-name>
@@ -209,7 +209,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SyllabusDetailServlet</servlet-name>
-        <servlet-class>servlet.SyllabusDetailServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusDetailServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusDetailServlet</servlet-name>
@@ -217,7 +217,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SyllabusUpdateServlet</servlet-name>
-        <servlet-class>servlet.SyllabusUpdateServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusUpdateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusUpdateServlet</servlet-name>
