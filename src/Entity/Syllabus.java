@@ -44,8 +44,8 @@ public class Syllabus {
         this.year = resultSet.getInt("year");
         this.classRoom = resultSet.getString("class");
         this.semester = resultSet.getString("semester");
-        this.week = resultSet.getString("week");
-        this.time = resultSet.getString("time");
+        this.week = resultSet.getString("Week");
+        this.time = resultSet.getString("Time");
         this.unit = resultSet.getInt("unit");
         this.capacity = resultSet.getInt("capacity");
         this.mainTeacher = resultSet.getString("name");

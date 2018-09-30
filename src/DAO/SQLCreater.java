@@ -28,7 +28,9 @@ public class SQLCreater {
             }
         }
 
-        sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        if (page != -1) {
+            sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        }
         return sql;
     }
 
@@ -88,7 +90,9 @@ public class SQLCreater {
             }
         }
 
-        sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        if (page != -1) {
+            sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        }
 
         return sql;
     }
@@ -123,7 +127,9 @@ public class SQLCreater {
             }
         }
 
-        sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        if (page != -1) {
+            sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        }
 
         return sql;
     }
@@ -131,7 +137,7 @@ public class SQLCreater {
     public String insert(String tableName, List<DateSet> list) {
         String sql = "INSERT INTO " + tableName + "(" + ((DateSet) list.get(0)).getColumn();
 
-        for (int i = 1;i < list.size();i++) {
+        for (int i = 1; i < list.size(); i++) {
             sql += "," + list.get(i).getColumn();
         }
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class SyllabusDAO {
     private List<DateSet> list = new ArrayList<DateSet>();
     private String tableName = "syllabus";
-    private List<String> columns = Arrays.asList("syllabus_id", "syllabus_name", "english_name", "dividend_grade", "year", "class", "semester", "week", "time", "unit", "capacity", "objective_summary", "goal", "textbook", "reference_book", "educational_object", "dp", "self_study", "free_text", "mail_address", "office_hour", "classification", "guidance", "advice");
+    private List<String> columns = Arrays.asList("syllabus_id", "syllabus_name", "english_name", "dividend_grade", "year", "class", "semester", "Week", "Time", "unit", "capacity", "objective_summary", "goal", "textbook", "reference_book", "educational_object", "dp", "self_study", "free_text", "mail_address", "office_hour", "classification", "guidance", "advice");
     private List<String> mold = Arrays.asList("string", "string", "string", "integer", "integer", "string", "string", "string", "string", "integer", "integer", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string");
     private SessionManager sessionManager = new SessionManager();
     private SQLCreater sqlCreater = new SQLCreater();
@@ -36,7 +36,10 @@ public class SyllabusDAO {
         } else {
             tmpSql = "";
         }
-        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql + "OFFSET " + page * 100 + " LIMIT 100";
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.Week,s.Time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql;
+        if(page!= -1){
+            sql += "OFFSET " + page * 100 + " LIMIT 100";
+        }
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<Syllabus> results = new ArrayList<>();
         while (resultSet.next()) {
@@ -128,7 +131,7 @@ public class SyllabusDAO {
 
     public Syllabus findBySyllabusId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.Week,s.Time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new Syllabus(resultSet);
@@ -136,7 +139,7 @@ public class SyllabusDAO {
 
     public SyllabusDetail findBySyllabusDetailId(String syllabusId) throws SQLException {
         setValue("syllabus_id", syllabusId);
-        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.week,s.time,s.unit,s.capacity,u.name,s.objective_summary,s.goal,s.textbook,s.reference_book,s.educational_object,s.dp,s.self_study,s.free_text,s.mail_address,s.office_hour,s.classification,s.guidance,s.advice FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
+        String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.Week,s.Time,s.unit,s.capacity,u.name,s.objective_summary,s.goal,s.textbook,s.reference_book,s.educational_object,s.dp,s.self_study,s.free_text,s.mail_address,s.office_hour,s.classification,s.guidance,s.advice FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return createSyllabusDetail(resultSet);
@@ -150,8 +153,8 @@ public class SyllabusDAO {
         Integer year = resultSet.getInt("year");
         String classroom = resultSet.getString("class");
         String semester = resultSet.getString("semester");
-        String week = resultSet.getString("week");
-        String time = resultSet.getString("time");
+        String week = resultSet.getString("Week");
+        String time = resultSet.getString("Time");
         Integer unit = resultSet.getInt("unit");
         Integer capacity = resultSet.getInt("capacity");
         String mainTeacher = resultSet.getString("name");

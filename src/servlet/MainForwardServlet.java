@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class MainForwardServlet extends HttpServlet {
     //ページリストの定義
-    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/UserRegistration.jsp", "/UserDetail.jsp", "/UserDelete.jsp",
-            "/CourseList.jsp", "/CourseDelete.jsp", "/UserSearch.jsp", "/UserResult.jsp", "/SyllabusRegistration.jsp",
-            "/SyllabusDetail.jsp", "/SyllabusDelete.jsp", "/SyllabusSearch.jsp", "/SyllabusResult.jsp",
-            "/CourseRegistration.jsp", "/CourseCheck.jsp", "/TimeTable.jsp", "/CourseCheck.jsp", "/AchieveRegistration.jsp",
-            "/AchieveCheck.jsp", "/condition.jsp","SyllabusUpdate.jsp"};
+    private String[] pageList = {"/Login.jsp", "/Top.jsp", "/User/UserRegistration.jsp", "/User/UserDetail.jsp", "/User/UserDelete.jsp",
+            "/Course/CourseList.jsp", "/Course/CourseDelete.jsp", "/User/UserSearch.jsp", "/User/UserResult.jsp", "/Syllabus/SyllabusRegistration.jsp",
+            "/Syllabus/SyllabusDetail.jsp", "/Syllabus/SyllabusDelete.jsp", "/Syllabus/SyllabusSearch.jsp", "/Syllabus/SyllabusResult.jsp",
+            "/Course/CourseRegistration.jsp", "/Course/CourseCheck.jsp", "/TimeTable.jsp", "/Course/CourseCheck.jsp", "/Achieve/AchieveRegistration.jsp",
+            "/Achieve/AchieveCheck.jsp", "/condition.jsp","/Syllabus/SyllabusUpdate.jsp"};
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int nextNumber;
