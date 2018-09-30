@@ -93,6 +93,7 @@ public class User {
 
     public String setBirthday(String birthday) {
         birthday = new ReplaceString().replace(birthday);
+        birthday = birthday.replace("&#45;","-");
         if (birthday.matches("[-\\d]+$") && birthday.matches("^(\\d{4}-(0[0-9]|1[0-2])-(0[0-9]|[12][0-9]|3[01]))$")) {
             this.birthday = birthday;
             return "";

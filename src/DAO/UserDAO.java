@@ -14,8 +14,9 @@ public class UserDAO {
     private List<DateSet> list = new ArrayList<DateSet>();
     private String tableName = "user";
     private List<String> columns = Arrays.asList("user_id", "name", "phonetic", "password", "slat", "gender", "birthday", "postal_code", "address", "tel", "user_classification");
-
     private List<String> mold = Arrays.asList("string", "string", "string", "string", "string", "integer", "string", "string", "string", "string", "string");
+    private List<Boolean> blankSetting = Arrays.asList(false, false, true, true, true, false, false, true, true, true, false);
+
     private SessionManager sessionManager = new SessionManager();
     private SQLCreater sqlCreater = new SQLCreater();
 
@@ -26,9 +27,9 @@ public class UserDAO {
 
     }
 
-    public List<User> select(User user,Integer page) throws SQLException {
+    public List<User> select(User user, Integer page) throws SQLException {
         setList(user);
-        String sql = sqlCreater.select(tableName, list,page);
+        String sql = sqlCreater.select(tableName, list, page);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         List<User> results = new ArrayList<User>();
         while (resultSet.next()) {
@@ -39,6 +40,11 @@ public class UserDAO {
 
     public boolean insert(User user) {
         setList(user);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getValue().equals("") && !blankSetting.get(i)) {
+                return false;
+            }
+        }
         String sql = sqlCreater.insert(tableName, list);
         return sessionManager.execute(sql);
     }
@@ -90,7 +96,7 @@ public class UserDAO {
 
     public User findById(String userId) throws SQLException {
         setValue("user_id", userId);
-        String sql = sqlCreater.select(tableName, list,0);
+        String sql = sqlCreater.select(tableName, list, 0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return new User(resultSet);
@@ -111,7 +117,7 @@ public class UserDAO {
     public User login(String userId, String password) throws SQLException {
         clearValue();
         setValue("user_id", userId);
-        String sql = sqlCreater.select(tableName, list,0);
+        String sql = sqlCreater.select(tableName, list, 0);
         ResultSet resultSet = sessionManager.executeQuery(sql);
         if (resultSet.next()) {
             String salt = resultSet.getString("slat");
@@ -131,7 +137,7 @@ public class UserDAO {
     }
 
     public Integer getCount() throws SQLException {
-        String sql = new SQLCreater().getCount(tableName,list);
+        String sql = new SQLCreater().getCount(tableName, list);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         resultSet.next();
         return resultSet.getInt("C1");
