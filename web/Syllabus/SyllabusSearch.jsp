@@ -59,8 +59,13 @@
         <tr align="center">
             <th>配当学年</th>
             <td>
-                <input type="text" name="dividend_grade"
-                       value="<jsp:getProperty name="searchSyllabus" property="dividendGradeString"/>"/>
+                <select name="dividend_grade">
+                    <option value="-1">全学年</option>
+                    <option value="1" <%=searchSyllabus.getDividendGradeSelected(1)%>>1</option>
+                    <option value="2" <%=searchSyllabus.getDividendGradeSelected(2)%>>2</option>
+                    <option value="3" <%=searchSyllabus.getDividendGradeSelected(3)%>>3</option>
+                    <option value="4" <%=searchSyllabus.getDividendGradeSelected(4)%>>4</option>
+                </select>
             </td>
         </tr>
 
@@ -75,22 +80,41 @@
         <tr align="center">
             <th>学期</th>
             <td>
-                <input type="text" name="semester"
-                       value="<jsp:getProperty name="searchSyllabus" property="semester"/>"/>
+                <select name="semester">
+                    <option value="">---</option>
+                    <option value="前期" <%=searchSyllabus.getSemesterSelected("前期")%>>前期</option>
+                    <option value="後期" <%=searchSyllabus.getSemesterSelected("後期")%>>後期</option>
+                </select>
             </td>
         </tr>
         <tr>
             <th>曜日</th>
             <td>
-                <input type="text" name="week"
-                       value="<jsp:getProperty name="searchSyllabus" property="week"/>"/>
+                <select name="week">
+                    <option value="">---</option>
+                    <option value="月" <%=searchSyllabus.getWeekSelected("月")%>>月</option>
+                    <option value="火" <%=searchSyllabus.getWeekSelected("火")%>>火</option>
+                    <option value="水" <%=searchSyllabus.getWeekSelected("水")%>>水</option>
+                    <option value="木" <%=searchSyllabus.getWeekSelected("木")%>>木</option>
+                    <option value="金" <%=searchSyllabus.getWeekSelected("金")%>>金</option>
+                    <option value="土" <%=searchSyllabus.getWeekSelected("土")%>>土</option>
+                </select>
             </td>
         </tr>
         <tr>
             <th>時限</th>
             <td>
-                <input type="text" name="time"
-                       value="<jsp:getProperty name="searchSyllabus" property="time"/>"/>
+                <select name="time">
+                    <option value="">---</option>
+                    <option value="1" <%=searchSyllabus.getTimeSelected("1")%>>1</option>
+                    <option value="2" <%=searchSyllabus.getTimeSelected("2")%>>2</option>
+                    <option value="3" <%=searchSyllabus.getTimeSelected("3")%>>3</option>
+                    <option value="4" <%=searchSyllabus.getTimeSelected("4")%>>4</option>
+                    <option value="5" <%=searchSyllabus.getTimeSelected("5")%>>5</option>
+                    <option value="6" <%=searchSyllabus.getTimeSelected("6")%>>6</option>
+                    <option value="7" <%=searchSyllabus.getTimeSelected("7")%>>7</option>
+                    <option value="8" <%=searchSyllabus.getTimeSelected("8")%>>8</option>
+                </select>
             </td>
         </tr>
 

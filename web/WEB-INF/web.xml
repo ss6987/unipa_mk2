@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>ConditionForwardServlet</servlet-name>
-        <servlet-class>servlet.Course.ConditionForwardServlet</servlet-class>
+        <servlet-class>servlet.course.ConditionForwardServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConditionForwardServlet</servlet-name>
@@ -132,7 +132,7 @@
 
     <servlet>
         <servlet-name>CourseRegistCheckServlet</servlet-name>
-        <servlet-class>servlet.Course.CourseRegistCheckServlet</servlet-class>
+        <servlet-class>servlet.course.CourseRegistCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseRegistCheckServlet</servlet-name>
@@ -140,12 +140,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CourseRegistServlet</servlet-name>
-        <servlet-class>servlet.Course.CourseRegistServlet</servlet-class>
+        <servlet-name>CourseRegistrationServlet</servlet-name>
+        <servlet-class>servlet.course.CourseRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CourseRegistServlet</servlet-name>
-        <url-pattern>/CourseRegistServlet</url-pattern>
+        <servlet-name>CourseRegistrationServlet</servlet-name>
+        <url-pattern>/CourseRegistration</url-pattern>
     </servlet-mapping>
 
     <servlet>

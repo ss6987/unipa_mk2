@@ -117,6 +117,34 @@ public class Syllabus {
         return this.getDividendGrade().toString();
     }
 
+    public String getDividendGradeSelected(Integer value){
+        if(value == this.getDividendGrade()){
+            return "selected";
+        }
+        return "";
+    }
+
+    public String getSemesterSelected(String value){
+        if(this.getSemester().equals(value)){
+            return "selected";
+        }
+        return "";
+    }
+
+    public String getWeekSelected(String value){
+        if(this.getWeek().equals(value)){
+            return "selected";
+        }
+        return "";
+    }
+
+    public String getTimeSelected(String value){
+        if(this.getTime().equals(value)){
+            return "selected";
+        }
+        return "";
+    }
+
     public String getYearString() {
         if (this.getYear() == -1) {
             return "";
@@ -210,6 +238,12 @@ public class Syllabus {
             return "";
         }
         return "曜日に使用できない文字が存在します。";
+    }
+
+    public String setWeek(Integer week) {
+        String[] weekList = {"月","火","水","木","金","土"};
+        this.week = weekList[week];
+        return "";
     }
 
     public String setTime(String time) {

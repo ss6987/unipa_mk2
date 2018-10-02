@@ -3,25 +3,44 @@ package servlet.timetable;
 import Entity.Syllabus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TimeTable {
-    private String[] weekName = {"月","火","水","木","金","土","日"};
-    private Week[] weeks = new Week[7];
+    private List<String> weekName = Arrays.asList("月", "火", "水", "木", "金", "土", "日");
+    private List<Week> weeks = new ArrayList<>();
 
-    public TimeTable(){
-        for(int i = 0;i < weeks.length;i++){
-            weeks[i] = new Week();
+    public TimeTable() {
+        for (int i = 0; i < weekName.size(); i++) {
+            weeks.add(new Week());
         }
     }
 
-    public void addSyllabus(Syllabus syllabus){
+    public void addSyllabus(Syllabus syllabus) {
         String[] week = syllabus.getWeek().split("&#44;");
         String[] time = syllabus.getTime().split("&#44;");
-        String[] weekTime = new String[week.length];
-        for(int i = 0;i<week.length;i++){
-            weekTime[i] = week[i] + time[i];
-            System.out.println(weekTime[i]);
+        for (int i = 0; i < week.length; i++) {
+            this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+        }
+    }
+
+    public void addSyllabusList(List<Syllabus> syllabusList) {
+        for (Syllabus syllabus : syllabusList) {
+            String[] week = syllabus.getWeek().split("&#44;");
+            String[] time = syllabus.getTime().split("&#44;");
+            for (int i = 0; i < week.length; i++) {
+                this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+            }
+        }
+    }
+
+    public List<Syllabus> getSyllabusList(Integer week,Integer time){
+        return this.weeks.get(week - 1).getSyllabusList(time);
+    }
+
+    public void deleteSyllabus(String syllabusId){
+        for(Week week:weeks){
+            week.deleteSyllabus(syllabusId);
         }
     }
 }

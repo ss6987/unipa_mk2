@@ -38,6 +38,13 @@
     <button type="submit" name="action" value="check">履修登録者一覧</button>
 </form>
 <%
+} else if (user.getUserClassification().equals("学生")) {
+%>
+<form action="/CourseRegistServlet" method="post">
+    <input type="hidden" name="targetSyllabusId" value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
+    <button type="submit" name="action" value="add">履修登録に追加</button>
+</form>
+<%
     }
 %>
 <form action="/SyllabusSearch" method="post">
