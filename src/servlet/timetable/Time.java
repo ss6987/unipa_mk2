@@ -28,8 +28,8 @@ public class Time {
     public void deleteSyllabus(String syllabusId){
         Integer index = syllabusIdList.indexOf(syllabusId);
         if(index != -1){
-            syllabusLists.remove(index);
-            syllabusIdList.remove(index);
+            this.syllabusLists.remove(index.intValue());
+            this.syllabusIdList.remove(index.intValue());
         }
     }
 }

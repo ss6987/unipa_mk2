@@ -11,13 +11,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="timeTable" class="servlet.timetable.TimeTable" scope="session"/>
-<%
-    ModelManager modelManager = new ModelManager();
-    Syllabus searchSyllabus = new Syllabus();
-    searchSyllabus.setClassRoom("FI演習室");
-    List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, -1);
-    timeTable.addSyllabusList(syllabusList);
-%>
 <html lang="ja">
 <head>
     <title>履修登録</title>

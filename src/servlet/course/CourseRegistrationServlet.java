@@ -57,6 +57,7 @@ public class CourseRegistrationServlet extends HttpServlet {
             TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
             timeTable.deleteSyllabus(targetSyllabusId);
 
+            session.setAttribute("timeTable",timeTable);
             request.setAttribute("errorString", "");
             request.setAttribute("Number", 15);
             dispatch.forward(request, response);

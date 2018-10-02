@@ -242,7 +242,7 @@ public class Syllabus {
 
     public String setWeek(Integer week) {
         String[] weekList = {"月","火","水","木","金","土"};
-        this.week = weekList[week];
+        this.week = weekList[week - 1];
         return "";
     }
 
