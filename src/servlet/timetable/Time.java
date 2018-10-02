@@ -32,4 +32,11 @@ public class Time {
             this.syllabusIdList.remove(index.intValue());
         }
     }
+
+    public boolean checkOverlap(){
+        if(syllabusLists.size() == 1 || syllabusLists.size() == 0){
+            return true;
+        }
+        return false;
+    }
 }

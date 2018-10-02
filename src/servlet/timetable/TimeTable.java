@@ -43,4 +43,13 @@ public class TimeTable {
             week.deleteSyllabus(syllabusId);
         }
     }
+
+    public boolean checkOverlap(){
+        for(Week week:weeks){
+            if(!week.checkOverlap()){
+                return false;
+            }
+        }
+        return true;
+    }
 }

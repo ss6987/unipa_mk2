@@ -1,8 +1,10 @@
 package servlet.course;
 
+import Entity.Student;
 import Entity.Syllabus;
 import etc.ModelManager;
 import etc.ReplaceString;
+import Entity.User;
 import servlet.timetable.Time;
 import servlet.timetable.TimeTable;
 
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CourseRegistrationServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -28,6 +31,26 @@ public class CourseRegistrationServlet extends HttpServlet {
         String action = replaceString.repairRequest(request.getParameter("action"));
 
         if (action.equals("registration")) {
+            TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
+            User user = (User) session.getAttribute("user");
+
+            if (!timeTable.checkOverlap()) {
+                session.setAttribute("timeTable", timeTable);
+                request.setAttribute("errorString", "重複している時間があります。");
+                request.setAttribute("Number", 15);
+                dispatch.forward(request, response);
+                return;
+            }
+
+            try {
+                Student student = user.convertUserToStudent();
+            } catch (SQLException e) {
+                request.setAttribute("errorString", "エラーが発生しました。");
+                request.setAttribute("Number", 15);
+                dispatch.forward(request, response);
+                return;
+            }
+            return;
 
         } else if (action.equals("firstSearch")) {
             String time = replaceString.repairRequest(request.getParameter("time"));
@@ -43,7 +66,7 @@ public class CourseRegistrationServlet extends HttpServlet {
             return;
         } else if (action.equals("add")) {
             String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-            TimeTable timeTable = (TimeTable)session.getAttribute("timeTable");
+            TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
 
             Syllabus syllabus = modelManager.syllabusFindById(targetSyllabusId);
             timeTable.addSyllabus(syllabus);
@@ -57,7 +80,7 @@ public class CourseRegistrationServlet extends HttpServlet {
             TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
             timeTable.deleteSyllabus(targetSyllabusId);
 
-            session.setAttribute("timeTable",timeTable);
+            session.setAttribute("timeTable", timeTable);
             request.setAttribute("errorString", "");
             request.setAttribute("Number", 15);
             dispatch.forward(request, response);

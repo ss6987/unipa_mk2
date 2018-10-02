@@ -11,6 +11,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="timeTable" class="servlet.timetable.TimeTable" scope="session"/>
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
     <title>履修登録</title>
@@ -22,7 +23,17 @@
 <br>
 <h1>履修登録</h1>
 
-<span style="background-color:#ffcc99">※正しく入力されていません</span>
+<%
+    if (!errorString.equals("")) {
+%>
+<span style="background-color:#ffcc99"><%=errorString%></span>
+<%
+    }
+%>
+
+<form action="/CourseRegistration" method="post">
+    <button type="submit" name="action" value="registration">登録</button>
+</form>
 <table BORDER="1" align="center">
     <tr align="center">
         <th></th>
@@ -72,7 +83,7 @@
     %>
 </table>
 <br>
-<button type="submit" name="coursnext" align="center">次へ</button>
+
 
 </body>
 </html>
