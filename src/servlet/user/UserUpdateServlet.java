@@ -1,5 +1,6 @@
 package servlet.user;
 
+import Entity.Student;
 import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
@@ -44,13 +45,27 @@ public class UserUpdateServlet extends HttpServlet {
             String address = replaceString.repairRequest(request.getParameter("address"));
             String tel = replaceString.repairRequest(request.getParameter("tel"));
             String userClassification = replaceString.repairRequest(request.getParameter("user_classification"));
-            String facultyDepartmentId = replaceString.repairRequest(request.getParameter("facultyDepartmentId"));
-            String grade = replaceString.repairRequest(request.getParameter("grade"));
+            String facultyDepartmentIdString = replaceString.repairRequest(request.getParameter("facultyDepartmentId"));
+            String gradeString = replaceString.repairRequest(request.getParameter("grade"));
             Integer gender;
             try {
                 gender = Integer.parseInt(genderString);
             } catch (java.lang.NumberFormatException e) {
                 gender = -1;
+            }
+
+            Integer facultyDepartmentId;
+            try{
+                facultyDepartmentId = Integer.parseInt(facultyDepartmentIdString);
+            }catch (java.lang.NumberFormatException e){
+                facultyDepartmentId = -1;
+            }
+
+            Integer grade;
+            try{
+                grade = Integer.parseInt(gradeString);
+            }catch (java.lang.NumberFormatException e){
+                grade = -1;
             }
 
             User user = new User();
@@ -80,8 +95,9 @@ public class UserUpdateServlet extends HttpServlet {
                 update = modelManager.userUpdate(user);
             }
 
-            if(user.getUserClassification().equals("学生")){
-//                学生登録処理
+            if(user.getUserClassification().equals("学生") && update){
+                Student student = new Student(user.getUserId(),facultyDepartmentId,grade);
+                update = modelManager.studentRegistrationOrUpdate(student);
             }
 
             if (!update) {

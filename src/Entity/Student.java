@@ -12,13 +12,20 @@ public class Student {
     private Integer facultyDepartmentId;
     private Integer grade;
 
-    public Student(String userId, Integer facultyDepartmentId, Integer grade) throws SQLException {
+
+    public Student(){
+        userId = "";
+        facultyDepartmentId = -1;
+        grade = -1;
+    }
+
+    public Student(String userId, Integer facultyDepartmentId, Integer grade) {
         setUserId(userId);
         setFacultyDepartmentId(facultyDepartmentId);
         setGrade(grade);
     }
 
-    public String setUserId(String userId) throws SQLException {
+    public String setUserId(String userId)  {
         userId = new ReplaceString().replace(userId);
         if (new StringCheck().checkNotSymbols(userId)) {
             if(new UserDAO().findById(userId).getUserId() != ""){
@@ -68,5 +75,16 @@ public class Student {
     public User convertStudentToUser() throws SQLException {
         UserDAO userDAO = new UserDAO();
         return userDAO.findById(this.userId);
+    }
+
+    public String getFacultyDepartmentSelected(Integer facultyDepartmentId){
+        if(this.getFacultyDepartmentId() == facultyDepartmentId){
+            return "selected";
+        }
+        return "";
+    }
+
+    public String getGradeString(){
+        return String.valueOf(this.grade);
     }
 }

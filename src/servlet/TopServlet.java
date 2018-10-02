@@ -1,5 +1,6 @@
 package servlet;
 
+import Entity.Student;
 import etc.ModelManager;
 import Entity.User;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TopServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -86,6 +88,13 @@ public class TopServlet extends HttpServlet {
                     request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
                     targetUserId = (String) session.getAttribute("targetUserId");
                     targetUser = modelManager.userFindById(targetUserId);
+                    Student targetStudent;
+                    try {
+                        targetStudent = targetUser.convertUserToStudent();
+                    } catch (SQLException e) {
+                        targetStudent = new Student();
+                    }
+                    request.setAttribute("targetStudent",targetStudent);
                     request.setAttribute("targetUser", targetUser);
                     break;
                 case "SyllabusSearch":

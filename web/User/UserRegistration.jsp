@@ -1,5 +1,6 @@
 <%@ page import="Entity.FacultyDepartment" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: satone
   Date: 2018/07/13
@@ -10,6 +11,7 @@
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
+<jsp:useBean id="targetStudent" class="Entity.Student" scope="request"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <%
     List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
@@ -152,7 +154,9 @@
                     <%
                         for (FacultyDepartment facultyDepartment : facultyDepartmentList) {
                     %>
-                    <option value="<%=facultyDepartment.getFacultyDepartmentId()%>">
+                    <option value="<%=facultyDepartment.getFacultyDepartmentId()%>"
+                            <%=targetStudent.getFacultyDepartmentSelected(facultyDepartment.getFacultyDepartmentId())%>>
+
                         <%=facultyDepartment.getFaculty()%>
                         <%=facultyDepartment.getDepartment()%>
                     </option>
@@ -166,7 +170,7 @@
             <th>学年</th>
             <td>
                 <input type="text" name="grade"
-                       value="" pattern="[1-4]"/>
+                       value="<jsp:getProperty name="targetStudent" property="gradeString"/>" pattern="[1-4]"/>
             </td>
         </tr>
         </tbody>

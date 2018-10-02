@@ -94,12 +94,16 @@ public class UserDAO {
         list.get(10).setValue(user.getUserClassification());
     }
 
-    public User findById(String userId) throws SQLException {
+    public User findById(String userId) {
         setValue("user_id", userId);
         String sql = sqlCreater.select(tableName, list, 0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
-        resultSet.next();
-        return new User(resultSet);
+        try {
+            resultSet.next();
+            return new User(resultSet);
+        } catch (SQLException e) {
+            return new User();
+        }
     }
 
 
