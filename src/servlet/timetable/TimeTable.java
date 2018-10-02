@@ -4,6 +4,7 @@ import Entity.Syllabus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class TimeTable {
@@ -34,22 +35,36 @@ public class TimeTable {
         }
     }
 
-    public List<Syllabus> getSyllabusList(Integer week,Integer time){
+    public List<Syllabus> getSyllabusList(Integer week, Integer time) {
         return this.weeks.get(week - 1).getSyllabusList(time);
     }
 
-    public void deleteSyllabus(String syllabusId){
+    public List<String> getAllSyllabusList(){
+        List<Syllabus> syllabusList = new ArrayList<>();
         for(Week week:weeks){
+            syllabusList.addAll(week.getAllSyllabusList());
+        }
+        List<String> stringList = new ArrayList<>();
+        for(Syllabus syllabus:syllabusList){
+            stringList.add(syllabus.getSyllabusId());
+        }
+        return new ArrayList<>(new HashSet<>(stringList));
+    }
+
+
+    public void deleteSyllabus(String syllabusId) {
+        for (Week week : weeks) {
             week.deleteSyllabus(syllabusId);
         }
     }
 
-    public boolean checkOverlap(){
-        for(Week week:weeks){
-            if(!week.checkOverlap()){
+    public boolean checkOverlap() {
+        for (Week week : weeks) {
+            if (!week.checkOverlap()) {
                 return false;
             }
         }
         return true;
     }
+
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CourseRegistrationServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -42,14 +43,29 @@ public class CourseRegistrationServlet extends HttpServlet {
                 return;
             }
 
+            Student student;
             try {
-                Student student = user.convertUserToStudent();
+                student = user.convertUserToStudent();
             } catch (SQLException e) {
                 request.setAttribute("errorString", "エラーが発生しました。");
                 request.setAttribute("Number", 15);
                 dispatch.forward(request, response);
                 return;
             }
+
+            modelManager.courseDelete(student.getUserId());
+            List<String> syllabusList = timeTable.getAllSyllabusList();
+            boolean flag = modelManager.courseRegistration(student, syllabusList);
+
+            if (!flag) {
+                request.setAttribute("errorString", "エラーが発生しました。");
+                request.setAttribute("Number", 15);
+                dispatch.forward(request, response);
+                return;
+            }
+            request.setAttribute("errorString", "更新成功");
+            request.setAttribute("Number", 15);
+            dispatch.forward(request, response);
             return;
 
         } else if (action.equals("firstSearch")) {

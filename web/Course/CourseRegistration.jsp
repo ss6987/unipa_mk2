@@ -1,8 +1,6 @@
-<%@ page import="etc.ModelManager" %>
 <%@ page import="Entity.Syllabus" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="servlet.timetable.TimeTable" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: satone
   Date: 2018/07/27

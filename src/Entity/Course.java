@@ -24,8 +24,12 @@ public class Course {
         this.year = -1;
     }
 
-    public Course(ResultSet resultSet) {
-
+    public Course(ResultSet resultSet) throws SQLException {
+        this.userId = resultSet.getString("user_id");
+        this.syllabusId = resultSet.getString("syllabus_id");
+        this.achievement = resultSet.getInt("achievement");
+        this.mainTeacherName = resultSet.getString("main_teacher_name");
+        this.year = resultSet.getInt("year");
     }
 
     public Course(Student student, Syllabus syllabus, Integer achievement) throws SQLException {

@@ -4,6 +4,7 @@ package servlet.timetable;
 import Entity.Syllabus;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Week {
@@ -21,6 +22,14 @@ public class Week {
 
     public List<Syllabus> getSyllabusList(Integer time) {
         return this.times.get(time - 1).getSyllabusLists();
+    }
+
+    public List<Syllabus> getAllSyllabusList(){
+        List<Syllabus> syllabusList = new ArrayList<>();
+        for(Time time:times){
+            syllabusList.addAll(time.getSyllabusLists());
+        }
+        return syllabusList;
     }
 
     public void deleteSyllabus(String syllabusId) {

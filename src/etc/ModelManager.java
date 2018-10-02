@@ -5,6 +5,7 @@ import Entity.*;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelManager {
@@ -185,18 +186,45 @@ public class ModelManager {
         return true;
     }
 
-    public boolean courseDelete(String syllabusId, List<String> studentList) throws SQLException {
+    public boolean courseDelete(String syllabusId, List<String> studentList) {
         Course course = new Course();
-        course.setSyllabusId(syllabusId);
-        for (int i = 0; i < studentList.size(); i++) {
-            course.setUserId(studentList.get(i));
-            try {
+        try {
+            course.setSyllabusId(syllabusId);
+            for (String studentId : studentList) {
+                course.setUserId(studentId);
                 courseDAO.delete(course);
-            } catch (SQLException e) {
-                return false;
             }
+        } catch (SQLException e) {
+            return false;
         }
         return true;
+    }
+
+    public boolean courseDelete(String studentId) {
+        Course course = new Course();
+        try {
+            course.setUserId(studentId);
+            courseDAO.delete(course);
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public List<Syllabus> courseSelect(String studentId) {
+        try {
+            Student student = studentDAO.findByStudent(studentId);
+            List<Course> courseList = courseDAO.findByStudent(student, -1);
+            List<Syllabus> syllabusList = new ArrayList<>();
+            for (Course course : courseList) {
+                Syllabus syllabus = syllabusDAO.findBySyllabusId(course.getSyllabusId());
+                syllabusList.add(syllabus);
+            }
+            return syllabusList;
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+
     }
 
     public String getRegistrationPeriod() {
