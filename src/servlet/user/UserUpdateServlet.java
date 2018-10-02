@@ -44,6 +44,8 @@ public class UserUpdateServlet extends HttpServlet {
             String address = replaceString.repairRequest(request.getParameter("address"));
             String tel = replaceString.repairRequest(request.getParameter("tel"));
             String userClassification = replaceString.repairRequest(request.getParameter("user_classification"));
+            String facultyDepartmentId = replaceString.repairRequest(request.getParameter("facultyDepartmentId"));
+            String grade = replaceString.repairRequest(request.getParameter("grade"));
             Integer gender;
             try {
                 gender = Integer.parseInt(genderString);
@@ -78,6 +80,9 @@ public class UserUpdateServlet extends HttpServlet {
                 update = modelManager.userUpdate(user);
             }
 
+            if(user.getUserClassification().equals("学生")){
+//                学生登録処理
+            }
 
             if (!update) {
                 errorString += "更新に失敗しました";
@@ -85,6 +90,8 @@ public class UserUpdateServlet extends HttpServlet {
                 request.setAttribute("Number", 3);
             } else {
                 errorString += "更新完了";
+
+
                 User loginUser = (User) session.getAttribute("user");
                 user = modelManager.userFindById(targetUserId);
                 if (loginUser.getUserId() == targetUserId) {

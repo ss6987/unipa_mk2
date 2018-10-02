@@ -11,6 +11,12 @@ public class FacultyDepartment {
     private String faculty;
     private String department;
 
+    public FacultyDepartment(){
+        facultyDepartmentId = -1;
+        faculty = "";
+        department = "";
+    }
+
     public FacultyDepartment(ResultSet resultSet) throws SQLException {
         this.facultyDepartmentId = resultSet.getInt("faculty_department_id");
         this.faculty = resultSet.getString("faculty");

@@ -83,9 +83,10 @@ public class TopServlet extends HttpServlet {
                     break;
                 case "UserUpdate":
                     url = 3;
+                    request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
                     targetUserId = (String) session.getAttribute("targetUserId");
                     targetUser = modelManager.userFindById(targetUserId);
-                    request.setAttribute("targetUser",targetUser);
+                    request.setAttribute("targetUser", targetUser);
                     break;
                 case "SyllabusSearch":
                     url = 13;
@@ -97,6 +98,7 @@ public class TopServlet extends HttpServlet {
                     url = 19;
                     break;
                 case "UserRegistration":
+                    request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
                     url = 3;
                     break;
                 case "SyllabusRegistration":

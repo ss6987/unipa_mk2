@@ -13,6 +13,7 @@ public class ModelManager {
     private CourseDAO courseDAO = new CourseDAO();
     private RegistrationPeriodDAO registrationPeriodDAO = new RegistrationPeriodDAO();
     private TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
+    private FacultyDepartmentDAO facultyDepartmentDAO = new FacultyDepartmentDAO();
 
 
     public ModelManager() {
@@ -214,5 +215,14 @@ public class ModelManager {
         } catch (SQLException e) {
             return "";
         }
+    }
+
+    public List<FacultyDepartment> getFacultyDepartmentList(){
+        try {
+            return facultyDepartmentDAO.select(new FacultyDepartment(),-1);
+        } catch (SQLException e) {
+            return null;
+        }
+
     }
 }

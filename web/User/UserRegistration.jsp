@@ -1,4 +1,5 @@
-<%--
+<%@ page import="Entity.FacultyDepartment" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: satone
   Date: 2018/07/13
@@ -10,6 +11,10 @@
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
+<%
+    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
+%>
+
 <html lang="ja">
 <head>
     <title>ユーザー登録</title>
@@ -44,8 +49,9 @@
     }
 %>
 
-<form action="/UserUpdate" method="post">
+<form action="/UserUpdate" method="post" name="userRegistration">
     <table BORDER="1" align="center">
+        <tbody>
         <tr align="center">
             <th>学籍番号</th>
             <td>
@@ -80,7 +86,7 @@
         <tr align="center">
             <th>ユーザー分類</th>
             <td>
-                <select name="user_classification" size="1">
+                <select name="user_classification" size="1" onchange="classificationSelect()">
                     <option value="学生" <%=targetUser.getUserClassificationSelected("学生")%>>学生</option>
                     <option value="教職員" <%=targetUser.getUserClassificationSelected("教職員")%>>教職員</option>
                     <option value="管理者" <%=targetUser.getUserClassificationSelected("管理者")%>>管理者</option>
@@ -139,6 +145,31 @@
                 <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"/><br>※ハイフンなしで入力
             </td>
         </tr>
+        <tr align="center" class="studentStatus">
+            <th>学部学科</th>
+            <td>
+                <select name="facultyDepartmentId">
+                    <%
+                        for (FacultyDepartment facultyDepartment : facultyDepartmentList) {
+                    %>
+                    <option value="<%=facultyDepartment.getFacultyDepartmentId()%>">
+                        <%=facultyDepartment.getFaculty()%>
+                        <%=facultyDepartment.getDepartment()%>
+                    </option>
+                    <%
+                        }
+                    %>
+                </select>
+            </td>
+        </tr>
+        <tr align="center" class="studentStatus">
+            <th>学年</th>
+            <td>
+                <input type="text" name="grade"
+                       value="" pattern="[1-4]"/>
+            </td>
+        </tr>
+        </tbody>
     </table>
     <%
         if (!targetUserId.equals("")) {
@@ -153,5 +184,26 @@
         }
     %>
 </form>
+
 </body>
 </html>
+<script type="text/javascript">
+    window.onload = function start() {
+        classificationSelect()
+    }
+
+    function classificationSelect() {
+        select = document.getElementsByTagName("select")
+        if (select.user_classification.value == "学生") {
+            studentStatus = document.getElementsByClassName("studentStatus")
+            for (var i = 0; i < studentStatus.length; i++) {
+                studentStatus[i].style.display = "";
+            }
+        } else {
+            studentStatus = document.getElementsByClassName("studentStatus")
+            for (var i = 0; i < studentStatus.length; i++) {
+                studentStatus[i].style.display = "none";
+            }
+        }
+    }
+</script>
