@@ -11,7 +11,7 @@
 <jsp:useBean id="user" scope="session" class="Entity.User"/>
 <jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
 <jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
-
+<jsp:useBean id="backPage" scope="request" class="java.lang.String"/>
 <html lang="ja">
 <head>
     <title>
@@ -46,10 +46,20 @@
 </form>
 <%
     }
+    if (backPage.equals("searchResult")) {
 %>
 <form action="/SyllabusSearch" method="post">
     <button type="submit" name="action" value="return">戻る</button>
 </form>
+<%
+} else if (backPage.equals("timetable")) {
+%>
+<form action="/Top" method="post">
+    <button type="submit" name="action" value="CheckTimeTable">戻る</button>
+</form>
+<%
+    }
+%>
 <table border="3">
     <tr>
         <th width="30%">シラバスID</th>
@@ -199,11 +209,31 @@
         </td>
     </tr>
     <%
-        for (SyllabusContents syllabusContents : targetSyllabus.getSyllabusContents()) {
+        for
+        (
+        SyllabusContents
+        syllabusContents
+        :
+        targetSyllabus
+        .
+        getSyllabusContents
+        (
+        )
+        )
+        {
     %>
     <tr>
-        <th width="30%">第<%=syllabusContents.getClassNumber()%>回</th>
-        <td><%=syllabusContents.getCourseContent()%>
+        <th width="30%">第<%=syllabusContents
+            .
+            getClassNumber
+            (
+            )%>回
+        </th>
+        <td><%=syllabusContents
+            .
+            getCourseContent
+            (
+            )%>
         </td>
     </tr>
     <%

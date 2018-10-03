@@ -54,6 +54,7 @@
             <form action="/SyllabusDetail" method="post" name="form<%=i%>">
                 <input type="hidden" name="action" value="detail">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
+                <input type="hidden" name="backPage" value="searchResult"/>
                 <a href="javascript:form<%=i%>.submit()"><%=syllabus.getSyllabusName()%>
                 </a>
             </form>

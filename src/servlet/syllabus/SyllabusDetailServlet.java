@@ -3,6 +3,7 @@ package servlet.syllabus;
 import Entity.Syllabus;
 import Entity.SyllabusDetail;
 import etc.ModelManager;
+import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,6 +35,8 @@ public class SyllabusDetailServlet extends HttpServlet {
         session.setAttribute("targetSyllabusId", syllabusId);
         request.setAttribute("targetSyllabus", targetSyllabus);
         if (action.equals("detail")) {
+            String backPage = new ReplaceString().repairRequest(request.getParameter("backPage"));
+            request.setAttribute("backPage",backPage);
             request.setAttribute("Number", 11);
             dispatch.forward(request, response);
         }else if(action.equals("update")){

@@ -56,6 +56,7 @@
             <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form_<%=syllabus.getSyllabusId()%>">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <input type="hidden" name="action" value="detail"/>
+                <input type="hidden" name="backPage" value="timetable"/>
                 <a href="javascript:form_<%=syllabus.getSyllabusId()%>.submit()"><%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%></a>
             </form>
             <%
