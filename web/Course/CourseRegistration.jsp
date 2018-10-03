@@ -30,7 +30,7 @@
 %>
 
 <form action="/CourseRegistration" method="post">
-    <button type="submit" name="action" value="registration">登録</button>
+    <button type="submit" name="action" value="check">登録</button>
 </form>
 <table BORDER="1" align="center">
     <tr align="center">

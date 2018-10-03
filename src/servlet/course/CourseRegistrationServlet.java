@@ -59,12 +59,12 @@ public class CourseRegistrationServlet extends HttpServlet {
 
             if (!flag) {
                 request.setAttribute("errorString", "エラーが発生しました。");
-                request.setAttribute("Number", 15);
+                request.setAttribute("Number", 17);
                 dispatch.forward(request, response);
                 return;
             }
             request.setAttribute("errorString", "更新成功");
-            request.setAttribute("Number", 15);
+            request.setAttribute("Number", 16);
             dispatch.forward(request, response);
             return;
 
@@ -101,6 +101,14 @@ public class CourseRegistrationServlet extends HttpServlet {
             request.setAttribute("Number", 15);
             dispatch.forward(request, response);
             return;
+        }else if(action.equals("check")){
+            request.setAttribute("errorString", "");
+            request.setAttribute("Number", 16);
+            dispatch.forward(request, response);
+        }else if(action.equals("back")){
+            request.setAttribute("errorString", "");
+            request.setAttribute("Number", 15);
+            dispatch.forward(request, response);
         }
     }
 

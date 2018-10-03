@@ -10,6 +10,7 @@ import java.util.List;
 public class TimeTable {
     private List<String> weekName = Arrays.asList("月", "火", "水", "木", "金", "土", "日");
     private List<Week> weeks = new ArrayList<>();
+    private Integer totalUnit = 0;
 
     public TimeTable() {
         for (int i = 0; i < weekName.size(); i++) {
@@ -23,6 +24,7 @@ public class TimeTable {
         for (int i = 0; i < week.length; i++) {
             this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
         }
+        this.totalUnit += syllabus.getUnit();
     }
 
     public void addSyllabusList(List<Syllabus> syllabusList) {
@@ -32,6 +34,7 @@ public class TimeTable {
             for (int i = 0; i < week.length; i++) {
                 this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
             }
+            this.totalUnit += syllabus.getUnit();
         }
     }
 
@@ -39,13 +42,13 @@ public class TimeTable {
         return this.weeks.get(week - 1).getSyllabusList(time);
     }
 
-    public List<String> getAllSyllabusList(){
+    public List<String> getAllSyllabusList() {
         List<Syllabus> syllabusList = new ArrayList<>();
-        for(Week week:weeks){
+        for (Week week : weeks) {
             syllabusList.addAll(week.getAllSyllabusList());
         }
         List<String> stringList = new ArrayList<>();
-        for(Syllabus syllabus:syllabusList){
+        for (Syllabus syllabus : syllabusList) {
             stringList.add(syllabus.getSyllabusId());
         }
         return new ArrayList<>(new HashSet<>(stringList));
@@ -67,4 +70,7 @@ public class TimeTable {
         return true;
     }
 
+    public Integer getTotalUnit(){
+        return totalUnit;
+    }
 }

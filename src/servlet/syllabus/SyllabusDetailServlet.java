@@ -43,6 +43,7 @@ public class SyllabusDetailServlet extends HttpServlet {
             request.setAttribute("Number",12);
             dispatch.forward(request, response);
         }
+        return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
