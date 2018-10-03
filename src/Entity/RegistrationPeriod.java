@@ -5,6 +5,7 @@ import etc.StringCheck;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class RegistrationPeriod {
     private Integer id;
@@ -17,7 +18,7 @@ public class RegistrationPeriod {
         this.endDate = resultSet.getDate("end_date").toString();
     }
 
-    public RegistrationPeriod(String startDate,String endDate){
+    public RegistrationPeriod(String startDate, String endDate) {
         this.id = 0;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,8 +36,8 @@ public class RegistrationPeriod {
         return endDate;
     }
 
-    public String getPeriod(){
-        return getStartDate()+ "~" + getEndDate();
+    public String getPeriod() {
+        return getStartDate() + "~" + getEndDate();
     }
 
     public void setStartDate(String startDate) {
@@ -47,5 +48,21 @@ public class RegistrationPeriod {
     public void setEndDate(String endDate) {
         endDate = new ReplaceString().replace(endDate);
         this.endDate = endDate;
+    }
+
+    public LocalDateTime getStartLocalDate() {
+        String[] dateString = startDate.split("-");
+        Integer date = Integer.parseInt(dateString[0]);
+        Integer month = Integer.parseInt(dateString[1]);
+        Integer time = Integer.parseInt(dateString[2]);
+        return LocalDateTime.of(date, month, time, 0, 0, 0);
+    }
+
+    public LocalDateTime getEndLocalDate() {
+        String[] dateString = endDate.split("-");
+        Integer date = Integer.parseInt(dateString[0]);
+        Integer month = Integer.parseInt(dateString[1]);
+        Integer time = Integer.parseInt(dateString[2]);
+        return LocalDateTime.of(date, month, time, 0, 0, 0);
     }
 }

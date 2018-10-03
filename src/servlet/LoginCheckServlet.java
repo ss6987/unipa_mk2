@@ -32,6 +32,7 @@ public class LoginCheckServlet extends HttpServlet {
         User user = modelManager.login(id, password);
         Integer url;
         if (user != null) {
+            session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
             if(user.getUserClassification().equals("学生")){
                 List<Syllabus> syllabusList = modelManager.courseSelect(user.getUserId());
                 TimeTable timeTable = new TimeTable();

@@ -20,12 +20,22 @@
 <%
     String period = (String) request.getAttribute("period");
     String classification = user.getUserClassification();
+    boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
 %>
 
 <h1>UNIPAへようこそ！</h1>
 <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
-<h2>履修登録期間<%=period%>
+<%
+    if (registrationPeriodFlag) {
+%>
+<h2>
+    履修登録期間<%=period%>
 </h2>
+
+<%
+    }
+%>
+
 <div>
     <form action="<%= request.getContextPath()%>/Top" method="post" accept-charset="UTF-8">
         <span><button type="submit" name="action" value="MyUser">ユーザー情報確認</button></span>
@@ -36,7 +46,13 @@
 
         <span><button type="submit" name="action" value="CheckTimeTable">時間割表確認</button> </span>
         <span><button type="submit" name="action" value="Achieve">成績参照</button></span>
+        <%
+            if (registrationPeriodFlag) {
+        %>
         <span><button type="submit" name="action" value="CourseRegistration">履修登録</button> </span>
+        <%
+            }
+        %>
         <%
         } else if (classification.equals("教職員")) {
         %>

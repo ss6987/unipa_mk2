@@ -5,7 +5,9 @@ import Entity.*;
 
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ModelManager {
@@ -16,10 +18,23 @@ public class ModelManager {
     private TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
     private FacultyDepartmentDAO facultyDepartmentDAO = new FacultyDepartmentDAO();
     private StudentDAO studentDAO = new StudentDAO();
+    private boolean registrationPeriodFlag = false;
 
 
     public ModelManager() {
-        System.out.println("OK");
+        RegistrationPeriod registrationPeriod;
+        try {
+            registrationPeriod = registrationPeriodDAO.select();
+        } catch (SQLException e) {
+            registrationPeriod = new RegistrationPeriod("1900-01-01","1900-01-01");
+        }
+        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.of(2018,8,27,0,0,0);
+        LocalDateTime startDate = registrationPeriod.getStartLocalDate();
+        LocalDateTime endDate = registrationPeriod.getEndLocalDate();
+        if(now.compareTo(startDate) == 1 && now.compareTo(endDate) == -1){
+            this.registrationPeriodFlag = true;
+        }
     }
 
     public User login(String userId, String password) {
@@ -253,5 +268,9 @@ public class ModelManager {
         } catch (SQLException e) {
             return studentDAO.insert(student);
         }
+    }
+
+    public boolean getRegistrationPeriodFlag(){
+        return registrationPeriodFlag;
     }
 }
