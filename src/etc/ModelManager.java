@@ -273,4 +273,13 @@ public class ModelManager {
     public boolean getRegistrationPeriodFlag(){
         return registrationPeriodFlag;
     }
+
+    public List<Syllabus> teacherInChargeSearch(String userId){
+        User user = userDAO.findById(userId);
+        try {
+            return teacherInChargeDAO.findByUser(user,-1);
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+    }
 }

@@ -55,7 +55,7 @@
 } else if (backPage.equals("timetable")) {
 %>
 <form action="/Top" method="post">
-    <button type="submit" name="action" value="CheckTimeTable">戻る</button>
+    <button type="submit" name="action" value="CourseCheck">戻る</button>
 </form>
 <%
     }
@@ -78,6 +78,10 @@
         <td>
             <jsp:getProperty name="targetSyllabus" property="englishName"/>
         </td>
+    </tr>
+    <tr>
+        <th width="30%">主担当教員</th>
+        <td><jsp:getProperty name="targetSyllabus" property="mainTeacher"/></td>
     </tr>
     <tr>
         <th width="30%">配当学年</th>

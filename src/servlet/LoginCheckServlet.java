@@ -22,6 +22,9 @@ public class LoginCheckServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(session != null){
+            session.invalidate();
+        }
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
@@ -35,6 +38,11 @@ public class LoginCheckServlet extends HttpServlet {
             session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
             if(user.getUserClassification().equals("学生")){
                 List<Syllabus> syllabusList = modelManager.courseSelect(user.getUserId());
+                TimeTable timeTable = new TimeTable();
+                timeTable.addSyllabusList(syllabusList);
+                session.setAttribute("timeTable",timeTable);
+            }else if(user.getUserClassification().equals("教職員")){
+                List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
                 TimeTable timeTable = new TimeTable();
                 timeTable.addSyllabusList(syllabusList);
                 session.setAttribute("timeTable",timeTable);

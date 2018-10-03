@@ -63,7 +63,7 @@ public class TopServlet extends HttpServlet {
                     url = 13;
                     break;
                 case "CourseCheck":
-                    url = 18;
+                    url = 17;
                     break;
                 default:
                     url = 2;

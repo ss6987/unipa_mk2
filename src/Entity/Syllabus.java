@@ -1,6 +1,7 @@
 package Entity;
 
 import DAO.SyllabusDAO;
+import DAO.TeacherInChargeDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
@@ -48,7 +49,11 @@ public class Syllabus {
         this.time = resultSet.getString("Time");
         this.unit = resultSet.getInt("unit");
         this.capacity = resultSet.getInt("capacity");
-        this.mainTeacher = resultSet.getString("name");
+        try{
+            this.mainTeacher = resultSet.getString("name");
+        }catch (java.sql.SQLException e){
+            this.mainTeacher = new TeacherInChargeDAO().findMainTeacherBySyllabus(this).getName();
+        }
     }
 
     public Syllabus(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher) {
