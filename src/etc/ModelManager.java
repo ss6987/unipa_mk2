@@ -28,8 +28,8 @@ public class ModelManager {
         } catch (SQLException e) {
             registrationPeriod = new RegistrationPeriod("1900-01-01","1900-01-01");
         }
-        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime now = LocalDateTime.of(2018,8,27,0,0,0);
+//        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2018,9,27,0,0,0);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if(now.compareTo(startDate) == 1 && now.compareTo(endDate) == -1){

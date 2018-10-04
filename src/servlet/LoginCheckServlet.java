@@ -22,8 +22,12 @@ public class LoginCheckServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(session != null){
-            session.invalidate();
+        if (session != null) {
+            try {
+                session.invalidate();
+            }catch (java.lang.IllegalStateException e){
+                ;
+            }
         }
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
@@ -35,17 +39,17 @@ public class LoginCheckServlet extends HttpServlet {
         User user = modelManager.login(id, password);
         Integer url;
         if (user != null) {
-            session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
-            if(user.getUserClassification().equals("学生")){
+            session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
+            if (user.getUserClassification().equals("学生")) {
                 List<Syllabus> syllabusList = modelManager.courseSelect(user.getUserId());
                 TimeTable timeTable = new TimeTable();
                 timeTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable",timeTable);
-            }else if(user.getUserClassification().equals("教職員")){
+                session.setAttribute("timeTable", timeTable);
+            } else if (user.getUserClassification().equals("教職員")) {
                 List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
                 TimeTable timeTable = new TimeTable();
                 timeTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable",timeTable);
+                session.setAttribute("timeTable", timeTable);
             }
 
             session.setAttribute("user", user);
