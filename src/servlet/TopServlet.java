@@ -125,6 +125,7 @@ public class TopServlet extends HttpServlet {
 
         request.setAttribute("Number", url);
         dispatch.forward(request, response);
+        return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

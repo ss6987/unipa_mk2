@@ -41,8 +41,9 @@ public class LoginCheckServlet extends HttpServlet {
         if (user != null) {
             session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
             if (user.getUserClassification().equals("学生")) {
-                List<Syllabus> syllabusList = modelManager.courseSelect(user.getUserId());
+                List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(user.getUserId());
                 TimeTable timeTable = new TimeTable();
+                timeTable.setSemester(modelManager.getSemester());
                 timeTable.addSyllabusList(syllabusList);
                 session.setAttribute("timeTable", timeTable);
             } else if (user.getUserClassification().equals("教職員")) {

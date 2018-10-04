@@ -1,7 +1,9 @@
 package servlet.course;
 
+import Entity.Course;
 import etc.ModelManager;
 import etc.ReplaceString;
+import Entity.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseCheckServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -24,8 +28,19 @@ public class CourseCheckServlet extends HttpServlet {
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
 
-        if(action.equals("courseCheck")){
-
+        if (action.equals("courseCheck")) {
+            String targetSyllabusId = (String) session.getAttribute("targetSyllabusId");
+            List<Course> courseList = modelManager.courseSelect("", targetSyllabusId, -1);
+            List<User> userList = new ArrayList<>();
+            for (Course course : courseList) {
+                userList.add(modelManager.userFindById(course.getUserId()));
+            }
+            request.setAttribute("courseList",courseList);
+            request.setAttribute("userList",userList);
+            request.setAttribute("Number", 6);
+            request.setAttribute("errorString", "");
+            dispatch.forward(request, response);
+            return;
         }
     }
 

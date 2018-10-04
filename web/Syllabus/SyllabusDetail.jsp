@@ -37,7 +37,7 @@
 } else if (user.getUserClassification().equals("教職員")) {
 %>
 <form action="/CourseCheck" method="post">
-    <button type="submit" name="action" value="courceCheck">履修登録者一覧</button>
+    <button type="submit" name="action" value="courseCheck">履修登録者一覧</button>
 </form>
 <%
 } else if (user.getUserClassification().equals("学生") && registrationPeriodFlag) {
