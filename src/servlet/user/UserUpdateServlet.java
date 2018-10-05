@@ -1,5 +1,6 @@
 package servlet.user;
 
+import Entity.FacultyDepartment;
 import Entity.Student;
 import Entity.User;
 import etc.ModelManager;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class UserUpdateServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -55,16 +57,16 @@ public class UserUpdateServlet extends HttpServlet {
             }
 
             Integer facultyDepartmentId;
-            try{
+            try {
                 facultyDepartmentId = Integer.parseInt(facultyDepartmentIdString);
-            }catch (java.lang.NumberFormatException e){
+            } catch (java.lang.NumberFormatException e) {
                 facultyDepartmentId = -1;
             }
 
             Integer grade;
-            try{
+            try {
                 grade = Integer.parseInt(gradeString);
-            }catch (java.lang.NumberFormatException e){
+            } catch (java.lang.NumberFormatException e) {
                 grade = -1;
             }
 
@@ -78,9 +80,10 @@ public class UserUpdateServlet extends HttpServlet {
             errorString += user.setAddress(address);
             errorString += user.setTel(tel);
             errorString += user.setUserClassification(userClassification);
-            errorString = errorString.replace("。","。<br/>");
+            errorString = errorString.replace("。", "。<br/>");
 
             if (!errorString.equals("")) {
+                request.setAttribute("facultyDepartmentList", modelManager.getFacultyDepartmentList());
                 request.setAttribute("targetUser", user);
                 request.setAttribute("errorString", errorString);
                 request.setAttribute("Number", 3);
@@ -95,13 +98,14 @@ public class UserUpdateServlet extends HttpServlet {
                 update = modelManager.userUpdate(user);
             }
 
-            if(user.getUserClassification().equals("学生") && update){
-                Student student = new Student(user.getUserId(),facultyDepartmentId,grade);
+            if (user.getUserClassification().equals("学生") && update) {
+                Student student = new Student(user.getUserId(), facultyDepartmentId, grade);
                 update = modelManager.studentRegistrationOrUpdate(student);
             }
 
             if (!update) {
                 errorString += "更新に失敗しました";
+                request.setAttribute("facultyDepartmentList", modelManager.getFacultyDepartmentList());
                 request.setAttribute("user", user);
                 request.setAttribute("Number", 3);
             } else {
@@ -113,8 +117,10 @@ public class UserUpdateServlet extends HttpServlet {
                 if (loginUser.getUserId() == targetUserId) {
                     session.setAttribute("user", user);
                 }
+                List<FacultyDepartment> facultyDepartmentList = modelManager.getFacultyDepartmentList();
+                request.setAttribute("facultyDepartmentList", facultyDepartmentList);
                 request.setAttribute("targetUser", user);
-                session.setAttribute("targetUserId",targetUserId);
+                session.setAttribute("targetUserId", targetUserId);
                 request.setAttribute("Number", 4);
 
             }
