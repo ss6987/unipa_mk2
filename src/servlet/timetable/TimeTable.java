@@ -11,6 +11,7 @@ public class TimeTable {
     private List<String> weekName = Arrays.asList("月", "火", "水", "木", "金", "土", "日");
     private List<Week> weeks = new ArrayList<>();
     private Integer totalUnit = 0;
+    private String semester = "前期";
 
     public TimeTable() {
         for (int i = 0; i < weekName.size(); i++) {
@@ -21,20 +22,26 @@ public class TimeTable {
     public void addSyllabus(Syllabus syllabus) {
         String[] week = syllabus.getWeek().split("&#44;");
         String[] time = syllabus.getTime().split("&#44;");
-        for (int i = 0; i < week.length; i++) {
-            this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+        String semester = syllabus.getSemester();
+        if (semester.equals(semester)) {
+            for (int i = 0; i < week.length; i++) {
+                this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+            }
+            this.totalUnit += syllabus.getUnit();
         }
-        this.totalUnit += syllabus.getUnit();
     }
 
     public void addSyllabusList(List<Syllabus> syllabusList) {
         for (Syllabus syllabus : syllabusList) {
             String[] week = syllabus.getWeek().split("&#44;");
             String[] time = syllabus.getTime().split("&#44;");
-            for (int i = 0; i < week.length; i++) {
-                this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+            String semester = syllabus.getSemester();
+            if (semester.equals(this.semester)) {
+                for (int i = 0; i < week.length; i++) {
+                    this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+                }
+                this.totalUnit += syllabus.getUnit();
             }
-            this.totalUnit += syllabus.getUnit();
         }
     }
 
@@ -70,7 +77,11 @@ public class TimeTable {
         return true;
     }
 
-    public Integer getTotalUnit(){
+    public Integer getTotalUnit() {
         return totalUnit;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 }

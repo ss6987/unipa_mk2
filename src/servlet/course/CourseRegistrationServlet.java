@@ -31,7 +31,7 @@ public class CourseRegistrationServlet extends HttpServlet {
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
 
-        if((boolean)session.getAttribute("registrationPeriodFlag")){
+        if(!(boolean)session.getAttribute("registrationPeriodFlag")){
             request.setAttribute("errorString", "履修登録期間外");
             request.setAttribute("Number", 16);
             dispatch.forward(request, response);

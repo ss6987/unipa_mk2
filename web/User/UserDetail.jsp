@@ -9,7 +9,6 @@
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
-
 <html lang="ja">
 <head>
     <title>ユーザー管理</title>

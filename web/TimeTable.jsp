@@ -53,11 +53,11 @@
                 List<Syllabus> tableSyllabusList = timeTable.getSyllabusList(week, time);
                 for (Syllabus syllabus : tableSyllabusList) {
             %>
-            <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form_<%=syllabus.getSyllabusId()%>">
+            <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <input type="hidden" name="action" value="detail"/>
                 <input type="hidden" name="backPage" value="timetable"/>
-                <a href="javascript:form_<%=syllabus.getSyllabusId()%>.submit()"><%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%></a>
+                <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()"><%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%></a>
             </form>
             <%
                 }
