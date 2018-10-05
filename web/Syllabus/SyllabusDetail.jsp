@@ -12,11 +12,6 @@
 <jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
 <jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
 <jsp:useBean id="backPage" scope="request" class="java.lang.String"/>
-<%
-    boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
-    String semesterString = (String) request.getAttribute("semesterString");
-    if (user.getUserClassification().equals("管理者")) {
-%>
 
 <html lang="ja">
 <head>
@@ -26,6 +21,11 @@
 </head>
 <body>
 <h1>シラバス詳細</h1>
+
+<%
+    boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
+    if (user.getUserClassification().equals("管理者")) {
+%>
 <form action="/SyllabusDetail" method="post">
     <button type="submit" name="action" value="update">更新ページへ</button>
 </form>
@@ -34,13 +34,13 @@
 </form>
 
 <%
-} else if ((boolean) request.getAttribute("inChargeFlag")) {
+} else if ((boolean)request.getAttribute("inChargeFlag")) {
 %>
 <form action="/CourseCheck" method="post">
     <button type="submit" name="action" value="courseCheck">履修登録者一覧</button>
 </form>
 <%
-} else if (user.getUserClassification().equals("学生") && registrationPeriodFlag && targetSyllabus.getSemester().equals(semesterString)) {
+} else if (user.getUserClassification().equals("学生") && registrationPeriodFlag) {
 %>
 <form action="/CourseRegistration" method="post">
     <input type="hidden" name="targetSyllabusId" value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
