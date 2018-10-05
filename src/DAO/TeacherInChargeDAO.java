@@ -80,10 +80,26 @@ public class TeacherInChargeDAO {
         return userList;
     }
 
+    public boolean getInCharge(String syllabusId,String userId){
+        setList(userId,syllabusId,-1);
+        String sql = sqlCreater.selectAnd(tableName,list,-1);
+        ResultSet resultSet = sessionManager.executeQuery(sql);
+        try {
+            return resultSet.next();
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 
     private void setList(User user, Syllabus syllabus, Integer mainTeacher) {
         list.get(0).setValue(user.getUserId());
         list.get(1).setValue(syllabus.getSyllabusId());
+        list.get(2).setValue(mainTeacher.toString());
+    }
+
+    private void setList(String userId,String syllabusId,Integer mainTeacher){
+        list.get(0).setValue(userId);
+        list.get(1).setValue(syllabusId);
         list.get(2).setValue(mainTeacher.toString());
     }
 
