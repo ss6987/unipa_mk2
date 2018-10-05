@@ -83,6 +83,7 @@ public class CourseRegistrationServlet extends HttpServlet {
             Syllabus searchSyllabus = new Syllabus();
             searchSyllabus.setTime(time);
             searchSyllabus.setWeek(Integer.parseInt(week));
+            searchSyllabus.setSemester(modelManager.getSemesterString());
             session.setAttribute("searchSyllabus", searchSyllabus);
 
             request.setAttribute("errorString", "");
