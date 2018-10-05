@@ -41,6 +41,7 @@ public class SyllabusDetailServlet extends HttpServlet {
             }else{
                 request.setAttribute("inChargeFlag",false);
             }
+            request.setAttribute("semesterFlag",modelManager.getSemester());
             request.setAttribute("backPage",backPage);
             request.setAttribute("Number", 11);
             dispatch.forward(request, response);

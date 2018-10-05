@@ -321,7 +321,11 @@ public class ModelManager {
         }
     }
 
-    public String getSemester() {
+    public boolean getSemester(){
+        return semester;
+    }
+
+    public String getSemesterString() {
         if (this.semester) {
             return "前期";
         } else {

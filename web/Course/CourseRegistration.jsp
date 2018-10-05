@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="timeTable" class="servlet.timetable.TimeTable" scope="session"/>
+<jsp:useBean id="nowTable" class="servlet.timetable.TimeTable" scope="session"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
@@ -60,7 +60,7 @@
                 </div>
             </form>
             <%
-                List<Syllabus> tableSyllabusList = timeTable.getSyllabusList(week, time);
+                List<Syllabus> tableSyllabusList = nowTable.getSyllabusList(week, time);
                 for (Syllabus syllabus : tableSyllabusList) {
             %>
             <form action="<%=request.getContextPath()%>/CourseRegistration" method="post">
