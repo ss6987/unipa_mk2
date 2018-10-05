@@ -321,11 +321,16 @@ public class ModelManager {
         }
     }
 
-    public String getSemester(){
-        if(this.semester){
+    public String getSemester() {
+        if (this.semester) {
             return "前期";
-        }else{
+        } else {
             return "後期";
         }
+    }
+
+    public boolean getInCharge(String syllabusId, String teacherId) {
+        return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
+
     }
 }
