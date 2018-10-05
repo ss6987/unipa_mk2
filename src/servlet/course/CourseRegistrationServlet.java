@@ -39,11 +39,11 @@ public class CourseRegistrationServlet extends HttpServlet {
         }
 
         if (action.equals("registration")) {
-            TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
+            TimeTable timeTable = (TimeTable) session.getAttribute("nowTable");
             User user = (User) session.getAttribute("user");
 
             if (!timeTable.checkOverlap()) {
-                session.setAttribute("timeTable", timeTable);
+                session.setAttribute("nowTable", timeTable);
                 request.setAttribute("errorString", "重複している時間があります。");
                 request.setAttribute("Number", 15);
                 dispatch.forward(request, response);
@@ -66,12 +66,14 @@ public class CourseRegistrationServlet extends HttpServlet {
 
             if (!flag) {
                 request.setAttribute("errorString", "エラーが発生しました。");
-                request.setAttribute("Number", 17);
+                request.setAttribute("Number", 16);
                 dispatch.forward(request, response);
                 return;
             }
+            session.setAttribute("timeTable",timeTable);
+
             request.setAttribute("errorString", "更新成功");
-            request.setAttribute("Number", 16);
+            request.setAttribute("Number", 17);
             dispatch.forward(request, response);
             return;
 
@@ -89,7 +91,7 @@ public class CourseRegistrationServlet extends HttpServlet {
             return;
         } else if (action.equals("add")) {
             String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-            TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
+            TimeTable timeTable = (TimeTable) session.getAttribute("nowTable");
 
             Syllabus syllabus = modelManager.syllabusFindById(targetSyllabusId);
             timeTable.addSyllabus(syllabus);
@@ -100,10 +102,10 @@ public class CourseRegistrationServlet extends HttpServlet {
 
         } else if (action.equals("delete")) {
             String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-            TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
-            timeTable.deleteSyllabus(targetSyllabusId);
+            TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
+            nowTable.deleteSyllabus(targetSyllabusId);
 
-            session.setAttribute("timeTable", timeTable);
+            session.setAttribute("nowTable", nowTable);
             request.setAttribute("errorString", "");
             request.setAttribute("Number", 15);
             dispatch.forward(request, response);
