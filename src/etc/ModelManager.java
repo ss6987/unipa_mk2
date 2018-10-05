@@ -30,7 +30,7 @@ public class ModelManager {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
 //        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime now = LocalDateTime.of(2018, 9, 1, 0, 0, 1);
+        LocalDateTime now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if (now.isAfter(startDate) && now.isBefore(endDate)) {
