@@ -16,7 +16,7 @@ public class SyllabusDAO {
     private String tableName = "syllabus";
     private List<String> columns = Arrays.asList("syllabus_id", "syllabus_name", "english_name", "dividend_grade", "year", "class", "semester", "week", "time", "unit", "capacity", "objective_summary", "goal", "textbook", "reference_book", "educational_object", "dp", "self_study", "free_text", "mail_address", "office_hour", "classification", "guidance", "advice");
     private List<String> mold = Arrays.asList("string", "string", "string", "integer", "integer", "string", "string", "string", "string", "integer", "integer", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string", "string");
-    private List<Boolean> blankSrtting = Arrays.asList(false,false,true,false,false,true,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true);
+    private List<Boolean> blankSrtting = Arrays.asList(false, false, true, false, false, true, false, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true);
     private SessionManager sessionManager = new SessionManager();
     private SQLCreater sqlCreater = new SQLCreater();
 
@@ -38,7 +38,7 @@ public class SyllabusDAO {
             tmpSql = "";
         }
         String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.Week,s.Time,s.unit,s.capacity,u.name FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0" + tmpSql;
-        if(page!= -1){
+        if (page != -1) {
             sql += "OFFSET " + page * 100 + " LIMIT 100";
         }
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
@@ -58,8 +58,8 @@ public class SyllabusDAO {
 
     public boolean insert(SyllabusDetail syllabus) {
         setList(syllabus);
-        for(int i = 0;i < list.size();i++){
-            if(list.get(i).getValue().equals("") && !blankSrtting.get(i)){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getValue().equals("") && !blankSrtting.get(i)) {
                 return false;
             }
         }
@@ -71,17 +71,21 @@ public class SyllabusDAO {
         setList(syllabus);
         String sql = sqlCreater.update(tableName, list);
         boolean flag = sessionManager.execute(sql);
-        if(!flag){
+        if (!flag) {
             return flag;
         }
         SyllabusContentsDAO syllabusContentsDAO = new SyllabusContentsDAO();
-        for(SyllabusContents syllabusContents:syllabus.getSyllabusContents()){
-            if(syllabusContentsDAO.findBySyllabusContents(syllabusContents)){
+        for (SyllabusContents syllabusContents : syllabus.getSyllabusContents()) {
+            if (syllabusContentsDAO.findBySyllabusContents(syllabusContents)) {
                 flag = syllabusContentsDAO.update(syllabusContents);
-            }else{
+            } else {
                 flag = syllabusContentsDAO.insert(syllabusContents);
+                if (!flag) {
+                    sql = sqlCreater.deleteAnd(tableName, list);
+                    sessionManager.execute(sql);
+                }
             }
-            if(!flag){
+            if (!flag) {
                 return flag;
             }
         }
