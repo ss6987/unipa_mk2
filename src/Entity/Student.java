@@ -85,6 +85,10 @@ public class Student {
     }
 
     public String getGradeString(){
-        return String.valueOf(this.grade);
+        if(this.grade != -1){
+            return String.valueOf(this.grade);
+        }else{
+            return "";
+        }
     }
 }
