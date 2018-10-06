@@ -3,6 +3,7 @@ package servlet;
 import Entity.Syllabus;
 import etc.ModelManager;
 import Entity.User;
+import servlet.timetable.Time;
 import servlet.timetable.TimeTable;
 
 import javax.servlet.RequestDispatcher;
