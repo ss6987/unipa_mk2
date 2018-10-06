@@ -52,8 +52,8 @@ public class TopServlet extends HttpServlet {
                     url = 17;
                     break;
                 case "Achieve":
-                    url = 20;
-                    break;
+                    request.getRequestDispatcher("/AchieveForward").forward(request, response);
+                    return ;
                 case "CourseRegistration":
                     url = 15;
                     break;

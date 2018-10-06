@@ -21,19 +21,19 @@
     <title>ログイン</title>
 </head>
 <body>
-<form action="<%= request.getContextPath()%>/LoginCheck" method="post">
+<form action="<%=request.getContextPath()%>/LoginCheck" method="post">
     <div>
         <table>
             <tr>
-                <td>学籍番号</td>
+                <th>学籍番号</th>
                 <td>
                     <input type="text" name="id"
                            value="<jsp:getProperty name="user" property="userId"/>"
-                           required pattern="^[0-9A-Za-z]+$"/>
+                           required pattern="^[0-9A-Za-z]+$" autofocus/>
                 </td>
             </tr>
             <tr>
-                <td>パスワード</td>
+                <th>パスワード</th>
                 <td><input type="password" name="password" required></td>
             </tr>
         </table>
