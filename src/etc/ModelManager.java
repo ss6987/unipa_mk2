@@ -20,6 +20,7 @@ public class ModelManager {
     private StudentDAO studentDAO = new StudentDAO();
     private boolean registrationPeriodFlag = false;
     private boolean semester = true;
+    private LocalDateTime now;
 
 
     public ModelManager() {
@@ -30,7 +31,7 @@ public class ModelManager {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
 //        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
+        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if (now.isAfter(startDate) && now.isBefore(endDate)) {
@@ -335,6 +336,9 @@ public class ModelManager {
 
     public boolean getInCharge(String syllabusId, String teacherId) {
         return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
+    }
 
+    public LocalDateTime getNow(){
+        return now;
     }
 }

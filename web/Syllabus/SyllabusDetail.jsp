@@ -14,7 +14,7 @@
 <jsp:useBean id="backPage" scope="request" class="java.lang.String"/>
 <%
     boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
-    boolean semesterFlag = (boolean)request.getAttribute("semesterFlag");
+    String semesterString = (String) request.getAttribute("semesterString");
     if (user.getUserClassification().equals("管理者")) {
 %>
 
@@ -34,13 +34,13 @@
 </form>
 
 <%
-} else if ((boolean)request.getAttribute("inChargeFlag")) {
+} else if ((boolean) request.getAttribute("inChargeFlag")) {
 %>
 <form action="/CourseCheck" method="post">
     <button type="submit" name="action" value="courseCheck">履修登録者一覧</button>
 </form>
 <%
-} else if (user.getUserClassification().equals("学生") && registrationPeriodFlag & semesterFlag) {
+} else if (user.getUserClassification().equals("学生") && registrationPeriodFlag && targetSyllabus.getSemester().equals(semesterString)) {
 %>
 <form action="/CourseRegistration" method="post">
     <input type="hidden" name="targetSyllabusId" value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
@@ -217,30 +217,14 @@
         </td>
     </tr>
     <%
-        for
-                (
-                SyllabusContents
-                        syllabusContents
-                :
-                targetSyllabus
-                        .
-                                getSyllabusContents
-                                        (
-                                        )
-                ) {
+        for (SyllabusContents syllabusContents : targetSyllabus.getSyllabusContents()) {
     %>
     <tr>
-        <th width="30%">第<%=syllabusContents
-                .
-                        getClassNumber
-                                (
-                                )%>回
+        <th width="30%">
+            第<%=syllabusContents.getClassNumber()%>回
         </th>
-        <td><%=syllabusContents
-                .
-                        getCourseContent
-                                (
-                                )%>
+        <td>
+            <%=syllabusContents.getCourseContent()%>
         </td>
     </tr>
     <%
