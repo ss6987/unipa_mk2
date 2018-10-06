@@ -11,29 +11,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <%
-
 %>
 <html lang="ja">
 <head>
+    <link rel="stylesheet" type="text/css" href="LoginDesign.css">
     <title>ログイン</title>
 </head>
 <body>
 <form action="<%= request.getContextPath()%>/LoginCheck" method="post">
-    <table>
-        <tr>
-            <td>学籍番号</td>
-            <td>
-                <input type="text" name="id"
-                       value="<jsp:getProperty name="user" property="userId"/>"
-                       required pattern="^[0-9A-Za-z]+$"/>
-            </td>
-        </tr>
-        <tr>
-            <td>パスワード</td>
-            <td><input type="password" name="password" required></td>
-        </tr>
-    </table>
-    <button type="submit" name="login">ログイン</button>
+    <div>
+        <table>
+            <tr>
+                <td>学籍番号</td>
+                <td>
+                    <input type="text" name="id"
+                           value="<jsp:getProperty name="user" property="userId"/>"
+                           required pattern="^[0-9A-Za-z]+$"/>
+                </td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td><input type="password" name="password" required></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn_1" name="login">ログイン</button>
+    </div>
 </form>
 </body>
 </html>
