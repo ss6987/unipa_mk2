@@ -3,6 +3,7 @@ package servlet;
 import Entity.Syllabus;
 import etc.ModelManager;
 import Entity.User;
+import servlet.timetable.Time;
 import servlet.timetable.TimeTable;
 
 import javax.servlet.RequestDispatcher;
@@ -22,8 +23,12 @@ public class LoginCheckServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(session != null){
-            session.invalidate();
+        if (session != null) {
+            try {
+                session.invalidate();
+            } catch (java.lang.IllegalStateException e) {
+                ;
+            }
         }
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
@@ -35,17 +40,24 @@ public class LoginCheckServlet extends HttpServlet {
         User user = modelManager.login(id, password);
         Integer url;
         if (user != null) {
-            session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
-            if(user.getUserClassification().equals("学生")){
-                List<Syllabus> syllabusList = modelManager.courseSelect(user.getUserId());
-                TimeTable timeTable = new TimeTable();
+            session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
+            if (user.getUserClassification().equals("学生")) {
+                List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(user.getUserId());
+                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+
                 timeTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable",timeTable);
-            }else if(user.getUserClassification().equals("教職員")){
+                nowTable.addSyllabusList(syllabusList);
+                session.setAttribute("timeTable", timeTable);
+                session.setAttribute("nowTable", nowTable);
+            } else if (user.getUserClassification().equals("教職員")) {
                 List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
-                TimeTable timeTable = new TimeTable();
+                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
                 timeTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable",timeTable);
+                nowTable.addSyllabusList(syllabusList);
+                session.setAttribute("timeTable", timeTable);
+                session.setAttribute("nowTable", nowTable);
             }
 
             session.setAttribute("user", user);

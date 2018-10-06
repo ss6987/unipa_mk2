@@ -16,7 +16,7 @@ public class Course {
     private String mainTeacherName;
     private Integer year;
 
-    public Course(){
+    public Course() {
         this.userId = "";
         this.syllabusId = "";
         this.achievement = -1;
@@ -43,8 +43,8 @@ public class Course {
 
     public String setUserId(String userId) throws SQLException {
         userId = new ReplaceString().replace(userId);
-        if(new StringCheck().checkNotSymbols(userId)){
-            if(new UserDAO().findById(userId).getUserId() != ""){
+        if (new StringCheck().checkNotSymbols(userId)) {
+            if (new UserDAO().findById(userId).getUserId() != "") {
                 this.userId = userId;
                 return "";
             }
@@ -55,8 +55,8 @@ public class Course {
 
     public String setSyllabusId(String syllabusId) throws SQLException {
         syllabusId = new ReplaceString().replace(syllabusId);
-        if(new StringCheck().checkNotSymbols(syllabusId)){
-            if(new SyllabusDAO().findBySyllabusId(syllabusId).getSyllabusId()!=""){
+        if (new StringCheck().checkNotSymbols(syllabusId)) {
+            if (new SyllabusDAO().findBySyllabusId(syllabusId).getSyllabusId() != "") {
                 this.syllabusId = syllabusId;
                 return "";
             }
@@ -66,7 +66,7 @@ public class Course {
     }
 
     public String setAchievement(Integer achievement) {
-        if(achievement >= -2 && achievement <= 4){
+        if (achievement >= -3 && achievement <= 4) {
             this.achievement = achievement;
             return "";
         }
@@ -75,7 +75,7 @@ public class Course {
 
     public String setMainTeacherName(String mainTeacherName) {
         mainTeacherName = new ReplaceString().replace(mainTeacherName);
-        if(new StringCheck().checkNotSymbols(mainTeacherName)){
+        if (new StringCheck().checkNotSymbols(mainTeacherName)) {
             this.mainTeacherName = mainTeacherName;
             return "";
         }
@@ -83,7 +83,7 @@ public class Course {
     }
 
     public String setYear(Integer year) {
-        if(year >= -1){
+        if (year >= -1) {
             this.year = year;
             return "";
         }
@@ -108,5 +108,26 @@ public class Course {
 
     public Integer getYear() {
         return year;
+    }
+
+    public String getAchievementString() {
+        switch (this.achievement) {
+            case -3:
+                return "承認前";
+            case -2:
+                return "履修中";
+            case 0:
+                return "D";
+            case 1:
+                return "C";
+            case 2:
+                return "B";
+            case 3:
+                return "A";
+            case 4:
+                return "S";
+            default:
+                return "--";
+        }
     }
 }

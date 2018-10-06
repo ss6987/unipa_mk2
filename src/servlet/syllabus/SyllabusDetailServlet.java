@@ -1,6 +1,6 @@
 package servlet.syllabus;
 
-import Entity.Syllabus;
+import Entity.User;
 import Entity.SyllabusDetail;
 import etc.ModelManager;
 import etc.ReplaceString;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class SyllabusDetailServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -36,6 +35,13 @@ public class SyllabusDetailServlet extends HttpServlet {
         request.setAttribute("targetSyllabus", targetSyllabus);
         if (action.equals("detail")) {
             String backPage = new ReplaceString().repairRequest(request.getParameter("backPage"));
+            User user = (User) session.getAttribute("user");
+            if(user.getUserClassification().equals("教職員") && modelManager.getInCharge(syllabusId,user.getUserId())){
+                request.setAttribute("inChargeFlag",true);
+            }else{
+                request.setAttribute("inChargeFlag",false);
+            }
+            request.setAttribute("semesterString",modelManager.getSemesterString());
             request.setAttribute("backPage",backPage);
             request.setAttribute("Number", 11);
             dispatch.forward(request, response);

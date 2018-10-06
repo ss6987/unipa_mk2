@@ -1,0 +1,46 @@
+body{
+    background-color: #AAAAAA;
+}
+
+div{
+    margin-left:40%;
+}
+
+.btn_1{
+    margin-left:150px;
+    width:100px;
+    display: inline-block;
+    text-decoration: none;
+    color: #AA5500;
+    line-height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    font-weight: bold;
+    background-image: -webkit-linear-gradient(#75A9FF 0%, #DD0000 100%);
+    background-image: linear-gradient(#C6E9FC 0%, #9CDAFD 100%);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.28);
+}
+.btn_1:active{/*押したとき*/
+    -ms-transform: translateY(2px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);/*沈むように*/
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: -webkit-linear-gradient(#00ff7f 0%, #005FFF 100%);
+    background-image: linear-gradient(#9CDAFD 0%, #3DB9FD 100%);/*グラデーションを明るく*/
+}
+
+table{
+    width:400px;
+    border: 1px #000000 solid;
+    border-collapse:collapse;
+    background-color:#EEEEEE;
+}
+tr:nth-child(odd){
+    background-color: #D9E5FF;
+}
+th,td{
+    padding: 5px 15px;
+}

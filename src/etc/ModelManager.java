@@ -19,6 +19,8 @@ public class ModelManager {
     private FacultyDepartmentDAO facultyDepartmentDAO = new FacultyDepartmentDAO();
     private StudentDAO studentDAO = new StudentDAO();
     private boolean registrationPeriodFlag = false;
+    private boolean semester = true;
+    private LocalDateTime now;
 
 
     public ModelManager() {
@@ -26,14 +28,18 @@ public class ModelManager {
         try {
             registrationPeriod = registrationPeriodDAO.select();
         } catch (SQLException e) {
-            registrationPeriod = new RegistrationPeriod("1900-01-01","1900-01-01");
+            registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
-        LocalDateTime now = LocalDateTime.now();
-//        LocalDateTime now = LocalDateTime.of(2018,8,27,0,0,0);
+//        LocalDateTime now = LocalDateTime.now();
+        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
-        if(now.compareTo(startDate) == 1 && now.compareTo(endDate) == -1){
+        if (now.isAfter(startDate) && now.isBefore(endDate)) {
             this.registrationPeriodFlag = true;
+        }
+        LocalDateTime september = LocalDateTime.of(now.getYear(), 9, 1, 0, 0, 0);
+        if (now.isAfter(september)) {
+            semester = false;
         }
     }
 
@@ -226,7 +232,23 @@ public class ModelManager {
         return true;
     }
 
-    public List<Syllabus> courseSelect(String studentId) {
+    public List<Course> courseSelect(String studentId, String syllabusId, Integer achievement) {
+        try {
+            if (!studentId.equals("")) {
+                Student student = studentDAO.findByStudent(studentId);
+                return courseDAO.findByStudent(student, achievement);
+            } else if (!syllabusId.equals("")) {
+                Syllabus syllabus = syllabusDAO.findBySyllabusId(syllabusId);
+                return courseDAO.findBySyllabus(syllabus, achievement);
+            } else {
+                return new ArrayList<>();
+            }
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Syllabus> courseSelectSyllabus(String studentId) {
         try {
             Student student = studentDAO.findByStudent(studentId);
             List<Course> courseList = courseDAO.findByStudent(student, -1);
@@ -236,6 +258,23 @@ public class ModelManager {
                 syllabusList.add(syllabus);
             }
             return syllabusList;
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+
+    }
+
+    public List<User> courseSelectUser(String syllabusId) {
+        try {
+            Syllabus syllabus = syllabusDAO.findBySyllabusId(syllabusId);
+            List<Course> courseList = courseDAO.findBySyllabus(syllabus, -1);
+            List<User> userList = new ArrayList<>();
+            for (Course course : courseList) {
+                User user = userDAO.findById(course.getUserId());
+                userList.add(user);
+            }
+            return userList;
+
         } catch (SQLException e) {
             return new ArrayList<>();
         }
@@ -270,16 +309,36 @@ public class ModelManager {
         }
     }
 
-    public boolean getRegistrationPeriodFlag(){
+    public boolean getRegistrationPeriodFlag() {
         return registrationPeriodFlag;
     }
 
-    public List<Syllabus> teacherInChargeSearch(String userId){
+    public List<Syllabus> teacherInChargeSearch(String userId) {
         User user = userDAO.findById(userId);
         try {
-            return teacherInChargeDAO.findByUser(user,-1);
+            return teacherInChargeDAO.findByUser(user, -1);
         } catch (SQLException e) {
             return new ArrayList<>();
         }
+    }
+
+    public boolean getSemester(){
+        return semester;
+    }
+
+    public String getSemesterString() {
+        if (this.semester) {
+            return "前期";
+        } else {
+            return "後期";
+        }
+    }
+
+    public boolean getInCharge(String syllabusId, String teacherId) {
+        return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
+    }
+
+    public LocalDateTime getNow(){
+        return now;
     }
 }

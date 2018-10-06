@@ -13,6 +13,7 @@
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetStudent" class="Entity.Student" scope="request"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
+
 <%
     List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
 %>
@@ -95,19 +96,6 @@
                 </select>
             </td>
         </tr>
-
-        <%
-            if (targetUser.getUserClassification().equals("学生")) {
-        %>
-        <tr align="center">
-            <th>学部・学科</th>
-            <td>
-            </td>
-        </tr>
-
-        <%
-            }
-        %>
 
         <tr align="center">
             <th>性別</th>

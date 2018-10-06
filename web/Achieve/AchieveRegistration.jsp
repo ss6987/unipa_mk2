@@ -21,7 +21,7 @@
 <input type="file" name="seisekicsv" size="30">
 
 <table BORDER="1" align="center">
-    <tr align="center"><td>科目名</td><td>　　　</td></tr></table>
+    <tr align="center"><td>授業名</td><td>　　　</td></tr></table>
 
 <br>
 <table BORDER="1" align="center">

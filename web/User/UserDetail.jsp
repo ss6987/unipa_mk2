@@ -1,4 +1,8 @@
-<%@ page import="Entity.User" %><%--
+<%@ page import="Entity.User" %>
+<%@ page import="Entity.FacultyDepartment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Entity.Student" %>
+<%--
   Created by IntelliJ IDEA.
   User: ASAMI
   Date: 2018/07/13
@@ -9,6 +13,7 @@
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
+<jsp:useBean id="facultyDepartment" class="Entity.FacultyDepartment" scope="request"/>
 
 <html lang="ja">
 <head>
@@ -71,11 +76,13 @@
     <%
         if (targetUser.getUserClassification().equals("学生")) {
     %>
-    <tr align="center">
-        <th>学部・学科</th>
-        <td>
-        </td>
-    </tr>
+    <tr align="center" class="studentStatus">
+            <th>学部学科</th>
+            <td>
+                <jsp:getProperty name="facultyDepartment" property="faculty"/>
+                <jsp:getProperty name="facultyDepartment" property="department"/>
+            </td>
+        </tr>
 
     <%
         }

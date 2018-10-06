@@ -53,7 +53,7 @@
 
     </tr>
     <tr align="center">
-        <td>科目名</td><td>単位</td><td>評価</td><td>年度</td><td>学期</td><td>教員名</td>
+        <td>授業名</td><td>単位</td><td>評価</td><td>年度</td><td>学期</td><td>教員名</td>
     </tr>
     <tr align="center">
         <td>＜人間科学科目＞</td>

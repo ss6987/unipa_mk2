@@ -22,7 +22,7 @@ public class SQLCreater {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
-                    sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                    sql += " WHERE " + tmp.getColumn() + " like '%" + tmp.getValue() + "%'";
                 }
                 flag = false;
             }
@@ -75,7 +75,7 @@ public class SQLCreater {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
-                    sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                    sql += " WHERE " + tmp.getColumn() + " like '%" + tmp.getValue() + "%'";
                 }
 
                 flag = false;
@@ -83,7 +83,7 @@ public class SQLCreater {
                 if (tmp.getMold() != "string" && tmp.getMold() != "date") {
                     sql += " AND " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
-                    sql += " AND " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                    sql += " AND " + tmp.getColumn() + " like '%" + tmp.getValue() + "%'";
                 }
 
                 flag = false;
@@ -112,7 +112,7 @@ public class SQLCreater {
                 if (tmp.getMold() != "string") {
                     sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
-                    sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                    sql += " WHERE " + tmp.getColumn() + " like '%" + tmp.getValue() + "%'";
                 }
 
                 flag = false;
@@ -120,7 +120,7 @@ public class SQLCreater {
                 if (tmp.getMold() != "string") {
                     sql += " OR " + tmp.getColumn() + " = " + tmp.getValue();
                 } else {
-                    sql += " OR " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                    sql += " OR " + tmp.getColumn() + " like '%" + tmp.getValue() + "%'";
                 }
 
                 flag = false;
