@@ -60,7 +60,7 @@
                 <%
                     if (targetUserId.equals("")) {
                 %>
-                <input type="text" name="targetUserId" value="<jsp:getProperty name="targetUser" property="userId"/>">
+                <input type="text" name="targetUserId" value="<jsp:getProperty name="targetUser" property="userId" />"required pattern="^[0-9A-Za-z]+$"tabindex="1"/>
                 <%
                 } else {
                 %>
@@ -74,21 +74,21 @@
         <tr align="center">
             <th>氏名</th>
             <td>
-                <input type="text" name="name" value="<jsp:getProperty name="targetUser" property="name"/>"/>
+                <input type="text" name="name" value="<jsp:getProperty name="targetUser" property="name"/>"tabindex="2"required/>
             </td>
         </tr>
 
         <tr align="center">
             <th>フリガナ</th>
             <td>
-                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"/>
+                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶ]+$"tabindex="3"/>
             </td>
         </tr>
 
         <tr align="center">
             <th>ユーザー分類</th>
             <td>
-                <select name="user_classification" size="1" onchange="classificationSelect()">
+                <select name="user_classification" size="1" onchange="classificationSelect()"tabindex="4">
                     <option value="学生" <%=targetUser.getUserClassificationSelected("学生")%>>学生</option>
                     <option value="教職員" <%=targetUser.getUserClassificationSelected("教職員")%>>教職員</option>
                     <option value="管理者" <%=targetUser.getUserClassificationSelected("管理者")%>>管理者</option>
@@ -112,17 +112,17 @@
         <tr align="center">
             <th>性別</th>
             <td>
-                <input type="radio" name="gender" value="0" <%=targetUser.getGenderSelected(0)%>>男性
-                <input type="radio" name="gender" value="1" <%=targetUser.getGenderSelected(1)%>>女性
+                <input type="radio" name="gender" value="0" tabindex="5"<%=targetUser.getGenderSelected(0)%>>男性
+                <input type="radio" name="gender" value="1" tabindex="6" <%=targetUser.getGenderSelected(1)%>>女性
             </td>
         </tr>
 
         <tr align="center">
             <th>生年月日</th>
             <td>
-                西暦<input type="text" name="year" value="<jsp:getProperty name="targetUser" property="birthYear"/>"/>年
-                <input type="text" name="month" value="<jsp:getProperty name="targetUser" property="birthMonth"/>"/>月
-                <input type="text" name="day" value="<jsp:getProperty name="targetUser" property="birthDay"/>"/>日
+                西暦<input type="text" name="year" value="<jsp:getProperty name="targetUser" property="birthYear"/>"required pattern="^[0-9]+$"tabindex="7"/>年
+                <input type="text" name="month" value="<jsp:getProperty name="targetUser" property="birthMonth"/>"required pattern="^[0-9]+$"tabindex="8"/>月
+                <input type="text" name="day" value="<jsp:getProperty name="targetUser" property="birthDay"/>"required pattern="^[0-9]+$"tabindex="9"/>日
             </td>
         </tr>
 
@@ -130,27 +130,27 @@
             <th>郵便番号</th>
             <td>
                 <input type="text" name="postal_code"
-                       value="<jsp:getProperty name="targetUser" property="postalCode"/>"/><br>※ハイフンなしで入力
+                       value="<jsp:getProperty name="targetUser" property="postalCode"/>"required pattern="^[0-9]+$"tabindex="10"/><br>※ハイフンなしで入力
             </td>
         </tr>
 
         <tr align="center">
             <th>住所</th>
             <td>
-                <input type="text" name="address" value="<jsp:getProperty name="targetUser" property="address"/>"/>
+                <input type="text" name="address" value="<jsp:getProperty name="targetUser" property="address"/>"tabindex="11"required/>
             </td>
         </tr>
 
         <tr align="center">
             <th>電話番号</th>
             <td>
-                <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"/><br>※ハイフンなしで入力
+                <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"required pattern="^[0-9]+$"tabindex="12"/><br>※ハイフンなしで入力
             </td>
         </tr>
         <tr align="center" class="studentStatus">
             <th>学部学科</th>
             <td>
-                <select name="facultyDepartmentId">
+                <select name="facultyDepartmentId" tabindex="13">
                     <%
                         for (FacultyDepartment facultyDepartment : facultyDepartmentList) {
                     %>
@@ -170,7 +170,7 @@
             <th>学年</th>
             <td>
                 <input type="text" name="grade"
-                       value="<jsp:getProperty name="targetStudent" property="gradeString"/>" pattern="[1-4]"/>
+                       value="<jsp:getProperty name="targetStudent" property="gradeString"/>" pattern="[1-4]" tabindex="14"/>
             </td>
         </tr>
         </tbody>
@@ -178,12 +178,12 @@
     <%
         if (!targetUserId.equals("")) {
     %>
-    <button type="submit" name="action" value="update" align="center"> 更新</button>
-    <button type="submit" name="action" value="delete" align="center"> 削除</button>
+    <button type="submit" name="action" value="update" align="center"tabindex="15"> 更新</button>
+    <button type="submit" name="action" value="delete" align="center"tabindex="16"> 削除</button>
     <%
     } else {
     %>
-    <button type="submit" name="action" value="insert" align="center"> 登録</button>
+    <button type="submit" name="action" value="insert" align="center"tabindex="15"> 登録</button>
     <%
         }
     %>
