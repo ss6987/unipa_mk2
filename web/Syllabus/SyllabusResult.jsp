@@ -34,8 +34,8 @@
 
 <table BORDER="1" align="center">
     <tr>
-        <th>科目ID</th>
-        <th>科目名</th>
+        <th>授業ID</th>
+        <th>授業名</th>
         <th>担当教員</th>
         <th>学期</th>
         <th>曜日</th>

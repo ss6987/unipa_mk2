@@ -32,7 +32,7 @@
 <form action="/SyllabusSearch" method="post">
     <table BORDER="1" align="center">
         <tr>
-            <th>科目ID</th>
+            <th>授業ID</th>
             <td>
                 <input type="text" name="syllabus_id"
                        value="<jsp:getProperty name="searchSyllabus" property="syllabusId"/>"/>
@@ -41,7 +41,7 @@
         </tr>
 
         <tr align="center">
-            <th>科目名</th>
+            <th>科授業名</th>
             <td>
                 <input type="text" name="syllabus_name"
                        value="<jsp:getProperty name="searchSyllabus" property="syllabusName"/>"/>

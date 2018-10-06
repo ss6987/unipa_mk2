@@ -2,6 +2,7 @@ package servlet.timetable;
 
 import Entity.Syllabus;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ public class TimeTable {
     private List<Week> weeks = new ArrayList<>();
     private Integer totalUnit = 0;
     private String semester = "前期";
+    private LocalDateTime now;
 
     public TimeTable() {
         for (int i = 0; i < weekName.size(); i++) {
@@ -19,29 +21,30 @@ public class TimeTable {
         }
     }
 
+    public TimeTable(String semester, LocalDateTime now) {
+        for (int i = 0; i < weekName.size(); i++) {
+            weeks.add(new Week());
+        }
+        this.semester = semester;
+        this.now = now;
+    }
+
     public void addSyllabus(Syllabus syllabus) {
         String[] week = syllabus.getWeek().split("&#44;");
         String[] time = syllabus.getTime().split("&#44;");
         String semester = syllabus.getSemester();
-        if (semester.equals(semester)) {
-            for (int i = 0; i < week.length; i++) {
+
+        for (int i = 0; i < week.length; i++) {
+            if (semester.equals(this.semester) && syllabus.getYear().equals(now.getYear())) {
                 this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
+                this.totalUnit += syllabus.getUnit();
             }
-            this.totalUnit += syllabus.getUnit();
         }
     }
 
     public void addSyllabusList(List<Syllabus> syllabusList) {
         for (Syllabus syllabus : syllabusList) {
-            String[] week = syllabus.getWeek().split("&#44;");
-            String[] time = syllabus.getTime().split("&#44;");
-            String semester = syllabus.getSemester();
-            if (semester.equals(this.semester)) {
-                for (int i = 0; i < week.length; i++) {
-                    this.weeks.get(this.weekName.indexOf(week[i])).addSyllabus(syllabus, time[i]);
-                }
-                this.totalUnit += syllabus.getUnit();
-            }
+            this.addSyllabus(syllabus);
         }
     }
 
@@ -79,9 +82,5 @@ public class TimeTable {
 
     public Integer getTotalUnit() {
         return totalUnit;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = semester;
     }
 }
