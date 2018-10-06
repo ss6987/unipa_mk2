@@ -36,8 +36,13 @@ public class CourseCheckServlet extends HttpServlet {
                 userList.add(modelManager.userFindById(course.getUserId()));
             }
             request.setAttribute("courseList",courseList);
-            request.setAttribute("userList",userList);
+            request.setAttribute("studentList",userList);
             request.setAttribute("Number", 6);
+            request.setAttribute("errorString", "");
+            dispatch.forward(request, response);
+            return;
+        }else if(action.equals("back")){
+            request.setAttribute("Number", 11);
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);
             return;

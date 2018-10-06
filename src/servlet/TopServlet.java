@@ -1,5 +1,6 @@
 package servlet;
 
+import Entity.FacultyDepartment;
 import Entity.Student;
 import etc.ModelManager;
 import Entity.User;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class TopServlet extends HttpServlet {
     private String disp = "/MainForward";
@@ -33,6 +35,13 @@ public class TopServlet extends HttpServlet {
                 case "MyUser":
                     url = 4;
                     User targetUser = (User) session.getAttribute("user");
+
+                    try {
+                        Student targetStudent = targetUser.convertUserToStudent();
+                        request.setAttribute("facultyDepartment", targetStudent.getFacultyDepartment());
+                    } catch (SQLException e) {
+                        ;
+                    }
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUser.getUserId());
                     break;
@@ -80,12 +89,20 @@ public class TopServlet extends HttpServlet {
                     url = 4;
                     String targetUserId = request.getParameter("targetUserId");
                     targetUser = modelManager.userFindById(targetUserId);
+                    if (targetUser.getUserClassification().equals("学生")) {
+                        try {
+                            Student targetStudent = targetUser.convertUserToStudent();
+                            request.setAttribute("facultyDepartment", targetStudent.getFacultyDepartment());
+                        } catch (SQLException e) {
+                            ;
+                        }
+                    }
                     request.setAttribute("targetUser", targetUser);
                     session.setAttribute("targetUserId", targetUserId);
                     break;
                 case "UserUpdate":
                     url = 3;
-                    request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
+                    request.setAttribute("facultyDepartmentList", modelManager.getFacultyDepartmentList());
                     targetUserId = (String) session.getAttribute("targetUserId");
                     targetUser = modelManager.userFindById(targetUserId);
                     Student targetStudent;
@@ -94,7 +111,7 @@ public class TopServlet extends HttpServlet {
                     } catch (SQLException e) {
                         targetStudent = new Student();
                     }
-                    request.setAttribute("targetStudent",targetStudent);
+                    request.setAttribute("targetStudent", targetStudent);
                     request.setAttribute("targetUser", targetUser);
                     break;
                 case "SyllabusSearch":

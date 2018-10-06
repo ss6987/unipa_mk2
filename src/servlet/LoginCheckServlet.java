@@ -3,6 +3,7 @@ package servlet;
 import Entity.Syllabus;
 import etc.ModelManager;
 import Entity.User;
+import servlet.timetable.Time;
 import servlet.timetable.TimeTable;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +26,7 @@ public class LoginCheckServlet extends HttpServlet {
         if (session != null) {
             try {
                 session.invalidate();
-            }catch (java.lang.IllegalStateException e){
+            } catch (java.lang.IllegalStateException e) {
                 ;
             }
         }
@@ -42,15 +43,21 @@ public class LoginCheckServlet extends HttpServlet {
             session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
             if (user.getUserClassification().equals("学生")) {
                 List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(user.getUserId());
-                TimeTable timeTable = new TimeTable();
-                timeTable.setSemester(modelManager.getSemester());
+                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+
                 timeTable.addSyllabusList(syllabusList);
+                nowTable.addSyllabusList(syllabusList);
                 session.setAttribute("timeTable", timeTable);
+                session.setAttribute("nowTable", nowTable);
             } else if (user.getUserClassification().equals("教職員")) {
                 List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
-                TimeTable timeTable = new TimeTable();
+                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
+                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
                 timeTable.addSyllabusList(syllabusList);
+                nowTable.addSyllabusList(syllabusList);
                 session.setAttribute("timeTable", timeTable);
+                session.setAttribute("nowTable", nowTable);
             }
 
             session.setAttribute("user", user);
