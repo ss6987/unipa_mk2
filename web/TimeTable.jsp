@@ -17,7 +17,7 @@
 </head>
 <body>
 <form action="/Top" method="get">
-    <button type="submit" name="top" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
 </form>
 <br>
 

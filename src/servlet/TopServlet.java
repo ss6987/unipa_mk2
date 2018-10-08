@@ -53,7 +53,7 @@ public class TopServlet extends HttpServlet {
                     break;
                 case "Achieve":
                     request.getRequestDispatcher("/AchieveForward").forward(request, response);
-                    return ;
+                    return;
                 case "CourseRegistration":
                     url = 15;
                     break;
@@ -131,8 +131,8 @@ public class TopServlet extends HttpServlet {
                     url = 10;
                     break;
                 case "AchieveCheck":
-                    url = 20;
-                    break;
+                    request.getRequestDispatcher("/AchieveForward").forward(request, response);
+                    return;
                 default:
                     url = 2;
             }
