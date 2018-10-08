@@ -58,7 +58,9 @@
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <input type="hidden" name="action" value="detail"/>
                 <input type="hidden" name="backPage" value="timetable"/>
-                <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()"><%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%></a>
+                <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()">
+                    <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>,<%=syllabus.getClassRoom()%>
+                </a>
             </form>
             <%
                 }

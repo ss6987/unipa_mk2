@@ -12,28 +12,31 @@
 <jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
 <jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
 <jsp:useBean id="backPage" scope="request" class="java.lang.String"/>
+
+<html lang="ja">
+<head>
+    <title>
+        <jsp:getProperty name="targetSyllabus" property="syllabusName"/>
+    </title>
+    <link rel="stylesheet" type="text/css" href="../Design.css">
+</head>
+<body>
+<h1>シラバス詳細</h1>
 <%
     boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
     String semesterString = (String) request.getAttribute("semesterString");
     if (user.getUserClassification().equals("管理者")) {
 %>
 
-<html lang="ja">
-<head>
-    <title>
-        <jsp:getProperty name="targetSyllabus" property="syllabusName"/>
-        <link rel="stylesheet" type="text/css" href="Design.css">
-    </title>
-</head>
-<body>
-<h1>シラバス詳細</h1>
 <form action="/SyllabusDetail" method="post">
     <button type="submit" name="action" class="btn_5" value="update">更新ページへ</button>
 </form>
 <form action="/SyllabusDetail" method="post">
     <button type="submit" name="action" class="btn_3" value="delete">シラバス削除</button>
 </form>
-
+<form action="/CourseCheck" method="post">
+    <button type="submit" name="action" class="btn_5" value="courseCheck">履修登録者一覧</button>
+</form>
 <%
 } else if ((boolean) request.getAttribute("inChargeFlag")) {
 %>

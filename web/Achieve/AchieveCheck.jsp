@@ -27,32 +27,6 @@
 </h1>
 
 <br>
-<%--<table BORDER="1" align="left">--%>
-<%--<tr>--%>
-<%--<td>表示パターン</td>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td><input type=radio name="pattern" value="nomal">通常<br>--%>
-<%--<input type=radio name="pattern" value="nengak">年度学期--%>
-<%--</td>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td>表示設定</td>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td>--%>
-<%--<form action="cgi-bin/abc.cgi" method="post">--%>
-<%--<input type="checkbox" name="hyouzi" value="1">評価名称<br>--%>
-<%--<input type="checkbox" name="hyouzi" value="2">不合格科目<br>--%>
-<%--<input type="checkbox" name="hyouzi" value="3">履修中科目<br>--%>
-<%--<input type="checkbox" name="hyouzi" value="4">単位取得情報欄<br>--%>
-
-<%--</form>--%>
-<%--</td>--%>
-<%--</tr>--%>
-
-
-<%--</table>--%>
 
 <table BORDER="1" align="center">
     <tr align="center">
