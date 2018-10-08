@@ -11,11 +11,12 @@
 <html lang="ja">
 <head>
     <title>ユーザー削除確認</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
 <form action="/Top" method="get">
-    <button type="submit" name="top" value="top"> トップ</button>
+    <button type="submit" name="top" class="btn_1"value="top"> トップ</button>
 </form>
 
 <h1>ユーザー削除</h1>
@@ -103,10 +104,10 @@
 
 <form action="/Top" method="post">
     <input type="hidden" name="action" value="UserUpdate">
-    <button type="submit" name="login">もどる</button>
+    <button type="submit" class="btn_1" name="login">もどる</button>
 </form>
 <form action="/UserDelete" method="post">
-    <button type="submit" name="action" value="delete" align="center"> 削除</button>
+    <button type="submit" name="action" class="btn_3" value="delete" align="center"> 削除</button>
 </form>
 </body>
 </html>

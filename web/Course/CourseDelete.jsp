@@ -9,6 +9,7 @@
 <html lang="ja">
 <head>
     <title>履修者削除確認</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
@@ -20,11 +21,11 @@
 
 %>
 
-<h1>  <button type="submit" name="check"> トップ </button></h1>
-<button type="submit" name="login" style="position: absolute; right:  0px; top: 0px">もどる</button>
+<button type="submit" class="btn_1" name="check"> トップ </button>
+<button type="submit" name="login" class="btn_1" style="position: absolute; right:  0px; top: 0px">もどる</button>
 
 
-以下の履修者を削除しますか?
+<h2>以下の履修者を削除しますか?</h2>
 
 <br>
 <table BORDER="1" align="center">
@@ -52,7 +53,7 @@
 
 
 
-<button type="submit" name="ue" ><a href="#top" >上へ戻る</a></button>
-<button type="submit" name="check" align="center"> 削除 </button>
+<button type="submit" class="btn_6" name="ue" ><a href="#top" >上へ戻る</a></button>
+<button type="submit" name="check" class="btn_3" align="center"> 削除 </button>
 </body>
 </html>

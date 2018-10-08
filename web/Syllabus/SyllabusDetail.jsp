@@ -22,42 +22,43 @@
 <head>
     <title>
         <jsp:getProperty name="targetSyllabus" property="syllabusName"/>
+        <link rel="stylesheet" type="text/css" href="Design.css">
     </title>
 </head>
 <body>
 <h1>シラバス詳細</h1>
 <form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" value="update">更新ページへ</button>
+    <button type="submit" name="action" class="btn_5" value="update">更新ページへ</button>
 </form>
 <form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" value="delete">シラバス削除</button>
+    <button type="submit" name="action" class="btn_3" value="delete">シラバス削除</button>
 </form>
 
 <%
 } else if ((boolean) request.getAttribute("inChargeFlag")) {
 %>
 <form action="/CourseCheck" method="post">
-    <button type="submit" name="action" value="courseCheck">履修登録者一覧</button>
+    <button type="submit" name="action" class="btn_5" value="courseCheck">履修登録者一覧</button>
 </form>
 <%
 } else if (user.getUserClassification().equals("学生") && registrationPeriodFlag && targetSyllabus.getSemester().equals(semesterString)) {
 %>
 <form action="/CourseRegistration" method="post">
     <input type="hidden" name="targetSyllabusId" value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
-    <button type="submit" name="action" value="add">履修登録に追加</button>
+    <button type="submit" name="action" class="btn_5" value="add">履修登録に追加</button>
 </form>
 <%
     }
     if (backPage.equals("searchResult")) {
 %>
 <form action="/SyllabusSearch" method="post">
-    <button type="submit" name="action" value="return">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="return">戻る</button>
 </form>
 <%
 } else if (backPage.equals("timetable")) {
 %>
 <form action="/Top" method="post">
-    <button type="submit" name="action" value="CourseCheck">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="CourseCheck">戻る</button>
 </form>
 <%
     }

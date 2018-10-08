@@ -11,6 +11,7 @@
 <html lang="ja">
 <head>
     <title>シラバス検索結果</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <%
@@ -85,7 +86,7 @@
 %>
 <form action="/SyllabusSearch" method="post">
     <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
-    <button name="action" type="submit" value="change_page">最初</button>
+    <button name="action" type="submit" class="btn_6" value="change_page">最初</button>
 </form>
 <%
 } else {
@@ -101,7 +102,7 @@
 %>
 <form action="/SyllabusSearch" method="post">
     <input type="hidden" name="page" value="<%=i%>"/>
-    <button name="action" type="submit" value="change_page"><%=i%>
+    <button name="action" type="submit" class="btn_6" value="change_page"><%=i%>
     </button>
 </form>
 <%
@@ -120,7 +121,7 @@
 %>
 <form action="/SyllabusSearch" method="post">
     <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
-    <button name="action" type="submit" value="change_page">最後</button>
+    <button name="action" type="submit" class="btn_6" value="change_page">最後</button>
 </form>
 <%
 } else {

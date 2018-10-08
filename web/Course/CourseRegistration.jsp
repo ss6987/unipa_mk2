@@ -13,10 +13,11 @@
 <html lang="ja">
 <head>
     <title>履修登録</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <form action="/Top" method="get">
-    <button type="submit" name="top" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 </form>
 <br>
 <h1>履修登録</h1>
@@ -30,7 +31,7 @@
 %>
 
 <form action="/CourseRegistration" method="post">
-    <button type="submit" name="action" value="check">登録</button>
+    <button type="submit" name="action" class="btn_4" value="check">登録</button>
 </form>
 <table BORDER="1" align="center">
     <tr align="center">
@@ -56,7 +57,7 @@
                 <div align="right">
                     <input type="hidden" name="week" value="<%=week%>">
                     <input type="hidden" name="time" value="<%=time%>">
-                    <button type="submit" name="action" value="firstSearch">検索</button>
+                    <button type="submit" name="action" class="btn_5" value="firstSearch">検索</button>
                 </div>
             </form>
             <%
@@ -66,7 +67,7 @@
             <form action="<%=request.getContextPath()%>/CourseRegistration" method="post">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>
-                <button type="submit" name="action" value="delete">削除</button>
+                <button type="submit" name="action" class="btn_3" value="delete">削除</button>
             </form>
             <%
                 }

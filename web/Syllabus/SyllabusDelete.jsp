@@ -12,6 +12,7 @@
 <html lang="ja">
 <head>
     <title>シラバス削除確認</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
@@ -88,11 +89,11 @@
 
 
 <form action="/SyllabusDelete" method="post">
-    <button type="submit" name="action" value="delete">削除確定</button>
+    <button type="submit" name="action" class="btn_3" value="delete">削除確定</button>
 </form>
 
 <form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" value="detail">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="detail">戻る</button>
 </form>
 </body>
 </html>

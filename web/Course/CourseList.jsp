@@ -15,12 +15,13 @@
 <html lang="ja">
 <head>
     <title>履修者一覧</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <form action="/Top" method="get">
-    <button type="submit" name="top">トップへ</button>
+    <button type="submit" class="btn_1" name="top">トップへ</button>
 </form>
-<button type="submit" name="action" value="back" onclick="history.back()">戻る</button>
+<button type="submit" name="action" class="btn_1" value="back" onclick="history.back()">戻る</button>
 
 <%--エラー（仮）--%>
 <h1>履修者一覧</h1>

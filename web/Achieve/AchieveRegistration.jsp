@@ -9,9 +9,10 @@
 <html lang="ja">
 <head>
     <title>成績情報更新</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<button type="submit" name="top" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+<button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 <br>
 <h1>成績登録</h1>
 <br>
@@ -29,7 +30,7 @@
     <tr><td>　</td><td>　</td></tr>
 </table>
 
-<button type="submit" name="ue" ><a href="#top" >上へ戻る</a></button>
-<button type="submit" name="back" align="center"> 戻る </button>
+<button type="submit" class="btn_6" name="ue" ><a href="#top" >上へ戻る</a></button>
+<button type="submit" name="back" class="btn_1" align="center"> 戻る </button>
 </body>
 </html>

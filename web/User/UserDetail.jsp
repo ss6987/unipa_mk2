@@ -18,19 +18,20 @@
 <html lang="ja">
 <head>
     <title>ユーザー管理</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
 <div>
     <form action="/Top" method="get">
-        <button type="submit">トップ</button>
+        <button type="submit" class="btn_1">トップ</button>
     </form>
 </div>
 <%
     if (!targetUserId.equals(user.getUserId())) {
 %>
 <form action="/UserSearch" method="post">
-    <button type="submit" name="action" value="return">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="return">戻る</button>
 </form>
 <%
     }
@@ -121,7 +122,7 @@
     if (user.getUserClassification().equals("管理者")) {
 %>
     <form action="/Top" method="post">
-        <button type="submit" name="action" value="UserUpdate">更新</button>
+        <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
     </form>
 <%
     }
@@ -146,7 +147,7 @@
             </td>
         </tr>
     </table>
-    <button type="submit" name="action" value="update_password">パスワード更新</button>
+    <button type="submit" name="action" class="btn_4" value="update_password">パスワード更新</button>
 </form>
 <%
     }

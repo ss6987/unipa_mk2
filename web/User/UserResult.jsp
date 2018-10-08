@@ -18,14 +18,15 @@
 <html lang="ja">
 <head>
     <title>ユーザー検索結果</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
 <form action="/Top" method="get">
-    <button type="submit" name="check"> トップ</button>
+    <button type="submit" name="check" class="btn_1"> トップ</button>
 </form>
 <form action="/Top" method="post">
-    <button type="submit" name="action" value="UserSearch">もどる</button>
+    <button type="submit" name="action" class="btn_1" value="UserSearch">もどる</button>
 </form>
 <br>
 
@@ -94,7 +95,7 @@
 %>
 <form action="/UserSearch" method="post">
     <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
-    <button name="action" type="submit" value="changePage">最初</button>
+    <button name="action" type="submit" class="btn_6" value="changePage">最初</button>
 </form>
 <%
 } else {
@@ -110,7 +111,7 @@
 %>
 <form action="/UserSearch" method="post">
     <input type="hidden" name="page" value="<%=i%>"/>
-    <button name="action" type="submit" value="changePage"><%=i%>
+    <button name="action" type="submit" class="btn_6" value="changePage"><%=i%>
     </button>
 </form>
 <%
@@ -129,7 +130,7 @@
 %>
 <form action="/UserSearch" method="post">
     <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
-    <button name="action" type="submit" value="changePage">最後</button>
+    <button name="action" type="submit" class="btn_6" value="changePage">最後</button>
 </form>
 <%
 } else {

@@ -10,12 +10,13 @@
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
-    <title>ユーサー検索</title>
+    <title>ユーザー検索</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 
 <body>
 <form action="/Top" method="get">
-    <button type="submit" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+    <button type="submit" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
 </form>
 
 <br>
@@ -97,7 +98,7 @@
             </td>
         </tr>
     </table>
-    <button type="submit" name="action" value="firstSearch">検索</button>
+    <button type="submit" name="action" class="btn_4" value="firstSearch">検索</button>
 </form>
 </body>
 </html>

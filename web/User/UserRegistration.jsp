@@ -21,11 +21,12 @@
 <html lang="ja">
 <head>
     <title>ユーザー登録</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
 <form action="/Top" method="get">
-    <button type="submit" name="action" value="Top">トップ</button>
+    <button type="submit" name="action" class="btn_1" value="Top">トップ</button>
 </form>
 <br>
 <%
@@ -166,12 +167,12 @@
     <%
         if (!targetUserId.equals("")) {
     %>
-    <button type="submit" name="action" value="update" align="center"tabindex="15"> 更新</button>
-    <button type="submit" name="action" value="delete" align="center"tabindex="16"> 削除</button>
+    <button type="submit" name="action" value="update" class="btn_4" align="center"tabindex="15"> 更新</button>
+    <button type="submit" name="action" value="delete" class="btn_3" align="center"tabindex="16"> 削除</button>
     <%
     } else {
     %>
-    <button type="submit" name="action" value="insert" align="center"tabindex="15"> 登録</button>
+    <button type="submit" name="action" value="insert" class="btn_4" align="center"tabindex="15"> 登録</button>
     <%
         }
     %>

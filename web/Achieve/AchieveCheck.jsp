@@ -15,11 +15,12 @@
 <html lang="ja">
 <head>
     <title>成績参照</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 
 <form action="/Top" method="get">
-    <button type="submit" name="check"> トップ</button>
+    <button type="submit" class="btn_1" name="check"> トップ</button>
 </form>
 <h1>
     成績照会

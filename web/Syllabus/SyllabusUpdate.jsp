@@ -13,14 +13,15 @@
 <html lang="ja">
 <head>
     <title><jsp:getProperty name="targetSyllabus" property="syllabusName"/></title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <h1>シラバス更新</h1>
 <form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" value="detail">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="detail">戻る</button>
 </form>
 <form action="/SyllabusUpdate" method="post">
-    <button type="submit" name="action" value="update">更新</button>
+    <button type="submit" name="action" class="btn_4" value="update">更新</button>
     <table border="3">
         <tr>
             <th width="30%">シラバスID</th>

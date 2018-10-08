@@ -1,9 +1,16 @@
+body{
+    background-color: #AAAAAA;
+}
 form {
     margin: 0 0 0 0;
 }
 
 .div {
-    background-color: #AAAAAA;
+}
+
+h1{
+    margin:10px 40%;
+    width: 10em;
 }
 
 .btn_1 {
@@ -32,7 +39,7 @@ form {
     transform: translateY(2px); /*沈むように*/
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
     background-image: -webkit-linear-gradient(#00ff7f 0%, #005FFF 100%);
-    background-image: linear-gradient(#AA0000 0%, #00ff7f 100%); /*グラデーションを明るく*/
+    background-image: linear-gradient(#9CDAFD 0%, #60A8BF 100%); /*グラデーションを明るく*/
 }
 
 .btn_2 {
@@ -115,6 +122,12 @@ form {
     border-bottom: solid 2px #00BCD4;
     box-shadow: none;
     text-shadow: -1px -1px rgba(255, 255, 255, 0.3), 1px 1px rgba(0, 0, 0, 0.3);
+}
+.btn_6{
+
+}
+btn:active{
+
 }
 
 table {

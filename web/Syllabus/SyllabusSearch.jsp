@@ -11,12 +11,12 @@
 <html lang="ja">
 <head>
     <title>シラバス検索</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <form action="/Top" method="get">
-    <button type="submit">トップ</button>
+    <button type="submit" class="btn_1">トップ</button>
 </form>
-</button>
 <br>
 <h1>シラバス検索</h1>
 <br>
@@ -168,7 +168,7 @@
 
     </table>
     <input type="hidden" name="action" value="first_search"/>
-    <button type="submit" name="action" value="search">検索</button>
+    <button type="submit" name="action" class="btn_5" value="search">検索</button>
 </form>
 </body>
 </html>

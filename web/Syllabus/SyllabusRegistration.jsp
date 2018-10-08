@@ -13,19 +13,20 @@
 <html lang="ja">
 <head>
     <title>シラバス登録</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <%
     if (!targetSyllabusId.equals("")) {
 %>
 <form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" value="detail">戻る</button>
+    <button type="submit" name="action" class="btn_1" value="detail">戻る</button>
 </form>
 <%
     }
 %>
 <form action="/Top" method="get">
-    <button type="submit">トップ</button>
+    <button type="submit" class="btn_1">トップ</button>
 </form>
 
 <%
@@ -281,12 +282,12 @@
     <%
         if (!targetSyllabusId.equals("")) {
     %>
-    <button type="submit" name="action" value="update"tabindex="42">更新</button>
-    <button type="submit" name="action" value="delete"tabindex="43">削除</button>
+    <button type="submit" name="action" class="btn_4" value="update"tabindex="42">更新</button>
+    <button type="submit" name="action" class="btn_3" value="delete"tabindex="43">削除</button>
     <%
     } else {
     %>
-    <button type="submit" name="action" value="insert"tabindex="42">登録</button>
+    <button type="submit" name="action" class="btn_4" value="insert"tabindex="42">登録</button>
     <%
         }
     %>
