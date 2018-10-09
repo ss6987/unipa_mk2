@@ -46,7 +46,6 @@
             } else if (classification.equals("管理者")) {
             %>
             <span><button type="submit" name="action" class="btn_2" value="UserSearch">ユーザー検索</button></span>
-            <span><button type="submit" name="action" class="btn_2" value="AchieveRegistration">成績登録</button></span>
             <span><button type="submit" name="action" class="btn_2" value="UserRegistration">ユーザー登録</button></span>
             <span><button type="submit" name="action" class="btn_2" value="SyllabusRegistration">シラバス登録</button></span>
             <span><button type="submit" name="action" class="btn_2" value="AchieveCheck">履修登録期間設定</button></span>
