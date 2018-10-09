@@ -20,7 +20,9 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+<form action="/Top" method="get">
+    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+</form>
 <br>
 <h1>成績情報更新</h1>
 <br>
@@ -82,6 +84,8 @@
     </table>
     <button type="submit" name="action" value="update">更新</button>
 </form>
-<button type="submit" name="back" class="btn_1" align="center"> 戻る</button>
+<form action="/AchieveRegist" method="post">
+    <button type="submit" name="action" value="back" class="btn_1" align="center"> 戻る</button>
+</form>
 </body>
 </html>

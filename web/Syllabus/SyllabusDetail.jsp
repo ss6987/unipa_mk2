@@ -22,6 +22,10 @@
 </head>
 <body>
 <h1>シラバス詳細</h1>
+<form action="/Top" method="get">
+    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+</form>
+
 <%
     boolean registrationPeriodFlag = (boolean) session.getAttribute("registrationPeriodFlag");
     String semesterString = (String) request.getAttribute("semesterString");
