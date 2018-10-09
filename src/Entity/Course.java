@@ -32,6 +32,14 @@ public class Course {
         this.year = resultSet.getInt("year");
     }
 
+    public Course(String studentId,String syllabusId,Integer achievement) throws SQLException {
+        setUserId(studentId);
+        setSyllabusId(syllabusId);
+        setAchievement(achievement);
+        this.mainTeacherName = "";
+        this.year = -1;
+    }
+
     public Course(Student student, Syllabus syllabus, Integer achievement) throws SQLException {
         setUserId(student.getUserId());
         setSyllabusId(syllabus.getSyllabusId());

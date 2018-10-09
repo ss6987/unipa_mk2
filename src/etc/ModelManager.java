@@ -7,7 +7,6 @@ import Entity.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ModelManager {
@@ -203,7 +202,13 @@ public class ModelManager {
         return flag;
     }
 
-    public boolean courseUpdate(Student student, List<String> syllabusIdList, List<String> achievementList) {
+    public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) throws SQLException {
+        for (String studentId : studentIdList) {
+            Course course = new Course(studentId, syllabusId, achievement);
+            if(!courseDAO.update(course)){
+                return false;
+            }
+        }
         return true;
     }
 
@@ -322,7 +327,7 @@ public class ModelManager {
         }
     }
 
-    public boolean getSemester(){
+    public boolean getSemester() {
         return semester;
     }
 
@@ -335,10 +340,10 @@ public class ModelManager {
     }
 
     public boolean getInCharge(String syllabusId, String teacherId) {
-        return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
+        return teacherInChargeDAO.getInCharge(syllabusId, teacherId);
     }
 
-    public LocalDateTime getNow(){
+    public LocalDateTime getNow() {
         return now;
     }
 }

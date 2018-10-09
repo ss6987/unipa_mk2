@@ -88,7 +88,14 @@
             }
         %>
     </table>
+    <%
+        if (flag) {
+    %>
+    <button type="submit" name="action" value="allow">承認</button>
     <button type="submit" name="action" value="deleteCheck">削除</button>
+    <%
+        }
+    %>
 </form>
 
 </body>

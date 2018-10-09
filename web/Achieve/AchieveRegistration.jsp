@@ -14,7 +14,7 @@
 <body>
 <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 <br>
-<h1>成績登録</h1>
+<h1>成績登情報更新</h1>
 <br>
 <span style="background-color:#ffcc99">※ファイルが違います</span>
 <br>

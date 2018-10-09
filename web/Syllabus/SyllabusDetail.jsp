@@ -37,6 +37,9 @@
 <form action="/CourseCheck" method="post">
     <button type="submit" name="action" class="btn_5" value="courseCheck">履修登録者一覧</button>
 </form>
+<form action="/AchieveRegist" method="post">
+    <button type="submit" name="action" class="btn_5" value="achieveRegistration">成績登録</button>
+</form>
 <%
 } else if ((boolean) request.getAttribute("inChargeFlag")) {
 %>
