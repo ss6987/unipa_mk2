@@ -18,7 +18,7 @@
     <title>
         <jsp:getProperty name="targetSyllabus" property="syllabusName"/>
     </title>
-    <link rel="stylesheet" type="text/css" href="../Design.css">
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <h1>シラバス詳細</h1>
