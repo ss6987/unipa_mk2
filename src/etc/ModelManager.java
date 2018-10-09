@@ -202,14 +202,26 @@ public class ModelManager {
         return flag;
     }
 
-    public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) throws SQLException {
+    public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) {
         for (String studentId : studentIdList) {
-            Course course = new Course(studentId, syllabusId, achievement);
-            if(!courseDAO.update(course)){
+            if(!courseUpdate(studentId,syllabusId,achievement)){
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean courseUpdate(String studentId, String syllabusId, Integer achievement) {
+        Course course = new Course();
+        try {
+            course = new Course(studentId, syllabusId, achievement);
+            if (!courseDAO.update(course)) {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
     }
 
     public boolean courseDelete(String syllabusId, List<String> studentList) {

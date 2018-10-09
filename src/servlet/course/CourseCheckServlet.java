@@ -98,18 +98,17 @@ public class CourseCheckServlet extends HttpServlet {
                 return;
             }
 
-            try {
-                modelManager.courseUpdate(targetUserIdList, targetSyllabusId, -2);
-            } catch (SQLException e) {
+            if (!modelManager.courseUpdate(targetUserIdList, targetSyllabusId, -2)) {
                 request.setAttribute("courseList", courseList);
                 request.setAttribute("studentList", userList);
                 request.setAttribute("Number", 6);
-                request.setAttribute("errorString", "更新に失敗しました。");
+                request.setAttribute("errorString", "承認に失敗しました。");
                 dispatch.forward(request, response);
                 return;
             }
 
-            courseList = modelManager.courseSelect("",targetSyllabusId,-1);
+
+            courseList = modelManager.courseSelect("", targetSyllabusId, -1);
             userList = modelManager.courseSelectUser(targetSyllabusId);
 
             request.setAttribute("courseList", courseList);

@@ -138,4 +138,11 @@ public class Course {
                 return "--";
         }
     }
+
+    public String getAchievementSelected(Integer achievement){
+        if(achievement == this.achievement){
+            return "selected";
+        }
+        return "";
+    }
 }

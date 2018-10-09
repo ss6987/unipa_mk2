@@ -31,21 +31,46 @@ public class AchieveRegistServlet extends HttpServlet {
         ReplaceString replaceString = new ReplaceString();
         String action = replaceString.repairRequest(request.getParameter("action"));
 
-        if(action.equals("achieveRegistration")){
+        if (action.equals("achieveRegistration")) {
             String targetSyllabusId = (String) session.getAttribute("targetSyllabusId");
 
             syllabus = modelManager.syllabusFindById(targetSyllabusId);
-            courseList = modelManager.courseSelect("",targetSyllabusId,-1);
-            for(int i = 0;i < courseList.size();i++){
-                if(courseList.get(i).getAchievement() == -3){
+            courseList = modelManager.courseSelect("", targetSyllabusId, -1);
+            for (int i = 0; i < courseList.size(); i++) {
+                if (courseList.get(i).getAchievement() == -3) {
                     courseList.remove(i);
                 }
             }
             userList = modelManager.courseSelectUser(targetSyllabusId);
 
-            request.setAttribute("syllabus",syllabus);
-            request.setAttribute("courseList",courseList);
-            request.setAttribute("userList",userList);
+            request.setAttribute("syllabus", syllabus);
+            request.setAttribute("courseList", courseList);
+            request.setAttribute("userList", userList);
+            request.setAttribute("Number", 19);
+            request.setAttribute("errorString", "");
+            dispatch.forward(request, response);
+            return;
+        } else if (action.equals("update")) {
+            for (int i = 0; i < courseList.size(); i++) {
+                String achievementString = request.getParameter("select_" + i);
+                Integer achievement = Integer.parseInt(achievementString);
+                Course course = courseList.get(i);
+                if (course.getAchievement() != achievement) {
+                    modelManager.courseUpdate(course.getUserId(), course.getSyllabusId(), achievement);
+                }
+            }
+
+            courseList = modelManager.courseSelect("", syllabus.getSyllabusId(), -1);
+            for (int i = 0; i < courseList.size(); i++) {
+                if (courseList.get(i).getAchievement() == -3) {
+                    courseList.remove(i);
+                }
+            }
+            userList = modelManager.courseSelectUser(syllabus.getSyllabusId());
+
+            request.setAttribute("syllabus", syllabus);
+            request.setAttribute("courseList", courseList);
+            request.setAttribute("userList", userList);
             request.setAttribute("Number", 19);
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);
