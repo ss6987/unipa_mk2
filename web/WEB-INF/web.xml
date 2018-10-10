@@ -219,9 +219,18 @@
         <servlet-name>SyllabusUpdateServlet</servlet-name>
         <servlet-class>servlet.syllabus.SyllabusUpdateServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>SyllabusUpdateServlet</servlet-name>
         <url-pattern>/SyllabusUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>periodRegistrationServlet</servlet-name>
+        <servlet-class>servlet.periodRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>periodRegistrationServlet</servlet-name>
+        <url-pattern>/periodRegistration</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

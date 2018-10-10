@@ -308,6 +308,14 @@ public class ModelManager {
         }
     }
 
+    public RegistrationPeriod registrationPeriodSelect(){
+        try {
+            return registrationPeriodDAO.select();
+        } catch (SQLException e) {
+            return new RegistrationPeriod();
+        }
+    }
+
     public List<FacultyDepartment> getFacultyDepartmentList() {
         try {
             return facultyDepartmentDAO.select(new FacultyDepartment(), -1);
@@ -357,5 +365,9 @@ public class ModelManager {
 
     public LocalDateTime getNow() {
         return now;
+    }
+
+    public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod){
+        return registrationPeriodDAO.update(registrationPeriod);
     }
 }

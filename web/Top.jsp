@@ -40,7 +40,7 @@
             <span><button type="submit" name="action" class="btn_2" value="UserSearch">ユーザー検索</button></span>
             <span><button type="submit" name="action" class="btn_2" value="UserRegistration">ユーザー登録</button></span>
             <span><button type="submit" name="action" class="btn_2" value="SyllabusRegistration">シラバス登録</button></span>
-            <span><button type="submit" name="action" class="btn_2" value="AchieveCheck">履修登録期間設定</button></span>
+            <span><button type="submit" name="action" class="btn_2" value="periodRegistrationCheck">履修登録期間設定</button></span>
             <%
             } else {
             %>

@@ -130,8 +130,8 @@ public class TopServlet extends HttpServlet {
                 case "SyllabusRegistration":
                     url = 10;
                     break;
-                case "AchieveCheck":
-                    request.getRequestDispatcher("/AchieveForward").forward(request, response);
+                case "periodRegistrationCheck":
+                    request.getRequestDispatcher("/periodRegistration").forward(request, response);
                     return;
                 default:
                     url = 2;
