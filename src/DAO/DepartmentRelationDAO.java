@@ -17,7 +17,7 @@ public class DepartmentRelationDAO {
     private SessionManager sessionManager = new SessionManager();
     private SQLCreater sqlCreater = new SQLCreater();
 
-    public DepartmentRelationDAO(){
+    public DepartmentRelationDAO() {
         for (int i = 0; i < columns.size(); i++) {
             this.list.add(new DateSet(columns.get(i), mold.get(i), ""));
         }
@@ -45,13 +45,13 @@ public class DepartmentRelationDAO {
     }
 
     public boolean insert(FacultyDepartment facultyDepartment, Syllabus syllabus) {
-        setList(facultyDepartment,syllabus);
+        setList(facultyDepartment, syllabus);
         String sql = sqlCreater.insert(tableName, list);
         return sessionManager.execute(sql);
     }
 
-    public boolean delete(FacultyDepartment facultyDepartment, Syllabus syllabus){
-        setList(facultyDepartment,syllabus);
+    public boolean delete(FacultyDepartment facultyDepartment, Syllabus syllabus) {
+        setList(facultyDepartment, syllabus);
         String sql = sqlCreater.delete(tableName, list);
         return sessionManager.execute(sql);
     }
