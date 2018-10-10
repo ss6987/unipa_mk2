@@ -25,21 +25,21 @@
 </h1>
 
 <div>
-    <form action="/periodRegistration.jsp" method="post">
+    <form action="/periodRegistration" method="post">
         <table border="1">
             <tr>
                 <th>登録期間</th>
                 <td>
                     <div>
-                        西暦<input type="text" name="startYear" value="<%=startDate.getYear()%>">年
-                        <input type="text" name="startMonth" value="<%=startDate.getMonthValue()%>">月
-                        <input type="text" name="startDay" value="<%=startDate.getDayOfMonth()%>">日
+                        西暦<input type="text" name="startYear" value="<%=startDate.getYear()%>" required pattern="^20[0-9][0-9]$">年
+                        <input type="text" name="startMonth" value="<%=startDate.getMonthValue()%>" required pattern="^(1[0-2]|[1-9])$">月
+                        <input type="text" name="startDay" value="<%=startDate.getDayOfMonth()%>" required pattern="^([1-9]|1[0-9]|2[0-9]|3[01])$">日
                     </div>
                     <div>~</div>
                     <div>
-                        西暦<input type="text" name="endYear" value="<%=endDate.getYear()%>">年
-                        <input type="text" name="endMonth" value="<%=endDate.getMonthValue()%>">月
-                        <input type="text" name="endDay" value="<%=endDate.getDayOfMonth()%>">日
+                        西暦<input type="text" name="endYear" value="<%=endDate.getYear()%>" required>年
+                        <input type="text" name="endMonth" value="<%=endDate.getMonthValue()%>" required>月
+                        <input type="text" name="endDay" value="<%=endDate.getDayOfMonth()%>" required>日
                     </div>
                 </td>
             </tr>

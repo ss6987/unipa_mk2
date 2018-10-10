@@ -69,4 +69,10 @@ public class RegistrationPeriod {
         Integer time = Integer.parseInt(dateString[2]);
         return LocalDateTime.of(date, month, time, 0, 0, 0);
     }
+
+    public boolean checkOrder(){
+        LocalDateTime localStartDate = getStartLocalDate();
+        LocalDateTime localEndDate = getEndLocalDate();
+        return localStartDate.isBefore(localEndDate);
+    }
 }

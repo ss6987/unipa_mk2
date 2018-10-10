@@ -30,12 +30,12 @@ public class periodRegistrationServlet extends HttpServlet {
         if (action.equals("periodRegistrationCheck")) {
             RegistrationPeriod registrationPeriod = modelManager.registrationPeriodSelect();
 
-            request.setAttribute("registrationPeriod",registrationPeriod);
+            request.setAttribute("registrationPeriod", registrationPeriod);
             request.setAttribute("Number", 23);
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);
             return;
-        }else if(action.equals("periodRegistration")){
+        } else if (action.equals("periodRegistration")) {
             String startYear = replaceString.repairRequest(request.getParameter("startYear"));
             String startMonth = replaceString.repairRequest(request.getParameter("startMonth"));
             String startDay = replaceString.repairRequest(request.getParameter("startDay"));
@@ -43,14 +43,34 @@ public class periodRegistrationServlet extends HttpServlet {
             String endMonth = replaceString.repairRequest(request.getParameter("endMonth"));
             String endDay = replaceString.repairRequest(request.getParameter("endDay"));
 
+            startMonth = addZero(startMonth);
+            startDay = addZero(startDay);
+            endMonth = addZero(endMonth);
+            endDay = addZero(endDay);
+
             String startDate = startYear + "-" + startMonth + "-" + startDay;
             String endDate = endYear + "-" + endMonth + "-" + endDay;
 
-            RegistrationPeriod registrationPeriod = new RegistrationPeriod(startDate,endDate);
+            RegistrationPeriod registrationPeriod = new RegistrationPeriod(startDate, endDate);
 
-             modelManager.registrationPeriodUpdate(registrationPeriod);
+            if (!registrationPeriod.checkOrder()) {
+                request.setAttribute("errorString", "登録開始日が登録終了日を超えています。");
+                registrationPeriod = modelManager.registrationPeriodSelect();
+                request.setAttribute("registrationPeriod", registrationPeriod);
+                request.setAttribute("Number", 23);
+                dispatch.forward(request, response);
+                return;
+            }
+
+            if (modelManager.registrationPeriodUpdate(registrationPeriod)) {
+                request.setAttribute("errorString", "");
+                request.setAttribute("registrationPeriod", registrationPeriod);
+            } else {
+                request.setAttribute("errorString", "登録に失敗しました。");
+                registrationPeriod = modelManager.registrationPeriodSelect();
+                request.setAttribute("registrationPeriod", registrationPeriod);
+            }
             request.setAttribute("Number", 23);
-            request.setAttribute("errorString", "");
             dispatch.forward(request, response);
             return;
         }
@@ -58,5 +78,12 @@ public class periodRegistrationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private String addZero(String string) {
+        if (string.length() == 1) {
+            return "0" + string;
+        }
+        return string;
     }
 }
