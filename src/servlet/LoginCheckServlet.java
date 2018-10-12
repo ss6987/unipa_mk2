@@ -1,10 +1,7 @@
 package servlet;
 
-import Entity.Syllabus;
 import etc.ModelManager;
 import Entity.User;
-import servlet.timetable.Time;
-import servlet.timetable.TimeTable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
+
 
 public class LoginCheckServlet extends HttpServlet {
-    private String disp = "/MainForward";
     private ModelManager modelManager = new ModelManager();
     private RequestDispatcher dispatch;
     private HttpSession session;
@@ -30,7 +26,6 @@ public class LoginCheckServlet extends HttpServlet {
                 ;
             }
         }
-        dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
         String id = request.getParameter("id");
@@ -38,46 +33,23 @@ public class LoginCheckServlet extends HttpServlet {
 
 
         User user = modelManager.login(id, password);
-        Integer url;
         if (user != null) {
-            session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
-            if (user.getUserClassification().equals("学生")) {
-                List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(user.getUserId());
-                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-
-                timeTable.addSyllabusList(syllabusList);
-                nowTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable", timeTable);
-                session.setAttribute("nowTable", nowTable);
-            } else if (user.getUserClassification().equals("教職員")) {
-                List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
-                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                timeTable.addSyllabusList(syllabusList);
-                nowTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable", timeTable);
-                session.setAttribute("nowTable", nowTable);
-            }
-
-            session.setAttribute("user", user);
-            url = 2;
+            dispatch = request.getRequestDispatcher("/Main");
         } else {
-            System.out.println("error");
             user = new User();
             user.setUserId(id);
-            session.setAttribute("user", user);
-            url = 1;
+            Integer url = 1;
+            dispatch = request.getRequestDispatcher("/Login.jsp");
+            request.setAttribute("Number", url);
         }
 
-        request.setAttribute("period", modelManager.getRegistrationPeriod());
-        request.setAttribute("Number", url);
+        session.setAttribute("user", user);
         dispatch.forward(request, response);
         return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher(disp);
+        dispatch = request.getRequestDispatcher("/TopServlet");
         session = request.getSession(true);
 
         User user = (User) session.getAttribute("user");

@@ -167,23 +167,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Return</servlet-name>
-        <servlet-class>servlet.Return</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Return</servlet-name>
-        <url-pattern>/Return</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ReturnTop</servlet-name>
-        <servlet-class>servlet.ReturnTop</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ReturnTop</servlet-name>
-        <url-pattern>/ReturnTop</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>MainForwardServlet</servlet-name>
         <servlet-class>servlet.MainForwardServlet</servlet-class>
     </servlet>
@@ -225,12 +208,68 @@
         <url-pattern>/SyllabusUpdate</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>periodRegistrationServlet</servlet-name>
+        <servlet-name>PeriodRegistrationServlet</servlet-name>
         <servlet-class>servlet.periodRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>periodRegistrationServlet</servlet-name>
+        <servlet-name>PeriodRegistrationServlet</servlet-name>
         <url-pattern>/periodRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AchieveMainServlet</servlet-name>
+        <servlet-class>servlet.achieve.achieveMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AchieveMainServlet</servlet-name>
+        <url-pattern>/achieveMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CourseMainServlet</servlet-name>
+        <servlet-class>servlet.course.courseMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseMainServlet</servlet-name>
+        <url-pattern>/courseMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusMainServlet</servlet-name>
+        <servlet-class>servlet.syllabus.syllabusMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusMainServlet</servlet-name>
+        <url-pattern>/syllabusMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>TimeTableMainServlet</servlet-name>
+        <servlet-class>servlet.timetable.timeTableMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TimeTableMainServlet</servlet-name>
+        <url-pattern>/timeTableMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserMainServlet</servlet-name>
+        <servlet-class>servlet.user.UserMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserMainServlet</servlet-name>
+        <url-pattern>/UserMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>servlet.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/Main</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <servlet-class>servlet.user.UserDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <url-pattern>/UserDetail</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
