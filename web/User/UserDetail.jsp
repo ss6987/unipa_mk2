@@ -121,7 +121,7 @@
 <%
     if (user.getUserClassification().equals("管理者")) {
 %>
-    <form action="/Top" method="post">
+    <form action="/Main" method="post">
         <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
     </form>
 <%
@@ -132,7 +132,7 @@
     if (user.getUserId() == targetUser.getUserId()) {
 %>
 <h2 align="center">パスワード設定</h2>
-<form action="/UserUpdate" method="post">
+<form action="/Main" method="post">
     <table BORDER="1" align="center">
         <tr>
             <th>更新前パスワード</th>

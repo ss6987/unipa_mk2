@@ -3,6 +3,7 @@ package servlet;
 import Entity.Syllabus;
 import Entity.User;
 import etc.ModelManager;
+import etc.ReplaceString;
 import servlet.timetable.TimeTable;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ public class MainServlet extends HttpServlet {
     private RequestDispatcher dispatch;
     private HttpSession session;
     private ModelManager modelManager = new ModelManager();
+    private ReplaceString replaceString = new ReplaceString();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession(true);
@@ -29,9 +31,9 @@ public class MainServlet extends HttpServlet {
             return;
         }
 
-        String action = request.getParameter("action");
+        String action = replaceString.repairRequest(request.getParameter("action"));
 
-        if (action.indexOf("login") != -1) {
+        if (action.indexOf("Login") != -1) {
             setTimeTable();
             session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
             url = "/Top";

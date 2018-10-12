@@ -2,6 +2,7 @@ package servlet;
 
 import etc.ModelManager;
 import Entity.User;
+import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ public class LoginCheckServlet extends HttpServlet {
     private ModelManager modelManager = new ModelManager();
     private RequestDispatcher dispatch;
     private HttpSession session;
+    private ReplaceString replaceString = new ReplaceString();
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,9 +30,8 @@ public class LoginCheckServlet extends HttpServlet {
         }
         session = request.getSession(true);
 
-        String id = request.getParameter("id");
-        String password = request.getParameter("password");
-
+        String id = replaceString.repairRequest(request.getParameter("id"));
+        String password = replaceString.repairRequest(request.getParameter("password"));
 
         User user = modelManager.login(id, password);
         if (user != null) {

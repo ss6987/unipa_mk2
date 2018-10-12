@@ -1,6 +1,7 @@
 package servlet.user;
 
 import etc.ModelManager;
+import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +15,22 @@ public class UserMainServlet extends HttpServlet {
     private ModelManager modelManager = new ModelManager();
     private RequestDispatcher dispatch;
     private HttpSession session;
+    private ReplaceString replaceString = new ReplaceString();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+        session = request.getSession(true);
+        String action = replaceString.repairRequest(request.getParameter("action"));
         String url = "/Top";
-        switch (action){
+        switch (action) {
             case "myUserDetail":
                 url = "/UserDetail";
+                break;
+            case "UserUpdate":
+                url = "/UserUpdate";
+                break;
         }
         dispatch = request.getRequestDispatcher(url);
-        dispatch.forward(request,response);
+        dispatch.forward(request, response);
         return;
     }
 

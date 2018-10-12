@@ -53,7 +53,7 @@
     }
 %>
 
-<form action="/UserUpdate" method="post" name="userRegistration">
+<form action="/Main" method="post" name="userRegistration">
     <table BORDER="1" align="center">
         <tbody>
         <tr align="center">
@@ -167,12 +167,12 @@
     <%
         if (!targetUserId.equals("")) {
     %>
-    <button type="submit" name="action" value="update" class="btn_4" align="center"tabindex="15"> 更新</button>
-    <button type="submit" name="action" value="delete" class="btn_3" align="center"tabindex="16"> 削除</button>
+    <button type="submit" name="action" value="UserUpdateDone" class="btn_4" align="center"tabindex="15"> 更新</button>
+    <button type="submit" name="action" value="UserDelete" class="btn_3" align="center"tabindex="16"> 削除</button>
     <%
     } else {
     %>
-    <button type="submit" name="action" value="insert" class="btn_4" align="center"tabindex="15"> 登録</button>
+    <button type="submit" name="action" value="UserRegistration" class="btn_4" align="center"tabindex="15"> 登録</button>
     <%
         }
     %>
