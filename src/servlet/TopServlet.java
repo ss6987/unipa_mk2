@@ -1,6 +1,5 @@
 package servlet;
 
-import Entity.FacultyDepartment;
 import Entity.Student;
 import etc.ModelManager;
 import Entity.User;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class TopServlet extends HttpServlet {
     private String disp = "/MainForward";
