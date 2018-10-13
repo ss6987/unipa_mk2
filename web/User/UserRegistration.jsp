@@ -15,7 +15,7 @@
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 
 <%
-    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
+    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartmentList");
 %>
 
 <html lang="ja">
