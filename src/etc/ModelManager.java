@@ -29,8 +29,7 @@ public class ModelManager {
         } catch (SQLException e) {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
-//        LocalDateTime now = LocalDateTime.now();
-        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
+        now = LocalDateTime.now();
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if (now.isAfter(startDate) && now.isBefore(endDate)) {
@@ -212,7 +211,7 @@ public class ModelManager {
     }
 
     public boolean courseUpdate(String studentId, String syllabusId, Integer achievement) {
-        Course course = new Course();
+        Course course;
         try {
             course = new Course(studentId, syllabusId, achievement);
             if (!courseDAO.update(course)) {
@@ -221,7 +220,7 @@ public class ModelManager {
         } catch (SQLException e) {
             return false;
         }
-        return false;
+        return true;
     }
 
     public boolean courseDelete(String syllabusId, List<String> studentList) {
@@ -369,5 +368,23 @@ public class ModelManager {
 
     public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod){
         return registrationPeriodDAO.update(registrationPeriod);
+    }
+
+    public void updateRegistrationPeriodFlag(){
+        RegistrationPeriod registrationPeriod;
+        try {
+            registrationPeriod = registrationPeriodDAO.select();
+        } catch (SQLException e) {
+            registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
+        }
+        LocalDateTime startDate = registrationPeriod.getStartLocalDate();
+        LocalDateTime endDate = registrationPeriod.getEndLocalDate();
+        if (now.isAfter(startDate) && now.isBefore(endDate)) {
+            this.registrationPeriodFlag = true;
+        }
+        LocalDateTime september = LocalDateTime.of(now.getYear(), 9, 1, 0, 0, 0);
+        if (now.isAfter(september)) {
+            semester = false;
+        }
     }
 }

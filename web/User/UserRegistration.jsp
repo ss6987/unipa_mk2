@@ -15,7 +15,7 @@
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 
 <%
-    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
+    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartmentList");
 %>
 
 <html lang="ja">
@@ -83,14 +83,14 @@
         <tr align="center">
             <th>フリガナ</th>
             <td>
-                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶ]+$"tabindex="3"/>
+                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶー]+$" tabindex="3"/>
             </td>
         </tr>
 
         <tr align="center">
             <th>ユーザー分類</th>
             <td>
-                <select name="user_classification" size="1" onchange="classificationSelect()"tabindex="4">
+                <select name="user_classification" size="1" onchange="classificationSelect()" tabindex="4">
                     <option value="学生" <%=targetUser.getUserClassificationSelected("学生")%>>学生</option>
                     <option value="教職員" <%=targetUser.getUserClassificationSelected("教職員")%>>教職員</option>
                     <option value="管理者" <%=targetUser.getUserClassificationSelected("管理者")%>>管理者</option>

@@ -16,6 +16,9 @@
 %>
 
 <h1>UNIPAへようこそ！</h1>
+<form action="/Top" method="post">
+    <button name="action" value="logout">ログアウト</button>
+</form>
 <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
 <h2>履修登録期間<%=period%>
 </h2>

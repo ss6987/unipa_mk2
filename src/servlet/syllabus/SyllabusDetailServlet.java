@@ -25,7 +25,7 @@ public class SyllabusDetailServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         String syllabusId = request.getParameter("targetSyllabusId");
-        if(syllabusId == null){
+        if (syllabusId == null) {
             syllabusId = (String) session.getAttribute("targetSyllabusId");
         }
 
@@ -36,20 +36,22 @@ public class SyllabusDetailServlet extends HttpServlet {
         if (action.equals("detail")) {
             String backPage = new ReplaceString().repairRequest(request.getParameter("backPage"));
             User user = (User) session.getAttribute("user");
-            if(user.getUserClassification().equals("教職員") && modelManager.getInCharge(syllabusId,user.getUserId())){
-                request.setAttribute("inChargeFlag",true);
-            }else{
-                request.setAttribute("inChargeFlag",false);
+            if (user.getUserClassification().equals("教職員") && modelManager.getInCharge(syllabusId, user.getUserId())) {
+                request.setAttribute("inChargeFlag", true);
+            } else {
+                request.setAttribute("inChargeFlag", false);
             }
-            request.setAttribute("semesterString",modelManager.getSemesterString());
-            request.setAttribute("backPage",backPage);
+            request.setAttribute("semesterString", modelManager.getSemesterString());
+            request.setAttribute("backPage", backPage);
             request.setAttribute("Number", 11);
             dispatch.forward(request, response);
-        }else if(action.equals("update")){
-            request.setAttribute("Number",10);
+        } else if (action.equals("update")) {
+            request.setAttribute("backPage", request.getParameter("backPage"));
+            request.setAttribute("Number", 10);
             dispatch.forward(request, response);
-        }else if(action.equals("delete")){
-            request.setAttribute("Number",12);
+        } else if (action.equals("delete")) {
+            request.setAttribute("backPage", request.getParameter("backPage"));
+            request.setAttribute("Number", 12);
             dispatch.forward(request, response);
         }
         return;

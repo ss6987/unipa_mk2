@@ -33,21 +33,26 @@
 %>
 
 <form action="/SyllabusDetail" method="post">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_5" value="update">更新ページへ</button>
 </form>
 <form action="/SyllabusDetail" method="post">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_3" value="delete">シラバス削除</button>
 </form>
 <form action="/CourseCheck" method="post">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_5" value="courseCheck">履修登録者一覧</button>
 </form>
 <form action="/AchieveRegist" method="post">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_5" value="achieveRegistration">成績登録</button>
 </form>
 <%
 } else if ((boolean) request.getAttribute("inChargeFlag")) {
 %>
 <form action="/CourseCheck" method="post">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_5" value="courseCheck">履修登録者一覧</button>
 </form>
 <%
@@ -55,6 +60,7 @@
 %>
 <form action="/CourseRegistration" method="post">
     <input type="hidden" name="targetSyllabusId" value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
+    <input type="hidden" name="backPage" value="<%=backPage%>">
     <button type="submit" name="action" class="btn_5" value="add">履修登録に追加</button>
 </form>
 <%

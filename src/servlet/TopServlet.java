@@ -25,10 +25,18 @@ public class TopServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
+
         String action = request.getParameter("action");
         Integer url;
         User user = (User) session.getAttribute("user");
         request.setAttribute("errorString", "");
+
+        if (action.equals("logout")) {
+            session.invalidate();
+            request.setAttribute("Number", 1);
+            dispatch.forward(request, response);
+            return;
+        }
 
         if (user.getUserClassification().equals("学生")) {
             switch (action) {
@@ -124,7 +132,7 @@ public class TopServlet extends HttpServlet {
                     url = 19;
                     break;
                 case "UserRegistration":
-                    request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
+                    request.setAttribute("facultyDepartmentList", modelManager.getFacultyDepartmentList());
                     url = 3;
                     break;
                 case "SyllabusRegistration":
@@ -150,6 +158,8 @@ public class TopServlet extends HttpServlet {
         session = request.getSession(true);
         session.removeAttribute("targetUserId");
         session.removeAttribute("targetSyllabusId");
+        session.removeAttribute("searchSyllabus");
+
 
         User user = (User) session.getAttribute("user");
         if (!user.getUserId().equals("")) {
