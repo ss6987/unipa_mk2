@@ -20,10 +20,13 @@
     <link rel="stylesheet" type="text/css" href="LoginDesign.css">
     <title>ログイン</title>
 </head>
+
 <body>
+
 <form action="<%=request.getContextPath()%>/LoginCheck" method="post">
-    <div>
-        <table>
+    <table id="window">
+    <tr><td id="site-box">
+        <table id="part">
             <tr>
                 <th>学籍番号</th>
                 <td>
@@ -38,7 +41,8 @@
             </tr>
         </table>
         <button type="submit" class="btn_1" name="login">ログイン</button>
-    </div>
+    </td></tr>
+    </table>
 </form>
 </body>
 </html>

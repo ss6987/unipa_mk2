@@ -37,9 +37,9 @@
                     </div>
                     <div>~</div>
                     <div>
-                        西暦<input type="text" name="endYear" value="<%=endDate.getYear()%>" required pattern="^20[0-9][0-9]$">年
-                        <input type="text" name="endMonth" value="<%=endDate.getMonthValue()%>" required pattern="^(1[0-2]|[1-9])$">月
-                        <input type="text" name="endDay" value="<%=endDate.getDayOfMonth()%>" required pattern="^([1-9]|1[0-9]|2[0-9]|3[01])$">日
+                        西暦<input type="text" name="endYear" value="<%=endDate.getYear()%>" required>年
+                        <input type="text" name="endMonth" value="<%=endDate.getMonthValue()%>" required>月
+                        <input type="text" name="endDay" value="<%=endDate.getDayOfMonth()%>" required>日
                     </div>
                 </td>
             </tr>

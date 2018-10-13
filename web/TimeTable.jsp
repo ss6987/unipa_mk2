@@ -16,65 +16,64 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Top" method="get">
-    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
-</form>
-<br>
-
-
-<%
-    if (!errorString.equals("")) {
-%>
-<span style="background-color:#ffcc99"><%=errorString%></span>
-<%
-    }
-%>
-
-<table BORDER="1" align="center">
-    <tr align="center">
-        <th></th>
-        <th>月</th>
-        <th>火</th>
-        <th>水</th>
-        <th>木</th>
-        <th>金</th>
-        <th>土</th>
-    </tr>
-    <%
-        for (int time = 1; time < 9; time++) {
-    %>
-    <tr>
-        <th><%=time%>
-        </th>
+<table id="window"><tr><td class="ta-box">
+        <form action="/Top" method="get">
+            <button type="submit" name="top" class="btn_1">トップ</button>
+        </form>
+</td><td class="tb-box"></td></tr>
+<tr><td class="c-box" colspan="2">
         <%
-            for (int week = 1; week < 7; week++) {
+            if (!errorString.equals("")) {
         %>
-        <td>
-            <%
-                List<Syllabus> tableSyllabusList = timeTable.getSyllabusList(week, time);
-                for (Syllabus syllabus : tableSyllabusList) {
-            %>
-            <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>">
-                <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
-                <input type="hidden" name="action" value="detail"/>
-                <input type="hidden" name="backPage" value="timetable"/>
-                <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()">
-                    <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>,<%=syllabus.getClassRoom()%>
-                </a>
-            </form>
-            <%
-                }
-            %>
-        </td>
+        <%=errorString%>
         <%
             }
         %>
-    </tr>
-    <%
-        }
-    %>
-</table>
 
-
+        <table BORDER="1" class="part">
+            <tr>
+                <th></th>
+                <th>月</th>
+                <th>火</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th>土</th>
+            </tr>
+            <%
+                for (int time = 1; time < 9; time++) {
+            %>
+            <tr>
+                <th><%=time%>
+                </th>
+                <%
+                    for (int week = 1; week < 7; week++) {
+                %>
+                <td>
+                    <%
+                        List<Syllabus> tableSyllabusList = timeTable.getSyllabusList(week, time);
+                        for (Syllabus syllabus : tableSyllabusList) {
+                    %>
+                    <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>">
+                        <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
+                        <input type="hidden" name="action" value="detail"/>
+                        <input type="hidden" name="backPage" value="timetable"/>
+                        <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()">
+                            <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>,<%=syllabus.getClassRoom()%>
+                        </a>
+                    </form>
+                    <%
+                        }
+                    %>
+                </td>
+                <%
+                    }
+                %>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+</td></tr></table>
 </body>
 </html>

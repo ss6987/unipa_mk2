@@ -18,55 +18,52 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
+<table id="window"><tr><td class="ta-box">
+        <form action="/Top" method="get">
+            <button type="submit" class="btn_1" name="check"> トップ</button>
+        </form>
+</td><td class="tb-box"></td></tr>
+<tr><td class="c-box" colspan="2">
+        <h1>成績照会</h1>
+        <table BORDER="1" class="part">
+            <tr>
+                <th>授業名</th>
+                <th>単位</th>
+                <th>評価</th>
+                <th>年度</th>
+                <th>学期</th>
+                <th>教員名</th>
+            </tr>
+            <%
+                for (int i = 0; i < courseList.size(); i++) {
+                    Course course = courseList.get(i);
+                    Syllabus syllabus = syllabusList.get(i);
+            %>
+            <tr>
+                <td>
+                    <%=syllabus.getSyllabusName()%>
+                </td>
+                <td>
+                    <%=syllabus.getUnitString()%>
+                </td>
+                <td>
+                    <%=course.getAchievementString()%>
+                </td>
+                <td>
+                    <%=course.getYear()%>
+                </td>
+                <td>
+                    <%=syllabus.getSemester()%>
+                </td>
+                <td>
+                    <%=course.getMainTeacherName()%>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
 
-<form action="/Top" method="get">
-    <button type="submit" class="btn_1" name="check"> トップ</button>
-</form>
-<h1>
-    成績照会
-</h1>
-
-<br>
-
-<table BORDER="1" align="center">
-    <tr align="center">
-        <th>授業名</th>
-        <th>単位</th>
-        <th>評価</th>
-        <th>年度</th>
-        <th>学期</th>
-        <th>教員名</th>
-    </tr>
-    <%
-        for (int i = 0; i < courseList.size(); i++) {
-            Course course = courseList.get(i);
-            Syllabus syllabus = syllabusList.get(i);
-    %>
-    <tr>
-        <td>
-            <%=syllabus.getSyllabusName()%>
-        </td>
-        <td>
-            <%=syllabus.getUnitString()%>
-        </td>
-        <td>
-            <%=course.getAchievementString()%>
-        </td>
-        <td>
-            <%=course.getYear()%>
-        </td>
-        <td>
-            <%=syllabus.getSemester()%>
-        </td>
-        <td>
-            <%=course.getMainTeacherName()%>
-        </td>
-    </tr>
-    <%
-        }
-    %>
-</table>
-
-
+</td></tr></table>
 </body>
 </html>
