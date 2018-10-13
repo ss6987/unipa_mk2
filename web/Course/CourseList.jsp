@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Top" method="get">
+<form action="/Main" method="get">
     <button type="submit" class="btn_1" name="top">トップへ</button>
 </form>
 <button type="submit" name="action" class="btn_1" value="back" onclick="history.back()">戻る</button>

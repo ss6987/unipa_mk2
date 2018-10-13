@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<form action="/Top" method="get">
+<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_1" value="Top">トップ</button>
 </form>
 <br>

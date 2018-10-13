@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/*requestにページ番号を突っ込むとそのページへforwardしてくれるサーブレット*/
 public class MainForwardServlet extends HttpServlet {
     //ページリストの定義
     private String[] pageList = {
@@ -25,6 +26,7 @@ public class MainForwardServlet extends HttpServlet {
 
         //ページリストから画面NoのURLへ遷移する
         request.getRequestDispatcher(pageList[nextNumber - 1]).forward(request, response);
+        return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,5 +38,6 @@ public class MainForwardServlet extends HttpServlet {
         }
         //ページリストから画面NoのURLへ遷移する
         request.getRequestDispatcher(pageList[nextNumber - 1]).forward(request, response);
+        return;
     }
 }

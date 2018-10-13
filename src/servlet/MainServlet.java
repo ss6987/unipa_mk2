@@ -1,43 +1,44 @@
 package servlet;
 
-import Entity.Syllabus;
-import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
-import servlet.timetable.TimeTable;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.spi.http.HttpContext;
 import java.io.IOException;
-import java.util.List;
 
+/*requestのactionを見て、各種MainServletに振り分けるサーブレット*/
 public class MainServlet extends HttpServlet {
-    private RequestDispatcher dispatch;
-    private HttpSession session;
-    private ModelManager modelManager = new ModelManager();
     private ReplaceString replaceString = new ReplaceString();
+    private ModelManager modelManager = new ModelManager();
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        getServletContext().setAttribute("modelManager",modelManager);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        session = request.getSession(true);
+        HttpSession session = request.getSession(true);
 
         String url = "Login.jsp";
         if (session.getAttribute("user") == null) {
-            dispatch = request.getRequestDispatcher(url);
-            dispatch.forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
             return;
         }
 
-        String action = replaceString.repairRequest(request.getParameter("action"));
+        String action = (String) request.getAttribute("action");
+        if(action == null){
+            action = replaceString.repairRequest(request.getParameter("action"));
+            request.setAttribute("action",action);
+        }
 
-        if (action.indexOf("Login") != -1) {
-            setTimeTable();
-            session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
-            url = "/Top";
-        } else if (action.indexOf("Top") != -1) {
+        if (action.indexOf("Login") != -1 || action.indexOf("Top") != -1) {
             url = "/Top";
         } else if (action.indexOf("Achievement") != -1) {
             url = "/AchievementMain";
@@ -50,8 +51,7 @@ public class MainServlet extends HttpServlet {
         } else if (action.indexOf("User") != -1) {
             url = "/UserMain";
         }
-        dispatch = request.getRequestDispatcher(url);
-        dispatch.forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 
@@ -59,24 +59,5 @@ public class MainServlet extends HttpServlet {
 
     }
 
-    private void setTimeTable() {
-        User loginUser = (User) session.getAttribute("user");
-        List<Syllabus> syllabusList = null;
 
-        if (loginUser.getUserClassification().equals("学生")) {
-            syllabusList = modelManager.courseSelectSyllabus(loginUser.getUserId());
-        } else if (loginUser.getUserClassification().equals("教職員")) {
-            syllabusList = modelManager.teacherInChargeSearch(loginUser.getUserId());
-        }
-
-        if (syllabusList != null) {
-            TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-            TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-
-            timeTable.addSyllabusList(syllabusList);
-            nowTable.addSyllabusList(syllabusList);
-            session.setAttribute("timeTable", timeTable);
-            session.setAttribute("nowTable", nowTable);
-        }
-    }
 }

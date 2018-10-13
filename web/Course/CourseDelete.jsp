@@ -19,8 +19,8 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Top" method="get">
-    <button type="submit" class="btn_1" name="check"> トップ</button>
+<form action="/Main" method="get">
+    <button type="submit" class="btn_1" name="action" value="Top"> トップ</button>
 </form>
 <button type="submit" name="login" class="btn_1" style="position: absolute; right:  0px; top: 0px">もどる</button>
 

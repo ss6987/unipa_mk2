@@ -22,7 +22,7 @@
 </head>
 <body>
 <h1>シラバス詳細</h1>
-<form action="/Top" method="get">
+<form action="/Main" method="get">
     <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 </form>
 
@@ -67,7 +67,7 @@
 <%
 } else if (backPage.equals("timetable")) {
 %>
-<form action="/Top" method="post">
+<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_1" value="CourseCheck">戻る</button>
 </form>
 <%

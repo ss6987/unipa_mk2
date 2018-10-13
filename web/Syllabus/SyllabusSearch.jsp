@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Top" method="get">
-    <button type="submit" class="btn_1">トップ</button>
+<form action="/Main" method="get">
+    <button type="submit" name="action" value="Top" class="btn_1">トップ</button>
 </form>
 <br>
 <h1>シラバス検索</h1>

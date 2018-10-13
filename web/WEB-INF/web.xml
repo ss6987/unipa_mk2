@@ -77,12 +77,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>servlet.user.UserUpdateServlet</servlet-class>
+        <servlet-name>UserInsertOrUpdateServlet</servlet-name>
+        <servlet-class>servlet.user.UserInsertOrUpdateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserUpdateServlet</servlet-name>
-        <url-pattern>/UserUpdate</url-pattern>
+        <servlet-name>UserInsertOrUpdateServlet</servlet-name>
+        <url-pattern>/UserInsertOrUpdate</url-pattern>
     </servlet-mapping>
 
     <servlet>

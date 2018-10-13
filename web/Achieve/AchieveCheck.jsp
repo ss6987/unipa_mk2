@@ -19,8 +19,8 @@
 </head>
 <body>
 
-<form action="/Top" method="get">
-    <button type="submit" class="btn_1" name="check"> トップ</button>
+<form action="/Main" method="get">
+    <button type="submit" class="btn_1" name="action" value="Top"> トップ</button>
 </form>
 <h1>
     成績照会

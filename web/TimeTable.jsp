@@ -16,8 +16,8 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Top" method="get">
-    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
+<form action="/Main" method="get">
+    <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
 </form>
 <br>
 

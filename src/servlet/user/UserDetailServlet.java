@@ -23,7 +23,7 @@ public class UserDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession(true);
 
-        String action = request.getParameter("action");
+        String action = (String) request.getAttribute("action");
         User targetUser;
         if (action.equals("myUserDetail")) {
             targetUser = (User) session.getAttribute("user");

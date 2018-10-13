@@ -11,26 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**/
 public class UserMainServlet extends HttpServlet {
-    private ModelManager modelManager = new ModelManager();
-    private RequestDispatcher dispatch;
-    private HttpSession session;
-    private ReplaceString replaceString = new ReplaceString();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        session = request.getSession(true);
-        String action = replaceString.repairRequest(request.getParameter("action"));
+        String action = (String) request.getAttribute("action");
         String url = "/Top";
-        switch (action) {
-            case "myUserDetail":
-                url = "/UserDetail";
-                break;
-            case "UserUpdate":
-                url = "/UserUpdate";
-                break;
+        if (action.indexOf("Detail") != -1) {
+            url = "/UserDetail";
+        } else if (action.indexOf("Update") != -1 || action.indexOf("Registration") != -1) {
+            url = "/UserInsertOrUpdate";
+        } else if (action.indexOf("Delete") != -1) {
+            url = "/UserDelete";
         }
-        dispatch = request.getRequestDispatcher(url);
-        dispatch.forward(request, response);
+
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 

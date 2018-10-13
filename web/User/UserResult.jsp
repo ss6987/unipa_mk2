@@ -22,10 +22,10 @@
 </head>
 <body>
 
-<form action="/Top" method="get">
-    <button type="submit" name="check" class="btn_1"> トップ</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" value="Top" class="btn_1"> トップ</button>
 </form>
-<form action="/Top" method="post">
+<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_1" value="UserSearch">もどる</button>
 </form>
 <br>
@@ -56,7 +56,7 @@
             <%=user.getUserId()%>
         </td>
         <td>
-            <form action="/Top" method="post" name="form<%=i%>">
+            <form action="/Main" method="post" name="form<%=i%>">
                 <input type="hidden" name="action" value="UserDetail"/>
                 <input type="hidden" name="targetUserId" value="<%=user.getUserId()%>"/>
                 <a href="javascript:form<%=i%>.submit()"><%=user.getName()%>

@@ -25,8 +25,8 @@
 <%
     }
 %>
-<form action="/Top" method="get">
-    <button type="submit" class="btn_1">トップ</button>
+<form action="/Main" method="post">
+    <button type="submit" class="btn_1" name="action" value="Top">トップ</button>
 </form>
 
 <%

@@ -20,7 +20,7 @@
     Integer nowPage = paging.getNowPage();
 %>
 
-<form action="/Top" method="post">
+<form action="/Main" method="post">
     <button type="submit" name="action" value="SyllabusSearch"> 再検索</button>
 </form>
 

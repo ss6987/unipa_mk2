@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<form action="/Top" method="get">
-    <button type="submit" name="top" class="btn_1"value="top"> トップ</button>
+<form action="/Main" method="get">
+    <button type="submit" name="action" class="btn_1" value="Top"> トップ</button>
 </form>
 
 <h1>ユーザー削除</h1>
@@ -102,7 +102,7 @@
 
 </table>
 
-<form action="/Top" method="post">
+<form action="/Main" method="post">
     <input type="hidden" name="action" value="UserUpdate">
     <button type="submit" class="btn_1" name="login">もどる</button>
 </form>
