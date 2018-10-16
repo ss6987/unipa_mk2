@@ -5,6 +5,8 @@ import DAO.UserDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 public class Student {
@@ -21,6 +23,29 @@ public class Student {
 
     public Student(String userId, Integer facultyDepartmentId, Integer grade) {
         setUserId(userId);
+        setFacultyDepartmentId(facultyDepartmentId);
+        setGrade(grade);
+    }
+
+    public Student(HttpServletRequest request,String targetUserId) throws UnsupportedEncodingException {
+        ReplaceString replaceString = new ReplaceString();
+        String facultyDepartmentIdString = replaceString.repairRequest(request.getParameter("facultyDepartmentId"));
+        String gradeString = replaceString.repairRequest(request.getParameter("grade"));
+        Integer facultyDepartmentId;
+        try {
+            facultyDepartmentId = Integer.parseInt(facultyDepartmentIdString);
+        } catch (java.lang.NumberFormatException e) {
+            facultyDepartmentId = -1;
+        }
+
+        Integer grade;
+        try {
+            grade = Integer.parseInt(gradeString);
+        } catch (java.lang.NumberFormatException e) {
+            grade = -1;
+        }
+
+        setUserId(targetUserId);
         setFacultyDepartmentId(facultyDepartmentId);
         setGrade(grade);
     }

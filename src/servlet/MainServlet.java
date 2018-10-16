@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         String url = "Login.jsp";
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("user") == null || session.getAttribute("user").equals("")) {
             request.getRequestDispatcher(url).forward(request, response);
             return;
         }

@@ -271,6 +271,14 @@
         <servlet-name>UserDetailServlet</servlet-name>
         <url-pattern>/UserDetail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UserResultServlet</servlet-name>
+        <servlet-class>servlet.user.UserResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserResultServlet</servlet-name>
+        <url-pattern>/UserResult</url-pattern>
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/error/404.html</location>

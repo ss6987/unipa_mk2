@@ -15,8 +15,9 @@
 </head>
 
 <body>
-<form action="/Main" method="get">
-    <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ
+    </button>
 </form>
 
 <br>
@@ -33,7 +34,7 @@
     }
 %>
 
-<form action="/UserSearch" method="post">
+<form action="/Main" method="post">
     <table BORDER="1" align="center">
         <tr align="center">
             <th>学籍番号</th>
@@ -64,13 +65,16 @@
         <tr>
             <th>生年月日</th>
             <td>
-                <input type="text" name="birthday" value="<jsp:getProperty name="searchUser" property="birthday"/>"/>
+                西暦<input type="text" name="year" value="<jsp:getProperty name="searchUser" property="birthYear"/>"/>年<br/>
+                <input type="text" name="month" value="<jsp:getProperty name="searchUser" property="birthMonth"/>"/>月<br/>
+                <input type="text" name="day" value="<jsp:getProperty name="searchUser" property="birthDay"/>"/>日<br/>
             </td>
         </tr>
         <tr>
             <th>郵便番号</th>
             <td>
-                <input type="text" name="postalCode" value="<jsp:getProperty name="searchUser" property="postalCode"/>"/>
+                <input type="text" name="postal_code"
+                       value="<jsp:getProperty name="searchUser" property="postalCode"/>"/>
             </td>
         </tr>
         <tr>
@@ -88,7 +92,8 @@
         <tr>
             <th>ユーザー分類</th>
             <td>
-                <input type="text" name="userClassification" value="<jsp:getProperty name="searchUser" property="userClassification"/>"/>
+                <input type="text" name="user_classification"
+                       value="<jsp:getProperty name="searchUser" property="userClassification"/>"/>
             </td>
         </tr>
         <tr>
@@ -98,7 +103,7 @@
             </td>
         </tr>
     </table>
-    <button type="submit" name="action" class="btn_4" value="firstSearch">検索</button>
+    <button type="submit" name="action" class="btn_4" value="UserSearchFirst">検索</button>
 </form>
 </body>
 </html>

@@ -23,6 +23,10 @@ public class UserMainServlet extends HttpServlet {
             url = "/UserInsertOrUpdate";
         } else if (action.indexOf("Delete") != -1) {
             url = "/UserDelete";
+        } else if(action.indexOf("Search") != -1){
+            url = "/UserSearch";
+        } else if(action.indexOf("Result") != -1){
+            url = "/UserResult";
         }
 
         request.getRequestDispatcher(url).forward(request, response);
