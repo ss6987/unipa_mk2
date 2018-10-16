@@ -14,7 +14,7 @@
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
 <jsp:useBean id="facultyDepartment" class="Entity.FacultyDepartment" scope="request"/>
-
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
     <title>ユーザー管理</title>
@@ -30,14 +30,20 @@
 <%
     if (!targetUserId.equals(user.getUserId())) {
 %>
-<form action="/UserSearch" method="post">
-    <button type="submit" name="action" class="btn_1" value="return">戻る</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_1" value="UserSearchBack">戻る</button>
 </form>
 <%
     }
 %>
 
 <h1 align="center">ユーザー管理</h1>
+
+<%
+    if(!errorString.equals("")){
+        %><%=errorString%><%
+    }
+%>
 
 <table BORDER="1" align="center">
     <tr align="center">
@@ -147,7 +153,7 @@
             </td>
         </tr>
     </table>
-    <button type="submit" name="action" class="btn_4" value="update_password">パスワード更新</button>
+    <button type="submit" name="action" class="btn_4" value="UserUpdatePassword">パスワード更新</button>
 </form>
 <%
     }

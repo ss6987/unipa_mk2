@@ -83,7 +83,7 @@
         <tr align="center">
             <th>フリガナ</th>
             <td>
-                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶ]+$"tabindex="3"/>
+                <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶー　 ]+$"tabindex="3"/>
             </td>
         </tr>
 

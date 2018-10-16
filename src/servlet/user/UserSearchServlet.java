@@ -38,6 +38,9 @@ public class UserSearchServlet extends HttpServlet {
             case "UserSearchChangePage":
                 changePage(request,response);
                 return;
+            case "UserSearchBack":
+                back(request, response);
+                return;
         }
         return;
     }
@@ -60,7 +63,7 @@ public class UserSearchServlet extends HttpServlet {
         session.setAttribute("searchUser",searchUser);
         session.setAttribute("paging",paging);
         request.setAttribute("userList",userList);
-        request.setAttribute("action","UserResultFirst");
+        request.setAttribute("action","UserResult");
         request.getRequestDispatcher("/Main").forward(request,response);
         return;
     }
@@ -76,7 +79,20 @@ public class UserSearchServlet extends HttpServlet {
 
         session.setAttribute("paging",paging);
         request.setAttribute("userList",userList);
-        request.setAttribute("action","UserResultFirst");
+        request.setAttribute("action","UserResult");
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
+    }
+
+    private void back(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        Paging paging = (Paging) session.getAttribute("paging");
+        User searchUser = (User) session.getAttribute("searchUser");
+
+        List<User> userList = modelManager.userSearch(searchUser,paging.getNowPage() -1);
+
+        request.setAttribute("userList",userList);
+        request.setAttribute("action","UserResult");
         request.getRequestDispatcher("/Main").forward(request,response);
         return;
     }

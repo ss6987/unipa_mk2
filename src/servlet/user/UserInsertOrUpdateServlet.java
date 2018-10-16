@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 public class UserInsertOrUpdateServlet extends HttpServlet {
     private String url = "/User/UserRegistration.jsp";
@@ -49,6 +51,10 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
                 return;
             case "UserRegistrationDone":
                 actionRegistrationDone(request, response, targetUserId);
+                return;
+            case "UserUpdatePassword":
+                actionUpdatePassword(request, response, targetUserId);
+                return;
         }
         return;
 
@@ -60,7 +66,15 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
 
     private void actionUpdate(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws ServletException, IOException {
         User targetUser = modelManager.userFindById(targetUserId);
+
         request.setAttribute("targetUser", targetUser);
+        if (targetUser.getUserClassification().equals("学生")) {
+            try {
+                request.setAttribute("targetStudent", targetUser.convertUserToStudent());
+            } catch (SQLException e) {
+                ;
+            }
+        }
         request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
         request.getRequestDispatcher(url).forward(request, response);
         return;
@@ -73,10 +87,10 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     private void actionUpdateDone(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws ServletException, IOException {
-        User targetUser = new User(request,targetUserId);
+        User targetUser = new User(request, targetUserId);
 
         if (targetUser == null) {
-            request.setAttribute("action","UserUpdate");
+            request.setAttribute("action", "UserUpdate");
             request.getRequestDispatcher("/Main").forward(request, response);
             return;
         }
@@ -102,7 +116,7 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     private void actionRegistrationDone(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws IOException, ServletException {
-        User targetUser = new User(request,targetUserId);
+        User targetUser = new User(request, targetUserId);
         modelManager.userRegistration(targetUser, "password");
 
         if (targetUser.getUserClassification().equals("学生")) {
@@ -115,6 +129,26 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
         return;
     }
 
+    private void actionUpdatePassword(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws IOException, ServletException {
+        String beforePassword = replaceString.repairRequest(request.getParameter("before_password"));
+        String afterPassword = replaceString.repairRequest(request.getParameter("after_password"));
+        User targetUser = modelManager.login(targetUserId, beforePassword);
+        if (targetUser == null) {
+            request.setAttribute("errorString", "更新前パスワードが違います。");
+            request.setAttribute("action", "UserDetail");
+            request.getRequestDispatcher("/Main").forward(request, response);
+            return;
+        }
 
+        if (!modelManager.userUpdatePassword(targetUser, afterPassword)) {
+            request.setAttribute("errorString", "更新に失敗しました。");
+            request.setAttribute("action", "UserDetail");
+            request.getRequestDispatcher("/Main").forward(request, response);
+            return;
+        }
+        request.getRequestDispatcher("/Login.jsp").forward(request, response);
+        return;
+
+    }
 
 }

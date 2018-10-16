@@ -21,8 +21,8 @@ public class UserResultServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         switch (action){
-            case "UserResultFirst":
-                resultFirst(request,response);
+            case "UserResult":
+                result(request,response);
                 return;
         }
     }
@@ -31,7 +31,7 @@ public class UserResultServlet extends HttpServlet {
 
     }
 
-    private void resultFirst(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    private void result(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(url).forward(request,response);
         return;
     }

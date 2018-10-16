@@ -15,13 +15,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class UserDetailServlet extends HttpServlet {
-    private ModelManager modelManager = new ModelManager();
-    private RequestDispatcher dispatch;
-    private HttpSession session;
-    private Integer url = 4;
+    private ModelManager modelManager;
+    private String url = "/User/UserDetail.jsp";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        modelManager = (ModelManager) getServletContext().getAttribute("modelManager");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        session = request.getSession(true);
+        HttpSession session = request.getSession(true);
 
         String action = (String) request.getAttribute("action");
         User targetUser;
@@ -30,6 +34,9 @@ public class UserDetailServlet extends HttpServlet {
             request.setAttribute("targetUser", targetUser);
         } else if (action.equals("UserDetail")) {
             String targetUserId = request.getParameter("targetUserId");
+            if(targetUserId == null || targetUserId.equals("")){
+                targetUserId = (String) session.getAttribute("targetUserId");
+            }
             targetUser = modelManager.userFindById(targetUserId);
         } else {
             targetUser = new User();
@@ -46,9 +53,7 @@ public class UserDetailServlet extends HttpServlet {
 
         session.setAttribute("targetUserId", targetUser.getUserId());
         request.setAttribute("targetUser", targetUser);
-        request.setAttribute("Number", url);
-        dispatch = request.getRequestDispatcher("/MainForward");
-        dispatch.forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 
