@@ -1,6 +1,6 @@
 <%@ page import="Entity.Syllabus" %>
 <%@ page import="java.util.List" %>
-<%@ page import="etc.Paging" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ASAMI
   Date: 2018/07/27
@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="paging" class="etc.Paging" scope="session"/>
 <html lang="ja">
 <head>
     <title>シラバス検索結果</title>
@@ -16,7 +17,6 @@
 <body>
 <%
     List<Syllabus> syllabusList = (List<Syllabus>) request.getAttribute("syllabusList");
-    Paging paging = (Paging) request.getAttribute("paging");
     Integer nowPage = paging.getNowPage();
 %>
 
@@ -52,8 +52,8 @@
             <%=syllabus.getSyllabusId()%>
         </td>
         <td>
-            <form action="/SyllabusDetail" method="post" name="form<%=i%>">
-                <input type="hidden" name="action" value="detail">
+            <form action="/Main" method="post" name="form<%=i%>">
+                <input type="hidden" name="action" value="SyllabusDetail">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <input type="hidden" name="backPage" value="searchResult"/>
                 <a href="javascript:form<%=i%>.submit()"><%=syllabus.getSyllabusName()%>
@@ -84,9 +84,9 @@
 <%
     if (nowPage != 1) {
 %>
-<form action="/SyllabusSearch" method="post">
+<form action="/Main" method="post">
     <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
-    <button name="action" type="submit" class="btn_6" value="change_page">最初</button>
+    <button name="action" type="submit" class="btn_6" value="SyllabusSearchChangePage">最初</button>
 </form>
 <%
 } else {
@@ -100,9 +100,9 @@
     for (int i = nowPage - 2; i < nowPage + 3; i++) {
         if (i != nowPage && i >= 1 && i <= paging.getLastPage()) {
 %>
-<form action="/SyllabusSearch" method="post">
+<form action="/Main" method="post">
     <input type="hidden" name="page" value="<%=i%>"/>
-    <button name="action" type="submit" class="btn_6" value="change_page"><%=i%>
+    <button name="action" type="submit" class="btn_6" value="SyllabusSearchChangePage"><%=i%>
     </button>
 </form>
 <%
@@ -119,9 +119,9 @@
 <%
     if (nowPage != paging.getLastPage()) {
 %>
-<form action="/SyllabusSearch" method="post">
+<form action="/Main" method="post">
     <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
-    <button name="action" type="submit" class="btn_6" value="change_page">最後</button>
+    <button name="action" type="submit" class="btn_6" value="SyllabusSearchChangePage">最後</button>
 </form>
 <%
 } else {

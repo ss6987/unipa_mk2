@@ -5,6 +5,8 @@ import DAO.TeacherInChargeDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -37,6 +39,75 @@ public class Syllabus {
         this.mainTeacher = "";
     }
 
+    public Syllabus(HttpServletRequest request,String syllabusId) throws UnsupportedEncodingException {
+        ReplaceString replaceString = new ReplaceString();
+        if(syllabusId.equals("")){
+            syllabusId = replaceString.repairRequest(request.getParameter("syllabus_id"));
+        }
+
+        String syllabusName = replaceString.repairRequest(request.getParameter("syllabus_name"));
+        String englishName = replaceString.repairRequest(request.getParameter("english_name"));
+        String classroom = replaceString.repairRequest(request.getParameter("class_room"));
+        String semester = replaceString.repairRequest(request.getParameter("semester"));
+        String week = replaceString.repairRequest(request.getParameter("week"));
+        String time = replaceString.repairRequest(request.getParameter("time"));
+        int dividendGrade;
+        int year;
+        int unit;
+        int capacity;
+
+        String errorString = "";
+        try {
+            dividendGrade = Integer.parseInt(replaceString.repairRequest(request.getParameter("dividend_grade")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("dividendGrade").equals("")) {
+                errorString += "配当学年に使用できない文字が存在します。";
+            }
+            dividendGrade = -1;
+        }
+
+        try {
+            year = Integer.parseInt(replaceString.repairRequest(request.getParameter("year")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("year").equals("")) {
+                errorString += "開講年度に使用できない文字が存在します。";
+            }
+            year = -1;
+        }
+
+        try {
+            unit = Integer.parseInt(replaceString.repairRequest(request.getParameter("unit")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("unit").equals("")) {
+                errorString += "単位数に使用できない文字が存在します。";
+            }
+            unit = -1;
+        }
+
+        try {
+            capacity = Integer.parseInt(replaceString.repairRequest(request.getParameter("capacity")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("capacity").equals("")) {
+                errorString += "定員に使用できない文字が存在します。";
+            }
+            capacity = -1;
+        }
+
+        errorString += this.setSyllabusId(syllabusId);
+        errorString += this.setSyllabusName(syllabusName);
+        errorString += this.setEnglishName(englishName);
+        errorString += this.setDividendGrade(dividendGrade);
+        errorString += this.setYear(year);
+        errorString += this.setClassRoom(classroom);
+        errorString += this.setSemester(semester);
+        errorString += this.setWeek(week);
+        errorString += this.setTime(time);
+        errorString += this.setUnit(unit);
+        errorString += this.setCapacity(capacity);
+        errorString = errorString.replace("。", "。<br/>");
+        request.setAttribute("errorString",errorString);
+    }
+
     public Syllabus(ResultSet resultSet) throws SQLException {
         this.syllabusId = resultSet.getString("syllabus_id");
         this.syllabusName = resultSet.getString("syllabus_name");
@@ -49,14 +120,14 @@ public class Syllabus {
         this.time = resultSet.getString("Time");
         this.unit = resultSet.getInt("unit");
         this.capacity = resultSet.getInt("capacity");
-        try{
+        try {
             this.mainTeacher = resultSet.getString("name");
-        }catch (java.sql.SQLException e){
+        } catch (java.sql.SQLException e) {
             this.mainTeacher = new TeacherInChargeDAO().findMainTeacherBySyllabus(this).getName();
         }
     }
 
-    public Syllabus(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher) {
+    public Syllabus(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity, String mainTeacher) {
         setSyllabusId(syllabusId);
         setSyllabusName(syllabusName);
         setEnglishName(englishName);
@@ -122,29 +193,29 @@ public class Syllabus {
         return this.getDividendGrade().toString();
     }
 
-    public String getDividendGradeSelected(Integer value){
-        if(value == this.getDividendGrade()){
+    public String getDividendGradeSelected(Integer value) {
+        if (value == this.getDividendGrade()) {
             return "selected";
         }
         return "";
     }
 
-    public String getSemesterSelected(String value){
-        if(this.getSemester().equals(value)){
+    public String getSemesterSelected(String value) {
+        if (this.getSemester().equals(value)) {
             return "selected";
         }
         return "";
     }
 
-    public String getWeekSelected(String value){
-        if(this.getWeek().equals(value)){
+    public String getWeekSelected(String value) {
+        if (this.getWeek().equals(value)) {
             return "selected";
         }
         return "";
     }
 
-    public String getTimeSelected(String value){
-        if(this.getTime().equals(value)){
+    public String getTimeSelected(String value) {
+        if (this.getTime().equals(value)) {
             return "selected";
         }
         return "";
@@ -171,7 +242,7 @@ public class Syllabus {
         return this.getCapacity().toString();
     }
 
-    public String getMainTeacher(){
+    public String getMainTeacher() {
         return this.mainTeacher;
     }
 
@@ -246,7 +317,7 @@ public class Syllabus {
     }
 
     public String setWeek(Integer week) {
-        String[] weekList = {"月","火","水","木","金","土"};
+        String[] weekList = {"月", "火", "水", "木", "金", "土"};
         this.week = weekList[week - 1];
         return "";
     }
@@ -276,9 +347,9 @@ public class Syllabus {
         return "定員に使用できない値が入力されています。";
     }
 
-    public String setMainTeacher(String mainTeacher){
+    public String setMainTeacher(String mainTeacher) {
         mainTeacher = new ReplaceString().replace(mainTeacher);
-        if(new StringCheck().checkNotSymbols(mainTeacher)){
+        if (new StringCheck().checkNotSymbols(mainTeacher)) {
             this.mainTeacher = mainTeacher;
             return "";
         }
@@ -290,7 +361,7 @@ public class Syllabus {
         try {
             return syllabusDAO.findBySyllabusDetailId(this.getSyllabusId());
         } catch (SQLException e) {
-            return new SyllabusDetail(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity,mainTeacher, "", "", "", "", "", "", "", "", "", "", "", "", "");
+            return new SyllabusDetail(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity, mainTeacher, "", "", "", "", "", "", "", "", "", "", "", "", "");
         }
     }
 }

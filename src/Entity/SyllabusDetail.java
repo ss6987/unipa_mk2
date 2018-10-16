@@ -4,6 +4,8 @@ import DAO.SyllabusContentsDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,101 @@ public class SyllabusDetail extends Syllabus {
         this.guidance = "";
         this.advice = "";
         this.syllabusContents = new ArrayList<>();
+    }
+
+    public SyllabusDetail(HttpServletRequest request,String syllabusId) throws UnsupportedEncodingException {
+        ReplaceString replaceString = new ReplaceString();
+        if(syllabusId.equals("")){
+            syllabusId = replaceString.repairRequest(request.getParameter("syllabus_id"));
+        }
+
+        String syllabusName = replaceString.repairRequest(request.getParameter("syllabus_name"));
+        String englishName = replaceString.repairRequest(request.getParameter("english_name"));
+        String classroom = replaceString.repairRequest(request.getParameter("class_room"));
+        String semester = replaceString.repairRequest(request.getParameter("semester"));
+        String week = replaceString.repairRequest(request.getParameter("week"));
+        String time = replaceString.repairRequest(request.getParameter("time"));
+        String objectiveSummary = replaceString.repairRequest(request.getParameter("objective_summary"));
+        String goal = replaceString.repairRequest(request.getParameter("goal"));
+        String textbook = replaceString.repairRequest(request.getParameter("textbook"));
+        String referenceBook = replaceString.repairRequest(request.getParameter("reference_book"));
+        String educationalObject = replaceString.repairRequest(request.getParameter("educational_object"));
+        String dp = replaceString.repairRequest(request.getParameter("dp"));
+        String selfStudy = replaceString.repairRequest(request.getParameter("self_study"));
+        String freeText = replaceString.repairRequest(request.getParameter("free_text"));
+        String mailAddress = replaceString.repairRequest(request.getParameter("mail_address"));
+        String officeHour = replaceString.repairRequest(request.getParameter("office_hour"));
+        String classification = replaceString.repairRequest(request.getParameter("classification"));
+        String guidance = replaceString.repairRequest(request.getParameter("guidance"));
+        String advice = replaceString.repairRequest(request.getParameter("advice"));
+        int dividendGrade;
+        int year;
+        int unit;
+        int capacity;
+
+        String errorString = "";
+        try {
+            dividendGrade = Integer.parseInt(replaceString.repairRequest(request.getParameter("dividend_grade")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("dividendGrade").equals("")) {
+                errorString += "配当学年に使用できない文字が存在します。";
+            }
+            dividendGrade = -1;
+        }
+
+        try {
+            year = Integer.parseInt(replaceString.repairRequest(request.getParameter("year")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("year").equals("")) {
+                errorString += "開講年度に使用できない文字が存在します。";
+            }
+            year = -1;
+        }
+
+        try {
+            unit = Integer.parseInt(replaceString.repairRequest(request.getParameter("unit")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("unit").equals("")) {
+                errorString += "単位数に使用できない文字が存在します。";
+            }
+            unit = -1;
+        }
+
+        try {
+            capacity = Integer.parseInt(replaceString.repairRequest(request.getParameter("capacity")));
+        } catch (java.lang.NumberFormatException e) {
+            if (!request.getParameter("capacity").equals("")) {
+                errorString += "定員に使用できない文字が存在します。";
+            }
+            capacity = -1;
+        }
+
+        errorString += this.setSyllabusId(syllabusId);
+        errorString += this.setSyllabusName(syllabusName);
+        errorString += this.setEnglishName(englishName);
+        errorString += this.setDividendGrade(dividendGrade);
+        errorString += this.setYear(year);
+        errorString += this.setClassRoom(classroom);
+        errorString += this.setSemester(semester);
+        errorString += this.setWeek(week);
+        errorString += this.setTime(time);
+        errorString += this.setUnit(unit);
+        errorString += this.setCapacity(capacity);
+        errorString += this.setObjectiveSummary(objectiveSummary);
+        errorString += this.setGoal(goal);
+        errorString += this.setTextbook(textbook);
+        errorString += this.setReferenceBook(referenceBook);
+        errorString += this.setEducationalObject(educationalObject);
+        errorString += this.setDp(dp);
+        errorString += this.setSelfStudy(selfStudy);
+        errorString += this.setFreeText(freeText);
+        errorString += this.setMailAddress(mailAddress);
+        errorString += this.setOfficeHour(officeHour);
+        errorString += this.setClassification(classification);
+        errorString += this.setGuidance(guidance);
+        errorString += this.setAdvice(advice);
+        errorString = errorString.replace("。", "。<br/>");
+        request.setAttribute("errorString",errorString);
     }
 
     public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {

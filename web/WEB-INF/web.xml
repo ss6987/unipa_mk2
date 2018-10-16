@@ -233,11 +233,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SyllabusMainServlet</servlet-name>
-        <servlet-class>servlet.syllabus.syllabusMainServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusMainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SyllabusMainServlet</servlet-name>
-        <url-pattern>/syllabusMain</url-pattern>
+        <url-pattern>/SyllabusMain</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>TimeTableMainServlet</servlet-name>
@@ -278,6 +278,14 @@
     <servlet-mapping>
         <servlet-name>UserResultServlet</servlet-name>
         <url-pattern>/UserResult</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusResultServlet</servlet-name>
+        <servlet-class>servlet.syllabus.SyllabusResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusResultServlet</servlet-name>
+        <url-pattern>/SyllabusResult</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

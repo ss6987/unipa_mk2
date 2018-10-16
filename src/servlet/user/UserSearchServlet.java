@@ -30,16 +30,16 @@ public class UserSearchServlet extends HttpServlet {
         String action = (String) request.getAttribute("action");
         switch (action){
             case "UserSearch":
-                search(request,response);
+                actionSearch(request,response);
                 return;
             case "UserSearchFirst":
-                searchFirst(request,response);
+                actionSearchFirst(request,response);
                 return;
             case "UserSearchChangePage":
-                changePage(request,response);
+                actionChangePage(request,response);
                 return;
             case "UserSearchBack":
-                back(request, response);
+                actionBack(request, response);
                 return;
         }
         return;
@@ -49,26 +49,25 @@ public class UserSearchServlet extends HttpServlet {
 
     }
 
-    private void search(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    private void actionSearch(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 
-    private void searchFirst(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    private void actionSearchFirst(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         User searchUser = new User(request,"");
         List<User> userList = modelManager.userSearch(searchUser,0);
-        Paging paging = new Paging(modelManager.userCount());
 
         HttpSession session = request.getSession(true);
         session.setAttribute("searchUser",searchUser);
-        session.setAttribute("paging",paging);
+        session.setAttribute("paging",new Paging(modelManager.userCount()));
         request.setAttribute("userList",userList);
         request.setAttribute("action","UserResult");
         request.getRequestDispatcher("/Main").forward(request,response);
         return;
     }
 
-    private void changePage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    private void actionChangePage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Integer nextPage = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
         Paging paging = (Paging) session.getAttribute("paging");
@@ -84,7 +83,7 @@ public class UserSearchServlet extends HttpServlet {
         return;
     }
 
-    private void back(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    private void actionBack(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Paging paging = (Paging) session.getAttribute("paging");
         User searchUser = (User) session.getAttribute("searchUser");

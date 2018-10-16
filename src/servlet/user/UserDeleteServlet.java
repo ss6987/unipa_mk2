@@ -24,8 +24,6 @@ public class UserDeleteServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String targetUserId = (String) session.getAttribute("targetUserId");
 
-
-        User targetUser = modelManager.userFindById(targetUserId);
         if (modelManager.userDelete(user)) {
             System.out.println("成功");
         } else {

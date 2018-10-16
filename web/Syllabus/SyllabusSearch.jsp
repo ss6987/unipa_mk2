@@ -29,7 +29,7 @@
 <%
     }
 %>
-<form action="/SyllabusSearch" method="post">
+<form action="/Main" method="post">
     <table BORDER="1" align="center">
         <tr>
             <th>授業ID</th>
@@ -161,14 +161,13 @@
         <tr align="center">
             <th>教室</th>
             <td>
-                <input type="text" name="classroom"
+                <input type="text" name="class_room"
                        value="<jsp:getProperty name="searchSyllabus" property="classRoom"/>"/>
             </td>
         </tr>
 
     </table>
-    <input type="hidden" name="action" value="first_search"/>
-    <button type="submit" name="action" class="btn_5" value="search">検索</button>
+    <button type="submit" name="action" class="btn_5" value="SyllabusSearchFirst">検索</button>
 </form>
 </body>
 </html>
