@@ -18,6 +18,7 @@ import java.util.List;
 
 public class SyllabusSearchServlet extends HttpServlet {
     private ModelManager modelManager;
+    private ReplaceString replaceString = new ReplaceString();
     private String url = "/Syllabus/SyllabusSearch.jsp";
 
     @Override
@@ -73,11 +74,32 @@ public class SyllabusSearchServlet extends HttpServlet {
         return;
     }
 
-    private void actionChangePage(HttpServletRequest request,HttpServletResponse response){
+    private void actionChangePage(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(true);
+        Integer nextPage = Integer.parseInt(replaceString.repairRequest(request.getParameter("page")));
+        Paging paging = (Paging) session.getAttribute("paging");
+        Syllabus searchSyllabus = (Syllabus) session.getAttribute("searchSyllabus");
 
+        paging.changePage(nextPage);
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus,paging.getNowPage() -1);
+
+        session.setAttribute("paging",paging);
+        request.setAttribute("syllabusList",syllabusList);
+        request.setAttribute("action","SyllabusResult");
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
-    private void actionBack(HttpServletRequest request,HttpServletResponse response){
+    private void actionBack(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        Paging paging = (Paging) session.getAttribute("paging");
+        Syllabus searchSyllabus = (Syllabus) session.getAttribute("searchSyllabus");
 
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus,paging.getNowPage() -1);
+
+        request.setAttribute("syllabusList",syllabusList);
+        request.setAttribute("action","SyllabusResult");
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 }

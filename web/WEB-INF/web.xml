@@ -200,7 +200,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>SyllabusUpdateServlet</servlet-name>
-        <servlet-class>servlet.syllabus.SyllabusUpdateServlet</servlet-class>
+        <servlet-class>servlet.syllabus.SyllabusInsertOrUpdateServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

@@ -34,18 +34,15 @@ public class LoginCheckServlet extends HttpServlet {
         String password = replaceString.repairRequest(request.getParameter("password"));
 
         User user = modelManager.login(id, password);
-        if (user != null) {
-            dispatch = request.getRequestDispatcher("/Main");
-        } else {
-            user = new User();
-            user.setUserId(id);
-            Integer url = 1;
-            dispatch = request.getRequestDispatcher("/Login.jsp");
-            request.setAttribute("Number", url);
+        if (user == null) {
+            request.setAttribute("errorString","ログイン失敗");
+            request.getRequestDispatcher("Login.jsp").forward(request,response);
+            return;
         }
 
         session.setAttribute("user", user);
-        dispatch.forward(request, response);
+        session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
+        request.getRequestDispatcher("/Main").forward(request, response);
         return;
     }
 

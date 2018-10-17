@@ -26,10 +26,10 @@ public class SyllabusMainServlet extends HttpServlet {
             url = "/SyllabusResult";
         } else if (action.indexOf("Detail") != -1) {
             url = "/SyllabusDetail";
-        } else if (action.indexOf("Registration") != -1) {
-            url = "/SyllabusRegistration";
-        } else if (action.indexOf("Update") != -1) {
-            url = "/SyllabusUpdate";
+        } else if (action.indexOf("Registration") != -1 || action.indexOf("Update") != -1) {
+            url = "/SyllabusInsertOrUpdate";
+        } else if (action.indexOf("Delete") != -1) {
+            url = "/SyllabusDelete";
         }
 
         request.getRequestDispatcher(url).forward(request, response);

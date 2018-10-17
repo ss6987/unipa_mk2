@@ -16,6 +16,7 @@ import java.io.IOException;
 public class SyllabusDetailServlet extends HttpServlet {
     private ModelManager modelManager;
     private String url = "/Syllabus/SyllabusDetail.jsp";
+    private ReplaceString replaceString = new ReplaceString();
 
     @Override
     public void init() throws ServletException {
@@ -25,7 +26,7 @@ public class SyllabusDetailServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
-        switch (action){
+        switch (action) {
             case "SyllabusDetail":
                 actionDetail(request, response);
                 return;
@@ -37,13 +38,16 @@ public class SyllabusDetailServlet extends HttpServlet {
 
     }
 
-    private void actionDetail(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        String targetSyllabusId = request.getParameter("targetSyllabusId");
+    private void actionDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
         SyllabusDetail syllabusDetail = modelManager.syllabusDetailFindById(targetSyllabusId);
         HttpSession session = request.getSession(true);
-        session.setAttribute("targetSyllabusId",targetSyllabusId);
-        request.setAttribute("targetSyllabus",syllabusDetail);
-        request.getRequestDispatcher(url).forward(request,response);
+
+        request.setAttribute("backPage", replaceString.repairRequest(request.getParameter("backPage")));
+        session.setAttribute("targetSyllabusId", targetSyllabusId);
+        request.setAttribute("semesterString", modelManager.getSemesterString());
+        request.setAttribute("targetSyllabus", syllabusDetail);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 }
