@@ -199,13 +199,13 @@
         <url-pattern>/SyllabusDetail</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>SyllabusUpdateServlet</servlet-name>
+        <servlet-name>SyllabusInsertOrUpdateServlet</servlet-name>
         <servlet-class>servlet.syllabus.SyllabusInsertOrUpdateServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>SyllabusUpdateServlet</servlet-name>
-        <url-pattern>/SyllabusUpdate</url-pattern>
+        <servlet-name>SyllabusInsertOrUpdateServlet</servlet-name>
+        <url-pattern>/SyllabusInsertOrUpdate</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>PeriodRegistrationServlet</servlet-name>

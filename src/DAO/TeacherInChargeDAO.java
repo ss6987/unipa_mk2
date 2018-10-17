@@ -35,6 +35,12 @@ public class TeacherInChargeDAO {
         return sessionManager.execute(sql);
     }
 
+    public boolean deleteByUser(User user){
+        setList(user,new Syllabus(),-1);
+        String sql = sqlCreater.deleteAnd(tableName,list);
+        return sessionManager.execute(sql);
+    }
+
     public boolean deleteBySyllabus(Syllabus syllabus){
         setList(new User(),syllabus,-1);
         String sql = sqlCreater.deleteAnd(tableName,list);

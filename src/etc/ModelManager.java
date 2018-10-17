@@ -60,15 +60,33 @@ public class ModelManager {
     }
 
     public boolean userDelete(User user) {
-        if (userDAO.delete(user)) {
-            return true;
-        } else {
+        if (!studentDAO.delete(user)) {
             return false;
         }
+
+        if (!teacherInChargeDAO.deleteByUser(user)) {
+            return false;
+        }
+
+        if (!userDAO.delete(user)) {
+            return false;
+        }
+        return true;
     }
 
     public boolean userUpdate(User user) {
-        return userDAO.update(user);
+        if (!userDAO.update(user)) {
+            return false;
+        }
+
+        if (!user.getUserClassification().equals("学生")) {
+            try {
+                studentDAO.delete(studentDAO.findByStudent(user.getUserId()));
+            } catch (SQLException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean userUpdatePassword(User user, String password) {
@@ -204,7 +222,7 @@ public class ModelManager {
 
     public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) {
         for (String studentId : studentIdList) {
-            if(!courseUpdate(studentId,syllabusId,achievement)){
+            if (!courseUpdate(studentId, syllabusId, achievement)) {
                 return false;
             }
         }
@@ -308,7 +326,7 @@ public class ModelManager {
         }
     }
 
-    public RegistrationPeriod registrationPeriodSelect(){
+    public RegistrationPeriod registrationPeriodSelect() {
         try {
             return registrationPeriodDAO.select();
         } catch (SQLException e) {
@@ -367,7 +385,7 @@ public class ModelManager {
         return now;
     }
 
-    public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod){
+    public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod) {
         return registrationPeriodDAO.update(registrationPeriod);
     }
 }

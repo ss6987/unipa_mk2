@@ -19,8 +19,8 @@
 <%
     if (!targetSyllabusId.equals("")) {
 %>
-<form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" class="btn_1" value="detail">戻る</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_1" value="SyllabusDetail">戻る</button>
 </form>
 <%
     }
@@ -49,7 +49,7 @@
 <%
     }
 %>
-<form action="/SyllabusUpdate" method="post">
+<form action="/Main" method="post">
     <table border="3">
         <tr>
             <th width="30%">シラバスID</th>
@@ -282,12 +282,11 @@
     <%
         if (!targetSyllabusId.equals("")) {
     %>
-    <button type="submit" name="action" class="btn_4" value="update"tabindex="42">更新</button>
-    <button type="submit" name="action" class="btn_3" value="delete"tabindex="43">削除</button>
+    <button type="submit" name="action" class="btn_4" value="SyllabusUpdateDone" tabindex="42">更新</button>
     <%
     } else {
     %>
-    <button type="submit" name="action" class="btn_4" value="insert"tabindex="42">登録</button>
+    <button type="submit" name="action" class="btn_4" value="SyllabusRegistrationDone" tabindex="42">登録</button>
     <%
         }
     %>

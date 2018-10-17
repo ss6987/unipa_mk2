@@ -129,6 +129,7 @@
 %>
     <form action="/Main" method="post">
         <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
+        <button type="submit" name="action" class="btn_4" value="UserDelete">削除</button>
     </form>
 <%
     }

@@ -2,46 +2,61 @@ package servlet.user;
 
 import Entity.User;
 import etc.ModelManager;
+import etc.ReplaceString;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UserDeleteServlet extends HttpServlet {
-    private String disp = "/MainForward";
-    private ModelManager modelManager = new ModelManager();
-    private RequestDispatcher dispatch;
-    private HttpSession session;
+    private ModelManager modelManager;
+    private ReplaceString replaceString = new ReplaceString();
+    private String url = "/User/UserDelete.jsp";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        modelManager = (ModelManager) getServletContext().getAttribute("modelManager");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher(disp);
-        session = request.getSession(true);
+        String action = (String) request.getAttribute("action");
+        String targetUserId = (String) request.getSession(true).getAttribute("targetUserId");
+        User targetUser = modelManager.userFindById(targetUserId);
 
-        User user = (User) session.getAttribute("user");
-        String targetUserId = (String) session.getAttribute("targetUserId");
-
-        if (modelManager.userDelete(user)) {
-            System.out.println("成功");
-        } else {
-            System.out.printf("失敗");
-        }
-
-        if (targetUserId == user.getUserId()) {
-            session.invalidate();
-            request.setAttribute("Number", 1);
-            dispatch.forward(request, response);
-        } else {
-            request.setAttribute("Number", 2);
-            dispatch.forward(request, response);
+        switch (action){
+            case "UserDelete":
+                actionDelete(request, response,targetUser);
+                return;
+            case "UserDeleteDone":
+                actionDeleteDone(request, response,targetUser);
+                return;
         }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private void actionDelete(HttpServletRequest request, HttpServletResponse response,User targetUser) throws ServletException, IOException {
+        request.setAttribute("targetUser",targetUser);
+        request.getRequestDispatcher(url).forward(request,response);
+        return;
+    }
+
+    private void actionDeleteDone(HttpServletRequest request, HttpServletResponse response,User targetUser) throws ServletException, IOException {
+        if(!modelManager.userDelete(targetUser)){
+            request.setAttribute("errorString","削除失敗");
+            actionDelete(request, response, targetUser);
+            return;
+        }
+
+        request.setAttribute("errorString","削除成功");
+        request.setAttribute("action","UserSearchBack");
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 }
