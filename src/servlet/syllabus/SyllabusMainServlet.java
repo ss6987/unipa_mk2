@@ -28,7 +28,7 @@ public class SyllabusMainServlet extends HttpServlet {
             url = "/SyllabusDetail";
         } else if (action.indexOf("Registration") != -1 || action.indexOf("Update") != -1) {
             url = "/SyllabusInsertOrUpdate";
-        } else if (action.indexOf("Delete") != -1) {
+        } else if(action.indexOf("Delete") != -1){
             url = "/SyllabusDelete";
         }
 

@@ -147,6 +147,19 @@ public class SyllabusDetail extends Syllabus {
         errorString += this.setAdvice(advice);
         errorString = errorString.replace("。", "。<br/>");
         request.setAttribute("errorString",errorString);
+
+        syllabusContents = new ArrayList<>();
+        for(int i = 1;i < 16;i++){
+            try {
+                String syllabus_contents = replaceString.repairRequest(request.getParameter("syllabus_context"));
+                SyllabusContents contents = new SyllabusContents(this.syllabusId,i,syllabus_contents);
+                this.addSyllabusContents(contents);
+            } catch (SQLException e) {
+                ;
+            } catch (java.lang.NullPointerException e){
+                ;
+            }
+        }
     }
 
     public SyllabusDetail(String syllabusId, String syllabusName, String englishName, Integer dividendGrade, Integer year, String classRoom, String semester, String week, String time, Integer unit, Integer capacity,String mainTeacher, String objectiveSummary, String goal, String textbook, String referenceBook, String educationalObject, String dp, String selfStudy, String freeText, String mailAddress, String officeHour, String classification, String guidance, String advice) throws SQLException {

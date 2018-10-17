@@ -203,6 +203,7 @@ public class ModelManager {
         User user = new User();
         syllabus.setSyllabusId(syllabusId);
         user.setUserId(userId);
+        teacherInChargeDAO.deleteBySyllabus(syllabus);
         return teacherInChargeDAO.insert(user, syllabus, mainTeacher);
     }
 

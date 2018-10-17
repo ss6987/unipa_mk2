@@ -64,9 +64,7 @@ public class TeacherInChargeDAO {
         String sql = "SELECT * FROM user AS u,teacher_in_charge AS t WHERE t.user_id = u.user_id AND t.syllabus_id = '" + syllabus.getSyllabusId() + "'";
         sql = sql + " AND t.main_teacher = " + 0;
 
-        System.out.println(sql);
         ResultSet resultSet = sessionManager.executeQuery(sql);
-        List<User> userList = new ArrayList<User>();
         resultSet.next();
         return new User(resultSet);
     }

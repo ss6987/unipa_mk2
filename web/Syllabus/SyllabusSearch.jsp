@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Main" method="get">
+<form action="/Main" method="post">
     <button type="submit" name="action" value="Top" class="btn_1">トップ</button>
 </form>
 <br>

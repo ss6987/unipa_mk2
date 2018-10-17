@@ -133,7 +133,7 @@
         <tr align="center">
             <th>電話番号</th>
             <td>
-                <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"required pattern="^[0-9]+$"tabindex="12"/><br>※ハイフンなしで入力
+                <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"required pattern="^[0-9]{10,11}" tabindex="12"/><br>※ハイフンなしで入力
             </td>
         </tr>
         <tr align="center" class="studentStatus">

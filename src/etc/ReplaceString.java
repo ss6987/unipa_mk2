@@ -29,6 +29,10 @@ public class ReplaceString {
     }
 
     public String repairRequest(String string) throws UnsupportedEncodingException {
-        return new String(string.getBytes("ISO-8859-1"), "UTF-8");
+        try{
+            return new String(string.getBytes("ISO-8859-1"), "UTF-8");
+        }catch (java.lang.NullPointerException e){
+            return "";
+        }
     }
 }

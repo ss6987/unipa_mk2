@@ -39,9 +39,12 @@ public class SyllabusDetailServlet extends HttpServlet {
     }
 
     private void actionDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-        SyllabusDetail syllabusDetail = modelManager.syllabusDetailFindById(targetSyllabusId);
         HttpSession session = request.getSession(true);
+        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
+        if(targetSyllabusId.equals("")){
+            targetSyllabusId = (String) session.getAttribute("targetSyllabusId");
+        }
+        SyllabusDetail syllabusDetail = modelManager.syllabusDetailFindById(targetSyllabusId);
 
         request.setAttribute("backPage", replaceString.repairRequest(request.getParameter("backPage")));
         session.setAttribute("targetSyllabusId", targetSyllabusId);

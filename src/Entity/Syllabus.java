@@ -39,9 +39,9 @@ public class Syllabus {
         this.mainTeacher = "";
     }
 
-    public Syllabus(HttpServletRequest request,String syllabusId) throws UnsupportedEncodingException {
+    public Syllabus(HttpServletRequest request, String syllabusId) throws UnsupportedEncodingException {
         ReplaceString replaceString = new ReplaceString();
-        if(syllabusId.equals("")){
+        if (syllabusId.equals("")) {
             syllabusId = replaceString.repairRequest(request.getParameter("syllabus_id"));
         }
 
@@ -105,7 +105,7 @@ public class Syllabus {
         errorString += this.setUnit(unit);
         errorString += this.setCapacity(capacity);
         errorString = errorString.replace("。", "。<br/>");
-        request.setAttribute("errorString",errorString);
+        request.setAttribute("errorString", errorString);
     }
 
     public Syllabus(ResultSet resultSet) throws SQLException {
@@ -354,6 +354,16 @@ public class Syllabus {
             return "";
         }
         return "主担当名に使用できない文字が存在します。";
+    }
+
+    public String getMainTeacherId() throws SQLException {
+        if (!this.getSyllabusId().equals("")) {
+            TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
+            return teacherInChargeDAO.findMainTeacherBySyllabus(this).getUserId();
+        }else {
+            return "";
+        }
+
     }
 
     public SyllabusDetail convertSyllabusToSyllabusDetail() throws SQLException {

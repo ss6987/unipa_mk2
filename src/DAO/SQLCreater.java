@@ -34,6 +34,33 @@ public class SQLCreater {
         return sql;
     }
 
+    public String selectEqual(String tableName, List<DateSet> list, Integer page) {
+        String sql = "SELECT ";
+        boolean flag = true;
+
+        for (DateSet tmp : list) {
+            sql += tmp.getColumn() + ",";
+        }
+        sql = sql.replaceFirst(",$", "");
+        sql += " FROM " + tableName;
+
+        for (DateSet tmp : list) {
+            if (!tmp.getValue().isEmpty() && flag && !tmp.getValue().equals("-1")) {
+                if (tmp.getMold() != "string" && tmp.getMold() != "date") {
+                    sql += " WHERE " + tmp.getColumn() + " = " + tmp.getValue();
+                } else {
+                    sql += " WHERE " + tmp.getColumn() + " = '" + tmp.getValue() + "'";
+                }
+                flag = false;
+            }
+        }
+
+        if (page != -1) {
+            sql += " OFFSET " + (page * 100) + " LIMIT 100";
+        }
+        return sql;
+    }
+
     public String getCount(String tableName, List<DateSet> list) {
         String sql = "SELECT COUNT(*) FROM " + tableName;
 

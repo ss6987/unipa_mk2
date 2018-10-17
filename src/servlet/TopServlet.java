@@ -25,7 +25,6 @@ public class TopServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatch = request.getRequestDispatcher(url);
         String action = (String) request.getAttribute("action");
         HttpSession session = request.getSession(true);
 
@@ -35,7 +34,7 @@ public class TopServlet extends HttpServlet {
 
         clearSession(session);
         request.setAttribute("period", modelManager.getRegistrationPeriod());
-        dispatch.forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 
@@ -69,6 +68,7 @@ public class TopServlet extends HttpServlet {
         session.removeAttribute("targetUser");
         session.removeAttribute("targetUserId");
         session.removeAttribute("targetSyllabus");
+        session.removeAttribute("targetSyllabusId");
         return;
     }
 
