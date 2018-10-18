@@ -16,15 +16,6 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<%
-    if (!targetSyllabusId.equals("")) {
-%>
-<form action="/Main" method="post">
-    <button type="submit" name="action" class="btn_1" value="SyllabusDetail">戻る</button>
-</form>
-<%
-    }
-%>
 <form action="/Main" method="post">
     <button type="submit" class="btn_1" name="action" value="Top">トップ</button>
 </form>
@@ -32,6 +23,9 @@
 <%
     if (!targetSyllabusId.equals("")) {
 %>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_1" value="SyllabusDetail">戻る</button>
+</form>
 <h1>シラバス更新</h1>
 <%
 } else {
@@ -82,7 +76,7 @@
                 <input type="text" name="english_name"
                        value="<jsp:getProperty name="targetSyllabus" property="englishName"/>"
 
-                       tabindex="3" />
+                       tabindex="3"/>
             </td>
         </tr>
         <tr>
@@ -91,7 +85,7 @@
                 <input type="text" name="dividend_grade"
                        value="<jsp:getProperty name="targetSyllabus" property="dividendGradeString"/>"
                        required pattern="^[1-4]$"
-                tabindex="4" />
+                       tabindex="4"/>
                 年以上
             </td>
         </tr>
@@ -101,7 +95,7 @@
                 <input type="text" name="year"
                        value="<jsp:getProperty name="targetSyllabus" property="yearString"/>"
                        required pattern="^[0-9]+$"
-                       tabindex="5" />
+                       tabindex="5"/>
                 年度
             </td>
         </tr>
@@ -109,7 +103,7 @@
             <th width="30%">教室</th>
             <td>
                 <input type="text" name="class_room"
-                       value="<jsp:getProperty name="targetSyllabus" property="classRoom"/>"tabindex="6" />
+                       value="<jsp:getProperty name="targetSyllabus" property="classRoom"/>" tabindex="6"/>
             </td>
         </tr>
         <tr>
@@ -125,7 +119,7 @@
             <th width="30%">曜日</th>
             <td>
                 <input type="text" name="week"
-                       value="<jsp:getProperty name="targetSyllabus" property="week"/>"tabindex="8" />
+                       value="<jsp:getProperty name="targetSyllabus" property="week"/>" tabindex="8"/>
             </td>
         </tr>
         <tr>
@@ -134,7 +128,7 @@
                 <input type="text" name="time"
                        value="<jsp:getProperty name="targetSyllabus" property="time"/>"
                        required pattern="^[0-9,]+$"
-                       tabindex="9" />
+                       tabindex="9"/>
             </td>
         </tr>
         <tr>
@@ -143,7 +137,7 @@
                 <input type="text" name="unit"
                        value="<jsp:getProperty name="targetSyllabus" property="unitString"/>"
                        required pattern="^[0-9]+$"
-                       tabindex="10" />
+                       tabindex="10"/>
             </td>
         </tr>
         <tr>
@@ -152,102 +146,103 @@
                 <input type="text" name="capacity"
                        value="<jsp:getProperty name="targetSyllabus" property="capacityString"/>"
                        required pattern="^[0-9]+$"
-                       tabindex="11" />人
+                       tabindex="11"/>人
             </td>
         </tr>
         <tr>
             <th>主担当教員ID</th>
-            <td><input value="<jsp:getProperty name="targetSyllabus" property="mainTeacherId"/>" type="text" name="main_teacher_id" tabindex="12" required></td>
+            <td><input value="<jsp:getProperty name="targetSyllabus" property="mainTeacherId"/>" type="text"
+                       name="main_teacher_id" tabindex="12" required></td>
         </tr>
         <tr>
             <th width="30%">目的概要</th>
             <td>
                 <input type="text" name="objective_summary"
-                       value="<jsp:getProperty name="targetSyllabus" property="objectiveSummary"/>" tabindex="13" />
+                       value="<jsp:getProperty name="targetSyllabus" property="objectiveSummary"/>" tabindex="13"/>
             </td>
         </tr>
         <tr>
             <th width="30%">達成目標</th>
             <td>
                 <input type="text" name="goal"
-                       value="<jsp:getProperty name="targetSyllabus" property="goal"/>"tabindex="14" />
+                       value="<jsp:getProperty name="targetSyllabus" property="goal"/>" tabindex="14"/>
             </td>
         </tr>
         <tr>
             <th width="30%">教科書</th>
             <td>
                 <input type="text" name="textbook"
-                       value="<jsp:getProperty name="targetSyllabus" property="textbook"/>"tabindex="15" />
+                       value="<jsp:getProperty name="targetSyllabus" property="textbook"/>" tabindex="15"/>
             </td>
         </tr>
         <tr>
             <th width="30%">参考書</th>
             <td>
                 <input type="text" name="reference_book"
-                       value="<jsp:getProperty name="targetSyllabus" property="referenceBook"/>"tabindex="16" />
+                       value="<jsp:getProperty name="targetSyllabus" property="referenceBook"/>" tabindex="16"/>
             </td>
         </tr>
         <tr>
             <th width="30%">学習・教育目標との対応</th>
             <td>
                 <input type="text" name="educational_object"
-                       value="<jsp:getProperty name="targetSyllabus" property="educationalObject"/>"tabindex="17" />
+                       value="<jsp:getProperty name="targetSyllabus" property="educationalObject"/>" tabindex="17"/>
             </td>
         </tr>
         <tr>
             <th width="30%">DPとの対応</th>
             <td>
                 <input type="text" name="dp"
-                       value="<jsp:getProperty name="targetSyllabus" property="dp"/>"tabindex="18" />
+                       value="<jsp:getProperty name="targetSyllabus" property="dp"/>" tabindex="18"/>
             </td>
         </tr>
         <tr>
             <th width="30%">事前・事後学習</th>
             <td>
                 <input type="text" name="self_study"
-                       value="<jsp:getProperty name="targetSyllabus" property="selfStudy"/>"tabindex="19" />
+                       value="<jsp:getProperty name="targetSyllabus" property="selfStudy"/>" tabindex="19"/>
             </td>
         </tr>
         <tr>
             <th width="30%">自由記載欄</th>
             <td>
                 <input type="text" name="free_text"
-                       value="<jsp:getProperty name="targetSyllabus" property="freeText"/>"tabindex="20" />
+                       value="<jsp:getProperty name="targetSyllabus" property="freeText"/>" tabindex="20"/>
             </td>
         </tr>
         <tr>
             <th width="30%">メールアドレス</th>
             <td>
                 <input type="text" name="mail_address"
-                       value="<jsp:getProperty name="targetSyllabus" property="mailAddress"/>"tabindex="21"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="mailAddress"/>" tabindex="21"/>
             </td>
         </tr>
         <tr>
             <th width="30%">オフィスアワー等</th>
             <td>
                 <input type="text" name="office_hour"
-                       value="<jsp:getProperty name="targetSyllabus" property="officeHour"/>"tabindex="22"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="officeHour"/>" tabindex="22"/>
             </td>
         </tr>
         <tr>
             <th width="30%">クラス分け情報</th>
             <td>
                 <input type="text" name="classification"
-                       value="<jsp:getProperty name="targetSyllabus" property="classification"/>"tabindex="23"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="classification"/>" tabindex="23"/>
             </td>
         </tr>
         <tr>
             <th width="30%">ガイダンス情報</th>
             <td>
                 <input type="text" name="guidance"
-                       value="<jsp:getProperty name="targetSyllabus" property="guidance"/>"tabindex="24"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="guidance"/>" tabindex="24"/>
             </td>
         </tr>
         <tr>
             <th width="30%">学習上の助言</th>
             <td>
                 <input type="text" name="advice"
-                       value="<jsp:getProperty name="targetSyllabus" property="advice"/>"tabindex="25"/>
+                       value="<jsp:getProperty name="targetSyllabus" property="advice"/>" tabindex="25"/>
             </td>
         </tr>
         <%

@@ -69,6 +69,7 @@ public class TopServlet extends HttpServlet {
         session.removeAttribute("targetUserId");
         session.removeAttribute("targetSyllabus");
         session.removeAttribute("targetSyllabusId");
+        session.removeAttribute("backPage");
         return;
     }
 

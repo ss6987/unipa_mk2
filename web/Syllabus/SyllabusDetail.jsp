@@ -1,4 +1,3 @@
-<%@ page import="Entity.SyllabusDetail" %>
 <%@ page import="Entity.SyllabusContents" %>
 <%--
   Created by IntelliJ IDEA.
@@ -11,7 +10,7 @@
 <jsp:useBean id="user" scope="session" class="Entity.User"/>
 <jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
 <jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
-<jsp:useBean id="backPage" scope="request" class="java.lang.String"/>
+<jsp:useBean id="backPage" scope="session" class="java.lang.String"/>
 
 <html lang="ja">
 <head>
@@ -34,14 +33,8 @@
 
 <form action="/Main" method="post">
     <button type="submit" name="action" class="btn_5" value="SyllabusUpdate">更新ページへ</button>
-</form>
-<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_3" value="SyllabusDelete">シラバス削除</button>
-</form>
-<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_5" value="CourseList">履修登録者一覧</button>
-</form>
-<form action="/Main" method="post">
     <button type="submit" name="action" class="btn_5" value="AchieveRegistration">成績登録</button>
 </form>
 <%

@@ -46,7 +46,11 @@ public class SyllabusDetailServlet extends HttpServlet {
         }
         SyllabusDetail syllabusDetail = modelManager.syllabusDetailFindById(targetSyllabusId);
 
-        request.setAttribute("backPage", replaceString.repairRequest(request.getParameter("backPage")));
+        String backPage = replaceString.repairRequest(request.getParameter("backPage"));
+        if(backPage.equals("")){
+            backPage = (String) session.getAttribute("backPage");
+        }
+        session.setAttribute("backPage", backPage);
         session.setAttribute("targetSyllabusId", targetSyllabusId);
         request.setAttribute("semesterString", modelManager.getSemesterString());
         request.setAttribute("targetSyllabus", syllabusDetail);
