@@ -147,8 +147,17 @@ public class ModelManager {
             SyllabusContentsDAO syllabusContentsDAO = new SyllabusContentsDAO();
             syllabusContentsDAO.delete(syllabusContents);
         }
-        TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
         teacherInChargeDAO.deleteBySyllabus(syllabus.convertSyllabusDetailToSyllabus());
+        DepartmentRelationDAO departmentRelationDAO = new DepartmentRelationDAO();
+        departmentRelationDAO.delete(new FacultyDepartment(), syllabus);
+        try {
+            List<Course> courseList = courseDAO.findBySyllabus(syllabus.convertSyllabusDetailToSyllabus(), -1);
+            for (Course course : courseList) {
+                courseDAO.delete(course);
+            }
+        }catch (SQLException e){
+            return false;
+        }
         return syllabusDAO.delete(syllabus);
     }
 

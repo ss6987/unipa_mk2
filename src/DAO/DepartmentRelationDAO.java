@@ -52,7 +52,7 @@ public class DepartmentRelationDAO {
 
     public boolean delete(FacultyDepartment facultyDepartment, Syllabus syllabus) {
         setList(facultyDepartment, syllabus);
-        String sql = sqlCreater.delete(tableName, list);
+        String sql = sqlCreater.deleteAnd(tableName, list);
         return sessionManager.execute(sql);
     }
 

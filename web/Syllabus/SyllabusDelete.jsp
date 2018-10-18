@@ -9,6 +9,7 @@
 <jsp:useBean id="user" scope="session" class="Entity.User"/>
 <jsp:useBean id="targetSyllabusId" scope="session" class="java.lang.String"/>
 <jsp:useBean id="targetSyllabus" scope="request" class="Entity.SyllabusDetail"/>
+<jsp:useBean id="errorString" scope="request" class="java.lang.String"/>
 <html lang="ja">
 <head>
     <title>シラバス削除確認</title>
@@ -16,84 +17,110 @@
 </head>
 <body>
 
-
-
 <h1>削除確認</h1>
 
 <br>
 <span style="background-color:#ffcc99">以下のシラバス情報を完全に削除します。</span>
-
+<%
+    if (!errorString.equals("")) {
+%>
+<div>
+    <%=errorString%>
+</div>
+<%
+    }
+%>
 <br>
 
 <table BORDER="1" align="center">
     <tr align="center">
         <th>シラバスID</th>
-        <td><jsp:getProperty name="targetSyllabus" property="syllabusId"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="syllabusId"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>授業名</th>
-        <td><jsp:getProperty name="targetSyllabus" property="syllabusName"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="syllabusName"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>英語名</th>
-        <td><jsp:getProperty name="targetSyllabus" property="englishName"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="englishName"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>配当学年</th>
-        <td><jsp:getProperty name="targetSyllabus" property="dividendGrade"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="dividendGrade"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>学期</th>
-        <td><jsp:getProperty name="targetSyllabus" property="semester"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="semester"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>曜日</th>
-        <td><jsp:getProperty name="targetSyllabus" property="week"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="week"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>時限</th>
-        <td><jsp:getProperty name="targetSyllabus" property="time"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="time"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>単位数</th>
-        <td><jsp:getProperty name="targetSyllabus" property="unit"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="unit"/>
+        </td>
     </tr>
 
     <tr align="center">
         <th>主担当教員名</th>
-        <td><jsp:getProperty name="targetSyllabus" property="mainTeacher"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="mainTeacher"/>
+        </td>
     </tr>
 
     <%--<tr align="center">--%>
-        <%--<th>関連科目</th>--%>
+    <%--<th>関連科目</th>--%>
     <%--</tr>--%>
 
     <%--<tr align="center">--%>
-        <%--<th>履修条件</th>--%>
+    <%--<th>履修条件</th>--%>
     <%--</tr>--%>
 
 
     <tr align="center">
         <th>定員数</th>
-        <td><jsp:getProperty name="targetSyllabus" property="capacity"/></td>
+        <td>
+            <jsp:getProperty name="targetSyllabus" property="capacity"/>
+        </td>
     </tr>
 
 </table>
 
 
-<form action="/SyllabusDelete" method="post">
-    <button type="submit" name="action" class="btn_3" value="delete">削除確定</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_3" value="SyllabusDeleteDone">削除確定</button>
 </form>
 
-<form action="/SyllabusDetail" method="post">
-    <button type="submit" name="action" class="btn_1" value="detail">戻る</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_1" value="SyllabusDetail">戻る</button>
 </form>
 </body>
 </html>
