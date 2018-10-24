@@ -199,7 +199,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AchieveMainServlet</servlet-name>
-        <servlet-class>servlet.achieve.achieveMainServlet</servlet-class>
+        <servlet-class>servlet.achieve.AchieveMainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AchieveMainServlet</servlet-name>
@@ -211,7 +211,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseMainServlet</servlet-name>
-        <url-pattern>/courseMain</url-pattern>
+        <url-pattern>/CourseMain</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>SyllabusMainServlet</servlet-name>

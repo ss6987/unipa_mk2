@@ -16,10 +16,9 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Main" method="get">
+<form action="/Main" method="post">
     <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 </form>
-<br>
 <h1>履修登録</h1>
 
 <%
@@ -30,8 +29,8 @@
     }
 %>
 
-<form action="/CourseRegistration" method="post">
-    <button type="submit" name="action" class="btn_4" value="check">登録</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" class="btn_4" value="CourseRegistrationDone">登録</button>
 </form>
 <table BORDER="1" align="center">
     <tr align="center">
@@ -53,21 +52,21 @@
             for (int week = 1; week < 7; week++) {
         %>
         <td>
-            <form action="<%=request.getContextPath()%>/CourseRegistration" method="post">
+            <form action="<%=request.getContextPath()%>/Main" method="post">
                 <div align="right">
                     <input type="hidden" name="week" value="<%=week%>">
                     <input type="hidden" name="time" value="<%=time%>">
-                    <button type="submit" name="action" class="btn_5" value="firstSearch">検索</button>
+                    <button type="submit" name="action" class="btn_5" value="CourseRegistrationSearch">検索</button>
                 </div>
             </form>
             <%
                 List<Syllabus> tableSyllabusList = nowTable.getSyllabusList(week, time);
                 for (Syllabus syllabus : tableSyllabusList) {
             %>
-            <form action="<%=request.getContextPath()%>/CourseRegistration" method="post">
+            <form action="<%=request.getContextPath()%>/Main" method="post">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
                 <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>
-                <button type="submit" name="action" class="btn_3" value="delete">削除</button>
+                <button type="submit" name="action" class="btn_3" value="CourseRegistrationDelete">削除</button>
             </form>
             <%
                 }

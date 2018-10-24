@@ -19,8 +19,7 @@
 <form action="/Main" method="post">
     <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
 </form>
-<br>
-
+<h1>時間割表</h1>
 
 <%
     if (!errorString.equals("")) {
