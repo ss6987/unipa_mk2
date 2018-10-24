@@ -46,7 +46,7 @@ public class MainServlet extends HttpServlet {
             url = "/CourseMain";
         } else if (action.indexOf("Syllabus") != -1) {
             url = "/SyllabusMain";
-        } else if (action.indexOf("Timetable") != -1) {
+        } else if (action.indexOf("TimeTable") != -1) {
             url = "/TimeTableMain";
         } else if (action.indexOf("User") != -1) {
             url = "/UserMain";

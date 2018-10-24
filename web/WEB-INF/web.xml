@@ -113,24 +113,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>StudentDeleteCheckServlet</servlet-name>
-        <servlet-class>servlet.user.StudentDeleteCheckServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentDeleteCheckServlet</servlet-name>
-        <url-pattern>/StudentDeleteCheck</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StudentDeleteServlet</servlet-name>
-        <servlet-class>servlet.user.StudentDeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentDeleteServlet</servlet-name>
-        <url-pattern>/StudentDelete</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>CourseCheckServlet</servlet-name>
         <servlet-class>servlet.course.CourseCheckServlet</servlet-class>
     </servlet>
@@ -225,7 +207,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>CourseMainServlet</servlet-name>
-        <servlet-class>servlet.course.courseMainServlet</servlet-class>
+        <servlet-class>servlet.course.CourseMainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CourseMainServlet</servlet-name>
@@ -241,11 +223,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>TimeTableMainServlet</servlet-name>
-        <servlet-class>servlet.timetable.timeTableMainServlet</servlet-class>
+        <servlet-class>servlet.timetable.TimeTableMainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableMainServlet</servlet-name>
-        <url-pattern>/timeTableMain</url-pattern>
+        <url-pattern>/TimeTableMain</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>UserMainServlet</servlet-name>

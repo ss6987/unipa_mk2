@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Main" method="get">
+<form action="/Main" method="post">
     <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ</button>
 </form>
 <br>
@@ -54,9 +54,9 @@
                 List<Syllabus> tableSyllabusList = timeTable.getSyllabusList(week, time);
                 for (Syllabus syllabus : tableSyllabusList) {
             %>
-            <form action="<%=request.getContextPath()%>/SyllabusDetail" method="post" name="form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>">
+            <form action="<%=request.getContextPath()%>/Main" method="post" name="form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>">
                 <input type="hidden" name="targetSyllabusId" value="<%=syllabus.getSyllabusId()%>"/>
-                <input type="hidden" name="action" value="detail"/>
+                <input type="hidden" name="action" value="SyllabusDetail"/>
                 <input type="hidden" name="backPage" value="timetable"/>
                 <a href="javascript:form<%=week%><%=time%>_<%=syllabus.getSyllabusId()%>.submit()">
                     <%=syllabus.getSyllabusName()%>,<%=syllabus.getMainTeacher()%>,<%=syllabus.getClassRoom()%>

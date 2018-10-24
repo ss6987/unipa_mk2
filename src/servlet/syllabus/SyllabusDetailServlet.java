@@ -5,7 +5,6 @@ import Entity.SyllabusDetail;
 import etc.ModelManager;
 import etc.ReplaceString;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +39,7 @@ public class SyllabusDetailServlet extends HttpServlet {
 
     private void actionDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
         String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
         if(targetSyllabusId.equals("")){
             targetSyllabusId = (String) session.getAttribute("targetSyllabusId");
@@ -54,6 +54,7 @@ public class SyllabusDetailServlet extends HttpServlet {
         session.setAttribute("targetSyllabusId", targetSyllabusId);
         request.setAttribute("semesterString", modelManager.getSemesterString());
         request.setAttribute("targetSyllabus", syllabusDetail);
+        request.setAttribute("inChargeFlag",modelManager.getInCharge(targetSyllabusId,user.getUserId()));
         request.getRequestDispatcher(url).forward(request, response);
         return;
     }
