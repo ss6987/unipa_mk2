@@ -135,11 +135,7 @@ public class ModelManager {
     }
 
     public boolean syllabusDelete(Syllabus syllabus) {
-        try {
-            return syllabusDAO.delete(syllabus.convertSyllabusToSyllabusDetail());
-        } catch (SQLException e) {
-            return false;
-        }
+        return syllabusDAO.delete(syllabus.convertSyllabusToSyllabusDetail());
     }
 
     public boolean syllabusDelete(SyllabusDetail syllabus) {
@@ -155,7 +151,7 @@ public class ModelManager {
             for (Course course : courseList) {
                 courseDAO.delete(course);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             return false;
         }
         return syllabusDAO.delete(syllabus);
@@ -170,11 +166,7 @@ public class ModelManager {
     }
 
     public SyllabusDetail syllabusDetailFindById(String syllabusId) {
-        try {
-            return syllabusDAO.findBySyllabusDetailId(syllabusId);
-        } catch (SQLException e) {
-            return null;
-        }
+        return syllabusDAO.findBySyllabusDetailId(syllabusId);
     }
 
     public List<Syllabus> syllabusSearch(Syllabus syllabus, Integer page) {

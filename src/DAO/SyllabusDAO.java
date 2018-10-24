@@ -147,12 +147,16 @@ public class SyllabusDAO {
         return new Syllabus(resultSet);
     }
 
-    public SyllabusDetail findBySyllabusDetailId(String syllabusId) throws SQLException {
+    public SyllabusDetail findBySyllabusDetailId(String syllabusId) {
         setValue("syllabus_id", syllabusId);
         String sql = "SELECT s.syllabus_id,s.syllabus_name,s.english_name,s.dividend_grade,s.year,s.class,s.semester,s.Week,s.Time,s.unit,s.capacity,u.name,s.objective_summary,s.goal,s.textbook,s.reference_book,s.educational_object,s.dp,s.self_study,s.free_text,s.mail_address,s.office_hour,s.classification,s.guidance,s.advice FROM syllabus as s,teacher_in_charge as t,user as u where s.syllabus_id = t.syllabus_id and u.user_id = t.user_id and t.main_teacher = 0 and s.syllabus_id = '" + syllabusId + "'";
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
-        resultSet.next();
-        return createSyllabusDetail(resultSet);
+        try {
+            resultSet.next();
+            return createSyllabusDetail(resultSet);
+        }catch (SQLException e){
+            return null;
+        }
     }
 
     private SyllabusDetail createSyllabusDetail(ResultSet resultSet) throws SQLException {

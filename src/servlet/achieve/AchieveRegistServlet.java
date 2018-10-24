@@ -76,12 +76,9 @@ public class AchieveRegistServlet extends HttpServlet {
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);
             return;
-        }else if(action.equals("back")){
-            try {
-                request.setAttribute("targetSyllabus",syllabus.convertSyllabusToSyllabusDetail());
-            } catch (SQLException e) {
-                ;
-            }
+        } else if (action.equals("back")) {
+            request.setAttribute("targetSyllabus", syllabus.convertSyllabusToSyllabusDetail());
+
             request.setAttribute("Number", 11);
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);

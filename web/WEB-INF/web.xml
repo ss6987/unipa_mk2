@@ -23,12 +23,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AchieveForwardServlet</servlet-name>
-        <servlet-class>servlet.achieve.AchieveForwardServlet</servlet-class>
+        <servlet-name>AchieveCheckServlet</servlet-name>
+        <servlet-class>servlet.achieve.AchieveCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AchieveForwardServlet</servlet-name>
-        <url-pattern>/AchieveForward</url-pattern>
+        <servlet-name>AchieveCheckServlet</servlet-name>
+        <url-pattern>/AchieveCheck</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -203,7 +203,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AchieveMainServlet</servlet-name>
-        <url-pattern>/achieveMain</url-pattern>
+        <url-pattern>/AchieveMain</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>CourseMainServlet</servlet-name>

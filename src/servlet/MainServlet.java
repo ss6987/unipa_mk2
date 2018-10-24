@@ -40,8 +40,8 @@ public class MainServlet extends HttpServlet {
 
         if (action.indexOf("Login") != -1 || action.indexOf("Top") != -1) {
             url = "/Top";
-        } else if (action.indexOf("Achievement") != -1) {
-            url = "/AchievementMain";
+        } else if (action.indexOf("Achieve") != -1) {
+            url = "/AchieveMain";
         } else if (action.indexOf("Course") != -1) {
             url = "/CourseMain";
         } else if (action.indexOf("Syllabus") != -1) {

@@ -360,18 +360,19 @@ public class Syllabus {
         if (!this.getSyllabusId().equals("")) {
             TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
             return teacherInChargeDAO.findMainTeacherBySyllabus(this).getUserId();
-        }else {
+        } else {
             return "";
         }
 
     }
 
-    public SyllabusDetail convertSyllabusToSyllabusDetail() throws SQLException {
+    public SyllabusDetail convertSyllabusToSyllabusDetail() {
         SyllabusDAO syllabusDAO = new SyllabusDAO();
-        try {
-            return syllabusDAO.findBySyllabusDetailId(this.getSyllabusId());
-        } catch (SQLException e) {
-            return new SyllabusDetail(syllabusId, syllabusName, englishName, dividendGrade, year, classRoom, semester, week, time, unit, capacity, mainTeacher, "", "", "", "", "", "", "", "", "", "", "", "", "");
+        SyllabusDetail syllabusDetail = syllabusDAO.findBySyllabusDetailId(this.getSyllabusId());
+        if(syllabusDetail == null){
+            return new SyllabusDetail();
         }
+        return syllabusDetail;
+
     }
 }
