@@ -7,6 +7,7 @@ import Entity.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ModelManager {
@@ -29,7 +30,8 @@ public class ModelManager {
         } catch (SQLException e) {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
-        now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.now();
+        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if (now.isAfter(startDate) && now.isBefore(endDate)) {
@@ -201,25 +203,7 @@ public class ModelManager {
         return flag;
     }
 
-    public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) {
-        for (String studentId : studentIdList) {
-            if(!courseUpdate(studentId,syllabusId,achievement)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean courseUpdate(String studentId, String syllabusId, Integer achievement) {
-        Course course;
-        try {
-            course = new Course(studentId, syllabusId, achievement);
-            if (!courseDAO.update(course)) {
-                return false;
-            }
-        } catch (SQLException e) {
-            return false;
-        }
+    public boolean courseUpdate(Student student, List<String> syllabusIdList, List<String> achievementList) {
         return true;
     }
 
@@ -307,14 +291,6 @@ public class ModelManager {
         }
     }
 
-    public RegistrationPeriod registrationPeriodSelect(){
-        try {
-            return registrationPeriodDAO.select();
-        } catch (SQLException e) {
-            return new RegistrationPeriod();
-        }
-    }
-
     public List<FacultyDepartment> getFacultyDepartmentList() {
         try {
             return facultyDepartmentDAO.select(new FacultyDepartment(), -1);
@@ -346,7 +322,7 @@ public class ModelManager {
         }
     }
 
-    public boolean getSemester() {
+    public boolean getSemester(){
         return semester;
     }
 
@@ -359,32 +335,10 @@ public class ModelManager {
     }
 
     public boolean getInCharge(String syllabusId, String teacherId) {
-        return teacherInChargeDAO.getInCharge(syllabusId, teacherId);
+        return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
     }
 
-    public LocalDateTime getNow() {
+    public LocalDateTime getNow(){
         return now;
-    }
-
-    public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod){
-        return registrationPeriodDAO.update(registrationPeriod);
-    }
-
-    public void updateRegistrationPeriodFlag(){
-        RegistrationPeriod registrationPeriod;
-        try {
-            registrationPeriod = registrationPeriodDAO.select();
-        } catch (SQLException e) {
-            registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
-        }
-        LocalDateTime startDate = registrationPeriod.getStartLocalDate();
-        LocalDateTime endDate = registrationPeriod.getEndLocalDate();
-        if (now.isAfter(startDate) && now.isBefore(endDate)) {
-            this.registrationPeriodFlag = true;
-        }
-        LocalDateTime september = LocalDateTime.of(now.getYear(), 9, 1, 0, 0, 0);
-        if (now.isAfter(september)) {
-            semester = false;
-        }
     }
 }

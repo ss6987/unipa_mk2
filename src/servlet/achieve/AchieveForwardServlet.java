@@ -42,11 +42,6 @@ public class AchieveForwardServlet extends HttpServlet {
             request.setAttribute("errorString", "");
             dispatch.forward(request, response);
             return;
-        }else if(action.equals("AchieveCheck")){
-            request.setAttribute("Number", 19);
-            request.setAttribute("errorString", "");
-            dispatch.forward(request, response);
-            return;
         }
     }
 

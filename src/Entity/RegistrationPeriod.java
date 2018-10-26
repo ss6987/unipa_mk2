@@ -8,12 +8,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class RegistrationPeriod {
-    private Integer id = 0;
-    private String startDate = "";
-    private String endDate = "";
-
-    public RegistrationPeriod(){
-    }
+    private Integer id;
+    private String startDate;
+    private String endDate;
 
     public RegistrationPeriod(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
@@ -55,24 +52,17 @@ public class RegistrationPeriod {
 
     public LocalDateTime getStartLocalDate() {
         String[] dateString = startDate.split("-");
-        return createLocalDate(dateString);
-    }
-
-    public LocalDateTime getEndLocalDate() {
-        String[] dateString = endDate.split("-");
-        return createLocalDate(dateString);
-    }
-
-    private LocalDateTime createLocalDate(String[] dateString){
         Integer date = Integer.parseInt(dateString[0]);
         Integer month = Integer.parseInt(dateString[1]);
         Integer time = Integer.parseInt(dateString[2]);
         return LocalDateTime.of(date, month, time, 0, 0, 0);
     }
 
-    public boolean checkOrder(){
-        LocalDateTime localStartDate = getStartLocalDate();
-        LocalDateTime localEndDate = getEndLocalDate();
-        return localStartDate.isBefore(localEndDate);
+    public LocalDateTime getEndLocalDate() {
+        String[] dateString = endDate.split("-");
+        Integer date = Integer.parseInt(dateString[0]);
+        Integer month = Integer.parseInt(dateString[1]);
+        Integer time = Integer.parseInt(dateString[2]);
+        return LocalDateTime.of(date, month, time, 0, 0, 0);
     }
 }

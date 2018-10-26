@@ -37,13 +37,6 @@ public class CourseDAO {
         return sessionManager.execute(sql);
     }
 
-    public boolean update(Course course) throws SQLException {
-        setList(course);
-        String sql = sqlCreater.update(tableName,list);
-        sql += " AND syllabus_id = '" + list.get(1).getValue() + "'";
-        return sessionManager.execute(sql);
-    }
-
     public List<Course> findByStudent(Student student, Integer achievement) throws SQLException {
         String sql = "SELECT * FROM COURSE WHERE user_id = '" + student.getUserId() + "'";
         if (achievement != -1) {
