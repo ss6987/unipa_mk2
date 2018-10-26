@@ -32,7 +32,7 @@ public class SyllabusDeleteServlet extends HttpServlet {
             if (flag) {
                 request.getRequestDispatcher("/SyllabusSearch").forward(request, response);
             } else {
-                request.setAttribute("Number", 11);
+                request.setAttribute("Number", 13);
                 dispatch.forward(request, response);
             }
         }

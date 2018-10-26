@@ -30,6 +30,13 @@ public class TopServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         request.setAttribute("errorString", "");
 
+        if (action.equals("logout")) {
+            session.invalidate();
+            request.setAttribute("Number", 1);
+            dispatch.forward(request, response);
+            return;
+        }
+
         if (user.getUserClassification().equals("学生")) {
             switch (action) {
                 case "MyUser":
@@ -53,7 +60,7 @@ public class TopServlet extends HttpServlet {
                     break;
                 case "Achieve":
                     request.getRequestDispatcher("/AchieveForward").forward(request, response);
-                    return ;
+                    return;
                 case "CourseRegistration":
                     url = 15;
                     break;
@@ -150,6 +157,8 @@ public class TopServlet extends HttpServlet {
         session = request.getSession(true);
         session.removeAttribute("targetUserId");
         session.removeAttribute("targetSyllabusId");
+        session.removeAttribute("searchSyllabus");
+
 
         User user = (User) session.getAttribute("user");
         if (!user.getUserId().equals("")) {
