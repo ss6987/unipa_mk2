@@ -25,18 +25,10 @@ public class TopServlet extends HttpServlet {
         dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
-
         String action = request.getParameter("action");
         Integer url;
         User user = (User) session.getAttribute("user");
         request.setAttribute("errorString", "");
-
-        if (action.equals("logout")) {
-            session.invalidate();
-            request.setAttribute("Number", 1);
-            dispatch.forward(request, response);
-            return;
-        }
 
         if (user.getUserClassification().equals("学生")) {
             switch (action) {
@@ -61,7 +53,7 @@ public class TopServlet extends HttpServlet {
                     break;
                 case "Achieve":
                     request.getRequestDispatcher("/AchieveForward").forward(request, response);
-                    return;
+                    return ;
                 case "CourseRegistration":
                     url = 15;
                     break;
@@ -132,15 +124,15 @@ public class TopServlet extends HttpServlet {
                     url = 19;
                     break;
                 case "UserRegistration":
-                    request.setAttribute("facultyDepartmentList", modelManager.getFacultyDepartmentList());
+                    request.setAttribute("facultyDepartment", modelManager.getFacultyDepartmentList());
                     url = 3;
                     break;
                 case "SyllabusRegistration":
                     url = 10;
                     break;
-                case "periodRegistrationCheck":
-                    request.getRequestDispatcher("/periodRegistration").forward(request, response);
-                    return;
+                case "AchieveCheck":
+                    url = 20;
+                    break;
                 default:
                     url = 2;
             }
@@ -158,8 +150,6 @@ public class TopServlet extends HttpServlet {
         session = request.getSession(true);
         session.removeAttribute("targetUserId");
         session.removeAttribute("targetSyllabusId");
-        session.removeAttribute("searchSyllabus");
-
 
         User user = (User) session.getAttribute("user");
         if (!user.getUserId().equals("")) {
