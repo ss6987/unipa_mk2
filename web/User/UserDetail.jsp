@@ -1,7 +1,3 @@
-<%@ page import="Entity.User" %>
-<%@ page import="Entity.FacultyDepartment" %>
-<%@ page import="java.util.List" %>
-<%@ page import="Entity.Student" %>
 <%--
   Created by IntelliJ IDEA.
   User: ASAMI

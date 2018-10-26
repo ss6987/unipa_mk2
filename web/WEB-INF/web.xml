@@ -113,12 +113,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CourseCheckServlet</servlet-name>
-        <servlet-class>servlet.course.CourseCheckServlet</servlet-class>
+        <servlet-name>CourseListServlet</servlet-name>
+        <servlet-class>servlet.course.CourseListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CourseCheckServlet</servlet-name>
-        <url-pattern>/CourseCheck</url-pattern>
+        <servlet-name>CourseListServlet</servlet-name>
+        <url-pattern>/CourseList</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -268,6 +268,22 @@
     <servlet-mapping>
         <servlet-name>SyllabusResultServlet</servlet-name>
         <url-pattern>/SyllabusResult</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CourseAllowServlet</servlet-name>
+        <servlet-class>servlet.course.CourseAllowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseAllowServlet</servlet-name>
+        <url-pattern>/CourseAllow</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CourseDeleteServlet</servlet-name>
+        <servlet-class>servlet.course.CourseDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseDeleteServlet</servlet-name>
+        <url-pattern>/CourseDelete</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

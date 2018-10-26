@@ -114,9 +114,8 @@ public class CourseRegistrationServlet extends HttpServlet {
         }
 
         TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
-        TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
         modelManager.courseDelete(loginUser.getUserId());
-        List<String> syllabusList = timeTable.getAllSyllabusList();
+        List<String> syllabusList = nowTable.getAllSyllabusList();
         if (!modelManager.courseRegistration(student, syllabusList)) {
             request.setAttribute("errorString", "登録に失敗しました。");
             request.getRequestDispatcher(url).forward(request, response);

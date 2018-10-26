@@ -58,7 +58,7 @@
                     <%=user.getUserId()%>
                 </td>
                 <td>
-                    <form action="/Top" method="post" name="form<%=i%>">
+                    <form action="/Main" method="post" name="form<%=i%>">
                         <input type="hidden" name="action" value="UserDetail"/>
                         <input type="hidden" name="targetUserId" value="<%=user.getUserId()%>"/>
                         <a href="javascript:form<%=i%>.submit()"><%=user.getName()%>

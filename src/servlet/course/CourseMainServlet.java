@@ -10,13 +10,17 @@ public class CourseMainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String url = "Top.jsp";
-        if(action.indexOf("Registration") != -1){
+        if (action.indexOf("Registration") != -1 || action.indexOf("Check") != -1) {
             url = "/CourseRegistration";
-        }else if(action.indexOf("Check") != -1){
-            url = "/CourseCheck";
+        } else if (action.indexOf("List") != -1) {
+            url = "/CourseList";
+        } else if (action.indexOf("Allow") != -1) {
+            url = "/CourseAllow";
+        } else if (action.indexOf("Delete") != -1) {
+            url = "/CourseDelete";
         }
 
-        request.getRequestDispatcher(url).forward(request,response);
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 

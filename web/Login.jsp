@@ -23,7 +23,7 @@
 
 <body>
 
-<form action="<%=request.getContextPath()%>/LoginCheck" method="post">
+<form action="/LoginCheck" method="post">
     <table id="window">
     <tr><td id="site-box">
         <table id="part">

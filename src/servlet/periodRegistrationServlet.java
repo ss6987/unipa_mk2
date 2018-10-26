@@ -71,7 +71,6 @@ public class periodRegistrationServlet extends HttpServlet {
                 request.setAttribute("registrationPeriod", registrationPeriod);
             }
 
-            modelManager.updateRegistrationPeriodFlag();
 
             request.setAttribute("Number", 23);
             dispatch.forward(request, response);

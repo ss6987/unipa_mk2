@@ -20,7 +20,7 @@
     <h1>UNIPAへようこそ！</h1>
     <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
     <h2>履修登録期間<%=period%></h2>
-            <form action="<%= request.getContextPath()%>/Top" method="post" accept-charset="UTF-8">
+            <form action="<%= request.getContextPath()%>/Main" method="post" accept-charset="UTF-8">
                 <span><button type="submit" name="action" class="btn_2" value="myUserDetail">ユーザー情報確認</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="SyllabusSearch">シラバス検索</button></span>
                 <%
@@ -33,7 +33,7 @@
                 <%
                 } else if (classification.equals("教職員")) {
                 %>
-                <span><button type="submit" name="action" class="btn_2" value="CourseCheck">担当科目確認</button></span>
+                <span><button type="submit" name="action" class="btn_2" value="TimeTableCheck">担当科目確認</button></span>
                 <%
                 } else if (classification.equals("管理者")) {
                 %>

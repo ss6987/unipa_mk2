@@ -21,8 +21,8 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<form action="/Main" method="get">
-    <button type="submit" class="btn_1" name="top">トップへ</button>
+<form action="/Main" method="post">
+    <button type="submit" class="btn_1" name="action" value="Top">トップへ</button>
 </form>
 <button type="submit" name="action" class="btn_1" value="back" onclick="history.back()">戻る</button>
 
@@ -36,7 +36,7 @@
     }
 %>
 
-<form method="post" action="/CourseCheck">
+<form method="post" action="/Main">
     <table BORDER="1" align="center">
         <tr align="center">
             <%
@@ -91,8 +91,8 @@
     <%
         if (flag) {
     %>
-    <button type="submit" name="action" value="allow">承認</button>
-    <button type="submit" name="action" value="deleteCheck">削除</button>
+    <button type="submit" name="action" value="CourseRegistrationAllow">承認</button>
+    <button type="submit" name="action" value="CourseRegistrationDelete">削除</button>
     <%
         }
     %>

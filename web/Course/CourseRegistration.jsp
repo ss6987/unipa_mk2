@@ -17,7 +17,8 @@
 </head>
 <body>
 <form action="/Main" method="post">
-    <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+    <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ
+    </button>
 </form>
 <h1>履修登録</h1>
 
@@ -80,7 +81,6 @@
         }
     %>
 </table>
-<br>
 
 
 </body>
