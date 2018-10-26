@@ -91,8 +91,8 @@
     <%
         if (flag) {
     %>
-    <button type="submit" name="action" value="CourseRegistrationAllow">承認</button>
-    <button type="submit" name="action" value="CourseRegistrationDelete">削除</button>
+    <button type="submit" name="action" value="CourseAllow">承認</button>
+    <button type="submit" name="action" value="CourseDelete">削除</button>
     <%
         }
     %>

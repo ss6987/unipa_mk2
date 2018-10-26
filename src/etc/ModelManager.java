@@ -241,7 +241,7 @@ public class ModelManager {
         } catch (SQLException e) {
             return false;
         }
-        return false;
+        return true;
     }
 
     public boolean courseDelete(String syllabusId, List<String> studentList) {

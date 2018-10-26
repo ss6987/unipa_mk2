@@ -31,7 +31,7 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
 
         String action = (String) request.getAttribute("action");
         String targetUserId = (String) request.getSession(true).getAttribute("targetUserId");
-        if (targetUserId == null) {
+        if (targetUserId == null || targetUserId.equals("")) {
             try {
                 targetUserId = replaceString.repairRequest(request.getParameter("targetUserId"));
             } catch (java.lang.NullPointerException e) {

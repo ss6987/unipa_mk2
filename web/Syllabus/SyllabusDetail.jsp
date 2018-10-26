@@ -35,14 +35,14 @@
             <%
                 if (backPage.equals("searchResult")) {
             %>
-            <form action="/SyllabusSearch" method="post">
-                <button type="submit" name="action" class="btn_1" value="return">戻る</button>
+            <form action="/Main" method="post">
+                <button type="submit" name="action" class="btn_1" value="SyllabusSearchBack">戻る</button>
             </form>
             <%
             } else if (backPage.equals("timetable")) {
             %>
-            <form action="/Top" method="post">
-                <button type="submit" name="action" class="btn_1" value="CourseCheck">戻る</button>
+            <form action="/Main" method="post">
+                <button type="submit" name="action" class="btn_1" value="TimeTable">戻る</button>
             </form>
             <%
                 }
@@ -80,19 +80,6 @@
                 <input type="hidden" name="targetSyllabusId"
                        value="<jsp:getProperty name="targetSyllabus" property="syllabusId"/>">
                 <button type="submit" name="action" class="btn_5" value="CourseRegistrationAdd">履修登録に追加</button>
-            </form>
-            <%
-                }
-                if (backPage.equals("searchResult")) {
-            %>
-            <form action="/Main" method="post">
-                <button type="submit" name="action" class="btn_1" value="SyllabusSearchBack">戻る</button>
-            </form>
-            <%
-            } else if (backPage.equals("timetable")) {
-            %>
-            <form action="/Main" method="post">
-                <button type="submit" name="action" class="btn_1" value="TimeTable">戻る</button>
             </form>
             <%
                 }
