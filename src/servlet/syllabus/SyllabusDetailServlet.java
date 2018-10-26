@@ -5,7 +5,6 @@ import Entity.SyllabusDetail;
 import etc.ModelManager;
 import etc.ReplaceString;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,48 +13,49 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SyllabusDetailServlet extends HttpServlet {
-    private String disp = "/MainForward";
-    private ModelManager modelManager = new ModelManager();
-    private RequestDispatcher dispatch;
-    private HttpSession session;
+    private ModelManager modelManager;
+    private String url = "/Syllabus/SyllabusDetail.jsp";
+    private ReplaceString replaceString = new ReplaceString();
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        modelManager = (ModelManager) getServletContext().getAttribute("modelManager");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher(disp);
-        session = request.getSession(true);
-
-        String action = request.getParameter("action");
-        String syllabusId = request.getParameter("targetSyllabusId");
-        if(syllabusId == null){
-            syllabusId = (String) session.getAttribute("targetSyllabusId");
-        }
-
-        SyllabusDetail targetSyllabus = modelManager.syllabusDetailFindById(syllabusId);
-
-        session.setAttribute("targetSyllabusId", syllabusId);
-        request.setAttribute("targetSyllabus", targetSyllabus);
-        if (action.equals("detail")) {
-            String backPage = new ReplaceString().repairRequest(request.getParameter("backPage"));
-            User user = (User) session.getAttribute("user");
-            if(user.getUserClassification().equals("教職員") && modelManager.getInCharge(syllabusId,user.getUserId())){
-                request.setAttribute("inChargeFlag",true);
-            }else{
-                request.setAttribute("inChargeFlag",false);
-            }
-            request.setAttribute("semesterString",modelManager.getSemesterString());
-            request.setAttribute("backPage",backPage);
-            request.setAttribute("Number", 11);
-            dispatch.forward(request, response);
-        }else if(action.equals("update")){
-            request.setAttribute("Number",10);
-            dispatch.forward(request, response);
-        }else if(action.equals("delete")){
-            request.setAttribute("Number",12);
-            dispatch.forward(request, response);
+        String action = (String) request.getAttribute("action");
+        switch (action) {
+            case "SyllabusDetail":
+                actionDetail(request, response);
+                return;
         }
         return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private void actionDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
+        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
+        if(targetSyllabusId.equals("")){
+            targetSyllabusId = (String) session.getAttribute("targetSyllabusId");
+        }
+        SyllabusDetail syllabusDetail = modelManager.syllabusDetailFindById(targetSyllabusId);
+
+        String backPage = replaceString.repairRequest(request.getParameter("backPage"));
+        if(backPage.equals("")){
+            backPage = (String) session.getAttribute("backPage");
+        }
+        session.setAttribute("backPage", backPage);
+        session.setAttribute("targetSyllabusId", targetSyllabusId);
+        request.setAttribute("semesterString", modelManager.getSemesterString());
+        request.setAttribute("targetSyllabus", syllabusDetail);
+        request.setAttribute("inChargeFlag",modelManager.getInCharge(targetSyllabusId,user.getUserId()));
+        request.getRequestDispatcher(url).forward(request, response);
+        return;
     }
 }

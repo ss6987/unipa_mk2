@@ -1,6 +1,7 @@
 package DAO;
 
 import Entity.Student;
+import Entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +54,21 @@ public class StudentDAO {
         setList(student);
         String sql = sqlCreater.delete(tableName, list);
         return sessionManager.execute(sql);
+    }
+
+    public boolean delete(User user){
+        Student student;
+        try {
+            student = user.convertUserToStudent();
+        } catch (SQLException e) {
+            return false;
+        }
+
+        if(student == null){
+            return true;
+        }
+
+        return this.delete(student);
     }
 
 

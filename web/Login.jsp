@@ -40,7 +40,7 @@
                 <td><input type="password" name="password" required></td>
             </tr>
         </table>
-        <button type="submit" class="btn_1" name="login">ログイン</button>
+        <button type="submit" class="btn_1" name="action" value="Login">ログイン</button>
     </td></tr>
     </table>
 </form>

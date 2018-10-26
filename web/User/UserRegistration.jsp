@@ -15,7 +15,7 @@
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 
 <%
-    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartmentList");
+    List<FacultyDepartment> facultyDepartmentList = (List<FacultyDepartment>) request.getAttribute("facultyDepartment");
 %>
 
 <html lang="ja">
@@ -25,7 +25,7 @@
 </head>
 <body>
 <table id="window"><tr><td class="a-box">
-        <form action="/Top" method="get">
+        <form action="/Main" method="post">
             <button type="submit" name="action" class="btn_1" value="Top">トップ</button>
         </form>
 </td><td class="c-box">
@@ -52,7 +52,7 @@
             }
         %>
 
-        <form action="/UserUpdate" method="post" name="userRegistration">
+        <form action="/Main" method="post" name="userRegistration">
             <table BORDER="1" align="center">
                 <tbody>
                 <tr align="center">
@@ -82,7 +82,7 @@
                 <tr align="center">
                     <th>フリガナ</th>
                     <td>
-                        <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶ]+$"tabindex="3"/>
+                        <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶー　 ]+$"tabindex="3"/>
                     </td>
                 </tr>
 
@@ -132,7 +132,7 @@
                 <tr align="center">
                     <th>電話番号</th>
                     <td>
-                        <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"required pattern="^[0-9]+$"tabindex="12"/><br>※ハイフンなしで入力
+                        <input type="text" name="tel" value="<jsp:getProperty name="targetUser" property="tel"/>"required pattern="^[0-9]{10,11}" tabindex="12"/><br>※ハイフンなしで入力
                     </td>
                 </tr>
                 <tr align="center" class="studentStatus">
@@ -166,12 +166,12 @@
             <%
                 if (!targetUserId.equals("")) {
             %>
-            <button type="submit" name="action" value="update" class="btn_4" align="center"tabindex="15"> 更新</button>
-            <button type="submit" name="action" value="delete" class="btn_3" align="center"tabindex="16"> 削除</button>
+            <button type="submit" name="action" value="UserUpdateDone" class="btn_4" align="center"tabindex="15"> 更新</button>
+            <button type="submit" name="action" value="UserDelete" class="btn_3" align="center"tabindex="16"> 削除</button>
             <%
             } else {
             %>
-            <button type="submit" name="action" value="insert" class="btn_4" align="center"tabindex="15"> 登録</button>
+            <button type="submit" name="action" value="UserRegistration" class="btn_4" align="center"tabindex="15"> 登録</button>
             <%
                 }
             %>

@@ -7,7 +7,6 @@ import Entity.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ModelManager {
@@ -61,15 +60,33 @@ public class ModelManager {
     }
 
     public boolean userDelete(User user) {
-        if (userDAO.delete(user)) {
-            return true;
-        } else {
+        if (!studentDAO.delete(user)) {
             return false;
         }
+
+        if (!teacherInChargeDAO.deleteByUser(user)) {
+            return false;
+        }
+
+        if (!userDAO.delete(user)) {
+            return false;
+        }
+        return true;
     }
 
     public boolean userUpdate(User user) {
-        return userDAO.update(user);
+        if (!userDAO.update(user)) {
+            return false;
+        }
+
+        if (!user.getUserClassification().equals("学生")) {
+            try {
+                studentDAO.delete(studentDAO.findByStudent(user.getUserId()));
+            } catch (SQLException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean userUpdatePassword(User user, String password) {
@@ -118,11 +135,7 @@ public class ModelManager {
     }
 
     public boolean syllabusDelete(Syllabus syllabus) {
-        try {
-            return syllabusDAO.delete(syllabus.convertSyllabusToSyllabusDetail());
-        } catch (SQLException e) {
-            return false;
-        }
+        return syllabusDAO.delete(syllabus.convertSyllabusToSyllabusDetail());
     }
 
     public boolean syllabusDelete(SyllabusDetail syllabus) {
@@ -130,8 +143,17 @@ public class ModelManager {
             SyllabusContentsDAO syllabusContentsDAO = new SyllabusContentsDAO();
             syllabusContentsDAO.delete(syllabusContents);
         }
-        TeacherInChargeDAO teacherInChargeDAO = new TeacherInChargeDAO();
         teacherInChargeDAO.deleteBySyllabus(syllabus.convertSyllabusDetailToSyllabus());
+        DepartmentRelationDAO departmentRelationDAO = new DepartmentRelationDAO();
+        departmentRelationDAO.delete(new FacultyDepartment(), syllabus);
+        try {
+            List<Course> courseList = courseDAO.findBySyllabus(syllabus.convertSyllabusDetailToSyllabus(), -1);
+            for (Course course : courseList) {
+                courseDAO.delete(course);
+            }
+        } catch (SQLException e) {
+            return false;
+        }
         return syllabusDAO.delete(syllabus);
     }
 
@@ -144,11 +166,7 @@ public class ModelManager {
     }
 
     public SyllabusDetail syllabusDetailFindById(String syllabusId) {
-        try {
-            return syllabusDAO.findBySyllabusDetailId(syllabusId);
-        } catch (SQLException e) {
-            return null;
-        }
+        return syllabusDAO.findBySyllabusDetailId(syllabusId);
     }
 
     public List<Syllabus> syllabusSearch(Syllabus syllabus, Integer page) {
@@ -186,6 +204,7 @@ public class ModelManager {
         User user = new User();
         syllabus.setSyllabusId(syllabusId);
         user.setUserId(userId);
+        teacherInChargeDAO.deleteBySyllabus(syllabus);
         return teacherInChargeDAO.insert(user, syllabus, mainTeacher);
     }
 
@@ -203,8 +222,26 @@ public class ModelManager {
         return flag;
     }
 
-    public boolean courseUpdate(Student student, List<String> syllabusIdList, List<String> achievementList) {
+    public boolean courseUpdate(List<String> studentIdList, String syllabusId, Integer achievement) {
+        for (String studentId : studentIdList) {
+            if (!courseUpdate(studentId, syllabusId, achievement)) {
+                return false;
+            }
+        }
         return true;
+    }
+
+    public boolean courseUpdate(String studentId, String syllabusId, Integer achievement) {
+        Course course = new Course();
+        try {
+            course = new Course(studentId, syllabusId, achievement);
+            if (!courseDAO.update(course)) {
+                return false;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        return false;
     }
 
     public boolean courseDelete(String syllabusId, List<String> studentList) {
@@ -291,6 +328,14 @@ public class ModelManager {
         }
     }
 
+    public RegistrationPeriod registrationPeriodSelect() {
+        try {
+            return registrationPeriodDAO.select();
+        } catch (SQLException e) {
+            return new RegistrationPeriod();
+        }
+    }
+
     public List<FacultyDepartment> getFacultyDepartmentList() {
         try {
             return facultyDepartmentDAO.select(new FacultyDepartment(), -1);
@@ -322,7 +367,7 @@ public class ModelManager {
         }
     }
 
-    public boolean getSemester(){
+    public boolean getSemester() {
         return semester;
     }
 
@@ -335,10 +380,14 @@ public class ModelManager {
     }
 
     public boolean getInCharge(String syllabusId, String teacherId) {
-        return teacherInChargeDAO.getInCharge(syllabusId,teacherId);
+        return teacherInChargeDAO.getInCharge(syllabusId, teacherId);
     }
 
-    public LocalDateTime getNow(){
+    public LocalDateTime getNow() {
         return now;
+    }
+
+    public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod) {
+        return registrationPeriodDAO.update(registrationPeriod);
     }
 }

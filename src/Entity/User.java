@@ -7,6 +7,8 @@ import DAO.UserDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -31,6 +33,49 @@ public class User {
         this.address = "";
         this.tel = "";
         this.userClassification = "";
+    }
+
+    public User(HttpServletRequest request,String targetUserId) throws UnsupportedEncodingException {
+        ReplaceString replaceString = new ReplaceString();
+        String errorString = "";
+
+        if(targetUserId.equals("")){
+            targetUserId = replaceString.repairRequest(request.getParameter("userId"));
+        }
+
+        String name = replaceString.repairRequest(request.getParameter("name"));
+        String phonetic = replaceString.repairRequest(request.getParameter("phonetic"));
+        String genderString = replaceString.repairRequest(request.getParameter("gender"));
+        String year = replaceString.repairRequest(request.getParameter("year"));
+        String month = replaceString.repairRequest(request.getParameter("month"));
+        String day = replaceString.replace(request.getParameter("day"));
+        String birthday = year + "-" + month + "-" + day;
+        String postalCode = replaceString.repairRequest(request.getParameter("postal_code"));
+        String address = replaceString.repairRequest(request.getParameter("address"));
+        String tel = replaceString.repairRequest(request.getParameter("tel"));
+        String userClassification = replaceString.repairRequest(request.getParameter("user_classification"));
+
+        Integer gender;
+        try {
+            gender = Integer.parseInt(genderString);
+        } catch (java.lang.NumberFormatException e) {
+            gender = -1;
+        }
+
+        errorString += this.setUserId(targetUserId);
+        errorString += this.setName(name);
+        errorString += this.setPhonetic(phonetic);
+        errorString += this.setGender(gender);
+        errorString += this.setBirthday(birthday);
+        errorString += this.setPostalCode(postalCode);
+        errorString += this.setAddress(address);
+        errorString += this.setTel(tel);
+        errorString += this.setUserClassification(userClassification);
+        errorString = errorString.replace("。", "。<br/>");
+
+        if (!errorString.equals("")) {
+            request.setAttribute("errorString", errorString);
+        }
     }
 
     public User(ResultSet resultSet) throws SQLException {
@@ -97,7 +142,7 @@ public class User {
         if (birthday.matches("[-\\d]+$") && birthday.matches("^(\\d{4}-(0[0-9]|1[0-2])-(0[0-9]|[12][0-9]|3[01]))$")) {
             this.birthday = birthday;
             return "";
-        }else if(birthday.equals("")){
+        }else if(birthday.equals("")||birthday.equals("--")){
             this.birthday = "";
             return "";
         }

@@ -1,10 +1,8 @@
 package servlet;
 
-import Entity.Syllabus;
 import etc.ModelManager;
 import Entity.User;
-import servlet.timetable.Time;
-import servlet.timetable.TimeTable;
+import etc.ReplaceString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
+
 
 public class LoginCheckServlet extends HttpServlet {
-    private String disp = "/MainForward";
     private ModelManager modelManager = new ModelManager();
     private RequestDispatcher dispatch;
     private HttpSession session;
+    private ReplaceString replaceString = new ReplaceString();
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,54 +28,26 @@ public class LoginCheckServlet extends HttpServlet {
                 ;
             }
         }
-        dispatch = request.getRequestDispatcher(disp);
         session = request.getSession(true);
 
-        String id = request.getParameter("id");
-        String password = request.getParameter("password");
-
+        String id = replaceString.repairRequest(request.getParameter("id"));
+        String password = replaceString.repairRequest(request.getParameter("password"));
 
         User user = modelManager.login(id, password);
-        Integer url;
-        if (user != null) {
-            session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
-            if (user.getUserClassification().equals("学生")) {
-                List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(user.getUserId());
-                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-
-                timeTable.addSyllabusList(syllabusList);
-                nowTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable", timeTable);
-                session.setAttribute("nowTable", nowTable);
-            } else if (user.getUserClassification().equals("教職員")) {
-                List<Syllabus> syllabusList = modelManager.teacherInChargeSearch(user.getUserId());
-                TimeTable timeTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                TimeTable nowTable = new TimeTable(modelManager.getSemesterString(), modelManager.getNow());
-                timeTable.addSyllabusList(syllabusList);
-                nowTable.addSyllabusList(syllabusList);
-                session.setAttribute("timeTable", timeTable);
-                session.setAttribute("nowTable", nowTable);
-            }
-
-            session.setAttribute("user", user);
-            url = 2;
-        } else {
-            System.out.println("error");
-            user = new User();
-            user.setUserId(id);
-            session.setAttribute("user", user);
-            url = 1;
+        if (user == null) {
+            request.setAttribute("errorString","ログイン失敗");
+            request.getRequestDispatcher("Login.jsp").forward(request,response);
+            return;
         }
 
-        request.setAttribute("period", modelManager.getRegistrationPeriod());
-        request.setAttribute("Number", url);
-        dispatch.forward(request, response);
+        session.setAttribute("user", user);
+        session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
+        request.getRequestDispatcher("/Main").forward(request, response);
         return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher(disp);
+        dispatch = request.getRequestDispatcher("/TopServlet");
         session = request.getSession(true);
 
         User user = (User) session.getAttribute("user");

@@ -9,7 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="paging" class="etc.Paging" scope="request"/>
+<jsp:useBean id="paging" class="etc.Paging" scope="session"/>
 <%
     List<User> userList = (List<User>) request.getAttribute("userList");
     Integer nowPage = paging.getNowPage();
@@ -23,11 +23,11 @@
 <body>
 <table id="window">
 <tr><td class="ta-box">
-        <form action="/Top" method="get">
-            <button type="submit" name="check" class="btn_1"> トップ</button>
+        <form action="/Main" method="post">
+            <button type="submit" name="action" value="Top" class="btn_1"> トップ</button>
         </form>
 </td><td class="tb-box">
-        <form action="/Top" method="post">
+        <form action="/Main" method="post">
             <button type="submit" name="action" class="btn_1" value="UserSearch">もどる</button>
         </form>
 </td></tr>
@@ -95,9 +95,9 @@
         <%
             if (nowPage != 1) {
         %>
-        <form action="/UserSearch" method="post">
+        <form action="/Main" method="post">
             <input type="hidden" name="page" value="<%=paging.getStartPage()%>"/>
-            <button name="action" type="submit" class="btn_6" value="changePage">最初</button>
+            <button name="action" type="submit" class="btn_6" value="UserSearchChangePage">最初</button>
         </form>
         <%
         } else {
@@ -111,9 +111,9 @@
             for (int i = nowPage - 2; i < nowPage + 3; i++) {
                 if (i != nowPage && i >= 1 && i <= paging.getLastPage()) {
         %>
-        <form action="/UserSearch" method="post">
+        <form action="/Main" method="post">
             <input type="hidden" name="page" value="<%=i%>"/>
-            <button name="action" type="submit" class="btn_6" value="changePage"><%=i%>
+            <button name="action" type="submit" class="btn_6" value="UserSearchChangePage"><%=i%>
             </button>
         </form>
         <%
@@ -130,9 +130,9 @@
         <%
             if (nowPage != paging.getLastPage()) {
         %>
-        <form action="/UserSearch" method="post">
+        <form action="/Main" method="post">
             <input type="hidden" name="page" value="<%=paging.getLastPage()%>"/>
-            <button name="action" type="submit" class="btn_6" value="changePage">最後</button>
+            <button name="action" type="submit" class="btn_6" value="UserSearchChangePage">最後</button>
         </form>
         <%
         } else {

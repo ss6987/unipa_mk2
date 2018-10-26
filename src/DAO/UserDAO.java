@@ -96,7 +96,7 @@ public class UserDAO {
 
     public User findById(String userId) {
         setValue("user_id", userId);
-        String sql = sqlCreater.select(tableName, list, 0);
+        String sql = sqlCreater.selectEqual(tableName, list, 0);
         ResultSet resultSet = this.sessionManager.executeQuery(sql);
         try {
             resultSet.next();

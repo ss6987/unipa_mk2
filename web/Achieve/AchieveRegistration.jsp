@@ -20,25 +20,32 @@
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<table id="window"><tr><td class="ta-box">
-        <form action="/Top" method="get">
-            <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
-        </form>
-</td><td class="tb-box">
-    <form action="/AchieveRegist" method="post">
-        <button type="submit" name="action" value="back" class="btn_1"> 戻る</button>
-    </form>
-</td></tr>
-<tr><td class="c-box" colspan="2">
-        <h1>成績情報更新</h1>
-        <%
+<table id="window">
+    <tr>
+        <td class="ta-box">
+            <form action="/Main" method="post">
+                <button type="submit" name="action" value="Top" class="btn_1"
+                        style="position: absolute; left: 0px; top: 0px">トップへ
+                </button>
+            </form>
+        </td>
+        <td class="tb-box">
+            <form action="/AchieveRegist" method="post">
+                <button type="submit" name="action" value="back" class="btn_1"> 戻る</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td class="c-box" colspan="2">
+            <h1>成績情報更新</h1>
+                <%
             if (!errorString.equals("")) {
         %>
-        <span style="background-color:#ffcc99">※ファイルが違います</span>
-        <%
+            <span style="background-color:#ffcc99">※ファイルが違います</span>
+                <%
             }
         %>
-        <br>
+            <br>
 
         <%--<input type="file" name="seisekicsv" size="30">--%>
 

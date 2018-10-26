@@ -23,12 +23,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AchieveForwardServlet</servlet-name>
-        <servlet-class>servlet.achieve.AchieveForwardServlet</servlet-class>
+        <servlet-name>AchieveCheckServlet</servlet-name>
+        <servlet-class>servlet.achieve.AchieveCheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AchieveForwardServlet</servlet-name>
-        <url-pattern>/AchieveForward</url-pattern>
+        <servlet-name>AchieveCheckServlet</servlet-name>
+        <url-pattern>/AchieveCheck</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -77,12 +77,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserUpdateServlet</servlet-name>
-        <servlet-class>servlet.user.UserUpdateServlet</servlet-class>
+        <servlet-name>UserInsertOrUpdateServlet</servlet-name>
+        <servlet-class>servlet.user.UserInsertOrUpdateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserUpdateServlet</servlet-name>
-        <url-pattern>/UserUpdate</url-pattern>
+        <servlet-name>UserInsertOrUpdateServlet</servlet-name>
+        <url-pattern>/UserInsertOrUpdate</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -110,24 +110,6 @@
     <servlet-mapping>
         <servlet-name>SyllabusRegistServlet</servlet-name>
         <url-pattern>/SyllabusRegist</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StudentDeleteCheckServlet</servlet-name>
-        <servlet-class>servlet.user.StudentDeleteCheckServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentDeleteCheckServlet</servlet-name>
-        <url-pattern>/StudentDeleteCheck</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>StudentDeleteServlet</servlet-name>
-        <servlet-class>servlet.user.StudentDeleteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentDeleteServlet</servlet-name>
-        <url-pattern>/StudentDelete</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -167,23 +149,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Return</servlet-name>
-        <servlet-class>servlet.Return</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Return</servlet-name>
-        <url-pattern>/Return</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ReturnTop</servlet-name>
-        <servlet-class>servlet.ReturnTop</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ReturnTop</servlet-name>
-        <url-pattern>/ReturnTop</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>MainForwardServlet</servlet-name>
         <servlet-class>servlet.MainForwardServlet</servlet-class>
     </servlet>
@@ -216,21 +181,93 @@
         <url-pattern>/SyllabusDetail</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>SyllabusUpdateServlet</servlet-name>
-        <servlet-class>servlet.syllabus.SyllabusUpdateServlet</servlet-class>
+        <servlet-name>SyllabusInsertOrUpdateServlet</servlet-name>
+        <servlet-class>servlet.syllabus.SyllabusInsertOrUpdateServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>SyllabusUpdateServlet</servlet-name>
-        <url-pattern>/SyllabusUpdate</url-pattern>
+        <servlet-name>SyllabusInsertOrUpdateServlet</servlet-name>
+        <url-pattern>/SyllabusInsertOrUpdate</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>periodRegistrationServlet</servlet-name>
+        <servlet-name>PeriodRegistrationServlet</servlet-name>
         <servlet-class>servlet.periodRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>periodRegistrationServlet</servlet-name>
+        <servlet-name>PeriodRegistrationServlet</servlet-name>
         <url-pattern>/periodRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AchieveMainServlet</servlet-name>
+        <servlet-class>servlet.achieve.AchieveMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AchieveMainServlet</servlet-name>
+        <url-pattern>/AchieveMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CourseMainServlet</servlet-name>
+        <servlet-class>servlet.course.CourseMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourseMainServlet</servlet-name>
+        <url-pattern>/CourseMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusMainServlet</servlet-name>
+        <servlet-class>servlet.syllabus.SyllabusMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusMainServlet</servlet-name>
+        <url-pattern>/SyllabusMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>TimeTableMainServlet</servlet-name>
+        <servlet-class>servlet.timetable.TimeTableMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TimeTableMainServlet</servlet-name>
+        <url-pattern>/TimeTableMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserMainServlet</servlet-name>
+        <servlet-class>servlet.user.UserMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserMainServlet</servlet-name>
+        <url-pattern>/UserMain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>servlet.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/Main</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <servlet-class>servlet.user.UserDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <url-pattern>/UserDetail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserResultServlet</servlet-name>
+        <servlet-class>servlet.user.UserResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserResultServlet</servlet-name>
+        <url-pattern>/UserResult</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SyllabusResultServlet</servlet-name>
+        <servlet-class>servlet.syllabus.SyllabusResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SyllabusResultServlet</servlet-name>
+        <url-pattern>/SyllabusResult</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

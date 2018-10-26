@@ -7,6 +7,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>トップページ</title>
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
@@ -19,16 +20,15 @@
     <h1>UNIPAへようこそ！</h1>
     <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
     <h2>履修登録期間<%=period%></h2>
-
             <form action="<%= request.getContextPath()%>/Top" method="post" accept-charset="UTF-8">
-                <span><button type="submit" name="action" class="btn_2" value="MyUser">ユーザー情報確認</button></span>
+                <span><button type="submit" name="action" class="btn_2" value="myUserDetail">ユーザー情報確認</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="SyllabusSearch">シラバス検索</button></span>
                 <%
                     if (classification.equals("学生")) {
                 %>
 
-                <span><button type="submit" name="action" class="btn_2" value="CheckTimeTable">時間割表確認</button> </span>
-                <span><button type="submit" name="action" class="btn_2" value="Achieve">成績参照</button></span>
+                <span><button type="submit" name="action" class="btn_2" value="TimeTableCheck">時間割表確認</button> </span>
+                <span><button type="submit" name="action" class="btn_2" value="AchieveCheck">成績参照</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="CourseRegistration">履修登録</button> </span>
                 <%
                 } else if (classification.equals("教職員")) {
@@ -40,12 +40,12 @@
                 <span><button type="submit" name="action" class="btn_2" value="UserSearch">ユーザー検索</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="UserRegistration">ユーザー登録</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="SyllabusRegistration">シラバス登録</button></span>
-                <span><button type="submit" name="action" class="btn_2" value="periodRegistrationCheck">履修登録期間設定</button></span>
+                <span><button type="submit" name="action" class="btn_2" value="PeriodRegistrationCheck">履修登録期間設定</button></span>
                 <%
                 } else {
                 %>
-                <span><button type="submit" name="action" class="btn_2" value="CheckTimeTable">時間割表確認</button> </span>
-                <span><button type="submit" name="action" class="btn_2" value="Achieve">成績参照</button></span>
+                <span><button type="submit" name="action" class="btn_2" value="TimeTableCheck">時間割表確認</button> </span>
+                <span><button type="submit" name="action" class="btn_2" value="AchieveCheck">成績参照</button></span>
                 <%
                     }
                 %>

@@ -19,110 +19,113 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CourseRegistrationServlet extends HttpServlet {
-    private String disp = "/MainForward";
-    private ModelManager modelManager = new ModelManager();
-    private RequestDispatcher dispatch;
-    private HttpSession session;
+    private ModelManager modelManager;
+    private ReplaceString replaceString = new ReplaceString();
+    private String url = "/Course/CourseRegistration.jsp";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        modelManager = (ModelManager) getServletContext().getAttribute("modelManager");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher(disp);
-        session = request.getSession(true);
-
-        ReplaceString replaceString = new ReplaceString();
-        String action = replaceString.repairRequest(request.getParameter("action"));
-
-        if(!(boolean)session.getAttribute("registrationPeriodFlag")){
-            request.setAttribute("errorString", "履修登録期間外");
-            request.setAttribute("Number", 16);
-            dispatch.forward(request, response);
-            return;
-        }
-
-        if (action.equals("registration")) {
-            TimeTable timeTable = (TimeTable) session.getAttribute("nowTable");
-            User user = (User) session.getAttribute("user");
-
-            if (!timeTable.checkOverlap()) {
-                session.setAttribute("nowTable", timeTable);
-                request.setAttribute("errorString", "重複している時間があります。");
-                request.setAttribute("Number", 15);
-                dispatch.forward(request, response);
+        String action = (String) request.getAttribute("action");
+        switch (action) {
+            case "CourseRegistration":
+                actionRegistration(request, response);
                 return;
-            }
-
-            Student student;
-            try {
-                student = user.convertUserToStudent();
-            } catch (SQLException e) {
-                request.setAttribute("errorString", "エラーが発生しました。");
-                request.setAttribute("Number", 15);
-                dispatch.forward(request, response);
+            case "CourseRegistrationSearch":
+                actionSearch(request, response);
                 return;
-            }
-
-            modelManager.courseDelete(student.getUserId());
-            List<String> syllabusList = timeTable.getAllSyllabusList();
-            boolean flag = modelManager.courseRegistration(student, syllabusList);
-
-            if (!flag) {
-                request.setAttribute("errorString", "エラーが発生しました。");
-                request.setAttribute("Number", 16);
-                dispatch.forward(request, response);
+            case "CourseRegistrationAdd":
+                actionAdd(request, response);
                 return;
-            }
-            session.setAttribute("timeTable",timeTable);
-
-            request.setAttribute("errorString", "更新成功");
-            request.setAttribute("Number", 17);
-            dispatch.forward(request, response);
-            return;
-
-        } else if (action.equals("firstSearch")) {
-            String time = replaceString.repairRequest(request.getParameter("time"));
-            String week = replaceString.repairRequest(request.getParameter("week"));
-            Syllabus searchSyllabus = new Syllabus();
-            searchSyllabus.setTime(time);
-            searchSyllabus.setWeek(Integer.parseInt(week));
-            searchSyllabus.setSemester(modelManager.getSemesterString());
-            session.setAttribute("searchSyllabus", searchSyllabus);
-
-            request.setAttribute("errorString", "");
-            request.setAttribute("Number", 13);
-            dispatch.forward(request, response);
-            return;
-        } else if (action.equals("add")) {
-            String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-            TimeTable timeTable = (TimeTable) session.getAttribute("nowTable");
-
-            Syllabus syllabus = modelManager.syllabusFindById(targetSyllabusId);
-            timeTable.addSyllabus(syllabus);
-            request.setAttribute("errorString", "");
-            request.setAttribute("Number", 15);
-            dispatch.forward(request, response);
-            return;
-
-        } else if (action.equals("delete")) {
-            String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
-            TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
-            nowTable.deleteSyllabus(targetSyllabusId);
-
-            session.setAttribute("nowTable", nowTable);
-            request.setAttribute("errorString", "");
-            request.setAttribute("Number", 15);
-            dispatch.forward(request, response);
-            return;
-        }else if(action.equals("check")){
-            request.setAttribute("errorString", "");
-            request.setAttribute("Number", 16);
-            dispatch.forward(request, response);
-        }else if(action.equals("back")){
-            request.setAttribute("errorString", "");
-            request.setAttribute("Number", 15);
-            dispatch.forward(request, response);
+            case "CourseRegistrationDelete":
+                actionDelete(request, response);
+                return;
+            case "CourseRegistrationDone":
+                actionRegistrationDone(request, response);
+                return;
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private void actionRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(url).forward(request, response);
+        return;
+    }
+
+    private void actionSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String weekString = replaceString.repairRequest(request.getParameter("week"));
+        Integer week = -1;
+        try {
+            week = Integer.parseInt(weekString);
+        } catch (java.lang.NumberFormatException e) {
+            ;
+        }
+        String time = replaceString.repairRequest(request.getParameter("time"));
+        Syllabus syllabus = new Syllabus();
+        syllabus.setWeek(week);
+        syllabus.setTime(time);
+
+        request.getSession(true).setAttribute("searchSyllabus", syllabus);
+        request.setAttribute("action", "SyllabusSearch");
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
+    }
+
+    private void actionAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
+        Syllabus targetSyllabus = modelManager.syllabusFindById(targetSyllabusId);
+        TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
+        nowTable.addSyllabus(targetSyllabus);
+
+        session.setAttribute("nowTable", nowTable);
+        request.getRequestDispatcher(url).forward(request, response);
+        return;
+    }
+
+    private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
+        TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
+        nowTable.deleteSyllabus(targetSyllabusId);
+
+        session.setAttribute("nowTable", nowTable);
+        request.getRequestDispatcher(url).forward(request, response);
+        return;
+    }
+
+    private void actionRegistrationDone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        User loginUser = (User) session.getAttribute("user");
+        Student student;
+        try {
+            student = loginUser.convertUserToStudent();
+        } catch (SQLException e) {
+            request.setAttribute("errorString", "対象学生が存在しません。");
+            request.getRequestDispatcher(url).forward(request, response);
+            return;
+        }
+
+        TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
+        TimeTable timeTable = (TimeTable) session.getAttribute("timeTable");
+        modelManager.courseDelete(loginUser.getUserId());
+        List<String> syllabusList = timeTable.getAllSyllabusList();
+        if (!modelManager.courseRegistration(student, syllabusList)) {
+            request.setAttribute("errorString", "登録に失敗しました。");
+            request.getRequestDispatcher(url).forward(request, response);
+            return;
+        }
+
+        session.setAttribute("timeTable",nowTable);
+        request.setAttribute("action", "TimeTableCheck");
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
     }
 }

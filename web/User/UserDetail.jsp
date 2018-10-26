@@ -14,7 +14,7 @@
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
 <jsp:useBean id="facultyDepartment" class="Entity.FacultyDepartment" scope="request"/>
-
+<jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
     <title>ユーザー管理</title>
@@ -22,151 +22,166 @@
 </head>
 <body>
 <table id="window">
-<tr><td class="ta-box">
-        <form action="/Top" method="get">
-            <button type="submit" class="btn_1">トップ</button>
-        </form>
-</td><td class="tb-box">
-    <%
-        if (!targetUserId.equals(user.getUserId())) {
-    %>
-    <form action="/UserSearch" method="post">
-        <button type="submit" name="action" class="btn_1" value="return">戻る</button>
-    </form>
-    <%
-        }
-    %>
-</td></tr>
-<tr><td class="c-box" colspan="2">
-    <h1 align="center">ユーザー管理</h1>
+    <tr>
+        <td class="ta-box">
+            <form action="/Main" method="post">
+                <button type="submit" name="action" value="Top" class="btn_1">トップ</button>
+            </form>
+        </td>
+        <td class="tb-box">
+            <%
+                if (!targetUserId.equals(user.getUserId())) {
+            %>
+            <form action="/Main" method="post">
+                <button type="submit" name="action" class="btn_1" value="UserSearchBack">戻る</button>
+            </form>
+            <%
+                }
+            %>
+        </td>
+    </tr>
+    <tr>
+        <td class="c-box" colspan="2">
+            <h1 align="center">ユーザー管理</h1>
 
-    <table BORDER="1" class="part">
-        <tr>
-            <th>学籍番号</th>
-            <td>
-                <%=targetUser.getUserId()%>
-            </td>
-        </tr>
+            <%
+                if (!errorString.equals("")) {
+            %>
+            <%=errorString%>
+            <%
+                }
+            %>
 
-        <tr>
-            <th>氏名</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="name"/>
-            </td>
-        </tr>
-        <tr>
-            <th>フリガナ</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="phonetic"/>
-            </td>
-        </tr>
+            <table BORDER="1" class="part">
+                <tr>
+                    <th>学籍番号</th>
+                    <td>
+                        <%=targetUser.getUserId()%>
+                    </td>
+                </tr>
 
-        <tr>
-            <th>性別</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="genderString"/>
-            </td>
-        </tr>
+                <tr>
+                    <th>氏名</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>フリガナ</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="phonetic"/>
+                    </td>
+                </tr>
 
-        <tr>
-            <th>ユーザー分類</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="userClassification"/>
-            </td>
-        </tr>
+                <tr>
+                    <th>性別</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="genderString"/>
+                    </td>
+                </tr>
 
-        <%
-            if (targetUser.getUserClassification().equals("学生")) {
-        %>
-        <tr align="center" class="studentStatus">
-                <th>学部学科</th>
-                <td>
-                    <jsp:getProperty name="facultyDepartment" property="faculty"/>
-                    <jsp:getProperty name="facultyDepartment" property="department"/>
-                </td>
-            </tr>
+                <tr>
+                    <th>ユーザー分類</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="userClassification"/>
+                    </td>
+                </tr>
 
-        <%
-            }
-        %>
+                <%
+                    if (targetUser.getUserClassification().equals("学生")) {
+                %>
+                <tr align="center" class="studentStatus">
+                    <th>学部学科</th>
+                    <td>
+                        <jsp:getProperty name="facultyDepartment" property="faculty"/>
+                        <jsp:getProperty name="facultyDepartment" property="department"/>
+                    </td>
+                </tr>
+
+                <%
+                    }
+                %>
 
 
-        <tr>
-            <th>生年月日</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="birthday"/>
-            </td>
-        </tr>
+                <tr>
+                    <th>生年月日</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="birthday"/>
+                    </td>
+                </tr>
 
-        <tr>
-            <th>郵便番号</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="postalCode"/>
-            </td>
-        </tr>
+                <tr>
+                    <th>郵便番号</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="postalCode"/>
+                    </td>
+                </tr>
 
-        <tr>
-            <th>住所</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="address"/>
-            </td>
-        </tr>
+                <tr>
+                    <th>住所</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="address"/>
+                    </td>
+                </tr>
 
-        <tr>
-            <th>電話番号</th>
-            <td>
-                <jsp:getProperty name="targetUser" property="tel"/>
-            </td>
-        </tr>
-    </table>
-    <%
-        if (user.getUserClassification().equals("管理者")) {
-    %>
-        <form action="/Top" method="post">
-            <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
-        </form>
-    <%
-        }
-    %>
+                <tr>
+                    <th>電話番号</th>
+                    <td>
+                        <jsp:getProperty name="targetUser" property="tel"/>
+                    </td>
+                </tr>
+            </table>
+            <%
+                if (user.getUserClassification().equals("管理者")) {
+            %>
+            <form action="/Main" method="post">
+                <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
+                <button type="submit" name="action" class="btn_4" value="UserDelete">削除</button>
+            </form>
+            <%
+                }
+            %>
 
-    <%
-        if (user.getUserId() == targetUser.getUserId()) {
-    %>
-    <h2 align="center">パスワード設定</h2>
-    <form action="/UserUpdate" method="post">
-        <table BORDER="1" class="part">
-            <tr>
-                <th>更新前パスワード</th>
-                <td>
-                    <input type="password" name="before_password" required>
-                </td>
-            </tr>
-            <tr>
-                <th>更新後パスワード</th>
-                <td>
-                    <input type="password" name="after_password" required>
-                </td>
-            </tr>
-        </table>
-        <button type="submit" name="action" class="btn_4" value="update_password">パスワード更新</button>
-    </form>
-    <%
-        }
-    %>
+            <%
+                if (user.getUserId() == targetUser.getUserId()) {
+            %>
+            <h2 align="center">パスワード設定</h2>
+            <form action="/Main" method="post">
+                <table BORDER="1" class="part">
+                    <tr>
+                        <th>更新前パスワード</th>
+                        <td>
+                            <input type="password" name="before_password" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>更新後パスワード</th>
+                        <td>
+                            <input type="password" name="after_password" required>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" name="action" class="btn_4" value="UserUpdatePassword">パスワード更新</button>
+            </form>
+            <%
+                }
+            %>
 
-    <%
-        if (user.getUserClassification().equals("学生")) {
-    %>
-    <h2 align="center">保護者用パスワード設定</h2>
-    <table BORDER="1" class="part">
-        <tr>
-            <th>パスワード<br>確認用パスワード</th>
-            <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-        </tr>
-    </table>
-    <%
-        }
-    %>
-</td></tr></table>
+            <%
+                if (user.getUserClassification().equals("学生")) {
+            %>
+            <h2 align="center">保護者用パスワード設定</h2>
+            <table BORDER="1" class="part">
+                <tr>
+                    <th>パスワード<br>確認用パスワード</th>
+                    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
+                </tr>
+            </table>
+            <%
+                }
+            %>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
