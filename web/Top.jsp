@@ -18,6 +18,9 @@
 <table id="window">
 <tr><td class="c-box">
     <h1>UNIPAへようこそ！</h1>
+    <form action="/Main" method="post">
+        <button name="action" value="Logout">ログアウト</button>
+    </form>
     <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
     <h2>履修登録期間<%=period%></h2>
             <form action="<%= request.getContextPath()%>/Main" method="post" accept-charset="UTF-8">

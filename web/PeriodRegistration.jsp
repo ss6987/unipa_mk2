@@ -18,8 +18,8 @@
     <title>履修登録期間変更</title>
 </head>
 <body>
-<form action="/Top" method="get">
-    <button type="submit" name="action" value="top">トップ</button>
+<form action="/Main" method="post">
+    <button type="submit" name="action" value="Top">トップ</button>
 </form>
 <h1>
     履修登録期間変更

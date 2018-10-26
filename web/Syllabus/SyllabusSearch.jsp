@@ -47,7 +47,7 @@
                     </tr>
 
                     <tr>
-                        <th>科授業名</th>
+                        <th>授業名</th>
                         <td>
                             <input type="text" name="syllabus_name"
                                    value="<jsp:getProperty name="searchSyllabus" property="syllabusName"/>"/>

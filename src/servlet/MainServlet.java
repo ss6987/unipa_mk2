@@ -52,6 +52,9 @@ public class MainServlet extends HttpServlet {
             url = "/UserMain";
         }else if(action.indexOf("PeriodRegistration") != -1){
             url = "/PeriodRegistration";
+        }else if(action.indexOf("Logout") != -1){
+            actionLogout(request, response);
+            return;
         }
         request.getRequestDispatcher(url).forward(request, response);
         return;
@@ -61,5 +64,10 @@ public class MainServlet extends HttpServlet {
 
     }
 
-
+    private void actionLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        session.invalidate();
+        request.getRequestDispatcher("Login.jsp").forward(request,response);
+        return;
+    }
 }
