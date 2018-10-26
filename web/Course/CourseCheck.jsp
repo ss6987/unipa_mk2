@@ -13,10 +13,11 @@
 <html lang="ja">
 <head>
     <title>履修登録確認</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
 <form action="/Top" method="get">
-    <button type="submit" name="top" style="position: absolute; left: 0px; top: 0px">トップへ</button>
+    <button type="submit" name="top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップへ</button>
 </form>
 <br>
 <h1>履修登録</h1>
@@ -70,8 +71,8 @@
 <%=nowTable.getTotalUnit()%>
 
 <form action="/CourseRegistration" method="post">
-    <button type="submit" name="action" value="back">戻る</button>
-    <button type="submit" name="action" value="registration">登録</button>
+    <button type="submit" name="action" class="btn_1" value="back">戻る</button>
+    <button type="submit" name="action" class="btn_4" value="registration">登録</button>
 </form>
 
 

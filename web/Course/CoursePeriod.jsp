@@ -9,9 +9,10 @@
 <html lang="ja">
 <head>
     <title>履修登録期間設定</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
-<h1>  <button type="submit" name="check"> トップ </button></h1>
+<h1>  <button type="submit" class="btn_1" name="check"> トップ </button></h1>
 <span style="background-color:#ffcc99">※正しく入力されていません</span>
 
 <table BORDER="1" align="center">
@@ -43,8 +44,8 @@
 
 <br>
 <br>
-<button type="submit" name="check" align="center"> 戻る </button>
-<button type="submit" name="next">次へ</button>
+<button type="submit" name="check" class="btn_1" align="center"> 戻る </button>
+<button type="submit" class="btn_4" name="next">次へ</button>
 <br>
 </body>
 </html>

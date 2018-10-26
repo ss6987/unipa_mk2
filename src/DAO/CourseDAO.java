@@ -26,6 +26,7 @@ public class CourseDAO {
 
     public boolean insert(Course course) throws SQLException {
         setList(course);
+        list.get(2).setValue("-3");
         String sql = sqlCreater.insert(tableName, list);
         return sessionManager.execute(sql);
     }

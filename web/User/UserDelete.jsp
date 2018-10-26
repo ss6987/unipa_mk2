@@ -11,102 +11,107 @@
 <html lang="ja">
 <head>
     <title>ユーザー削除確認</title>
+    <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
 <body>
+<table id="window">
+<tr><td class="ta-box">
+        <form action="/Top" method="get">
+            <button type="submit" name="top" class="btn_1"value="top"> トップ</button>
+        </form>
+</td></tr>
+<tr><td class="c-box" colspan="2">
+        <h1>ユーザー削除</h1>
+        <br>
 
-<form action="/Top" method="get">
-    <button type="submit" name="top" value="top"> トップ</button>
-</form>
+        以下の学生情報を完全に削除します。
 
-<h1>ユーザー削除</h1>
-<br>
-
-以下の学生情報を完全に削除します。
-
-<br>
-
-
-<table BORDER="1" align="center">
-    <tr align="center">
-        <th>学籍番号</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="userId"/>
-        </td>
-    </tr>
-
-    <tr align="center">
-        <th>氏名</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="name"/>
-        </td>
-    </tr>
-
-    <tr align="center">
-        <th>性別</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="genderString"/>
-        </td>
-
-    </tr>
-
-    <tr align="center">
-        <th>ユーザー分類</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="userClassification"/>
-        </td>
-
-    </tr>
+        <br>
 
 
-    <tr align="center">
-        <th>学部・学科</th>
-        <td>
-        </td>
+        <table BORDER="1" align="center">
+            <tr align="center">
+                <th>学籍番号</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="userId"/>
+                </td>
+            </tr>
 
-    </tr>
+            <tr align="center">
+                <th>氏名</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="name"/>
+                </td>
+            </tr>
+
+            <tr align="center">
+                <th>性別</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="genderString"/>
+                </td>
+
+            </tr>
+
+            <tr align="center">
+                <th>ユーザー分類</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="userClassification"/>
+                </td>
+
+            </tr>
 
 
-    <tr align="center">
-        <th>生年月日</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="birthYear"/>
-            年
-            <jsp:getProperty name="targetUser" property="birthMonth"/>
-            月
-            <jsp:getProperty name="targetUser" property="birthDay"/>
-            日
-        </td>
-    </tr>
+            <tr align="center">
+                <th>学部・学科</th>
+                <td>
+                </td>
 
-    <tr align="center">
-        <th>郵便番号</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="postalCode"/>
-        </td>
-    </tr>
+            </tr>
 
-    <tr align="center">
-        <th>住所</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="address"/>
-        </td>
-    </tr>
 
-    <tr align="center">
-        <th>電話番号</th>
-        <td>
-            <jsp:getProperty name="targetUser" property="tel"/>
-        </td>
-    </tr>
+            <tr align="center">
+                <th>生年月日</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="birthYear"/>
+                    年
+                    <jsp:getProperty name="targetUser" property="birthMonth"/>
+                    月
+                    <jsp:getProperty name="targetUser" property="birthDay"/>
+                    日
+                </td>
+            </tr>
 
+            <tr align="center">
+                <th>郵便番号</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="postalCode"/>
+                </td>
+            </tr>
+
+            <tr align="center">
+                <th>住所</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="address"/>
+                </td>
+            </tr>
+
+            <tr align="center">
+                <th>電話番号</th>
+                <td>
+                    <jsp:getProperty name="targetUser" property="tel"/>
+                </td>
+            </tr>
+
+        </table>
+
+        <form action="/Top" method="post">
+            <input type="hidden" name="action" value="UserUpdate">
+            <button type="submit" class="btn_1" name="login">もどる</button>
+        </form>
+        <form action="/UserDelete" method="post">
+            <button type="submit" name="action" class="btn_3" value="delete" align="center"> 削除</button>
+        </form>
+</td></tr>
 </table>
-
-<form action="/Top" method="post">
-    <input type="hidden" name="action" value="UserUpdate">
-    <button type="submit" name="login">もどる</button>
-</form>
-<form action="/UserDelete" method="post">
-    <button type="submit" name="action" value="delete" align="center"> 削除</button>
-</form>
 </body>
 </html>
