@@ -50,6 +50,8 @@ public class MainServlet extends HttpServlet {
             url = "/TimeTableMain";
         } else if (action.indexOf("User") != -1) {
             url = "/UserMain";
+        }else if(action.indexOf("PeriodRegistration") != -1){
+            url = "/PeriodRegistration";
         }
         request.getRequestDispatcher(url).forward(request, response);
         return;

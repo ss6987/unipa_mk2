@@ -30,8 +30,8 @@
             </form>
         </td>
         <td class="tb-box">
-            <form action="/AchieveRegist" method="post">
-                <button type="submit" name="action" value="back" class="btn_1"> 戻る</button>
+            <form action="/Main" method="post">
+                <button type="submit" name="action" value="SyllabusDetail" class="btn_1"> 戻る</button>
             </form>
         </td>
     </tr>
@@ -59,7 +59,7 @@
         </table>
 
         <br>
-        <form action="/AchieveRegist" method="post">
+        <form action="/Main" method="post">
             <table BORDER="1" class="part">
                 <tr>
                     <th>学籍番号</th>
@@ -94,7 +94,7 @@
                     }
                 %>
             </table>
-            <button type="submit" name="action" class="btn_4" value="update">更新</button>
+            <button type="submit" name="action" class="btn_4" value="AchieveRegistrationDone">更新</button>
         </form>
 
 </td></tr></table>

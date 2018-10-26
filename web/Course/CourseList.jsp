@@ -24,7 +24,9 @@
 <form action="/Main" method="post">
     <button type="submit" class="btn_1" name="action" value="Top">トップへ</button>
 </form>
-<button type="submit" name="action" class="btn_1" value="back" onclick="history.back()">戻る</button>
+<form action="/Main" method="post">
+    <button type="submit" class="btn_1" name="action" value="SyllabusDetail">戻る</button>
+</form>
 
 <h1>履修者一覧</h1>
 

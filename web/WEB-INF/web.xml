@@ -140,12 +140,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AchieveRegistServlet</servlet-name>
-        <servlet-class>servlet.achieve.AchieveRegistServlet</servlet-class>
+        <servlet-name>AchieveRegistrationServlet</servlet-name>
+        <servlet-class>servlet.achieve.AchieveRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AchieveRegistServlet</servlet-name>
-        <url-pattern>/AchieveRegist</url-pattern>
+        <servlet-name>AchieveRegistrationServlet</servlet-name>
+        <url-pattern>/AchieveRegistration</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -191,11 +191,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>PeriodRegistrationServlet</servlet-name>
-        <servlet-class>servlet.periodRegistrationServlet</servlet-class>
+        <servlet-class>servlet.PeriodRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PeriodRegistrationServlet</servlet-name>
-        <url-pattern>/periodRegistration</url-pattern>
+        <url-pattern>/PeriodRegistration</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AchieveMainServlet</servlet-name>
