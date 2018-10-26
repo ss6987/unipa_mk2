@@ -1,0 +1,146 @@
+body{
+    margin:0 0 0 0;
+    background-color: #AAAAAA;
+
+}
+form{
+    margin: 0 0 0 0;
+}
+#window{/* 仮想親テーブル */
+    width:100%;
+    background-color: rgba(0,0,0,0);
+}
+.c-box{/*仮想親テーブルのmainセル*/
+    text-align: center;
+    vertical-align: middle;
+}
+.ta-box{
+    width:50%;
+    height: 50px;
+
+}
+.tb-box{
+    width: 50%;
+    height: 50px;
+    text-align: right;
+}
+
+h1{
+    margin-top:50px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.btn_1{
+    margin:20px 10px;
+    width:100px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 20px;
+    color: #83C4CF;
+    line-height: 35px;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    background-image: -webkit-linear-gradient(#75A9FF 0%, #DD0000 100%);
+    background-image: linear-gradient(#CFCFCF 0%, #BBBBBB 100%);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.28);
+}
+.btn_1:active{/*押したとき*/
+    -ms-transform: translateY(2px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);/*沈むように*/
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: -webkit-linear-gradient(#999999 0%, #888888 100%);
+    background-image: linear-gradient(#BBBBBB 0%, #9A9A9A 100%);/*グラデーションを明るく*/
+}
+
+.btn_2 {
+    width: 80px;
+    height: 50px;
+    margin:50px 5px;
+    font-size: 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
+    border: double 6px #A00000;
+    border-radius: 3px;
+    transition: .4s;
+    background-image: -webkit-linear-gradient(#CFCFCF 0%, #BBBBBB 100%);
+    box-shadow: 2.5px 3.5px 0px rgba(0, 0, 0, 0.30);
+}
+
+.btn_2:active { /*押したとき*/
+    border: double 6px #A00000;
+    -ms-transform: translateY(2px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px); /*沈むように*/
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: -webkit-linear-gradient(#BBBBBB 0%, #9A9A9A 100%);
+
+}
+.btn_3 {
+    width: 80px;
+    height: 50px;
+    font-size: 16px;
+    margin:5px 5px;
+    display: inline-block;
+    text-decoration: none;
+    background: #CFCFCF; /*背景色*/
+    color: #00BCD4; /*=背景色*/
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2);
+    border-bottom: solid 2px #118e9e;
+    border-radius: 4px;
+    font-weight: bold;
+    text-shadow: -1px -1px rgba(207, 207, 207, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
+}
+
+.btn_3:active { /*押したとき*/
+    border-bottom: solid 2px #00BCD4;
+    box-shadow: none;
+    text-shadow: -1px -1px rgba(255, 255, 255, 0.3), 1px 1px rgba(0, 0, 0, 0.3);
+}
+.btn_4 {
+    width: 150px;
+    height: 80px;
+    margin:5px 5px;
+    font-size: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
+    border: double 6px #020138;
+    border-radius: 3px;
+    transition: .4s;
+    background-image: -webkit-linear-gradient(#CFCFCF 0%, #BBBBBB 100%);
+    box-shadow: 2.5px 3.5px 0px rgba(0, 0, 0, 0.30);
+}
+
+.btn_4:active { /*押したとき*/
+    border: double 4px #020138;
+    -ms-transform: translateY(2px);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px); /*沈むように*/
+    background-color: #020138;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: -webkit-linear-gradient(#BBBBBB 0%, #9A9A9A 100%);
+}
+
+.part{
+    margin:auto;
+    border: 1px #000000 solid;
+    border-collapse:collapse;
+    background-color:#EEEEEE;
+}
+.part tr:nth-child(odd){
+    background-color: #D9E5FF;
+}
+.ts{
+    width: 15%;
+}
+
+th, td {
+    padding: 5px 15px;
+}
