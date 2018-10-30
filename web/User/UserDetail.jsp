@@ -127,17 +127,24 @@
                     </td>
                 </tr>
             </table>
+            <span>
             <%
                 if (user.getUserClassification().equals("管理者")) {
             %>
-            <form action="/Main" method="post">
-                <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
-                <button type="submit" name="action" class="btn_4" value="UserDelete">削除</button>
-            </form>
+                <form action="/Main" method="post">
+                    <button type="submit" name="action" class="btn_4" value="UserUpdate">更新</button>
+                </form>
+            <%
+                }
+                if (user.getUserId() != targetUserId) {
+            %>
+                <form action="/Main" method="post">
+                    <button type="submit" name="action" class="btn_4" value="UserDelete">削除</button>
+                </form>
             <%
                 }
             %>
-
+            </span>
             <%
                 if (user.getUserId() == targetUser.getUserId()) {
             %>

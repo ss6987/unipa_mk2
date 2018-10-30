@@ -67,23 +67,25 @@ public class SyllabusInsertOrUpdateServlet extends HttpServlet {
         User targetMainTeacher = readMainTeacher(request);
 
         if (targetMainTeacher == null) {
-            request.setAttribute("action", "SyllabusRegistration");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorRegistrationReturn(request, response, "対象教職員が存在しません。");
             return;
         }
 
         if (!modelManager.syllabusRegistration(syllabusDetail)) {
-            request.setAttribute("errorString", "更新に失敗しました。");
-            request.setAttribute("action", "SyllabusRegistration");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorRegistrationReturn(request, response, "更新に失敗しました。");
             return;
         }
 
         if (!modelManager.teacherInChargeRegistration(syllabusDetail.getSyllabusId(), targetMainTeacher.getUserId(), 0)) {
             modelManager.syllabusDelete(syllabusDetail);
-            request.setAttribute("errorString", "更新に失敗しました。");
-            request.setAttribute("action", "SyllabusUpdate");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorRegistrationReturn(request, response, "更新に失敗しました。");
+            return;
+        }
+
+        syllabusDetail.setSyllabusContents(request);
+
+        if (!modelManager.syllabusUpdate(syllabusDetail)) {
+            errorRegistrationReturn(request, response, "更新に失敗しました。");
             return;
         }
 
@@ -100,23 +102,18 @@ public class SyllabusInsertOrUpdateServlet extends HttpServlet {
         User targetMainTeacher = readMainTeacher(request);
         if (targetMainTeacher == null) {
             request.setAttribute("targetSyllabus", syllabusDetail);
-            request.setAttribute("action", "SyllabusUpdate");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorUpdateReturn(request, response, "対象教職員が存在しません。");
             return;
         }
 
         if (!modelManager.syllabusUpdate(syllabusDetail)) {
             request.setAttribute("targetSyllabus", syllabusDetail);
-            request.setAttribute("errorString", "更新に失敗しました。");
-            request.setAttribute("action", "SyllabusUpdate");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorUpdateReturn(request, response, "更新に失敗しました。");
             return;
         }
 
         if (!modelManager.teacherInChargeRegistration(syllabusDetail.getSyllabusId(), targetMainTeacher.getUserId(), 0)) {
-            request.setAttribute("errorString", "更新に失敗しました。");
-            request.setAttribute("action", "SyllabusUpdate");
-            request.getRequestDispatcher("/Main").forward(request, response);
+            errorUpdateReturn(request, response, "更新に失敗しました");
             return;
         }
 
@@ -140,4 +137,15 @@ public class SyllabusInsertOrUpdateServlet extends HttpServlet {
         return mainTeacher;
     }
 
+    private void errorUpdateReturn(HttpServletRequest request, HttpServletResponse response, String errorString) throws ServletException, IOException {
+        request.setAttribute("action", "SyllabusDetail");
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
+    }
+
+    private void errorRegistrationReturn(HttpServletRequest request, HttpServletResponse response, String errorString) throws ServletException, IOException {
+        request.setAttribute("action", "SyllabusRegistration");
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
+    }
 }

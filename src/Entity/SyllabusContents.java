@@ -33,6 +33,7 @@ public class SyllabusContents {
                 this.syllabusId = syllabusId;
                 return "";
             }else{
+                this.syllabusId = syllabusId;
                 return "シラバスIDが見つかりませんでした。";
             }
         }

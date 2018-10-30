@@ -118,7 +118,7 @@
                     <th>郵便番号</th>
                     <td>
                         <input type="text" name="postal_code"
-                               value="<jsp:getProperty name="targetUser" property="postalCode"/>"required pattern="^[0-9]+$"tabindex="10"/><br>※ハイフンなしで入力
+                               value="<jsp:getProperty name="targetUser" property="postalCode"/>"required pattern="^[0-9]{7}"tabindex="10"/><br>※ハイフンなしで入力
                     </td>
                 </tr>
 

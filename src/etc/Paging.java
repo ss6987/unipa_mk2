@@ -34,4 +34,10 @@ public class Paging {
     public Integer getLastPage() {
         return lastPage;
     }
+
+    public void setCount(Integer count){
+        this.count = count;
+        this.lastPage = this.count / 100 + 1;
+        return;
+    }
 }

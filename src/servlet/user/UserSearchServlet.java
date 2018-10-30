@@ -50,6 +50,7 @@ public class UserSearchServlet extends HttpServlet {
     }
 
     private void actionSearch(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
         request.getRequestDispatcher(url).forward(request, response);
         return;
     }
@@ -89,6 +90,7 @@ public class UserSearchServlet extends HttpServlet {
         User searchUser = (User) session.getAttribute("searchUser");
 
         List<User> userList = modelManager.userSearch(searchUser,paging.getNowPage() -1);
+        paging.setCount(modelManager.userCount());
 
         request.setAttribute("userList",userList);
         request.setAttribute("action","UserResult");
