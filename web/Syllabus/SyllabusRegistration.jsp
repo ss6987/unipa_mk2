@@ -109,7 +109,7 @@
                         <td>
                             <input type="text" name="year"
                                    value="<jsp:getProperty name="targetSyllabus" property="yearString"/>"
-                                   required pattern="^[0-9]+$"
+                                   required pattern="^20[0-9]{2}"
                                    tabindex="5"/>
                             年度
                         </td>

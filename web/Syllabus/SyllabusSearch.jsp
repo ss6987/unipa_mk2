@@ -40,7 +40,7 @@
                     <tr>
                         <th>授業ID</th>
                         <td>
-                            <input type="text" name="syllabus_id"
+                            <input type="text" name="syllabus_id" pattern="^[0-9A-Za-z]+$" tabindex="1"
                                    value="<jsp:getProperty name="searchSyllabus" property="syllabusId"/>"/>
                         </td>
 
@@ -49,7 +49,7 @@
                     <tr>
                         <th>授業名</th>
                         <td>
-                            <input type="text" name="syllabus_name"
+                            <input type="text" name="syllabus_name" tabindex="2"
                                    value="<jsp:getProperty name="searchSyllabus" property="syllabusName"/>"/>
                         </td>
                     </tr>
@@ -57,7 +57,7 @@
                     <tr>
                         <th>英語名</th>
                         <td>
-                            <input type="text" name="english_name"
+                            <input type="text" name="english_name" tabindex="3"
                                    value="<jsp:getProperty name="searchSyllabus" property="englishName"/>"/>
                         </td>
                     </tr>
@@ -65,7 +65,7 @@
                     <tr>
                         <th>配当学年</th>
                         <td>
-                            <select name="dividend_grade">
+                            <select name="dividend_grade" tabindex="4">
                                 <option value="-1">全学年</option>
                                 <option value="1" <%=searchSyllabus.getDividendGradeSelected(1)%>>1</option>
                                 <option value="2" <%=searchSyllabus.getDividendGradeSelected(2)%>>2</option>
@@ -78,7 +78,7 @@
                     <tr>
                         <th>開講年度</th>
                         <td>
-                            <input type="text" name="year"
+                            <input type="text" name="year" pattern="^20[0-9]{2}" tabindex="5"
                                    value="<jsp:getProperty name="searchSyllabus" property="yearString"/>"/>
                         </td>
                     </tr>
@@ -86,7 +86,7 @@
                     <tr>
                         <th>学期</th>
                         <td>
-                            <select name="semester">
+                            <select name="semester" tabindex="6">
                                 <option value="">---</option>
                                 <option value="前期" <%=searchSyllabus.getSemesterSelected("前期")%>>前期</option>
                                 <option value="後期" <%=searchSyllabus.getSemesterSelected("後期")%>>後期</option>
@@ -96,7 +96,7 @@
                     <tr>
                         <th>曜日</th>
                         <td>
-                            <select name="week">
+                            <select name="week" tabindex="7">
                                 <option value="">---</option>
                                 <option value="月" <%=searchSyllabus.getWeekSelected("月")%>>月</option>
                                 <option value="火" <%=searchSyllabus.getWeekSelected("火")%>>火</option>
@@ -110,7 +110,7 @@
                     <tr>
                         <th>時限</th>
                         <td>
-                            <select name="time">
+                            <select name="time" tabindex="8">
                                 <option value="">---</option>
                                 <option value="1" <%=searchSyllabus.getTimeSelected("1")%>>1</option>
                                 <option value="2" <%=searchSyllabus.getTimeSelected("2")%>>2</option>
@@ -123,23 +123,10 @@
                             </select>
                         </td>
                     </tr>
-
-                    <tr>
-                        <th>科目分類</th>
-                        <td>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>担当教員</th>
-                        <td>
-                        </td>
-                    </tr>
-
                     <tr>
                         <th>単位数</th>
                         <td>
-                            <input type="text" name="unit"
+                            <input type="text" name="unit" pattern="^[0-9]+$" tabindex="9"
                                    value="<jsp:getProperty name="searchSyllabus" property="unitString"/>"/>
                         </td>
                     </tr>
@@ -147,33 +134,21 @@
                     <tr>
                         <th>定員</th>
                         <td>
-                            <input type="text" name="capacity"
+                            <input type="text" name="capacity" pattern="^[0-9]+$" tabindex="10"
                                    value="<jsp:getProperty name="searchSyllabus" property="capacityString"/>"/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>関連科目</th>
-                        <td>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>履修条件</th>
-                        <td>
                         </td>
                     </tr>
 
                     <tr>
                         <th>教室</th>
                         <td>
-                            <input type="text" name="class_room"
+                            <input type="text" name="class_room" tabindex="11"
                                    value="<jsp:getProperty name="searchSyllabus" property="classRoom"/>"/>
                         </td>
                     </tr>
 
                 </table>
-                <button type="submit" name="action" class="btn_5" value="SyllabusSearchFirst">検索</button>
+                <button type="submit" name="action" class="btn_5" value="SyllabusSearchFirst" tabindex="12">検索</button>
             </form>
         </td>
     </tr>

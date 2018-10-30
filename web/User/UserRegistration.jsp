@@ -61,7 +61,7 @@
                         <%
                             if (targetUserId.equals("")) {
                         %>
-                        <input type="text" name="targetUserId" value="<jsp:getProperty name="targetUser" property="userId" />"required pattern="^[0-9A-Za-z]+$"tabindex="1"/>
+                        <input type="text" name="targetUserId" value="<jsp:getProperty name="targetUser" property="userId" />" required pattern="^[0-9A-Za-z]+$" tabindex="1"/>
                         <%
                         } else {
                         %>
@@ -82,7 +82,7 @@
                 <tr align="center">
                     <th>フリガナ</th>
                     <td>
-                        <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>"required pattern="^[ァ-ヶー　 ]+$"tabindex="3"/>
+                        <input type="text" name="phonetic" value="<jsp:getProperty name="targetUser" property="phonetic"/>" required pattern="^[ァ-ヶー　 ]+$" tabindex="3"/>
                     </td>
                 </tr>
 
@@ -100,7 +100,7 @@
                 <tr align="center">
                     <th>性別</th>
                     <td>
-                        <input type="radio" name="gender" value="0" tabindex="5"<%=targetUser.getGenderSelected(0)%>>男性
+                        <input type="radio" name="gender" value="0" tabindex="5" <%=targetUser.getGenderSelected(0)%>>男性
                         <input type="radio" name="gender" value="1" tabindex="6" <%=targetUser.getGenderSelected(1)%>>女性
                     </td>
                 </tr>
@@ -108,9 +108,9 @@
                 <tr align="center">
                     <th>生年月日</th>
                     <td>
-                        西暦<input type="text" name="year" value="<jsp:getProperty name="targetUser" property="birthYear"/>"required pattern="^[0-9]+$"tabindex="7"/>年
-                        <input type="text" name="month" value="<jsp:getProperty name="targetUser" property="birthMonth"/>"required pattern="^[0-9]+$"tabindex="8"/>月
-                        <input type="text" name="day" value="<jsp:getProperty name="targetUser" property="birthDay"/>"required pattern="^[0-9]+$"tabindex="9"/>日
+                        西暦<input type="text" name="year" value="<jsp:getProperty name="targetUser" property="birthYear"/>" required pattern="^[0-9]+$" tabindex="7"/>年
+                        <input type="text" name="month" value="<jsp:getProperty name="targetUser" property="birthMonth"/>" required pattern="^[0-9]+$" tabindex="8"/>月
+                        <input type="text" name="day" value="<jsp:getProperty name="targetUser" property="birthDay"/>" required pattern="^[0-9]+$" tabindex="9"/>日
                     </td>
                 </tr>
 
@@ -118,7 +118,7 @@
                     <th>郵便番号</th>
                     <td>
                         <input type="text" name="postal_code"
-                               value="<jsp:getProperty name="targetUser" property="postalCode"/>"required pattern="^[0-9]{7}"tabindex="10"/><br>※ハイフンなしで入力
+                               value="<jsp:getProperty name="targetUser" property="postalCode"/>" required pattern="^[0-9]{7}" tabindex="10"/><br>※ハイフンなしで入力
                     </td>
                 </tr>
 

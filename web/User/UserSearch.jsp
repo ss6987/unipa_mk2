@@ -43,7 +43,7 @@
                     <tr>
                         <th>学籍番号</th>
                         <td>
-                            <input type="text" name="userId"
+                            <input type="text" name="userId" pattern="^[0-9A-Za-z]+$"
                                    value="<jsp:getProperty name="searchUser" property="userId"/>"/>
                         </td>
                     </tr>
@@ -58,7 +58,7 @@
                     <tr>
                         <th>フリガナ</th>
                         <td>
-                            <input type="text" name="phonetic"
+                            <input type="text" name="phonetic" pattern="^[ァ-ヶー　 ]+$"
                                    value="<jsp:getProperty name="searchUser" property="phonetic"/>"/>
                         </td>
                     </tr>
@@ -72,18 +72,18 @@
                     <tr>
                         <th>生年月日</th>
                         <td>
-                            西暦<input type="text" name="year"
+                            西暦<input type="text" name="year" pattern="^[0-9]+$"
                                      value="<jsp:getProperty name="searchUser" property="birthYear"/>"/>年<br/>
-                            <input type="text" name="month"
+                            <input type="text" name="month" pattern="^[0-9]+$"
                                    value="<jsp:getProperty name="searchUser" property="birthMonth"/>"/>月<br/>
-                            <input type="text" name="day"
+                            <input type="text" name="day" pattern="^[0-9]+$"
                                    value="<jsp:getProperty name="searchUser" property="birthDay"/>"/>日<br/>
                         </td>
                     </tr>
                     <tr>
                         <th>郵便番号</th>
                         <td>
-                            <input type="text" name="postal_code"
+                            <input type="text" name="postal_code" pattern="^[0-9]{7}"
                                    value="<jsp:getProperty name="searchUser" property="postalCode"/>"/>
                         </td>
                     </tr>
@@ -97,7 +97,8 @@
                     <tr>
                         <th>電話番号</th>
                         <td>
-                            <input type="text" name="tel" value="<jsp:getProperty name="searchUser" property="tel"/>"/>
+                            <input type="text" name="tel" pattern="^[0-9]{10,11}"
+                                   value="<jsp:getProperty name="searchUser" property="tel"/>"/>
                         </td>
                     </tr>
                     <tr>
