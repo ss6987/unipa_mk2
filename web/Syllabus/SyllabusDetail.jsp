@@ -26,7 +26,7 @@
         <td class="ta-box">
             <form action="/Main" method="post">
                 <button type="submit" name="action" value="Top" class="btn_1"
-                        style="position: absolute; left: 0px; top: 0px">トップへ
+                        style="position: absolute; left: 0px; top: 0px">トップ
                 </button>
             </form>
 
@@ -42,7 +42,7 @@
             } else if (backPage.equals("timetable")) {
             %>
             <form action="/Main" method="post">
-                <button type="submit" name="action" class="btn_1" value="TimeTable">戻る</button>
+                <button type="submit" name="action" class="btn_1" value="TimeTableCheck">戻る</button>
             </form>
             <%
                 }

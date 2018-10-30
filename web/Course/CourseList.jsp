@@ -22,7 +22,7 @@
 </head>
 <body>
 <form action="/Main" method="post">
-    <button type="submit" class="btn_1" name="action" value="Top">トップへ</button>
+    <button type="submit" class="btn_1" name="action" value="Top">トップ</button>
 </form>
 <form action="/Main" method="post">
     <button type="submit" class="btn_1" name="action" value="SyllabusDetail">戻る</button>
