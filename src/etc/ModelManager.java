@@ -28,7 +28,7 @@ public class ModelManager {
         } catch (SQLException e) {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
-        LocalDateTime now = LocalDateTime.now();
+        now = LocalDateTime.now();
 //        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();

@@ -13,7 +13,7 @@ public class TimeTable {
     private List<Week> weeks = new ArrayList<>();
     private Integer totalUnit = 0;
     private String semester = "前期";
-    private LocalDateTime now;
+    private LocalDateTime now = LocalDateTime.now();
 
     public TimeTable() {
         for (int i = 0; i < weekName.size(); i++) {
