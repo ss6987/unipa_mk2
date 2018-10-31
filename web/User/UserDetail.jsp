@@ -95,7 +95,8 @@
                 <tr>
                     <th>学年</th>
                     <td>
-                        <jsp:getProperty name="student" property="gradeString"/>年
+                        <jsp:getProperty name="student" property="gradeString"/>
+                        年
                     </td>
                 </tr>
                 <%
@@ -178,12 +179,23 @@
                 if (user.getUserClassification().equals("学生")) {
             %>
             <h2 align="center">保護者用パスワード設定</h2>
-            <table BORDER="1" class="part">
-                <tr>
-                    <th>パスワード<br>確認用パスワード</th>
-                    <td><input type="password" name="pass"><br><input type="password" name="kakuninpass"></td>
-                </tr>
-            </table>
+            <form action="/Main" method="post">
+                <table BORDER="1" class="part">
+                    <tr>
+                        <th>パスワード</th>
+                        <td>
+                            <input type="password" name="guardian_password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>確認用パスワード</th>
+                        <td>
+                            <input type="password" name="guardian_password_check">
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" name="action" class="btn_4" value="UserUpdateGuardian">保護者用パスワード</button>
+            </form>
             <%
                 }
             %>

@@ -2,6 +2,8 @@ package DAO;
 
 import Entity.Student;
 import Entity.User;
+import etc.CreateSalt;
+import etc.Sha256;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,4 +109,13 @@ public class StudentDAO {
         }
     }
 
+    public boolean updateGuardianPassword(Student student,String password){
+        setList(student);
+        String salt = new CreateSalt().getSalt();
+        String hash = new Sha256().sha256(password + salt);
+        setValue("guardian_password",hash);
+        setValue("guardian_slat",salt);
+        String sql = sqlCreater.update(tableName,list);
+        return sessionManager.execute(sql);
+    }
 }

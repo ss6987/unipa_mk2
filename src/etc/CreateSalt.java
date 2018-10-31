@@ -12,7 +12,7 @@ public class CreateSalt {
     };
     private int LENGTH = 20;
 
-    public String getrSalt(){
+    public String getSalt(){
         String result = "";
         for(int i = 0;i < LENGTH;i++){
             int index = new SecureRandom().nextInt(RANDOM_CODE.length);

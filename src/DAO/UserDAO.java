@@ -80,7 +80,7 @@ public class UserDAO {
 
     private void setList(User user, String password) {
         Sha256 sha256 = new Sha256();
-        String salt = new CreateSalt().getrSalt();
+        String salt = new CreateSalt().getSalt();
         list.get(0).setValue(user.getUserId());
         list.get(1).setValue(user.getName());
         list.get(2).setValue(user.getPhonetic());

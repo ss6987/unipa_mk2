@@ -390,4 +390,14 @@ public class ModelManager {
     public boolean registrationPeriodUpdate(RegistrationPeriod registrationPeriod) {
         return registrationPeriodDAO.update(registrationPeriod);
     }
+
+    public boolean studentGuardianPasswordUpdate(String targetUserId,String password){
+        Student student;
+        try {
+            student = studentDAO.findByStudent(targetUserId);
+        } catch (SQLException e) {
+            return false;
+        }
+        return studentDAO.updateGuardianPassword(student,password);
+    }
 }

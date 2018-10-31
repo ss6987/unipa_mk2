@@ -27,8 +27,6 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         String action = (String) request.getAttribute("action");
         String targetUserId = (String) request.getSession(true).getAttribute("targetUserId");
         if (targetUserId == null || targetUserId.equals("")) {
@@ -54,6 +52,9 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
                 return;
             case "UserUpdatePassword":
                 actionUpdatePassword(request, response, targetUserId);
+                return;
+            case "UserUpdateGuardian":
+                actionGuardian(request, response, targetUserId);
                 return;
         }
         return;
@@ -149,6 +150,29 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
         request.getRequestDispatcher("/Login.jsp").forward(request, response);
         return;
 
+    }
+
+    private void actionGuardian(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws IOException, ServletException {
+        String guardianPassword = replaceString.repairRequest(request.getParameter("guardian_password"));
+        String guardianPasswordCheck = replaceString.repairRequest(request.getParameter("guardian_password_check"));
+        if (!guardianPassword.equals(guardianPasswordCheck)) {
+            request.setAttribute("errorString", "パスワードと確認用パスワードが違います。");
+            request.setAttribute("action", "UserDetail");
+            request.getRequestDispatcher("/Main").forward(request, response);
+            return;
+        }
+
+        if(!modelManager.studentGuardianPasswordUpdate(targetUserId,guardianPassword)){
+            request.setAttribute("errorString", "更新に失敗しました。");
+            request.setAttribute("action", "UserDetail");
+            request.getRequestDispatcher("/Main").forward(request, response);
+            return;
+        }
+
+        request.setAttribute("errorString", "パスワードを更新しました。");
+        request.setAttribute("action", "UserDetail");
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
     }
 
 }
