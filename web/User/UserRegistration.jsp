@@ -176,9 +176,12 @@
                     <tr align="center" class="studentStatus">
                         <th>学年</th>
                         <td>
-                            <input type="text" name="grade"
-                                   value="<jsp:getProperty name="targetStudent" property="gradeString"/>"
-                                   pattern="[1-4]" tabindex="14"/>
+                            <select name="grade" tabindex="14">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </td>
                     </tr>
                     </tbody>

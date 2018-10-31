@@ -9,7 +9,7 @@
 <jsp:useBean id="user" class="Entity.User" scope="session"/>
 <jsp:useBean id="targetUserId" class="java.lang.String" scope="session"/>
 <jsp:useBean id="targetUser" class="Entity.User" scope="request"/>
-<jsp:useBean id="facultyDepartment" class="Entity.FacultyDepartment" scope="request"/>
+<jsp:useBean id="student" class="Entity.Student" scope="request"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>
@@ -89,11 +89,15 @@
                 <tr align="center" class="studentStatus">
                     <th>学部学科</th>
                     <td>
-                        <jsp:getProperty name="facultyDepartment" property="faculty"/>
-                        <jsp:getProperty name="facultyDepartment" property="department"/>
+                        <jsp:getProperty name="student" property="facultyDepartment"/>
                     </td>
                 </tr>
-
+                <tr>
+                    <th>学年</th>
+                    <td>
+                        <jsp:getProperty name="student" property="gradeString"/>年
+                    </td>
+                </tr>
                 <%
                     }
                 %>

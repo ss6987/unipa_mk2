@@ -45,7 +45,7 @@ public class UserDetailServlet extends HttpServlet {
         if (targetUser.getUserClassification().equals("学生")) {
             try {
                 Student student = targetUser.convertUserToStudent();
-                request.setAttribute("facultyDepartment", student.getFacultyDepartment());
+                request.setAttribute("student", student);
             } catch (SQLException e) {
                 ;
             }

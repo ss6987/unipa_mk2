@@ -66,4 +66,6 @@ public class FacultyDepartment {
     public String getDepartment() {
         return department;
     }
+
+
 }

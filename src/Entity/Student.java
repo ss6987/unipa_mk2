@@ -92,9 +92,10 @@ public class Student {
         return grade;
     }
 
-    public FacultyDepartment getFacultyDepartment() throws SQLException {
+    public String getFacultyDepartment() throws SQLException {
         FacultyDepartmentDAO facultyDepartmentDAO = new FacultyDepartmentDAO();
-        return facultyDepartmentDAO.findById(this.facultyDepartmentId.toString());
+        FacultyDepartment facultyDepartment = facultyDepartmentDAO.findById(this.facultyDepartmentId.toString());
+        return facultyDepartment.getFaculty() + facultyDepartment.getDepartment();
     }
 
     public User convertStudentToUser() throws SQLException {
