@@ -118,4 +118,20 @@ public class StudentDAO {
         String sql = sqlCreater.update(tableName,list);
         return sessionManager.execute(sql);
     }
+
+    public boolean login(String userId, String password) throws SQLException {
+        clearValue();
+        setValue("user_id", userId);
+        String sql = sqlCreater.select(tableName, list, 0);
+        ResultSet resultSet = sessionManager.executeQuery(sql);
+        if (resultSet.next()) {
+            String salt = resultSet.getString("guardian_slat");
+            String resultString = resultSet.getString("guardian_password");
+            Sha256 sha256 = new Sha256();
+            if (resultString.equals(sha256.sha256(password + salt))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

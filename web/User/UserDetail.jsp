@@ -151,7 +151,7 @@
             %>
             </span>
             <%
-                if (user.getUserId() == targetUser.getUserId()) {
+                if (user.getUserId() == targetUser.getUserId() && !user.getUserClassification().equals("保護者")) {
             %>
             <h2 align="center">パスワード設定</h2>
             <form action="/Main" method="post">

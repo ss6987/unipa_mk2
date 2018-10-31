@@ -3,7 +3,6 @@ package etc;
 import DAO.*;
 import Entity.*;
 
-
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ public class ModelManager {
         } catch (SQLException e) {
             registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
         }
-//        LocalDateTime now = LocalDateTime.now();
-        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
+        LocalDateTime now = LocalDateTime.now();
+//        now = LocalDateTime.of(2018, 9, 27, 0, 0, 1);
         LocalDateTime startDate = registrationPeriod.getStartLocalDate();
         LocalDateTime endDate = registrationPeriod.getEndLocalDate();
         if (now.isAfter(startDate) && now.isBefore(endDate)) {
@@ -399,5 +398,16 @@ public class ModelManager {
             return false;
         }
         return studentDAO.updateGuardianPassword(student,password);
+    }
+
+    public User loginGuardian(String id,String password){
+        try {
+            if(studentDAO.login(id,password)){
+                return userDAO.findById(id);
+            }
+        } catch (SQLException e) {
+            ;
+        }
+        return null;
     }
 }

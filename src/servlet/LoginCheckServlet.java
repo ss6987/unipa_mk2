@@ -1,5 +1,6 @@
 package servlet;
 
+import Entity.Student;
 import etc.ModelManager;
 import Entity.User;
 import etc.ReplaceString;
@@ -35,13 +36,17 @@ public class LoginCheckServlet extends HttpServlet {
 
         User user = modelManager.login(id, password);
         if (user == null) {
-            request.setAttribute("errorString","ログイン失敗");
-            request.getRequestDispatcher("Login.jsp").forward(request,response);
-            return;
+            user = modelManager.loginGuardian(id, password);
+            if (user == null) {
+                request.setAttribute("errorString", "ログイン失敗");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                return;
+            }
+            user.setUserClassification("保護者");
         }
 
         session.setAttribute("user", user);
-        session.setAttribute("registrationPeriodFlag",modelManager.getRegistrationPeriodFlag());
+        session.setAttribute("registrationPeriodFlag", modelManager.getRegistrationPeriodFlag());
         request.getRequestDispatcher("/Main").forward(request, response);
         return;
     }

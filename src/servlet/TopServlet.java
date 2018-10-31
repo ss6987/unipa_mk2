@@ -46,7 +46,7 @@ public class TopServlet extends HttpServlet {
         User loginUser = (User) session.getAttribute("user");
         List<Syllabus> syllabusList = null;
 
-        if (loginUser.getUserClassification().equals("学生")) {
+        if (loginUser.getUserClassification().equals("学生") || loginUser.getUserClassification().equals("保護者")) {
             syllabusList = modelManager.courseSelectSyllabus(loginUser.getUserId());
         } else if (loginUser.getUserClassification().equals("教職員")) {
             syllabusList = modelManager.teacherInChargeSearch(loginUser.getUserId());
