@@ -146,7 +146,25 @@
                                    value="<jsp:getProperty name="searchSyllabus" property="classRoom"/>"/>
                         </td>
                     </tr>
-
+                    <tr>
+                        <th>ソート</th>
+                        <td>
+                            <select name="sort_key">
+                                <option value="0">授業ID</option>
+                                <option value="1">授業名</option>
+                                <option value="2">英語名</option>
+                                <option value="3">開講年度</option>
+                                <option value="4">学期</option>
+                                <option value="5">曜日</option>
+                                <option value="6">時限</option>
+                                <option value="7">単位数</option>
+                                <option value="8">定員</option>
+                                <option value="9">教室</option>
+                            </select>
+                            <input type="radio" name="asc_desc" value="0" checked>昇順
+                            <input type="radio" name="asc_desc" value="1">降順
+                        </td>
+                    </tr>
                 </table>
                 <button type="submit" name="action" class="btn_5" value="SyllabusSearchFirst" tabindex="12">検索</button>
             </form>

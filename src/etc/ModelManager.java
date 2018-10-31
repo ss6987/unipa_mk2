@@ -168,9 +168,9 @@ public class ModelManager {
         return syllabusDAO.findBySyllabusDetailId(syllabusId);
     }
 
-    public List<Syllabus> syllabusSearch(Syllabus syllabus, Integer page) {
+    public List<Syllabus> syllabusSearch(Syllabus syllabus, Integer page,Integer sortKey,Integer ascDesc) {
         try {
-            return syllabusDAO.select(syllabus, page);
+            return syllabusDAO.select(syllabus, page,sortKey,ascDesc);
         } catch (SQLException e) {
             return null;
         }
