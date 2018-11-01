@@ -23,6 +23,8 @@ public class Syllabus {
     protected Integer unit;
     protected Integer capacity;
     protected String mainTeacher;
+    protected Integer sortKey = 0;
+    protected Integer ascDesc = 0;
 
     public Syllabus() {
         this.syllabusId = "";
@@ -373,6 +375,36 @@ public class Syllabus {
             return new SyllabusDetail();
         }
         return syllabusDetail;
+    }
 
+    public Integer getSortKey() {
+        return sortKey;
+    }
+
+    public void setSortKey(Integer sortKey) {
+        this.sortKey = sortKey;
+    }
+
+    public Integer getAscDesc() {
+        return ascDesc;
+    }
+
+    public void setAscDesc(Integer ascDesc) {
+        this.ascDesc = ascDesc;
+    }
+
+    public String getWeekTimeString(){
+        String[] weekList = this.getWeek().split("&#44;");
+        String[] timeList = this.getTime().split("&#44;");
+        String string = weekList[0] + "曜" + timeList[0] + "限";
+
+        if(weekList.length == 1){
+            return string;
+        }
+
+        for(int i =0;i < weekList.length;i++){
+            string += ","+ weekList[i] + "曜" + timeList[i] + "限";
+        }
+        return string;
     }
 }

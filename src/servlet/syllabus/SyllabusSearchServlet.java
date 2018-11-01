@@ -70,6 +70,9 @@ public class SyllabusSearchServlet extends HttpServlet {
             ascDesc = 0;
         }
 
+        searchSyllabus.setSortKey(sortKey);
+        searchSyllabus.setAscDesc(ascDesc);
+
         List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, 0,sortKey,ascDesc);
 
         HttpSession session = request.getSession(true);
@@ -88,7 +91,7 @@ public class SyllabusSearchServlet extends HttpServlet {
         Syllabus searchSyllabus = (Syllabus) session.getAttribute("searchSyllabus");
 
         paging.changePage(nextPage);
-        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, paging.getNowPage() - 1,0,0);
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, paging.getNowPage() - 1,searchSyllabus.getSortKey(),searchSyllabus.getAscDesc());
 
         session.setAttribute("paging", paging);
         request.setAttribute("syllabusList", syllabusList);
@@ -102,7 +105,7 @@ public class SyllabusSearchServlet extends HttpServlet {
         Paging paging = (Paging) session.getAttribute("paging");
         Syllabus searchSyllabus = (Syllabus) session.getAttribute("searchSyllabus");
 
-        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, paging.getNowPage() - 1,0,0);
+        List<Syllabus> syllabusList = modelManager.syllabusSearch(searchSyllabus, paging.getNowPage() - 1,searchSyllabus.getSortKey(),searchSyllabus.getAscDesc());
 
         request.setAttribute("syllabusList", syllabusList);
         request.setAttribute("action", "SyllabusResult");

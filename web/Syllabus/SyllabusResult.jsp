@@ -41,6 +41,7 @@
                     <th>学期</th>
                     <th>曜日</th>
                     <th>時限</th>
+                    <th>学年</th>
                     <th>教室</th>
                 </tr>
                 <%
@@ -67,10 +68,10 @@
                         <%=syllabus.getSemester()%>
                     </td>
                     <td>
-                        <%=syllabus.getWeek()%>
+                        <%=syllabus.getWeekTimeString()%>
                     </td>
                     <td>
-                        <%=syllabus.getTime()%>
+                        <%=syllabus.getDividendGrade()%>年
                     </td>
                     <td>
                         <%=syllabus.getClassRoom()%>

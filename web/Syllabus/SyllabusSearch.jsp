@@ -82,7 +82,13 @@
                                    value="<jsp:getProperty name="searchSyllabus" property="yearString"/>"/>
                         </td>
                     </tr>
-
+                    <tr>
+                        <th>教室</th>
+                        <td>
+                            <input type="text" name="class_room" tabindex="11"
+                                   value="<jsp:getProperty name="searchSyllabus" property="classRoom"/>"/>
+                        </td>
+                    </tr>
                     <tr>
                         <th>学期</th>
                         <td>
@@ -140,26 +146,20 @@
                     </tr>
 
                     <tr>
-                        <th>教室</th>
-                        <td>
-                            <input type="text" name="class_room" tabindex="11"
-                                   value="<jsp:getProperty name="searchSyllabus" property="classRoom"/>"/>
-                        </td>
-                    </tr>
-                    <tr>
                         <th>ソート</th>
                         <td>
                             <select name="sort_key">
                                 <option value="0">授業ID</option>
                                 <option value="1">授業名</option>
                                 <option value="2">英語名</option>
-                                <option value="3">開講年度</option>
-                                <option value="4">学期</option>
-                                <option value="5">曜日</option>
-                                <option value="6">時限</option>
-                                <option value="7">単位数</option>
-                                <option value="8">定員</option>
-                                <option value="9">教室</option>
+                                <option value="3">配当学年</option>
+                                <option value="4">開講年度</option>
+                                <option value="5">教室</option>
+                                <option value="6">学期</option>
+                                <option value="7">曜日</option>
+                                <option value="8">時限</option>
+                                <option value="9">単位数</option>
+                                <option value="10">定員</option>
                             </select>
                             <input type="radio" name="asc_desc" value="0" checked>昇順
                             <input type="radio" name="asc_desc" value="1">降順
