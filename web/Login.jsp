@@ -1,7 +1,4 @@
-<%@ page import="servlet.timetable.TimeTable" %>
-<%@ page import="etc.ModelManager" %>
-<%@ page import="Entity.Syllabus" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: SS
   Date: 2018/09/14

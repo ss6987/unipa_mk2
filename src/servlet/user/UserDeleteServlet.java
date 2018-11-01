@@ -2,7 +2,6 @@ package servlet.user;
 
 import Entity.User;
 import etc.ModelManager;
-import etc.ReplaceString;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +11,6 @@ import java.io.IOException;
 
 public class UserDeleteServlet extends HttpServlet {
     private ModelManager modelManager;
-    private ReplaceString replaceString = new ReplaceString();
     private String url = "/User/UserDelete.jsp";
 
     @Override

@@ -275,6 +275,7 @@
                         <th width="30%">第<%=syllabusContents.getClassNumber()%>回</th>
                         <td>
                             <input type="text" name="syllabus_contents<%=syllabusContents.getClassNumber()%>"
+                                   tabindex="<%=25+syllabusContents.getClassNumber()%>"
                                    value="<%=syllabusContents.getCourseContent()%>"/>
                         </td>
                     </tr>

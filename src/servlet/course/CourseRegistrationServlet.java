@@ -2,13 +2,11 @@ package servlet.course;
 
 import Entity.Student;
 import Entity.Syllabus;
+import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
-import Entity.User;
-import servlet.timetable.Time;
-import servlet.timetable.TimeTable;
+import etc.timetable.TimeTable;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

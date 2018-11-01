@@ -223,7 +223,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>TimeTableMainServlet</servlet-name>
-        <servlet-class>servlet.timetable.TimeTableMainServlet</servlet-class>
+        <servlet-class>servlet.TimeTableMainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableMainServlet</servlet-name>

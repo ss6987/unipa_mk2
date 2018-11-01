@@ -197,7 +197,7 @@
                 <%
                 } else {
                 %>
-                <button type="submit" name="action" value="UserRegistration" class="btn_4" align="center" tabindex="15">
+                <button type="submit" name="action" value="UserRegistrationDone" class="btn_4" align="center" tabindex="15">
                     登録
                 </button>
                 <%

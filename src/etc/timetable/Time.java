@@ -1,11 +1,9 @@
-package servlet.timetable;
+package etc.timetable;
 
 import Entity.Syllabus;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Time {
     private List<Syllabus> syllabusLists = new ArrayList<>();

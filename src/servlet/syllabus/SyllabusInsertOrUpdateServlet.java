@@ -1,19 +1,16 @@
 package servlet.syllabus;
 
-import Entity.User;
 import Entity.SyllabusDetail;
+import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
 
 public class SyllabusInsertOrUpdateServlet extends HttpServlet {
     private ModelManager modelManager;
@@ -64,6 +61,11 @@ public class SyllabusInsertOrUpdateServlet extends HttpServlet {
 
     private void actionInsertDone(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         SyllabusDetail syllabusDetail = new SyllabusDetail(request, "");
+        if(modelManager.syllabusFindById(syllabusDetail.getSyllabusId()) != null){
+            errorRegistrationReturn(request, response, "同じIDを持つシラバスが存在します。");
+            return;
+        }
+
         User targetMainTeacher = readMainTeacher(request);
 
         if (targetMainTeacher == null) {
@@ -144,6 +146,7 @@ public class SyllabusInsertOrUpdateServlet extends HttpServlet {
     }
 
     private void errorRegistrationReturn(HttpServletRequest request, HttpServletResponse response, String errorString) throws ServletException, IOException {
+        request.setAttribute("errorString",errorString);
         request.setAttribute("action", "SyllabusRegistration");
         request.getRequestDispatcher("/Main").forward(request, response);
         return;

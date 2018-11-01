@@ -5,14 +5,12 @@ import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 public class UserInsertOrUpdateServlet extends HttpServlet {
@@ -117,6 +115,13 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     private void actionRegistrationDone(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws IOException, ServletException {
+        if (modelManager.userFindById(targetUserId) != null) {
+            request.setAttribute("errorString","IDが重複しました。");
+            request.setAttribute("action", "UserRegistration");
+            request.getRequestDispatcher("/Main").forward(request, response);
+            return;
+        }
+
         User targetUser = new User(request, targetUserId);
         modelManager.userRegistration(targetUser, "password");
 
@@ -162,7 +167,7 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
             return;
         }
 
-        if(!modelManager.studentGuardianPasswordUpdate(targetUserId,guardianPassword)){
+        if (!modelManager.studentGuardianPasswordUpdate(targetUserId, guardianPassword)) {
             request.setAttribute("errorString", "更新に失敗しました。");
             request.setAttribute("action", "UserDetail");
             request.getRequestDispatcher("/Main").forward(request, response);

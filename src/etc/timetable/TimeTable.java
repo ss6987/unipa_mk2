@@ -1,4 +1,4 @@
-package servlet.timetable;
+package etc.timetable;
 
 import Entity.Syllabus;
 

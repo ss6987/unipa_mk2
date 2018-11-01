@@ -1,21 +1,16 @@
 package servlet.syllabus;
 
-import Entity.Syllabus;
 import Entity.SyllabusDetail;
 import etc.ModelManager;
-import etc.ReplaceString;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SyllabusDeleteServlet extends HttpServlet {
     private ModelManager modelManager;
-    private ReplaceString replaceString = new ReplaceString();
     private String url = "Syllabus/SyllabusDelete.jsp";
 
     @Override

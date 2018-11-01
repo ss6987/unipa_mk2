@@ -8,7 +8,7 @@
 <%@ page import="Entity.Syllabus" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="timeTable" class="servlet.timetable.TimeTable" scope="session"/>
+<jsp:useBean id="timeTable" class="etc.timetable.TimeTable" scope="session"/>
 <jsp:useBean id="errorString" class="java.lang.String" scope="request"/>
 <html lang="ja">
 <head>

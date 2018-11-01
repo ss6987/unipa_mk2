@@ -3,7 +3,7 @@ package servlet;
 import Entity.Syllabus;
 import Entity.User;
 import etc.ModelManager;
-import servlet.timetable.TimeTable;
+import etc.timetable.TimeTable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
