@@ -1,9 +1,7 @@
 package Entity;
 
 
-import DAO.FacultyDepartmentDAO;
 import DAO.StudentDAO;
-import DAO.UserDAO;
 import etc.ReplaceString;
 import etc.StringCheck;
 

@@ -1,7 +1,6 @@
 package Entity;
 
 import etc.ReplaceString;
-import etc.StringCheck;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

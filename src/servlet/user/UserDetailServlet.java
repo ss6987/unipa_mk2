@@ -1,11 +1,9 @@
 package servlet.user;
 
-import Entity.FacultyDepartment;
 import Entity.Student;
-import etc.ModelManager;
 import Entity.User;
+import etc.ModelManager;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

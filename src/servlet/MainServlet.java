@@ -3,13 +3,11 @@ package servlet;
 import etc.ModelManager;
 import etc.ReplaceString;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.spi.http.HttpContext;
 import java.io.IOException;
 
 /*requestのactionを見て、各種MainServletに振り分けるサーブレット*/
