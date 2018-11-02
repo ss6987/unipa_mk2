@@ -402,7 +402,7 @@ public class Syllabus {
             return string;
         }
 
-        for(int i =0;i < weekList.length;i++){
+        for(int i =1;i < weekList.length;i++){
             string += ","+ weekList[i] + "曜" + timeList[i] + "限";
         }
         return string;

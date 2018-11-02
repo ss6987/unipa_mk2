@@ -32,6 +32,7 @@ public class TopServlet extends HttpServlet {
         }
 
         clearSession(session);
+        request.setAttribute("periodFlag",modelManager.getRegistrationPeriodFlag());
         request.setAttribute("period", modelManager.getRegistrationPeriod());
         request.getRequestDispatcher(url).forward(request, response);
         return;

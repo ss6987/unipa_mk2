@@ -56,6 +56,7 @@ public class PeriodRegistrationServlet extends HttpServlet {
         if (!modelManager.registrationPeriodUpdate(registrationPeriod)) {
             errorReturn(request,response,"登録に失敗しました。");
         }
+        modelManager = new ModelManager();
         errorReturn(request,response,"更新成功");
         return;
     }

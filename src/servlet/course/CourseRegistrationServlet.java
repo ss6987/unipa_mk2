@@ -115,6 +115,13 @@ public class CourseRegistrationServlet extends HttpServlet {
         }
 
         TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
+
+        if(!nowTable.checkOverlap()){
+            request.setAttribute("errorString", "重複している科目が存在します。");
+            request.getRequestDispatcher(url).forward(request, response);
+            return;
+        }
+
         modelManager.courseDelete(loginUser.getUserId());
         List<String> syllabusList = nowTable.getAllSyllabusList();
         if (!modelManager.courseRegistration(student, syllabusList)) {

@@ -14,15 +14,18 @@
 <%
     String period = (String) request.getAttribute("period");
     String classification = user.getUserClassification();
+    Boolean periodFlag = (Boolean) request.getAttribute("periodFlag");
 %>
 <table id="window">
-<tr><td class="c-box">
-    <form action="/Main" method="post">
-        <button name="action" value="Logout">ログアウト</button>
-    </form>
-    <h1>UNIPAへようこそ！</h1>
-    <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
-    <h2>履修登録期間<%=period%></h2>
+    <tr>
+        <td class="c-box">
+            <form action="/Main" method="post">
+                <button name="action" value="Logout">ログアウト</button>
+            </form>
+            <h1>UNIPAへようこそ！</h1>
+            <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
+            <h2>履修登録期間<%=period%>
+            </h2>
             <form action="<%= request.getContextPath()%>/Main" method="post" accept-charset="UTF-8">
                 <span><button type="submit" name="action" class="btn_2" value="myUserDetail">ユーザー情報確認</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="SyllabusSearch">シラバス検索</button></span>
@@ -32,7 +35,13 @@
 
                 <span><button type="submit" name="action" class="btn_2" value="TimeTableCheck">時間割表確認</button> </span>
                 <span><button type="submit" name="action" class="btn_2" value="AchieveCheck">成績参照</button></span>
-                <span><button type="submit" name="action" class="btn_2" value="CourseRegistration">履修登録</button> </span>
+                <%
+                    if (periodFlag) {
+                %>
+                <span><button type="submit" name="action" class="btn_2" value="CourseRegistration">履修登録</button></span>
+                <%
+                    }
+                %>
                 <%
                 } else if (classification.equals("教職員")) {
                 %>
@@ -42,8 +51,10 @@
                 %>
                 <span><button type="submit" name="action" class="btn_2" value="UserSearch">ユーザー検索</button></span>
                 <span><button type="submit" name="action" class="btn_2" value="UserRegistration">ユーザー登録</button></span>
-                <span><button type="submit" name="action" class="btn_2" value="SyllabusRegistration">シラバス登録</button></span>
-                <span><button type="submit" name="action" class="btn_2" value="PeriodRegistrationCheck">履修登録期間設定</button></span>
+                <span><button type="submit" name="action" class="btn_2"
+                              value="SyllabusRegistration">シラバス登録</button></span>
+                <span><button type="submit" name="action" class="btn_2"
+                              value="PeriodRegistrationCheck">履修登録期間設定</button></span>
                 <%
                 } else {
                 %>
@@ -53,7 +64,8 @@
                     }
                 %>
             </form>
-</td></tr>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

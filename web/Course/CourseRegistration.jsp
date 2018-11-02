@@ -15,20 +15,12 @@
     <title>履修登録</title>
     <link rel="stylesheet" type="text/css" href="Design.css">
 </head>
-<body>
+<body onload="alertError()">
 <form action="/Main" method="post">
     <button type="submit" name="action" value="Top" class="btn_1" style="position: absolute; left: 0px; top: 0px">トップ
     </button>
 </form>
 <h1>履修登録</h1>
-
-<%
-    if (!errorString.equals("")) {
-%>
-<span style="background-color:#ffcc99"><%=errorString%></span>
-<%
-    }
-%>
 
 <form action="/Main" method="post">
     <button type="submit" name="action" class="btn_4" value="CourseRegistrationDone">登録</button>
@@ -82,6 +74,16 @@
     %>
 </table>
 
-
+<%
+    if (!errorString.equals("")) {
+%>
+<script type="text/javascript">
+    function alertError() {
+        alert("<%=errorString%>");
+    }
+</script>
+<%
+    }
+%>
 </body>
 </html>
