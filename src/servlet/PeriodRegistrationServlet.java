@@ -35,7 +35,8 @@ public class PeriodRegistrationServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
     }
 
     private void actionCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,22 +50,22 @@ public class PeriodRegistrationServlet extends HttpServlet {
     private void actionDone(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RegistrationPeriod registrationPeriod = createRegistrationPeriod(request);
         if (!registrationPeriod.checkOrder()) {
-            errorReturn(request,response,"登録開始日が登録終了日を超えています。");
+            errorReturn(request, response, "登録開始日が登録終了日を超えています。");
             return;
         }
 
         if (!modelManager.registrationPeriodUpdate(registrationPeriod)) {
-            errorReturn(request,response,"登録に失敗しました。");
+            errorReturn(request, response, "登録に失敗しました。");
         }
         modelManager = new ModelManager();
-        errorReturn(request,response,"更新成功");
+        errorReturn(request, response, "更新成功");
         return;
     }
 
-    private void errorReturn(HttpServletRequest request, HttpServletResponse response,String errorString) throws ServletException, IOException {
-        request.setAttribute("action","PeriodRegistrationCheck");
-        request.setAttribute("errorString",errorString);
-        request.getRequestDispatcher("/Main").forward(request,response);
+    private void errorReturn(HttpServletRequest request, HttpServletResponse response, String errorString) throws ServletException, IOException {
+        request.setAttribute("action", "PeriodRegistrationCheck");
+        request.setAttribute("errorString", errorString);
+        request.getRequestDispatcher("/Main").forward(request, response);
         return;
     }
 

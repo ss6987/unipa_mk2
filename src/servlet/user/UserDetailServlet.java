@@ -56,6 +56,7 @@ public class UserDetailServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 }

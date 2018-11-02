@@ -53,13 +53,23 @@ public class MainServlet extends HttpServlet {
         }else if(action.indexOf("Logout") != -1){
             actionLogout(request, response);
             return;
+        }else{
+            request.setAttribute("action","Top");
+            url = "/Top";
         }
         request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
 
+        if(session.getAttribute("user") == null || session.getAttribute("user").equals("")){
+            request.getRequestDispatcher("Login.jsp").forward(request,response);
+        }
+
+        doPost(request, response);
+        return;
     }
 
     private void actionLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

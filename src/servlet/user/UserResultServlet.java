@@ -20,19 +20,20 @@ public class UserResultServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
-        switch (action){
+        switch (action) {
             case "UserResult":
-                result(request,response);
+                result(request, response);
                 return;
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request, response);
+        return;
     }
 
-    private void result(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(url).forward(request,response);
+    private void result(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(url).forward(request, response);
         return;
     }
 }

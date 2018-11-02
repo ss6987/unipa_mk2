@@ -51,18 +51,7 @@ public class LoginCheckServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dispatch = request.getRequestDispatcher("/TopServlet");
-        session = request.getSession(true);
-
-        User user = (User) session.getAttribute("user");
-        if (!user.getUserId().equals("")) {
-            request.setAttribute("period", modelManager.getRegistrationPeriod());
-            request.setAttribute("Number", 2);
-            dispatch.forward(request, response);
-        } else {
-            request.setAttribute("Number", 1);
-            dispatch.forward(request, response);
-        }
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 }

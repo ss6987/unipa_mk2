@@ -18,7 +18,8 @@ public class SyllabusResultServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
     private void actionResult(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {

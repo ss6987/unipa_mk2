@@ -36,7 +36,8 @@ public class UserDeleteServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
     private void actionDelete(HttpServletRequest request, HttpServletResponse response,User targetUser) throws ServletException, IOException {

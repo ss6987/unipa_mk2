@@ -32,7 +32,8 @@ public class SyllabusDeleteServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,7 +1,7 @@
 package servlet.syllabus;
 
-import Entity.User;
 import Entity.SyllabusDetail;
+import Entity.User;
 import etc.ModelManager;
 import etc.ReplaceString;
 
@@ -34,7 +34,8 @@ public class SyllabusDetailServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
     private void actionDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

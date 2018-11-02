@@ -27,6 +27,11 @@ public class TopServlet extends HttpServlet {
         String action = (String) request.getAttribute("action");
         HttpSession session = request.getSession(true);
 
+        if(!(action.equals("Login") || action.equals("Top"))){
+            request.getRequestDispatcher("Login.jsp").forward(request,response);
+            return;
+        }
+
         if (action.equals("Login")) {
             setTimeTable(session);
         }
@@ -38,9 +43,9 @@ public class TopServlet extends HttpServlet {
         return;
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
+        return;
     }
 
     private void setTimeTable(HttpSession session) {

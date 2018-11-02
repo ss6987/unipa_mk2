@@ -60,7 +60,8 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/Main").forward(request,response);
+        return;
     }
 
     private void actionUpdate(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws ServletException, IOException {
