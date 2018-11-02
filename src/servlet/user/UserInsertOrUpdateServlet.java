@@ -116,7 +116,7 @@ public class UserInsertOrUpdateServlet extends HttpServlet {
     }
 
     private void actionRegistrationDone(HttpServletRequest request, HttpServletResponse response, String targetUserId) throws IOException, ServletException {
-        if (modelManager.userFindById(targetUserId) != null) {
+        if (!modelManager.userFindById(targetUserId).getUserId().equals("")) {
             request.setAttribute("errorString","IDが重複しました。");
             request.setAttribute("action", "UserRegistration");
             request.getRequestDispatcher("/Main").forward(request, response);

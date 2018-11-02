@@ -41,7 +41,6 @@ public class RelationDAO {
         }
         ResultSet resultSet = sessionManager.executeQuery(sql);
         List<Syllabus> syllabusList = new ArrayList<Syllabus>();
-        System.out.println(sql);
         while(resultSet.next()){
             syllabusList.add(new Syllabus(resultSet));
         }

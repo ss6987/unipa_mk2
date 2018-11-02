@@ -42,7 +42,6 @@ public class RegistrationPeriodDAO {
     public boolean update(RegistrationPeriod registrationPeriod) {
         setList(registrationPeriod);
         String sql = sqlCreater.update(tableName, list);
-        System.out.println(sql);
         return sessionManager.execute(sql);
     }
 

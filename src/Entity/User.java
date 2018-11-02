@@ -46,7 +46,13 @@ public class User {
         String genderString = replaceString.repairRequest(request.getParameter("gender"));
         String year = replaceString.repairRequest(request.getParameter("year"));
         String month = replaceString.repairRequest(request.getParameter("month"));
+        if(month.length() == 1){
+            month = "0" + month;
+        }
         String day = replaceString.replace(request.getParameter("day"));
+        if(day.length() == 1){
+            day = "0" + day;
+        }
         String birthday = year + "-" + month + "-" + day;
         String postalCode = replaceString.repairRequest(request.getParameter("postal_code"));
         String address = replaceString.repairRequest(request.getParameter("address"));

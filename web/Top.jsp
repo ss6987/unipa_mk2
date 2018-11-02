@@ -23,7 +23,19 @@
                 <button name="action" value="Logout">ログアウト</button>
             </form>
             <h1>UNIPAへようこそ！</h1>
-            <span style="background-color:#ffcc99"> <jsp:getProperty name="user" property="name"/></span>
+            <h2><span style="background-color:#ffcc99">
+            <%
+                if (user.getUserClassification().equals("保護者")) {
+            %>
+            <jsp:getProperty name="user" property="name"/>(保護者)さん
+            <%
+            } else {
+            %>
+            <jsp:getProperty name="user" property="name"/>さん
+            <%
+                }
+            %>
+            </span><h2></h2>
             <h2>履修登録期間<%=period%>
             </h2>
             <form action="<%= request.getContextPath()%>/Main" method="post" accept-charset="UTF-8">

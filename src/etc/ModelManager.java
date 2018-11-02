@@ -410,4 +410,21 @@ public class ModelManager {
         }
         return null;
     }
+
+    public void updateRegistrationPeriod(){
+        RegistrationPeriod registrationPeriod;
+        try {
+            registrationPeriod = registrationPeriodDAO.select();
+        } catch (SQLException e) {
+            registrationPeriod = new RegistrationPeriod("1900-01-01", "1900-01-01");
+        }
+        now = LocalDateTime.now();
+        LocalDateTime startDate = registrationPeriod.getStartLocalDate();
+        LocalDateTime endDate = registrationPeriod.getEndLocalDate();
+        if (now.isAfter(startDate) && now.isBefore(endDate)) {
+            this.registrationPeriodFlag = true;
+        }else{
+            this.registrationPeriodFlag = false;
+        }
+    }
 }

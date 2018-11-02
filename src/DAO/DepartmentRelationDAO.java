@@ -37,7 +37,6 @@ public class DepartmentRelationDAO {
         String sql = "select * from department_relation as d,faculty_department as f where d.faculty_department_id = f.faculty_department_id and d.syllabus_id = '" + syllabus.getSyllabusId() + "'";
         ResultSet resultSet = sessionManager.executeQuery(sql);
         List<FacultyDepartment> facultyDepartmentList = new ArrayList<FacultyDepartment>();
-        System.out.println(sql);
         while (resultSet.next()) {
             facultyDepartmentList.add(new FacultyDepartment(resultSet));
         }
