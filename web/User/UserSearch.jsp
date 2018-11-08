@@ -108,12 +108,12 @@
                                    value="<jsp:getProperty name="searchUser" property="userClassification"/>"/>
                         </td>
                     </tr>
-                    <tr>
-                        <th>学部・学科</th>
-                        <td>
+                    <%--<tr>--%>
+                        <%--<th>学部・学科</th>--%>
+                        <%--<td>--%>
 
-                        </td>
-                    </tr>
+                        <%--</td>--%>
+                    <%--</tr>--%>
                 </table>
                 <button type="submit" name="action" class="btn_4" value="UserSearchFirst">検索</button>
             </form>
