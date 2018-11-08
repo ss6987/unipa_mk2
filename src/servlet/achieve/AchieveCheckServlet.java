@@ -40,7 +40,7 @@ public class AchieveCheckServlet extends HttpServlet {
     private void actionCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User loginUser = (User) request.getSession(true).getAttribute("user");
         List<Course> courseList = modelManager.courseSelect(loginUser.getUserId(),"",-1);
-        List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(loginUser.getUserId());
+        List<Syllabus> syllabusList = modelManager.courseSelectSyllabus(loginUser.getUserId(),-1);
 
         request.setAttribute("courseList",courseList);
         request.setAttribute("syllabusList",syllabusList);

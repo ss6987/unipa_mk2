@@ -261,6 +261,7 @@ public class ModelManager {
         Course course = new Course();
         try {
             course.setUserId(studentId);
+            course.setAchievement(-3);
             courseDAO.delete(course);
         } catch (SQLException e) {
             return false;
@@ -284,10 +285,10 @@ public class ModelManager {
         }
     }
 
-    public List<Syllabus> courseSelectSyllabus(String studentId) {
+    public List<Syllabus> courseSelectSyllabus(String studentId,Integer achievement) {
         try {
             Student student = studentDAO.findByStudent(studentId);
-            List<Course> courseList = courseDAO.findByStudent(student, -1);
+            List<Course> courseList = courseDAO.findByStudent(student, achievement);
             List<Syllabus> syllabusList = new ArrayList<>();
             for (Course course : courseList) {
                 Syllabus syllabus = syllabusDAO.findBySyllabusId(course.getSyllabusId());

@@ -13,8 +13,8 @@ import java.util.List;
 public class CourseDAO {
     private List<DateSet> list = new ArrayList<DateSet>();
     private String tableName = "course";
-    private List<String> columns = Arrays.asList("user_id","syllabus_id","achievement","main_teacher_name","year");
-    private List<String> mold = Arrays.asList("string", "string", "integer","string","integer");
+    private List<String> columns = Arrays.asList("user_id", "syllabus_id", "achievement", "main_teacher_name", "year");
+    private List<String> mold = Arrays.asList("string", "string", "integer", "string", "integer");
     private SessionManager sessionManager = new SessionManager();
     private SQLCreater sqlCreater = new SQLCreater();
 
@@ -39,7 +39,7 @@ public class CourseDAO {
 
     public boolean update(Course course) throws SQLException {
         setList(course);
-        String sql = sqlCreater.update(tableName,list);
+        String sql = sqlCreater.update(tableName, list);
         sql += " AND syllabus_id = '" + list.get(1).getValue() + "'";
         return sessionManager.execute(sql);
     }
@@ -59,8 +59,10 @@ public class CourseDAO {
 
     public List<Course> findBySyllabus(Syllabus syllabus, Integer achievement) throws SQLException {
         String sql = "SELECT * FROM COURSE WHERE syllabus_id = '" + syllabus.getSyllabusId() + "'";
-        if (achievement != -1) {
+        if (achievement != -1 && achievement != -5) {
             sql = sql + " AND achievement = " + achievement;
+        } else if (achievement == -5) {
+            sql = sql + " AND (achievement = -2 OR achievement = -3)";
         }
         ResultSet resultSet = sessionManager.executeQuery(sql);
         List<Course> courseList = new ArrayList<Course>();
