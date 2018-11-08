@@ -46,8 +46,10 @@ public class CourseDAO {
 
     public List<Course> findByStudent(Student student, Integer achievement) throws SQLException {
         String sql = "SELECT * FROM COURSE WHERE user_id = '" + student.getUserId() + "'";
-        if (achievement != -1) {
+        if (achievement != -1 && achievement != -5) {
             sql = sql + " AND achievement = " + achievement;
+        } else if (achievement == -5) {
+            sql = sql + " AND (achievement = -2 OR achievement = -3)";
         }
         ResultSet resultSet = sessionManager.executeQuery(sql);
         List<Course> courseList = new ArrayList<Course>();

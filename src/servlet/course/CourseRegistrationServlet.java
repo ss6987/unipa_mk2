@@ -84,6 +84,12 @@ public class CourseRegistrationServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
         Syllabus targetSyllabus = modelManager.syllabusFindById(targetSyllabusId);
+        User user = (User) session.getAttribute("user");
+        if(modelManager.courseSelect(user.getUserId(),targetSyllabusId,-1).size() != 0){
+            request.setAttribute("errorString","その科目はすでに履修済みです。");
+            request.getRequestDispatcher(url).forward(request,response);
+            return;
+        }
         TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
         nowTable.addSyllabus(targetSyllabus);
 
