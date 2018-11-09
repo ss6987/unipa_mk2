@@ -1,5 +1,6 @@
 package servlet.course;
 
+import Entity.Course;
 import Entity.Student;
 import Entity.Syllabus;
 import Entity.User;
@@ -85,10 +86,13 @@ public class CourseRegistrationServlet extends HttpServlet {
         String targetSyllabusId = replaceString.repairRequest(request.getParameter("targetSyllabusId"));
         Syllabus targetSyllabus = modelManager.syllabusFindById(targetSyllabusId);
         User user = (User) session.getAttribute("user");
-        if(modelManager.courseSelect(user.getUserId(),targetSyllabusId,-1).size() != 0){
-            request.setAttribute("errorString","その科目はすでに履修済みです。");
-            request.getRequestDispatcher(url).forward(request,response);
-            return;
+        List<Course> courseList = modelManager.courseSelect(user.getUserId(),"",-1);
+        for(Course course:courseList){
+            if(course.getSyllabusId().equals(targetSyllabusId)){
+                request.setAttribute("errorString","その科目はすでに履修済みです。");
+                request.getRequestDispatcher(url).forward(request,response);
+                return;
+            }
         }
         TimeTable nowTable = (TimeTable) session.getAttribute("nowTable");
         nowTable.addSyllabus(targetSyllabus);
